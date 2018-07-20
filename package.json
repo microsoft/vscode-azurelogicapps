@@ -95,7 +95,7 @@
                 "title": "%azLogicApps.refresh%"
             },
             {
-                "category": "Azure Logic App",
+                "category": "Azure Logic Apps",
                 "command": "azureLogicApps.resubmitRun",
                 "title": "%azLogicApps.resubmitRun%"
             }
