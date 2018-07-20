@@ -1,0 +1,259 @@
+{
+    "name": "vscode-logicapps",
+    "displayName": "Azure Logic Apps",
+    "description": "%extension.description%",
+    "version": "0.0.1",
+    "publisher": "ms-azuretools",
+    "icon": "resources/azure-logic-apps.png",
+    "aiKey": "AIF-d9b70cd4-b9f9-4d70-929b-a071c400b217",
+    "engines": {
+        "vscode": "^1.25.1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Microsoft/vscore-azurelogicapps"
+    },
+    "galleryBanner": {
+        "color": "#0072c6",
+        "theme": "dark"
+    },
+    "homepage": "https://github.com/Microsoft/vscode-azurelogicapps/blob/master/README.md",
+    "license": "See license in LICENSE.md",
+    "categories": [
+        "Azure"
+    ],
+    "keywords": [
+        "Azure",
+        "Logic Apps"
+    ],
+    "preview": true,
+    "activationEvents": [
+        "onCommand:azureLogicApps.deleteLogicApp",
+        "onCommand:azureLogicApps.disableLogicApp",
+        "onCommand:azureLogicApps.enableLogicApp",
+        "onCommand:azureLogicApps.loadMore",
+        "onCommand:azureLogicApps.openInEditor",
+        "onCommand:azureLogicApps.openInPortal",
+        "onCommand:azureLogicApps.openRunInEditor",
+        "onCommand:azureLogicApps.openVersionInEditor",
+        "onCommand:azureLogicApps.previewInEditor",
+        "onCommand:azureLogicApps.refresh",
+        "onCommand:azureLogicApps.resubmitRun",
+        "onView:azureLogicAppsExplorer"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "commands": [
+            {
+                "category": "Azure Logic Apps",
+                "command": "azureLogicApps.deleteLogicApp",
+                "title": "%azLogicApps.deleteLogicApp%"
+            },
+            {
+                "category": "Azure Logic Apps",
+                "command": "azureLogicApps.disableLogicApp",
+                "title": "%azLogicApps.disableLogicApp%"
+            },
+            {
+                "category": "Azure Logic Apps",
+                "command": "azureLogicApps.enableLogicApp",
+                "title": "%azLogicApps.enableLogicApp%"
+            },
+            {
+                "category": "Azure Logic Apps",
+                "command": "azureLogicApps.loadMore",
+                "title": "%azLogicApps.loadMore%"
+            },
+            {
+                "category": "Azure Logic Apps",
+                "command": "azureLogicApps.openInEditor",
+                "title": "%azLogicApps.openInEditor%"
+            },
+            {
+                "category": "Azure Logic Apps",
+                "command": "azureLogicApps.openInPortal",
+                "title": "%azLogicApps.openInPortal%"
+            },
+            {
+                "category": "Azure Logic Apps",
+                "command": "azureLogicApps.openRunInEditor",
+                "title": "%azLogicApps.openRunInEditor%"
+            },
+            {
+                "category": "Azure Logic Apps",
+                "command": "azureLogicApps.openVersionInEditor",
+                "title": "%azLogicApps.openVersionInEditor%"
+            },
+            {
+                "category": "Azure Logic Apps",
+                "command": "azureLogicApps.previewInEditor",
+                "title": "%azLogicApps.previewInEditor%"
+            },
+            {
+                "category": "Azure Logic Apps",
+                "command": "azureLogicApps.refresh",
+                "title": "%azLogicApps.refresh%"
+            },
+            {
+                "category": "Azure Logic App",
+                "command": "azureLogicApps.resubmitRun",
+                "title": "%azLogicApps.resubmitRun%"
+            }
+        ],
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "icon": "resources/azure.svg",
+                    "id": "azure",
+                    "title": "Azure"
+                }
+            ]
+        },
+        "views": {
+            "azure": [
+                {
+                    "id": "azureLogicAppsExplorer",
+                    "name": "Logic Apps",
+                    "when": "config.azureLogicApps.showExplorer == true"
+                }
+            ]
+        },
+        "menus": {
+            "commandPalette": [
+                {
+                    "command": "azureLogicApps.loadMore",
+                    "when": "never"
+                },
+                {
+                    "command": "azureLogicApps.previewInEditor",
+                    "when": "never"
+                },
+                {
+                    "command": "azureLogicApps.refresh",
+                    "when": "never"
+                }
+            ],
+            "view/item/context": [
+                {
+                    "command": "azureLogicApps.openInPortal",
+                    "group": "1@1",
+                    "when": "view == azureLogicAppsExplorer && viewItem == azureextensionui.azureSubscription"
+                },
+                {
+                    "command": "azureLogicApps.refresh",
+                    "group": "2@1",
+                    "when": "view == azureLogicAppsExplorer && viewItem == azureextensionui.azureSubscription"
+                },
+                {
+                    "command": "azureLogicApps.openInEditor",
+                    "group": "inline",
+                    "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflow"
+                },
+                {
+                    "command": "azureLogicApps.openInEditor",
+                    "group": "1@1",
+                    "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflow"
+                },
+                {
+                    "command": "azureLogicApps.openInPortal",
+                    "group": "1@2",
+                    "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflow"
+                },
+                {
+                    "command": "azureLogicApps.disableLogicApp",
+                    "group": "2@1",
+                    "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflow"
+                },
+                {
+                    "command": "azureLogicApps.enableLogicApp",
+                    "group": "2@2",
+                    "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflow"
+                },
+                {
+                    "command": "azureLogicApps.deleteLogicApp",
+                    "group": "3@1",
+                    "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflow"
+                },
+                {
+                    "command": "azureLogicApps.refresh",
+                    "group": "4@1",
+                    "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflow"
+                },
+                {
+                    "command": "azureLogicApps.refresh",
+                    "group": "1@1",
+                    "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflowRuns"
+                },
+                {
+                    "command": "azureLogicApps.openRunInEditor",
+                    "group": "1@1",
+                    "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflowRun"
+                },
+                {
+                    "command": "azureLogicApps.resubmitRun",
+                    "group": "1@2",
+                    "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflowRun"
+                },
+                {
+                    "command": "azureLogicApps.refresh",
+                    "group": "1@1",
+                    "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflowVersions"
+                },
+                {
+                    "command": "azureLogicApps.openVersionInEditor",
+                    "group": "1@1",
+                    "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflowVersion"
+                }
+            ],
+            "view/title": [
+                {
+                    "command": "azure-account.selectSubscriptions",
+                    "group": "navigation@1",
+                    "when": "view == azureLogicAppsExplorer"
+                }
+            ]
+        },
+        "jsonValidation": [],
+        "configuration": [
+            {
+                "title": "Azure Logic Apps",
+                "properties": {
+                    "azureLogicApps.showExplorer": {
+                        "default": true,
+                        "description": "%azLogicApps.showExplorerDescription%",
+                        "type": "boolean"
+                    },
+                    "azureLogicApps.showSavePrompt": {
+                        "default": true,
+                        "description": "%azLogicApps.showSavePrompt%",
+                        "type": "boolean"
+                    }
+                }
+            }
+        ]
+    },
+    "scripts": {
+        "compile": "tsc -p ./",
+        "lint": "tslint src/**/*.ts --project tsconfig.json -e src/**/*.d.ts -t verbose",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test",
+        "vscode:prepublish": "npm run compile",
+        "watch": "tsc -watch -p ./"
+    },
+    "devDependencies": {
+        "@types/mocha": "^2.2.48",
+        "@types/node": "^7.0.67",
+        "tslint": "^5.10.0",
+        "typescript": "^2.9.2",
+        "vscode": "^1.1.18"
+    },
+    "dependencies": {
+        "azure-arm-logic": "^1.1.0-preview",
+        "vscode-azureextensionui": "^0.16.4",
+        "vscode-extension-telemetry": "0.0.15",
+        "vscode-nls": "^3.2.4"
+    },
+    "extensionDependencies": [
+        "ms-vscode.azure-account"
+    ]
+}
