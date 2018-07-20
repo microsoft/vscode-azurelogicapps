@@ -36,7 +36,6 @@
         "onCommand:azureLogicApps.openInPortal",
         "onCommand:azureLogicApps.openRunInEditor",
         "onCommand:azureLogicApps.openVersionInEditor",
-        "onCommand:azureLogicApps.previewInEditor",
         "onCommand:azureLogicApps.refresh",
         "onCommand:azureLogicApps.resubmitRun",
         "onView:azureLogicAppsExplorer"
@@ -117,10 +116,6 @@
             "commandPalette": [
                 {
                     "command": "azureLogicApps.loadMore",
-                    "when": "never"
-                },
-                {
-                    "command": "azureLogicApps.previewInEditor",
                     "when": "never"
                 },
                 {
