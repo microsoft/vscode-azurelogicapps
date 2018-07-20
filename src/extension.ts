@@ -77,10 +77,6 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             await openVersionInEditor(tree, node);
         });
 
-        registerCommand("azureLogicApps.previewInEditor", async (node?: IAzureNode<IAzureTreeItem>) => {
-            await openInEditor(tree, logicAppEditor, node, /* preview */ true);
-        });
-
         registerCommand("azureLogicApps.refresh", async (node?: IAzureNode<IAzureTreeItem>) => {
             await tree.refresh(node);
         });

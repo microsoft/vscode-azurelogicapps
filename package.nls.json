@@ -1,26 +1,15 @@
 {
     "azLogicApps.deleteLogicApp": "Delete",
-    "azLogicApps.deleting": "Deleting...",
     "azLogicApps.disableLogicApp": "Disable",
-    "azLogicApps.disabling": "Disabling...",
     "azLogicApps.enableLogicApp": "Enable",
-    "azLogicApps.enabling": "Enabling...",
     "azLogicApps.loadMore": "Load More...",
-    "azLogicApps.LogicApp": "Logic App",
     "azLogicApps.openInEditor": "Open in Editor",
     "azLogicApps.openInPortal": "Open in Portal",
     "azLogicApps.openRunInEditor": "Open in Editor",
     "azLogicApps.openVersionInEditor": "Open in Editor",
-    "azLogicApps.previewInEditor": "Preview in Editor",
     "azLogicApps.refresh": "Refresh",
     "azLogicApps.resubmitRun": "Resubmit",
-    "azLogicApps.resubmitting": "Resubmitting...",
-    "azLogicApps.Run": "Run",
-    "azLogicApps.Runs": "Runs",
     "azLogicApps.showExplorerDescription": "Show or hide the Azure Logic Apps Explorer",
     "azLogicApps.showSavePrompt": "Prompt the user before saving and updating a Logic App.",
-    "azLogicApps.Version": "Version",
-    "azLogicApps.Versions": "Versions",
-    "extension.description": "Visual Studio Code extension for Azure Logic Apps",
-    "starting": "Starting..."
+    "extension.description": "Visual Studio Code extension for Azure Logic Apps"
 }

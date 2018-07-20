@@ -86,11 +86,6 @@
             },
             {
                 "category": "Azure Logic Apps",
-                "command": "azureLogicApps.previewInEditor",
-                "title": "%azLogicApps.previewInEditor%"
-            },
-            {
-                "category": "Azure Logic Apps",
                 "command": "azureLogicApps.refresh",
                 "title": "%azLogicApps.refresh%"
             },
