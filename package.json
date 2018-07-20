@@ -18,7 +18,7 @@
         "theme": "dark"
     },
     "homepage": "https://github.com/Microsoft/vscode-azurelogicapps/blob/master/README.md",
-    "license": "See license in LICENSE.md",
+    "license": "See license in LICENSE file",
     "categories": [
         "Azure"
     ],
