@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import LogicAppsManagementClient = require("azure-arm-logic");
+import LogicAppsManagementClient from "azure-arm-logic";
 import { Workflow, WorkflowVersion } from "azure-arm-logic/lib/models";
 import { IAzureNode, IAzureParentTreeItem, IAzureTreeItem } from "vscode-azureextensionui";
 import { localize } from "../localize";
