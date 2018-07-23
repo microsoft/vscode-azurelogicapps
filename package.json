@@ -239,6 +239,7 @@
     },
     "dependencies": {
         "azure-arm-logic": "^2.0.0",
+        "vsce": "^1.44.0",
         "vscode-azureextensionui": "^0.16.4",
         "vscode-extension-telemetry": "0.0.15",
         "vscode-nls": "^3.2.4"
