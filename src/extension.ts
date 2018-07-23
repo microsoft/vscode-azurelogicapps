@@ -5,7 +5,7 @@
 
 import * as vscode from "vscode";
 import { AzureTreeDataProvider, AzureUserInput, callWithTelemetryAndErrorHandling, IActionContext, IAzureNode, IAzureTreeItem, registerCommand, registerEvent, registerUIExtensionVariables } from "vscode-azureextensionui";
-import TelemetryReporter from "vscode-azureextensionui/node_modules/vscode-extension-telemetry";
+import TelemetryReporter from "vscode-extension-telemetry";
 import { deleteLogicApp } from "./commands/deleteLogicApp";
 import { disableLogicApp } from "./commands/disableLogicApp";
 import { enableLogicApp } from "./commands/enableLogicApp";
