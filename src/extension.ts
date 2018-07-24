@@ -13,6 +13,7 @@ import { openInEditor } from "./commands/openInEditor";
 import { openInPortal } from "./commands/openInPortal";
 import { openRunInEditor } from "./commands/openRunInEditor";
 import { openVersionInEditor } from "./commands/openVersionInEditor";
+import { promoteVersion } from "./commands/promoteVersion";
 import { resubmitRun } from "./commands/resubmitRun";
 import { LogicAppEditor } from "./editors/LogicAppEditor";
 import { ext } from "./extensionVariables";
@@ -80,6 +81,10 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
 
         registerCommand("azureLogicApps.openVersionInEditor", async (node?: IAzureNode<IAzureTreeItem>) => {
             await openVersionInEditor(tree, node);
+        });
+
+        registerCommand("azureLogicApps.promoteVersion", async (node?: IAzureNode<IAzureTreeItem>) => {
+            await promoteVersion(tree, node);
         });
 
         registerCommand("azureLogicApps.refresh", async (node?: IAzureNode<IAzureTreeItem>) => {

@@ -7,6 +7,7 @@
     "azLogicApps.openInPortal": "Open in Portal",
     "azLogicApps.openRunInEditor": "Open in Editor",
     "azLogicApps.openVersionInEditor": "Open in Editor",
+    "azLogicApps.promoteVersion": "Promote",
     "azLogicApps.refresh": "Refresh",
     "azLogicApps.resubmitRun": "Resubmit",
     "azLogicApps.showExplorerDescription": "Show or hide the Azure Logic Apps Explorer",
