@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as vscode from "vscode";
-import { AzureTreeDataProvider, AzureUserInput, callWithTelemetryAndErrorHandling, IActionContext, IAzureNode, IAzureTreeItem, registerCommand, registerEvent, registerUIExtensionVariables } from "vscode-azureextensionui";
+import { AzureTreeDataProvider, AzureUserInput, callWithTelemetryAndErrorHandling, IActionContext, IAzureNode, registerCommand, registerEvent, registerUIExtensionVariables } from "vscode-azureextensionui";
 import TelemetryReporter from "vscode-extension-telemetry";
 import { deleteLogicApp } from "./commands/deleteLogicApp";
 import { disableLogicApp } from "./commands/disableLogicApp";
@@ -69,39 +69,39 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             await tree.loadMore(node);
         });
 
-        registerCommand("azureLogicApps.openInEditor", async (node?: IAzureNode<IAzureTreeItem>) => {
+        registerCommand("azureLogicApps.openInEditor", async (node?: IAzureNode) => {
             await openInEditor(tree, logicAppEditor, node);
         });
 
-        registerCommand("azureLogicApps.openInPortal", async (node?: IAzureNode<IAzureTreeItem>) => {
+        registerCommand("azureLogicApps.openInPortal", async (node?: IAzureNode) => {
             await openInPortal(tree, node);
         });
 
-        registerCommand("azureLogicApps.openRunInEditor", async (node?: IAzureNode<IAzureTreeItem>) => {
+        registerCommand("azureLogicApps.openRunInEditor", async (node?: IAzureNode) => {
             await openRunInEditor(tree, node);
         });
 
-        registerCommand("azureLogicApps.openTriggerInEditor", async (node?: IAzureNode<IAzureTreeItem>) => {
+        registerCommand("azureLogicApps.openTriggerInEditor", async (node?: IAzureNode) => {
             await openTriggerInEditor(tree, node);
         });
 
-        registerCommand("azureLogicApps.openVersionInEditor", async (node?: IAzureNode<IAzureTreeItem>) => {
+        registerCommand("azureLogicApps.openVersionInEditor", async (node?: IAzureNode) => {
             await openVersionInEditor(tree, node);
         });
 
-        registerCommand("azureLogicApps.promoteVersion", async (node?: IAzureNode<IAzureTreeItem>) => {
+        registerCommand("azureLogicApps.promoteVersion", async (node?: IAzureNode) => {
             await promoteVersion(tree, node);
         });
 
-        registerCommand("azureLogicApps.refresh", async (node?: IAzureNode<IAzureTreeItem>) => {
+        registerCommand("azureLogicApps.refresh", async (node?: IAzureNode) => {
             await tree.refresh(node);
         });
 
-        registerCommand("azureLogicApps.resubmitRun", async (node?: IAzureNode<IAzureTreeItem>) => {
+        registerCommand("azureLogicApps.resubmitRun", async (node?: IAzureNode) => {
             await resubmitRun(tree, node);
         });
 
-        registerCommand("azureLogicApps.runTrigger", async (node?: IAzureNode<IAzureTreeItem>) => {
+        registerCommand("azureLogicApps.runTrigger", async (node?: IAzureNode) => {
             await runTrigger(tree, node);
         });
 

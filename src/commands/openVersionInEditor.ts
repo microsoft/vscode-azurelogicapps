@@ -4,10 +4,10 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as vscode from "vscode";
-import { AzureTreeDataProvider, IAzureNode, IAzureTreeItem } from "vscode-azureextensionui";
+import { AzureTreeDataProvider, IAzureNode } from "vscode-azureextensionui";
 import { LogicAppVersionTreeItem } from "../tree/LogicAppVersionTreeItem";
 
-export async function openVersionInEditor(tree: AzureTreeDataProvider, node?: IAzureNode<IAzureTreeItem>): Promise<void> {
+export async function openVersionInEditor(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {
     if (!node) {
         node = await tree.showNodePicker(LogicAppVersionTreeItem.contextValue);
     }

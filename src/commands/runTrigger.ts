@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AzureTreeDataProvider, IAzureNode, IAzureTreeItem } from "vscode-azureextensionui";
+import { AzureTreeDataProvider, IAzureNode } from "vscode-azureextensionui";
 import { localize } from "../localize";
 import { LogicAppTriggerTreeItem } from "../tree/LogicAppTriggerTreeItem";
 
-export async function runTrigger(tree: AzureTreeDataProvider, node?: IAzureNode<IAzureTreeItem>): Promise<void> {
+export async function runTrigger(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {
     if (!node) {
         node = await tree.showNodePicker(LogicAppTriggerTreeItem.contextValue);
     }
