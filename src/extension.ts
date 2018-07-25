@@ -12,9 +12,11 @@ import { enableLogicApp } from "./commands/enableLogicApp";
 import { openInEditor } from "./commands/openInEditor";
 import { openInPortal } from "./commands/openInPortal";
 import { openRunInEditor } from "./commands/openRunInEditor";
+import { openTriggerInEditor } from "./commands/openTriggerInEditor";
 import { openVersionInEditor } from "./commands/openVersionInEditor";
 import { promoteVersion } from "./commands/promoteVersion";
 import { resubmitRun } from "./commands/resubmitRun";
+import { runTrigger } from "./commands/runTrigger";
 import { LogicAppEditor } from "./editors/LogicAppEditor";
 import { ext } from "./extensionVariables";
 import { LogicAppsProvider } from "./tree/LogicAppsProvider";
@@ -79,6 +81,10 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             await openRunInEditor(tree, node);
         });
 
+        registerCommand("azureLogicApps.openTriggerInEditor", async (node?: IAzureNode<IAzureTreeItem>) => {
+            await openTriggerInEditor(tree, node);
+        });
+
         registerCommand("azureLogicApps.openVersionInEditor", async (node?: IAzureNode<IAzureTreeItem>) => {
             await openVersionInEditor(tree, node);
         });
@@ -93,6 +99,10 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
 
         registerCommand("azureLogicApps.resubmitRun", async (node?: IAzureNode<IAzureTreeItem>) => {
             await resubmitRun(tree, node);
+        });
+
+        registerCommand("azureLogicApps.runTrigger", async (node?: IAzureNode<IAzureTreeItem>) => {
+            await runTrigger(tree, node);
         });
 
         registerEvent(

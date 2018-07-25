@@ -8,16 +8,19 @@ import { Workflow } from "azure-arm-logic/lib/models";
 import { IAzureParentTreeItem, IAzureTreeItem } from "vscode-azureextensionui";
 import { getIconPath } from "../utils/nodeUtils";
 import { LogicAppRunsTreeItem } from "./LogicAppRunsTreeItem";
+import { LogicAppTriggersTreeItem } from "./LogicAppTriggersTreeItem";
 import { LogicAppVersionsTreeItem } from "./LogicAppVersionsTreeItem";
 
 export class LogicAppTreeItem implements IAzureParentTreeItem {
     public static contextValue = "azLogicAppsWorkflow";
     public contextValue = LogicAppTreeItem.contextValue;
     public logicAppRunsItem: LogicAppRunsTreeItem;
+    public logicAppTriggersItem: LogicAppTriggersTreeItem;
     public logicAppVersionsItem: LogicAppVersionsTreeItem;
 
     public constructor(private readonly client: LogicAppsManagementClient, private readonly workflow: Workflow) {
         this.logicAppRunsItem = new LogicAppRunsTreeItem(client, workflow);
+        this.logicAppTriggersItem = new LogicAppTriggersTreeItem(client, workflow);
         this.logicAppVersionsItem = new LogicAppVersionsTreeItem(client, workflow);
     }
 
@@ -64,6 +67,7 @@ export class LogicAppTreeItem implements IAzureParentTreeItem {
     public async loadMoreChildren(): Promise<IAzureTreeItem[]> {
         return [
             this.logicAppRunsItem,
+            this.logicAppTriggersItem,
             this.logicAppVersionsItem
         ];
     }
@@ -72,6 +76,9 @@ export class LogicAppTreeItem implements IAzureParentTreeItem {
         switch (expectedContextValue) {
             case LogicAppRunsTreeItem.contextValue:
                 return this.logicAppRunsItem;
+
+            case LogicAppTriggersTreeItem.contextValue:
+                return this.logicAppTriggersItem;
 
             case LogicAppVersionsTreeItem.contextValue:
                 return this.logicAppVersionsItem;
