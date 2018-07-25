@@ -60,7 +60,11 @@ export class LogicAppTreeItem implements IAzureParentTreeItem {
         await this.client.workflows.enable(this.resourceGroupName, this.workflowName);
     }
 
-    public async getData(): Promise<string> {
+    public async getData(refresh = false): Promise<string> {
+        if (refresh) {
+            this.workflow = await this.client.workflows.get(this.resourceGroupName, this.workflowName);
+        }
+
         return JSON.stringify(this.workflow.definition, null, 4);
     }
 
