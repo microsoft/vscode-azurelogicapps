@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from "vscode";
 import { AzureTreeDataProvider, IAzureNode } from "vscode-azureextensionui";
 import { LogicAppTriggerTreeItem } from "../tree/LogicAppTriggerTreeItem";
+import { openAndShowTextDocument } from "../utils/commandUtils";
 
 export async function openTriggerInEditor(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {
     if (!node) {
@@ -13,9 +13,5 @@ export async function openTriggerInEditor(tree: AzureTreeDataProvider, node?: IA
     }
 
     const content = await (node.treeItem as LogicAppTriggerTreeItem).getData();
-    const document = await vscode.workspace.openTextDocument({
-        content,
-        language: "json"
-    });
-    await vscode.window.showTextDocument(document);
+    await openAndShowTextDocument(content);
 }

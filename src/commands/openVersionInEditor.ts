@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from "vscode";
 import { AzureTreeDataProvider, IAzureNode } from "vscode-azureextensionui";
 import { LogicAppVersionTreeItem } from "../tree/LogicAppVersionTreeItem";
+import { openAndShowTextDocument } from "../utils/commandUtils";
 
 export async function openVersionInEditor(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {
     if (!node) {
@@ -13,9 +13,5 @@ export async function openVersionInEditor(tree: AzureTreeDataProvider, node?: IA
     }
 
     const content = await (node.treeItem as LogicAppVersionTreeItem).getData();
-    const document = await vscode.workspace.openTextDocument({
-        content,
-        language: "json"
-    });
-    await vscode.window.showTextDocument(document);
+    await openAndShowTextDocument(content);
 }
