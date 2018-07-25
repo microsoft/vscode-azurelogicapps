@@ -18,7 +18,7 @@ export class LogicAppVersionsTreeItem implements IAzureParentTreeItem {
 
     private nextLink: string | undefined;
 
-    constructor(private readonly client: LogicAppsManagementClient, private readonly workflow: Workflow) {
+    public constructor(private readonly client: LogicAppsManagementClient, private readonly workflow: Workflow) {
     }
 
     public hasMoreChildren(): boolean {
