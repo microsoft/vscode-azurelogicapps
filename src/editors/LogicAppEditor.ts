@@ -14,7 +14,7 @@ export class LogicAppEditor extends BaseEditor<IAzureNode<LogicAppTreeItem>> {
     }
 
     public async getData(node: IAzureNode<LogicAppTreeItem>): Promise<string> {
-        return node.treeItem.getData();
+        return node.treeItem.getData(true);
     }
 
     public async getFilename(node: IAzureNode<LogicAppTreeItem>): Promise<string> {

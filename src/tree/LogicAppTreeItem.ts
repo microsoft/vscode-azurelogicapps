@@ -18,7 +18,7 @@ export class LogicAppTreeItem implements IAzureParentTreeItem {
     public logicAppTriggersItem: LogicAppTriggersTreeItem;
     public logicAppVersionsItem: LogicAppVersionsTreeItem;
 
-    public constructor(private readonly client: LogicAppsManagementClient, private readonly workflow: Workflow) {
+    public constructor(private readonly client: LogicAppsManagementClient, private workflow: Workflow) {
         this.logicAppRunsItem = new LogicAppRunsTreeItem(client, workflow);
         this.logicAppTriggersItem = new LogicAppTriggersTreeItem(client, workflow);
         this.logicAppVersionsItem = new LogicAppVersionsTreeItem(client, workflow);
@@ -86,6 +86,10 @@ export class LogicAppTreeItem implements IAzureParentTreeItem {
             default:
                 return undefined;
         }
+    }
+
+    public async refreshLabel() {
+        this.workflow = await this.client.workflows.get(this.resourceGroupName, this.workflowName);
     }
 
     public async update(definition: string): Promise<string> {
