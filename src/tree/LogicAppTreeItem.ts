@@ -92,10 +92,6 @@ export class LogicAppTreeItem implements IAzureParentTreeItem {
         }
     }
 
-    public async refreshLabel() {
-        this.workflow = await this.client.workflows.get(this.resourceGroupName, this.workflowName);
-    }
-
     public async update(definition: string): Promise<string> {
         const workflow = {
             ...this.workflow,
