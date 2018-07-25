@@ -26,7 +26,7 @@ export class LogicAppEditor extends BaseEditor<IAzureNode<LogicAppTreeItem>> {
         return localize("azLogicApps.saveConfirmationText", "Saving '{0}' will update the Logic App definition in your subscription.", label);
     }
 
-    public async getSize(_: IAzureNode<LogicAppTreeItem>): Promise<number> {
+    public async getSize(): Promise<number> {
         return 0;
     }
 
