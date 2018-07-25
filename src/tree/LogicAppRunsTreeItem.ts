@@ -22,7 +22,7 @@ export class LogicAppRunsTreeItem implements IAzureParentTreeItem {
     }
 
     public hasMoreChildren(): boolean {
-        return false;
+        return this.nextLink !== undefined;
     }
 
     public get iconPath(): nodeUtils.IThemedIconPath {
