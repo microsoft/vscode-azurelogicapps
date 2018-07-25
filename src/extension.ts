@@ -11,6 +11,7 @@ import { disableLogicApp } from "./commands/disableLogicApp";
 import { enableLogicApp } from "./commands/enableLogicApp";
 import { openInEditor } from "./commands/openInEditor";
 import { openInPortal } from "./commands/openInPortal";
+import { openRunActionInEditor } from "./commands/openRunActionInEditor";
 import { openRunInEditor } from "./commands/openRunInEditor";
 import { openTriggerInEditor } from "./commands/openTriggerInEditor";
 import { openVersionInEditor } from "./commands/openVersionInEditor";
@@ -75,6 +76,10 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
 
         registerCommand("azureLogicApps.openInPortal", async (node?: IAzureNode) => {
             await openInPortal(tree, node);
+        });
+
+        registerCommand("azureLogicApps.openRunActionInEditor", async (node?: IAzureNode) => {
+            await openRunActionInEditor(tree, node);
         });
 
         registerCommand("azureLogicApps.openRunInEditor", async (node?: IAzureNode) => {
