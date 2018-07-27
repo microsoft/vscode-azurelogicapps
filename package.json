@@ -41,6 +41,7 @@
         "onCommand:azureLogicApps.refresh",
         "onCommand:azureLogicApps.resubmitRun",
         "onCommand:azureLogicApps.runTrigger",
+        "onCommand:azureLogicApps.selectSubscriptions",
         "onView:azureLogicAppsExplorer"
     ],
     "main": "./out/extension",
@@ -110,6 +111,15 @@
                 "category": "Azure Logic Apps",
                 "command": "azureLogicApps.runTrigger",
                 "title": "%azLogicApps.runTrigger%"
+            },
+            {
+                "category": "Azure Logic Apps",
+                "command": "azureLogicApps.selectSubscriptions",
+                "icon": {
+                    "dark": "resources/dark/Filter.svg",
+                    "light": "resources/light/Filter.svg"
+                },
+                "title": "%azLogicApps.selectSubscriptions%"
             }
         ],
         "viewsContainers": {
@@ -235,7 +245,7 @@
             ],
             "view/title": [
                 {
-                    "command": "azure-account.selectSubscriptions",
+                    "command": "azureLogicApps.selectSubscriptions",
                     "group": "navigation@1",
                     "when": "view == azureLogicAppsExplorer"
                 }

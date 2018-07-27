@@ -105,6 +105,10 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             await runTrigger(tree, node);
         });
 
+        registerCommand("azureLogicApps.selectSubscriptions", () => {
+            vscode.commands.executeCommand("azure-account.selectSubscriptions");
+        });
+
         registerEvent(
             "azureLogicApps.logicAppEditor.onDidSaveTextDocument",
             vscode.workspace.onDidSaveTextDocument,
