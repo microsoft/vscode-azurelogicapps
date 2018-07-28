@@ -5,12 +5,12 @@
 
 import LogicAppsManagementClient from "azure-arm-logic";
 import { Workflow, WorkflowTrigger } from "azure-arm-logic/lib/models";
-import { IAzureNode, IAzureTreeItem } from "vscode-azureextensionui";
+import { IAzureNode, IAzureParentTreeItem, IAzureTreeItem } from "vscode-azureextensionui";
 import { localize } from "../localize";
 import { getThemedIconPath, IThemedIconPath } from "../utils/nodeUtils";
 import { LogicAppTriggerTreeItem } from "./LogicAppTriggerTreeItem";
 
-export class LogicAppTriggersTreeItem implements IAzureTreeItem {
+export class LogicAppTriggersTreeItem implements IAzureParentTreeItem {
     public static contextValue = "azLogicAppsWorkflowTriggers";
     public readonly childTypeLabel = localize("azLogicApps.Trigger", "Trigger");
     public readonly contextValue = LogicAppTriggersTreeItem.contextValue;
