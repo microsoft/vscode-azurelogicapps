@@ -1,0 +1,29 @@
+{
+    "defaultSeverity": "warning",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rules": {
+        "class-name": true,
+        "curly": true,
+        "max-line-length": false,
+        "no-duplicate-variable": true,
+        "no-namespace": false,
+        "no-string-throw": true,
+        "no-unused-expression": true,
+        "semicolon": [
+            true,
+            "always"
+        ],
+        "space-before-function-paren": false,
+        "trailing-comma": [
+            true,
+            {
+                "esSpecCompliant": true
+            }
+        ],
+        "triple-equals": true
+    },
+    "rulesDirectory": []
+}
