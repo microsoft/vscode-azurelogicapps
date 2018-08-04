@@ -283,11 +283,11 @@
         "@types/node": "^7.0.67",
         "tslint": "^5.11.0",
         "typescript": "^3.0.1",
+        "vsce": "^1.45.1",
         "vscode": "^1.1.18"
     },
     "dependencies": {
         "azure-arm-logic": "^2.0.0",
-        "vsce": "^1.44.0",
         "vscode-azureextensionui": "^0.16.4",
         "vscode-extension-telemetry": "0.0.15",
         "vscode-nls": "^3.2.4"
