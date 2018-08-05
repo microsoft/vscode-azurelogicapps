@@ -70,6 +70,10 @@
             {
                 "category": "Azure Logic Apps",
                 "command": "azureLogicApps.openInEditor",
+                "icon": {
+                    "dark": "resources/dark/Edit.svg",
+                    "light": "resources/light/Edit.svg"
+                },
                 "title": "%azLogicApps.openInEditor%"
             },
             {
