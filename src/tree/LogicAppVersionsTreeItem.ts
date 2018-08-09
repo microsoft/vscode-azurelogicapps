@@ -8,6 +8,7 @@ import { Workflow, WorkflowVersion } from "azure-arm-logic/lib/models";
 import { IAzureNode, IAzureParentTreeItem, IAzureTreeItem } from "vscode-azureextensionui";
 import { localize } from "../localize";
 import * as nodeUtils from "../utils/nodeUtils";
+import { LogicAppCurrentVersionTreeItem } from "./LogicAppCurrentVersionTreeItem";
 import { LogicAppVersionTreeItem } from "./LogicAppVersionTreeItem";
 
 export class LogicAppVersionsTreeItem implements IAzureParentTreeItem {
@@ -52,6 +53,10 @@ export class LogicAppVersionsTreeItem implements IAzureParentTreeItem {
 
         this.nextLink = workflowVersions.nextLink;
 
-        return workflowVersions.map((workflowVersion: WorkflowVersion) => new LogicAppVersionTreeItem(this.client, this.workflow, workflowVersion));
+        return workflowVersions.map((workflowVersion: WorkflowVersion) => {
+            return workflowVersion.name !== this.workflow.version!
+                ? new LogicAppVersionTreeItem(this.client, this.workflow, workflowVersion)
+                : new LogicAppCurrentVersionTreeItem(this.client, this.workflow, workflowVersion);
+        });
     }
 }
