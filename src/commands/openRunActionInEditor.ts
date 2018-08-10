@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AzureTreeDataProvider, IAzureNode, IAzureTreeItem } from "vscode-azureextensionui";
+import { AzureTreeDataProvider, IAzureNode } from "vscode-azureextensionui";
 import { LogicAppRunActionTreeItem } from "../tree/LogicAppRunActionTreeItem";
 import { openAndShowTextDocument } from "../utils/commandUtils";
 
-export async function openRunActionInEditor(tree: AzureTreeDataProvider, node?: IAzureNode<IAzureTreeItem>): Promise<void> {
+export async function openRunActionInEditor(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {
     if (!node) {
         node = await tree.showNodePicker(LogicAppRunActionTreeItem.contextValue);
     }
