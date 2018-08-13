@@ -54,9 +54,9 @@ export class LogicAppVersionsTreeItem implements IAzureParentTreeItem {
         this.nextLink = workflowVersions.nextLink;
 
         return workflowVersions.map((workflowVersion: WorkflowVersion) => {
-            return workflowVersion.name !== this.workflow.version!
-                ? new LogicAppVersionTreeItem(this.client, this.workflow, workflowVersion)
-                : new LogicAppCurrentVersionTreeItem(this.client, this.workflow, workflowVersion);
+            return workflowVersion.name === this.workflow.version!
+                ? new LogicAppCurrentVersionTreeItem(this.client, this.workflow, workflowVersion)
+                : new LogicAppVersionTreeItem(this.client, this.workflow, workflowVersion);
         });
     }
 }
