@@ -4,9 +4,10 @@
  *--------------------------------------------------------------------------------------------*/
 
 import LogicAppsManagementClient from "azure-arm-logic";
-import { WorkflowRun } from "azure-arm-logic/lib/models";
-import { IAzureTreeItem } from "vscode-azureextensionui";
+import { Workflow, WorkflowRun } from "azure-arm-logic/lib/models";
+import { IAzureParentTreeItem, IAzureTreeItem } from "vscode-azureextensionui";
 import * as nodeUtils from "../utils/nodeUtils";
+import { LogicAppRunActionsTreeItem } from "./LogicAppRunActionsTreeItem";
 
 enum LogicAppRunStatus {
     Aborted = "Aborted",
@@ -17,11 +18,13 @@ enum LogicAppRunStatus {
     Succeeded = "Succeeded"
 }
 
-export class LogicAppRunTreeItem implements IAzureTreeItem {
+export class LogicAppRunTreeItem implements IAzureParentTreeItem {
     public static readonly contextValue = "azLogicAppsWorkflowRun";
     public readonly contextValue = LogicAppRunTreeItem.contextValue;
+    private readonly logicAppRunActionsTreeItem: LogicAppRunActionsTreeItem;
 
-    public constructor(private readonly client: LogicAppsManagementClient, private readonly workflowRun: WorkflowRun) {
+    public constructor(private readonly client: LogicAppsManagementClient, private readonly workflow: Workflow, private readonly workflowRun: WorkflowRun) {
+        this.logicAppRunActionsTreeItem = new LogicAppRunActionsTreeItem(client, workflow, workflowRun);
     }
 
     public get commandId(): string {
@@ -58,7 +61,7 @@ export class LogicAppRunTreeItem implements IAzureTreeItem {
     }
 
     public get resourceGroupName(): string {
-        return this.workflowRun.id!.split("/").slice(-7, -6)[0];
+        return this.workflow.id!.split("/").slice(-5, -4)[0];
     }
 
     public get triggerName(): string {
@@ -66,11 +69,31 @@ export class LogicAppRunTreeItem implements IAzureTreeItem {
     }
 
     public get workflowName(): string {
-        return this.workflowRun.id!.split("/").slice(-3, -2)[0];
+        return this.workflow.name!;
     }
 
     public async getData(): Promise<string> {
         return JSON.stringify(this.workflowRun, null, 4);
+    }
+
+    public hasMoreChildren(): boolean {
+        return false;
+    }
+
+    public async loadMoreChildren(): Promise<IAzureTreeItem[]> {
+        return [
+            this.logicAppRunActionsTreeItem
+        ];
+    }
+
+    public pickTreeItem(expectedContextValue: string): IAzureTreeItem | undefined {
+        switch (expectedContextValue) {
+            case LogicAppRunActionsTreeItem.contextValue:
+                return this.logicAppRunActionsTreeItem;
+
+            default:
+                return undefined;
+        }
     }
 
     public async resubmit(): Promise<void> {

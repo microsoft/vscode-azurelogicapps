@@ -34,6 +34,7 @@
         "onCommand:azureLogicApps.loadMore",
         "onCommand:azureLogicApps.openInEditor",
         "onCommand:azureLogicApps.openInPortal",
+        "onCommand:azureLogicApps.openRunActionInEditor",
         "onCommand:azureLogicApps.openRunInEditor",
         "onCommand:azureLogicApps.openTriggerInEditor",
         "onCommand:azureLogicApps.openVersionInEditor",
@@ -80,6 +81,11 @@
                 "category": "Azure Logic Apps",
                 "command": "azureLogicApps.openInPortal",
                 "title": "%azLogicApps.openInPortal%"
+            },
+            {
+                "category": "Azure Logic Apps",
+                "command": "azureLogicApps.openRunActionInEditor",
+                "title": "%azLogicApps.openInEditor%"
             },
             {
                 "category": "Azure Logic Apps",
@@ -215,6 +221,16 @@
                     "command": "azureLogicApps.resubmitRun",
                     "group": "1@2",
                     "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflowRun"
+                },
+                {
+                    "command": "azureLogicApps.refresh",
+                    "group": "1@1",
+                    "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflowRunActions"
+                },
+                {
+                    "command": "azureLogicApps.openRunActionInEditor",
+                    "group": "1@1",
+                    "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflowRunAction"
                 },
                 {
                     "command": "azureLogicApps.refresh",

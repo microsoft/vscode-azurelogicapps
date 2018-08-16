@@ -4,21 +4,21 @@
  *--------------------------------------------------------------------------------------------*/
 
 import LogicAppsManagementClient from "azure-arm-logic";
-import { Workflow, WorkflowRun } from "azure-arm-logic/lib/models";
+import { Workflow, WorkflowRun, WorkflowRunAction } from "azure-arm-logic/lib/models";
 import { IAzureNode, IAzureParentTreeItem, IAzureTreeItem } from "vscode-azureextensionui";
 import { localize } from "../localize";
 import * as nodeUtils from "../utils/nodeUtils";
-import { LogicAppRunTreeItem } from "./LogicAppRunTreeItem";
+import { LogicAppRunActionTreeItem } from "./LogicAppRunActionTreeItem";
 
-export class LogicAppRunsTreeItem implements IAzureParentTreeItem {
-    public static contextValue = "azLogicAppsWorkflowRuns";
-    public readonly childTypeLabel = localize("azLogicApps.Run", "Run");
-    public readonly contextValue = LogicAppRunsTreeItem.contextValue;
-    public readonly label = localize("azLogicApps.Runs", "Runs");
+export class LogicAppRunActionsTreeItem implements IAzureParentTreeItem {
+    public static contextValue = "azLogicAppsWorkflowRunActions";
+    public readonly childTypeLabel = localize("azLogicApps.RunAction", "Action");
+    public readonly contextValue = LogicAppRunActionsTreeItem.contextValue;
+    public readonly label = localize("azLogicApps.RunActions", "Actions");
 
     private nextLink: string | undefined;
 
-    public constructor(private readonly client: LogicAppsManagementClient, private readonly workflow: Workflow) {
+    public constructor(private readonly client: LogicAppsManagementClient, private readonly workflow: Workflow, private readonly workflowRun: WorkflowRun) {
     }
 
     public hasMoreChildren(): boolean {
@@ -30,11 +30,15 @@ export class LogicAppRunsTreeItem implements IAzureParentTreeItem {
     }
 
     public get id(): string {
-        return `${this.workflow.id!}/runs`;
+        return `${this.workflowRun.id!}/actions`;
     }
 
     public get resourceGroupName(): string {
         return this.workflow.id!.split("/").slice(-5, -4)[0];
+    }
+
+    public get runName(): string {
+        return this.workflowRun.name!;
     }
 
     public get workflowName(): string {
@@ -46,12 +50,12 @@ export class LogicAppRunsTreeItem implements IAzureParentTreeItem {
             this.nextLink = undefined;
         }
 
-        const workflowRuns = this.nextLink === undefined
-            ? await this.client.workflowRuns.list(this.resourceGroupName, this.workflowName)
-            : await this.client.workflowRuns.listNext(this.nextLink);
+        const workflowRunActions = this.nextLink === undefined
+            ? await this.client.workflowRunActions.list(this.resourceGroupName, this.workflowName, this.runName)
+            : await this.client.workflowRunActions.listNext(this.nextLink);
 
-        this.nextLink = workflowRuns.nextLink;
+        this.nextLink = workflowRunActions.nextLink;
 
-        return workflowRuns.map((workflowRun: WorkflowRun) => new LogicAppRunTreeItem(this.client, this.workflow, workflowRun));
+        return workflowRunActions.map((workflowRunAction: WorkflowRunAction) => new LogicAppRunActionTreeItem(workflowRunAction));
     }
 }
