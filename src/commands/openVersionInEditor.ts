@@ -4,14 +4,15 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { AzureTreeDataProvider, IAzureNode } from "vscode-azureextensionui";
+import { LogicAppCurrentVersionTreeItem } from "../tree/LogicAppCurrentVersionTreeItem";
 import { LogicAppVersionTreeItem } from "../tree/LogicAppVersionTreeItem";
 import { openAndShowTextDocument } from "../utils/commandUtils";
 
 export async function openVersionInEditor(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {
     if (!node) {
-        node = await tree.showNodePicker(LogicAppVersionTreeItem.contextValue);
+        node = await tree.showNodePicker([LogicAppCurrentVersionTreeItem.contextValue, LogicAppVersionTreeItem.contextValue]);
     }
 
-    const content = await (node.treeItem as LogicAppVersionTreeItem).getData();
+    const content = await (node.treeItem as LogicAppCurrentVersionTreeItem | LogicAppVersionTreeItem).getData();
     await openAndShowTextDocument(content);
 }

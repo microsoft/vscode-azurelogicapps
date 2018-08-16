@@ -9,8 +9,8 @@ import { IAzureTreeItem } from "vscode-azureextensionui";
 import * as nodeUtils from "../utils/nodeUtils";
 
 export class LogicAppVersionTreeItem implements IAzureTreeItem {
-    public static readonly contextValue = "azLogicAppsWorkflowVersion";
-    public readonly contextValue = LogicAppVersionTreeItem.contextValue;
+    public static readonly contextValue: string = "azLogicAppsWorkflowVersion";
+    public readonly contextValue: string = LogicAppVersionTreeItem.contextValue;
 
     public constructor(private readonly client: LogicAppsManagementClient, private readonly workflow: Workflow, private readonly workflowVersion: WorkflowVersion) {
     }
