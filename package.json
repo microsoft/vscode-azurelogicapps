@@ -4,7 +4,7 @@
     "description": "%extension.description%",
     "version": "0.0.1",
     "publisher": "ms-azuretools",
-    "icon": "resources/azure-logic-apps.png",
+    "icon": "resources/azLogicApps.png",
     "aiKey": "a603acf5-644e-4b0e-bbf4-455c4ccff3b7",
     "engines": {
         "vscode": "^1.25.1"
@@ -43,7 +43,12 @@
         "onCommand:azureLogicApps.resubmitRun",
         "onCommand:azureLogicApps.runTrigger",
         "onCommand:azureLogicApps.selectSubscriptions",
-        "onView:azureLogicAppsExplorer"
+        "onView:azureLogicAppsExplorer",
+        "onCommand:azIntegrationAccounts.loadMore",
+        "onCommand:azIntegrationAccounts.openMapInEditor",
+        "onCommand:azIntegrationAccounts.refresh",
+        "onCommand:azIntegrationAccounts.selectSubscriptions",
+        "onView:azureIntegrationAccountsExplorer"
     ],
     "main": "./out/extension",
     "contributes": {
@@ -130,6 +135,25 @@
                     "light": "resources/light/Filter.svg"
                 },
                 "title": "%azLogicApps.selectSubscriptions%"
+            },
+            {
+                "category": "Azure Integration Accounts",
+                "command": "azIntegrationAccounts.loadMore",
+                "title": "%azIntegrationAccounts.loadMore%"
+            },
+            {
+                "category": "Azure Integration Accounts",
+                "command": "azIntegrationAccounts.refresh",
+                "title": "%azIntegrationAccounts.refresh%"
+            },
+            {
+                "category": "Azure Integration Accounts",
+                "command": "azIntegrationAccounts.selectSubscriptions",
+                "icon": {
+                    "dark": "resources/dark/Filter.svg",
+                    "light": "resources/light/Filter.svg"
+                },
+                "title": "%azIntegrationAccounts.selectSubscriptions%"
             }
         ],
         "viewsContainers": {
@@ -147,6 +171,11 @@
                     "id": "azureLogicAppsExplorer",
                     "name": "Logic Apps",
                     "when": "config.azureLogicApps.showExplorer == true"
+                },
+                {
+                    "id": "azureIntegrationAccountsExplorer",
+                    "name": "Integration Accounts",
+                    "when": "config.azureLogicApps.showExplorer == true"
                 }
             ]
         },
@@ -158,6 +187,14 @@
                 },
                 {
                     "command": "azureLogicApps.refresh",
+                    "when": "never"
+                },
+                {
+                    "command": "azIntegrationAccounts.loadMore",
+                    "when": "never"
+                },
+                {
+                    "command": "azIntegrationAccounts.refresh",
                     "when": "never"
                 }
             ],
@@ -266,6 +303,26 @@
                     "command": "azureLogicApps.promoteVersion",
                     "group": "1@2",
                     "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflowVersion"
+                },
+                {
+                    "command": "azIntegrationAccounts.refresh",
+                    "group": "1@1",
+                    "when": "view == azureIntegrationAccountsExplorer && viewItem == azureextensionui.azureSubscription"
+                },
+                {
+                    "command": "azIntegrationAccounts.refresh",
+                    "group": "1@1",
+                    "when": "view == azureIntegrationAccountsExplorer && viewItem == azIntegrationAccount"
+                },
+                {
+                    "command": "azIntegrationAccounts.refresh",
+                    "group": "1@1",
+                    "when": "view == azureIntegrationAccountsExplorer && viewItem == azIntegrationAccountMaps"
+                },
+                {
+                    "command": "azIntegrationAccounts.refresh",
+                    "group": "1@1",
+                    "when": "view == azureIntegrationAccountsExplorer && viewItem == azIntegrationAccountMap"
                 }
             ],
             "view/title": [
@@ -273,6 +330,11 @@
                     "command": "azureLogicApps.selectSubscriptions",
                     "group": "navigation@1",
                     "when": "view == azureLogicAppsExplorer"
+                },
+                {
+                    "command": "azIntegrationAccounts.selectSubscriptions",
+                    "group": "navigation@1",
+                    "when": "view == azureIntegrationAccountsExplorer"
                 }
             ]
         },
@@ -289,6 +351,21 @@
                     "azureLogicApps.showSavePrompt": {
                         "default": true,
                         "description": "%azLogicApps.showSavePrompt%",
+                        "type": "boolean"
+                    }
+                }
+            },
+            {
+                "title": "Azure Integration Accounts",
+                "properties": {
+                    "azIntegrationAccounts.showExplorer": {
+                        "default": true,
+                        "description": "%azIntegrationAccounts.showExplorerDescription%",
+                        "type": "boolean"
+                    },
+                    "azIntegrationAccounts.showSavePrompt": {
+                        "default": true,
+                        "description": "%azIntegrationAccounts.showSavePrompt%",
                         "type": "boolean"
                     }
                 }
@@ -312,7 +389,10 @@
         "vscode": "^1.1.18"
     },
     "dependencies": {
+        "@types/request-promise": "^4.1.42",
         "azure-arm-logic": "^2.0.0",
+        "request": "^2.88.0",
+        "request-promise": "^4.2.2",
         "vscode-azureextensionui": "^0.16.4",
         "vscode-extension-telemetry": "0.0.15",
         "vscode-nls": "^3.2.4"

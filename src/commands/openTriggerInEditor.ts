@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { AzureTreeDataProvider, IAzureNode } from "vscode-azureextensionui";
-import { LogicAppTriggerTreeItem } from "../tree/LogicAppTriggerTreeItem";
+import { LogicAppTriggerTreeItem } from "../tree/logic-app/LogicAppTriggerTreeItem";
 import { openAndShowTextDocument } from "../utils/commandUtils";
 
 export async function openTriggerInEditor(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {

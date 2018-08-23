@@ -6,7 +6,7 @@
 import LogicAppsManagementClient from "azure-arm-logic";
 import { Workflow, WorkflowRun } from "azure-arm-logic/lib/models";
 import { IAzureParentTreeItem, IAzureTreeItem } from "vscode-azureextensionui";
-import * as nodeUtils from "../utils/nodeUtils";
+import * as nodeUtils from "../../utils/nodeUtils";
 import { LogicAppRunActionsTreeItem } from "./LogicAppRunActionsTreeItem";
 
 enum LogicAppRunStatus {

@@ -6,8 +6,8 @@
 import LogicAppsManagementClient from "azure-arm-logic";
 import { Workflow, WorkflowVersion } from "azure-arm-logic/lib/models";
 import { IAzureNode, IAzureParentTreeItem, IAzureTreeItem } from "vscode-azureextensionui";
-import { localize } from "../localize";
-import * as nodeUtils from "../utils/nodeUtils";
+import { localize } from "../../localize";
+import * as nodeUtils from "../../utils/nodeUtils";
 import { LogicAppCurrentVersionTreeItem } from "./LogicAppCurrentVersionTreeItem";
 import { LogicAppVersionTreeItem } from "./LogicAppVersionTreeItem";
 

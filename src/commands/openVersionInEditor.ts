@@ -4,8 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { AzureTreeDataProvider, IAzureNode } from "vscode-azureextensionui";
-import { LogicAppCurrentVersionTreeItem } from "../tree/LogicAppCurrentVersionTreeItem";
-import { LogicAppVersionTreeItem } from "../tree/LogicAppVersionTreeItem";
+import { LogicAppCurrentVersionTreeItem } from "../tree/logic-app/LogicAppCurrentVersionTreeItem";
+import { LogicAppVersionTreeItem } from "../tree/logic-app/LogicAppVersionTreeItem";
 import { openAndShowTextDocument } from "../utils/commandUtils";
 
 export async function openVersionInEditor(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {

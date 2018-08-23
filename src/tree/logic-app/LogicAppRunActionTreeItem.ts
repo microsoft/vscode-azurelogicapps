@@ -5,7 +5,7 @@
 
 import { WorkflowRunAction } from "azure-arm-logic/lib/models";
 import { IAzureTreeItem } from "vscode-azureextensionui";
-import * as nodeUtils from "../utils/nodeUtils";
+import * as nodeUtils from "../../utils/nodeUtils";
 
 enum LogicAppRunStatus {
     Aborted = "Aborted",

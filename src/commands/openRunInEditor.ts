@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { AzureTreeDataProvider, IAzureNode } from "vscode-azureextensionui";
-import { LogicAppRunTreeItem } from "../tree/LogicAppRunTreeItem";
+import { LogicAppRunTreeItem } from "../tree/logic-app/LogicAppRunTreeItem";
 import { openAndShowTextDocument } from "../utils/commandUtils";
 
 export async function openRunInEditor(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {

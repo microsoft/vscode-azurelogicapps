@@ -6,7 +6,7 @@
 import LogicAppsManagementClient from "azure-arm-logic";
 import { Workflow, WorkflowVersion } from "azure-arm-logic/lib/models";
 import { IAzureTreeItem } from "vscode-azureextensionui";
-import * as nodeUtils from "../utils/nodeUtils";
+import * as nodeUtils from "../../utils/nodeUtils";
 
 export class LogicAppVersionTreeItem implements IAzureTreeItem {
     public static readonly contextValue: string = "azLogicAppsWorkflowVersion";

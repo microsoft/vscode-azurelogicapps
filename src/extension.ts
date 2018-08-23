@@ -5,7 +5,7 @@
 
 import * as vscode from "vscode";
 import { AzureTreeDataProvider, AzureUserInput, callWithTelemetryAndErrorHandling, IActionContext, IAzureNode, registerCommand, registerEvent, registerUIExtensionVariables } from "vscode-azureextensionui";
-import TelemetryReporter from "vscode-extension-telemetry";
+import TelemetryReporter from "vscode-azureextensionui/node_modules/vscode-extension-telemetry";
 import { deleteLogicApp } from "./commands/deleteLogicApp";
 import { disableLogicApp } from "./commands/disableLogicApp";
 import { enableLogicApp } from "./commands/enableLogicApp";
@@ -18,9 +18,11 @@ import { openVersionInEditor } from "./commands/openVersionInEditor";
 import { promoteVersion } from "./commands/promoteVersion";
 import { resubmitRun } from "./commands/resubmitRun";
 import { runTrigger } from "./commands/runTrigger";
-import { LogicAppEditor } from "./editors/LogicAppEditor";
+import { IntegrationAccountEditor } from "./editors/integration-account/IntegrationAccountMapEditor";
+import { LogicAppEditor } from "./editors/logic-app/LogicAppEditor";
 import { ext } from "./extensionVariables";
-import { LogicAppsProvider } from "./tree/LogicAppsProvider";
+import { IntegrationAccountProvider } from "./tree/integration-account/IntegrationAccountsProvider";
+import { LogicAppsProvider } from "./tree/logic-app/LogicAppsProvider";
 
 export async function activate(context: vscode.ExtensionContext): Promise<void> {
     registerUIExtensionVariables(ext);
@@ -119,6 +121,41 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             vscode.workspace.onDidSaveTextDocument,
             async function (this: IActionContext, document: vscode.TextDocument): Promise<void> {
                 await logicAppEditor.onDidSaveTextDocument(this, context.globalState, document);
+            });
+    });
+
+    await callWithTelemetryAndErrorHandling("azIntegrationAccounts.activate", async function activateCallback(this: IActionContext): Promise<void> {
+        this.properties.isActivationEvent = "true";
+
+        const integrationAccountProvider = new IntegrationAccountProvider();
+        const integrationAccountTree = new AzureTreeDataProvider(integrationAccountProvider, "azIntegrationAccounts.loadMore");
+        context.subscriptions.push(integrationAccountTree);
+        context.subscriptions.push(vscode.window.registerTreeDataProvider("azureIntegrationAccountsExplorer", integrationAccountTree));
+
+        const integrationAccountEditor = new IntegrationAccountEditor();
+        context.subscriptions.push(integrationAccountEditor);
+
+        registerCommand("azIntegrationAccounts.loadMore", async (node: IAzureNode) => {
+            await integrationAccountTree.loadMore(node);
+        });
+
+        registerCommand("azIntegrationAccounts.openMapInEditor", async (node?: IAzureNode) => {
+            await openInEditor(integrationAccountTree, integrationAccountEditor, node);
+        });
+
+        registerCommand("azIntegrationAccounts.refresh", async (node?: IAzureNode) => {
+            await integrationAccountTree.refresh(node);
+        });
+
+        registerCommand("azIntegrationAccounts.selectSubscriptions", () => {
+            vscode.commands.executeCommand("azure-account.selectSubscriptions");
+        });
+
+        registerEvent(
+            "azIntegrationAccounts.azureIntegrationAccountEditor.onDidSaveTextDocument",
+            vscode.workspace.onDidSaveTextDocument,
+            async function (this: IActionContext, document: vscode.TextDocument): Promise<void> {
+                await integrationAccountEditor.onDidSaveTextDocument(this, context.globalState, document);
             });
     });
 }
