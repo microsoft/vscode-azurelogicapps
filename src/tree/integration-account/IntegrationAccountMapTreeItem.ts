@@ -20,11 +20,15 @@ export class IntegrationAccountMapTreeItem implements IAzureTreeItem {
     public static readonly contextValue = "azIntegrationAccountMap";
     public readonly contextValue = IntegrationAccountMapTreeItem.contextValue;
 
-    public constructor(private readonly client: LogicAppsManagementClient, private readonly integrationAccountMap: IntegrationAccountMap) {
+    public constructor(private readonly client: LogicAppsManagementClient, private integrationAccountMap: IntegrationAccountMap) {
     }
 
     public get commandId(): string {
         return "azIntegrationAccounts.openMapInEditor";
+    }
+
+    public async deleteTreeItem(): Promise<void> {
+        await this.client.maps.deleteMethod(this.resourceGroupName, this.integrationAccountName, this.label);
     }
 
     public get iconPath(): string {
@@ -55,18 +59,26 @@ export class IntegrationAccountMapTreeItem implements IAzureTreeItem {
         return (MapType as any)[this.integrationAccountMap.mapType];
     }
 
-    public async getData(): Promise<string> {
+    public async getContent(): Promise<string> {
         return request(this.integrationAccountMap.contentLink!.uri!);
+    }
+
+    public async getDefinition(refresh = false): Promise<string> {
+        if (refresh) {
+            this.integrationAccountMap = await this.client.maps.get(this.resourceGroupName, this.integrationAccountName, this.integrationAccountMapName);
+        }
+
+        return JSON.stringify(this.integrationAccountMap, null, 4);
     }
 
     public async update(mapContent: string): Promise<string> {
         const map: IntegrationAccountMap = {
             content: mapContent,
-            contentType: this.mapType === MapType.Liquid ? "whateverLiquidIs" : "application/xml",
+            contentType: this.mapType === MapType.Liquid ? "text/plain" : "application/xml",
             mapType: this.mapType
         };
 
-        const updatedMap = await this.client.maps.createOrUpdate(this.resourceGroupName, this.integrationAccountName, this.label, map);
+        const updatedMap = await this.client.maps.createOrUpdate(this.resourceGroupName, this.integrationAccountName, this.integrationAccountMapName, map);
         return request(updatedMap.contentLink!.uri!);
     }
 }

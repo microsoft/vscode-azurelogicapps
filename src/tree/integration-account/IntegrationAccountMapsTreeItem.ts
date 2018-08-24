@@ -13,7 +13,7 @@ import { IntegrationAccountMapTreeItem } from "./IntegrationAccountMapTreeItem";
 export class IntegrationAccountMapsTreeItem implements IAzureParentTreeItem {
     public static contextValue = "azIntegrationAccountMaps";
     public readonly childTypeLabel = localize("azIntegrationAccounts.Map", "Map");
-    public readonly contextValue = IntegrationAccountMapTreeItem.contextValue;
+    public readonly contextValue = IntegrationAccountMapsTreeItem.contextValue;
     public readonly label = localize("azIntegrationAccounts.Maps", "Maps");
 
     private nextLink: string | undefined;

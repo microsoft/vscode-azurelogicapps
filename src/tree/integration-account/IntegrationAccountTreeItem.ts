@@ -42,6 +42,14 @@ export class IntegrationAccountTreeItem implements IAzureParentTreeItem {
         return false;
     }
 
+    public async getDefinition(refresh = false): Promise<string> {
+        if (refresh) {
+            this.integrationAccount = await this.client.integrationAccounts.get(this.resourceGroupName, this.integrationAccountName);
+        }
+
+        return JSON.stringify(this.integrationAccount, null, 4);
+    }
+
     public async deleteTreeItem(): Promise<void> {
         await this.client.integrationAccounts.deleteMethod(this.resourceGroupName, this.integrationAccountName);
     }

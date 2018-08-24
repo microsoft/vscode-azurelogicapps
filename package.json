@@ -44,6 +44,10 @@
         "onCommand:azureLogicApps.runTrigger",
         "onCommand:azureLogicApps.selectSubscriptions",
         "onView:azureLogicAppsExplorer",
+        "onCommand:azIntegrationAccounts.viewIntegrationAccountDefinition",
+        "onCommand:azIntegrationAccounts.delete",
+        "onCommand:azIntegrationAccounts.viewIntegrationAccountMapDefinition",
+        "onCommand:azIntegrationAccounts.deleteMap",
         "onCommand:azIntegrationAccounts.loadMore",
         "onCommand:azIntegrationAccounts.openMapInEditor",
         "onCommand:azIntegrationAccounts.refresh",
@@ -140,6 +144,26 @@
                 "category": "Azure Integration Accounts",
                 "command": "azIntegrationAccounts.loadMore",
                 "title": "%azIntegrationAccounts.loadMore%"
+            },
+            {
+                "category": "Azure Integration Accounts",
+                "command": "azIntegrationAccounts.viewIntegrationAccountDefinition",
+                "title": "%azIntegrationAccounts.viewIntegrationAccountDefinition%"
+            },
+            {
+                "category": "Azure Integration Accounts",
+                "command": "azIntegrationAccounts.delete",
+                "title": "%azIntegrationAccounts.delete%"
+            },
+            {
+                "category": "Azure Integration Accounts",
+                "command": "azIntegrationAccounts.viewIntegrationAccountMapDefinition",
+                "title": "%azIntegrationAccounts.viewIntegrationAccountMapDefinition%"
+            },
+            {
+                "category": "Azure Integration Accounts",
+                "command": "azIntegrationAccounts.deleteMap",
+                "title": "%azIntegrationAccounts.deleteMap%"
             },
             {
                 "category": "Azure Integration Accounts",
@@ -306,22 +330,42 @@
                 },
                 {
                     "command": "azIntegrationAccounts.refresh",
-                    "group": "1@1",
+                    "group": "3@1",
                     "when": "view == azureIntegrationAccountsExplorer && viewItem == azureextensionui.azureSubscription"
                 },
                 {
-                    "command": "azIntegrationAccounts.refresh",
+                    "command": "azIntegrationAccounts.viewIntegrationAccountDefinition",
                     "group": "1@1",
                     "when": "view == azureIntegrationAccountsExplorer && viewItem == azIntegrationAccount"
                 },
                 {
-                    "command": "azIntegrationAccounts.refresh",
-                    "group": "1@1",
-                    "when": "view == azureIntegrationAccountsExplorer && viewItem == azIntegrationAccountMaps"
+                    "command": "azIntegrationAccounts.delete",
+                    "group": "2@1",
+                    "when": "view == azureIntegrationAccountsExplorer && viewItem == azIntegrationAccount"
                 },
                 {
                     "command": "azIntegrationAccounts.refresh",
+                    "group": "3@1",
+                    "when": "view == azureIntegrationAccountsExplorer && viewItem == azIntegrationAccount"
+                },
+                {
+                    "command": "azIntegrationAccounts.refresh",
+                    "group": "3@1",
+                    "when": "view == azureIntegrationAccountsExplorer && viewItem == azIntegrationAccountMaps"
+                },
+                {
+                    "command": "azIntegrationAccounts.viewIntegrationAccountMapDefinition",
                     "group": "1@1",
+                    "when": "view == azureIntegrationAccountsExplorer && viewItem == azIntegrationAccountMap"
+                },
+                {
+                    "command": "azIntegrationAccounts.deleteMap",
+                    "group": "2@1",
+                    "when": "view == azureIntegrationAccountsExplorer && viewItem == azIntegrationAccountMap"
+                },
+                {
+                    "command": "azIntegrationAccounts.refresh",
+                    "group": "3@1",
                     "when": "view == azureIntegrationAccountsExplorer && viewItem == azIntegrationAccountMap"
                 }
             ],

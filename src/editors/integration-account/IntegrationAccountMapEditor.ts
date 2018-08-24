@@ -6,7 +6,7 @@
 import * as vscode from "vscode";
 import { BaseEditor, IAzureNode } from "vscode-azureextensionui";
 import { localize } from "../../localize";
-import { IntegrationAccountMapTreeItem } from "../../tree/integration-account/IntegrationAccountMapTreeItem";
+import { IntegrationAccountMapTreeItem, MapType } from "../../tree/integration-account/IntegrationAccountMapTreeItem";
 
 export class IntegrationAccountEditor extends BaseEditor<IAzureNode<IntegrationAccountMapTreeItem>> {
     constructor() {
@@ -14,11 +14,13 @@ export class IntegrationAccountEditor extends BaseEditor<IAzureNode<IntegrationA
     }
 
     public async getData(node: IAzureNode<IntegrationAccountMapTreeItem>): Promise<string> {
-        return node.treeItem.getData();
+        return node.treeItem.getContent();
     }
 
     public async getFilename(node: IAzureNode<IntegrationAccountMapTreeItem>): Promise<string> {
-        return `${node.treeItem.label}`;
+        const extension = node.treeItem.mapType === MapType.Liquid ? ".liquid" : ".xslt";
+
+        return `${node.treeItem.label}${extension}`;
     }
 
     public async getSaveConfirmationText(node: IAzureNode<IntegrationAccountMapTreeItem>): Promise<string> {

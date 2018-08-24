@@ -1,9 +1,13 @@
 {
+    "azIntegrationAccounts.delete": "Delete",
+    "azIntegrationAccounts.deleteMap": "Delete",
     "azIntegrationAccounts.loadMore": "Load More...",
     "azIntegrationAccounts.refresh": "Refresh",
     "azIntegrationAccounts.selectSubscriptions": "Select Subscriptions",
     "azIntegrationAccounts.showExplorerDescription": "Show or hide the Azure Integration Accounts Explorer",
     "azIntegrationAccounts.showSavePrompt": "Prompt the user before saving and updating a Logic App",
+    "azIntegrationAccounts.viewIntegrationAccountDefinition": "View Definition",
+    "azIntegrationAccounts.viewIntegrationAccountMapDefinition": "View Definition",
     "azLogicApps.deleteLogicApp": "Delete",
     "azLogicApps.disableLogicApp": "Disable",
     "azLogicApps.enableLogicApp": "Enable",
