@@ -92,7 +92,7 @@
             "\t\"type\": \"AppendToArrayVariable\"",
             "}"
         ],
-        "description": "The Append to Array action."
+        "description": "The Append to Array Variable action."
     },
     "AppendToStringVariable": {
         "prefix": "appendtostringvariable",
@@ -109,7 +109,7 @@
             "\t\"type\": \"AppendToStringVariable\"",
             "}"
         ],
-        "description": "The Append to String action."
+        "description": "The Append to String Variable action."
     },
     "Batch": {
         "prefix": "batch",
