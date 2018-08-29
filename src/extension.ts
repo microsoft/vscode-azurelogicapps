@@ -9,8 +9,8 @@ import TelemetryReporter from "vscode-azureextensionui/node_modules/vscode-exten
 import { deleteLogicApp } from "./commands/deleteLogicApp";
 import { disableLogicApp } from "./commands/disableLogicApp";
 import { enableLogicApp } from "./commands/enableLogicApp";
-import { deleteIntegrationAccount, viewIntegrationAccountDefinition } from "./commands/integrationAccountCommands";
-import { deleteIntegrationAccountMap, openIntegrationAccountMapInEditor, viewIntegrationAccountMapDefinition } from "./commands/integrationAccountMapCommands";
+import { deleteIntegrationAccount, viewIntegrationAccountProperties } from "./commands/integrationAccountCommands";
+import { deleteIntegrationAccountMap, openIntegrationAccountMapInEditor, viewIntegrationAccountMapProperties } from "./commands/integrationAccountMapCommands";
 import { openInEditor } from "./commands/openInEditor";
 import { openInPortal } from "./commands/openInPortal";
 import { openRunActionInEditor } from "./commands/openRunActionInEditor";
@@ -149,16 +149,16 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             await integrationAccountTree.loadMore(node);
         });
 
-        registerCommand("azIntegrationAccounts.viewIntegrationAccountDefinition", async (node?: IAzureNode) => {
-            await viewIntegrationAccountDefinition(integrationAccountTree, node);
+        registerCommand("azIntegrationAccounts.viewIntegrationAccountProperties", async (node?: IAzureNode) => {
+            await viewIntegrationAccountProperties(integrationAccountTree, node);
         });
 
         registerCommand("azIntegrationAccounts.openMapInEditor", async (node?: IAzureNode) => {
             await openIntegrationAccountMapInEditor(integrationAccountTree, integrationAccountEditor, node);
         });
 
-        registerCommand("azIntegrationAccounts.viewIntegrationAccountMapDefinition", async (node?: IAzureNode) => {
-            await viewIntegrationAccountMapDefinition(integrationAccountTree, node);
+        registerCommand("azIntegrationAccounts.viewIntegrationAccountMapProperties", async (node?: IAzureNode) => {
+            await viewIntegrationAccountMapProperties(integrationAccountTree, node);
         });
 
         registerCommand("azIntegrationAccounts.refresh", async (node?: IAzureNode) => {

@@ -5,7 +5,7 @@
 
 import LogicAppsManagementClient from "azure-arm-logic";
 import { IntegrationAccountMap } from "azure-arm-logic/lib/models";
-import * as request from "request-promise";
+import * as request from "request-promise-native";
 import { IAzureTreeItem } from "vscode-azureextensionui";
 import { getIconPath } from "../../utils/nodeUtils";
 
@@ -63,7 +63,7 @@ export class IntegrationAccountMapTreeItem implements IAzureTreeItem {
         return request(this.integrationAccountMap.contentLink!.uri!);
     }
 
-    public async getDefinition(refresh = false): Promise<string> {
+    public async getProperties(refresh = false): Promise<string> {
         if (refresh) {
             this.integrationAccountMap = await this.client.maps.get(this.resourceGroupName, this.integrationAccountName, this.integrationAccountMapName);
         }

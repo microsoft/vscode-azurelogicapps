@@ -21,13 +21,13 @@ export async function deleteIntegrationAccount(tree: AzureTreeDataProvider, node
     );
 }
 
-export async function viewIntegrationAccountDefinition(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {
+export async function viewIntegrationAccountProperties(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {
     if (!node) {
         node = await tree.showNodePicker(IntegrationAccountTreeItem.contextValue);
     }
 
     const integrationAccount = node.treeItem as IntegrationAccountTreeItem;
-    const integrationAccountDefinition = await integrationAccount.getDefinition();
+    const integrationAccountProperties = await integrationAccount.getProperties();
 
-    await openAndShowTextDocument(integrationAccountDefinition, "json");
+    await openAndShowTextDocument(integrationAccountProperties, "json");
 }

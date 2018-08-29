@@ -29,13 +29,13 @@ export async function openIntegrationAccountMapInEditor(tree: AzureTreeDataProvi
     await editor.showEditor(node);
 }
 
-export async function viewIntegrationAccountMapDefinition(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {
+export async function viewIntegrationAccountMapProperties(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {
     if (!node) {
         node = await tree.showNodePicker(IntegrationAccountMapTreeItem.contextValue);
     }
 
     const map = node.treeItem as IntegrationAccountMapTreeItem;
-    const mapDefinition = await map.getDefinition();
+    const mapProperties = await map.getProperties();
 
-    await openAndShowTextDocument(mapDefinition, "json");
+    await openAndShowTextDocument(mapProperties, "json");
 }
