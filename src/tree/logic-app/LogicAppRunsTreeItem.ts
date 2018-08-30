@@ -4,17 +4,17 @@
  *--------------------------------------------------------------------------------------------*/
 
 import LogicAppsManagementClient from "azure-arm-logic";
-import { Workflow, WorkflowTrigger } from "azure-arm-logic/lib/models";
+import { Workflow, WorkflowRun } from "azure-arm-logic/lib/models";
 import { IAzureNode, IAzureParentTreeItem, IAzureTreeItem } from "vscode-azureextensionui";
-import { localize } from "../localize";
-import { getThemedIconPath, IThemedIconPath } from "../utils/nodeUtils";
-import { LogicAppTriggerTreeItem } from "./LogicAppTriggerTreeItem";
+import { localize } from "../../localize";
+import * as nodeUtils from "../../utils/nodeUtils";
+import { LogicAppRunTreeItem } from "./LogicAppRunTreeItem";
 
-export class LogicAppTriggersTreeItem implements IAzureParentTreeItem {
-    public static contextValue = "azLogicAppsWorkflowTriggers";
-    public readonly childTypeLabel = localize("azLogicApps.Trigger", "Trigger");
-    public readonly contextValue = LogicAppTriggersTreeItem.contextValue;
-    public readonly label = localize("azLogicApps.Triggers", "Triggers");
+export class LogicAppRunsTreeItem implements IAzureParentTreeItem {
+    public static contextValue = "azLogicAppsWorkflowRuns";
+    public readonly childTypeLabel = localize("azLogicApps.Run", "Run");
+    public readonly contextValue = LogicAppRunsTreeItem.contextValue;
+    public readonly label = localize("azLogicApps.Runs", "Runs");
 
     private nextLink: string | undefined;
 
@@ -25,12 +25,12 @@ export class LogicAppTriggersTreeItem implements IAzureParentTreeItem {
         return this.nextLink !== undefined;
     }
 
-    public get iconPath(): IThemedIconPath {
-        return getThemedIconPath("BulletList");
+    public get iconPath(): nodeUtils.IThemedIconPath {
+        return nodeUtils.getThemedIconPath("BulletList");
     }
 
     public get id(): string {
-        return `${this.workflow.id!}/triggers`;
+        return `${this.workflow.id!}/runs`;
     }
 
     public get resourceGroupName(): string {
@@ -46,12 +46,12 @@ export class LogicAppTriggersTreeItem implements IAzureParentTreeItem {
             this.nextLink = undefined;
         }
 
-        const workflowTriggers = this.nextLink === undefined
-            ? await this.client.workflowTriggers.list(this.resourceGroupName, this.workflowName)
-            : await this.client.workflowTriggers.listNext(this.nextLink);
+        const workflowRuns = this.nextLink === undefined
+            ? await this.client.workflowRuns.list(this.resourceGroupName, this.workflowName)
+            : await this.client.workflowRuns.listNext(this.nextLink);
 
-        this.nextLink = workflowTriggers.nextLink;
+        this.nextLink = workflowRuns.nextLink;
 
-        return workflowTriggers.map((workflowTrigger: WorkflowTrigger) => new LogicAppTriggerTreeItem(this.client, workflowTrigger));
+        return workflowRuns.map((workflowRun: WorkflowRun) => new LogicAppRunTreeItem(this.client, this.workflow, workflowRun));
     }
 }

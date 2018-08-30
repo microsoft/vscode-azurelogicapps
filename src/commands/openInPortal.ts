@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { AzureTreeDataProvider, IAzureNode } from "vscode-azureextensionui";
-import { LogicAppTreeItem } from "../tree/LogicAppTreeItem";
+import { LogicAppTreeItem } from "../tree/logic-app/LogicAppTreeItem";
 
 export async function openInPortal(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {
     if (!node) {

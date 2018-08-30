@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { AzureTreeDataProvider, BaseEditor, IAzureNode } from "vscode-azureextensionui";
-import { LogicAppTreeItem } from "../tree/LogicAppTreeItem";
+import { LogicAppTreeItem } from "../tree/logic-app/LogicAppTreeItem";
 
 export async function openInEditor(tree: AzureTreeDataProvider, editor: BaseEditor<IAzureNode>, node?: IAzureNode): Promise<void> {
     if (!node) {

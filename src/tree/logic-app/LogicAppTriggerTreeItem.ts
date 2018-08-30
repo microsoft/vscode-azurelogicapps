@@ -6,7 +6,7 @@
 import LogicAppsManagementClient from "azure-arm-logic";
 import { WorkflowTrigger } from "azure-arm-logic/lib/models";
 import { IAzureTreeItem } from "vscode-azureextensionui";
-import { getThemedIconPath, IThemedIconPath } from "../utils/nodeUtils";
+import { getThemedIconPath, IThemedIconPath } from "../../utils/nodeUtils";
 
 export class LogicAppTriggerTreeItem implements IAzureTreeItem {
     public static readonly contextValue = "azLogicAppsWorkflowTrigger";

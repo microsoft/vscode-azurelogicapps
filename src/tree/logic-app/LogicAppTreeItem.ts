@@ -6,7 +6,7 @@
 import LogicAppsManagementClient from "azure-arm-logic";
 import { Workflow } from "azure-arm-logic/lib/models";
 import { IAzureParentTreeItem, IAzureTreeItem } from "vscode-azureextensionui";
-import { getIconPath } from "../utils/nodeUtils";
+import { getIconPath } from "../../utils/nodeUtils";
 import { LogicAppRunsTreeItem } from "./LogicAppRunsTreeItem";
 import { LogicAppTriggersTreeItem } from "./LogicAppTriggersTreeItem";
 import { LogicAppVersionsTreeItem } from "./LogicAppVersionsTreeItem";

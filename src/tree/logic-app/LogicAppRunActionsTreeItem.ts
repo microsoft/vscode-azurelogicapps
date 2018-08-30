@@ -6,8 +6,8 @@
 import LogicAppsManagementClient from "azure-arm-logic";
 import { Workflow, WorkflowRun, WorkflowRunAction } from "azure-arm-logic/lib/models";
 import { IAzureNode, IAzureParentTreeItem, IAzureTreeItem } from "vscode-azureextensionui";
-import { localize } from "../localize";
-import * as nodeUtils from "../utils/nodeUtils";
+import { localize } from "../../localize";
+import * as nodeUtils from "../../utils/nodeUtils";
 import { LogicAppRunActionTreeItem } from "./LogicAppRunActionTreeItem";
 
 export class LogicAppRunActionsTreeItem implements IAzureParentTreeItem {

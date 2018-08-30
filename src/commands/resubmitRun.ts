@@ -5,7 +5,7 @@
 
 import { AzureTreeDataProvider, IAzureNode } from "vscode-azureextensionui";
 import { localize } from "../localize";
-import { LogicAppRunTreeItem } from "../tree/LogicAppRunTreeItem";
+import { LogicAppRunTreeItem } from "../tree/logic-app/LogicAppRunTreeItem";
 
 export async function resubmitRun(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {
     if (!node) {

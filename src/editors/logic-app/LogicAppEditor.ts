@@ -5,8 +5,8 @@
 
 import * as vscode from "vscode";
 import { BaseEditor, IAzureNode } from "vscode-azureextensionui";
-import { localize } from "../localize";
-import { LogicAppTreeItem } from "../tree/LogicAppTreeItem";
+import { localize } from "../../localize";
+import { LogicAppTreeItem } from "../../tree/logic-app/LogicAppTreeItem";
 
 export class LogicAppEditor extends BaseEditor<IAzureNode<LogicAppTreeItem>> {
     constructor() {
