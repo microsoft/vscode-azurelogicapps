@@ -24,7 +24,8 @@
     ],
     "keywords": [
         "Azure",
-        "Logic Apps"
+        "Logic Apps",
+        "Integration Accounts"
     ],
     "preview": true,
     "activationEvents": [
