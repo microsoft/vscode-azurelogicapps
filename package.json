@@ -425,6 +425,12 @@
                     }
                 }
             }
+        ],
+        "snippets": [
+            {
+                "language": "json",
+                "path": "./snippets/logicapps.snippets.json"
+            }
         ]
     },
     "scripts": {
