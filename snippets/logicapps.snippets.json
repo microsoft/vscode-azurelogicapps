@@ -462,8 +462,8 @@
         ],
         "description": "The If scope operation."
     },
-    "IfOld": {
-        "prefix": "ifold",
+    "If": {
+        "prefix": "if",
         "body": [
             "\"${1:If}\": {",
             "\t\"actions\": {$3},",
