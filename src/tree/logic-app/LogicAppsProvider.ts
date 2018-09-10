@@ -7,12 +7,17 @@ import LogicAppsManagementClient from "azure-arm-logic";
 import { Workflow } from "azure-arm-logic/lib/models";
 import { addExtensionUserAgent, IAzureNode, IAzureTreeItem, IChildProvider } from "vscode-azureextensionui";
 import { localize } from "../../localize";
+import { createLogicApp } from "../../wizard/logic-app/createLogicApp";
 import { LogicAppTreeItem } from "./LogicAppTreeItem";
 
 export class LogicAppsProvider implements IChildProvider {
     public readonly childTypeLabel = localize("azLogicApps.LogicApp", "Logic App");
 
     private nextLink: string | undefined;
+
+    public async createChild(node: IAzureNode, showCreatingNode: (label: string) => void): Promise<IAzureTreeItem> {
+        return createLogicApp(node, showCreatingNode);
+    }
 
     public hasMoreChildren(): boolean {
         return this.nextLink !== undefined;

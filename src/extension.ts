@@ -6,6 +6,7 @@
 import * as vscode from "vscode";
 import { AzureTreeDataProvider, AzureUserInput, callWithTelemetryAndErrorHandling, IActionContext, IAzureNode, IAzureParentNode, registerCommand, registerEvent, registerUIExtensionVariables } from "vscode-azureextensionui";
 import TelemetryReporter from "vscode-azureextensionui/node_modules/vscode-extension-telemetry";
+import { createLogicApp } from "./commands/createLogicApp";
 import { deleteLogicApp } from "./commands/deleteLogicApp";
 import { disableLogicApp } from "./commands/disableLogicApp";
 import { enableLogicApp } from "./commands/enableLogicApp";
@@ -62,6 +63,10 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
 
         const logicAppEditor = new LogicAppEditor();
         context.subscriptions.push(logicAppEditor);
+
+        registerCommand("azureLogicApps.createLogicApp", async (node: IAzureParentNode) => {
+            await createLogicApp(tree, node);
+        });
 
         registerCommand("azureLogicApps.deleteLogicApp", async (node: IAzureNode) => {
             await deleteLogicApp(tree, node);
