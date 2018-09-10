@@ -10,7 +10,7 @@
     "azIntegrationAccounts.openMapInEditor": "Open in Editor",
     "azIntegrationAccounts.createMap": "New",
     "azIntegrationAccounts.viewIntegrationAccountMapProperties": "View properties",
-    "azIntegrationAccounts.deleteIntegrationAccountPrompt":  "Are you sure that you want to delete the whole integration account? This can not be undone.",
+    "azIntegrationAccounts.deleteIntegrationAccountPrompt": "Are you sure that you want to delete the whole integration account? This can not be undone.",
     "azLogicApps.deleteLogicApp": "Delete",
     "azLogicApps.disableLogicApp": "Disable",
     "azLogicApps.enableLogicApp": "Enable",

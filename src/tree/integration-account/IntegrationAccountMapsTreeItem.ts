@@ -71,8 +71,7 @@ export class IntegrationAccountMapsTreeItem implements IAzureParentTreeItem {
             });
         if (mapName) {
             const mapTypes = Object.keys(MapType).map((k) => MapType[k as any]);
-            const mapType = await vscode.window.showQuickPick(
-                mapTypes);
+            const mapType = await vscode.window.showQuickPick(mapTypes);
 
             if (mapType) {
                 showCreatingNode(mapName);
@@ -94,7 +93,7 @@ export class IntegrationAccountMapsTreeItem implements IAzureParentTreeItem {
         while (nextLink) {
             const nextPage = await this.client.maps.listByIntegrationAccountsNext(nextLink);
             nextLink = nextPage.nextLink;
-            results.concat(nextPage);
+            results.push(...nextPage);
         }
 
         return results;
