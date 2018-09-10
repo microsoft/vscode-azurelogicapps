@@ -7,14 +7,8 @@ import LogicAppsManagementClient from "azure-arm-logic";
 import { IntegrationAccountMap } from "azure-arm-logic/lib/models";
 import * as request from "request-promise-native";
 import { IAzureTreeItem } from "vscode-azureextensionui";
+import { getContentType, MapType } from "../../utils/integration-account/mapUtils";
 import { getIconPath } from "../../utils/nodeUtils";
-
-export enum MapType {
-    Liquid = "Liquid",
-    Xslt = "Xslt",
-    Xslt20 = "Xslt20",
-    Xslt30 = "Xslt30"
-}
 
 export class IntegrationAccountMapTreeItem implements IAzureTreeItem {
     public static readonly contextValue = "azIntegrationAccountMap";
@@ -74,7 +68,7 @@ export class IntegrationAccountMapTreeItem implements IAzureTreeItem {
     public async update(mapContent: string): Promise<string> {
         const map: IntegrationAccountMap = {
             content: mapContent,
-            contentType: this.mapType === MapType.Liquid ? "text/plain" : "application/xml",
+            contentType: getContentType(this.mapType),
             mapType: this.mapType
         };
 
