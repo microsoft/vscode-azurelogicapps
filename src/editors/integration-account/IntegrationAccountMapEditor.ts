@@ -6,9 +6,10 @@
 import * as vscode from "vscode";
 import { BaseEditor, IAzureNode } from "vscode-azureextensionui";
 import { localize } from "../../localize";
-import { IntegrationAccountMapTreeItem, MapType } from "../../tree/integration-account/IntegrationAccountMapTreeItem";
+import { IntegrationAccountMapTreeItem } from "../../tree/integration-account/IntegrationAccountMapTreeItem";
+import { MapType } from "../../utils/integration-account/mapUtils";
 
-export class IntegrationAccountEditor extends BaseEditor<IAzureNode<IntegrationAccountMapTreeItem>> {
+export class IntegrationAccountMapEditor extends BaseEditor<IAzureNode<IntegrationAccountMapTreeItem>> {
     constructor() {
         super("azIntegrationAccounts.showSavePrompt");
     }
