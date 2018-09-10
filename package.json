@@ -170,12 +170,12 @@
             {
                 "category": "Azure Integration Accounts",
                 "command": "azIntegrationAccounts.deleteMap",
-                "title": "%azIntegrationAccounts.deleteMap%"
+                "title": "%azIntegrationAccounts.delete%"
             },
             {
                 "category": "Azure Integration Accounts",
                 "command": "azIntegrationAccounts.createMap",
-                "title": "%azIntegrationAccounts.createMap%"
+                "title": "%azIntegrationAccounts.new%"
             },
             {
                 "category": "Azure Integration Accounts",

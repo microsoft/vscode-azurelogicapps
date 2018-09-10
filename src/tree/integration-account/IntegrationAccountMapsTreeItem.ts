@@ -57,7 +57,11 @@ export class IntegrationAccountMapsTreeItem implements IAzureParentTreeItem {
     }
 
     public async createChild(node: IAzureNode, showCreatingNode: (label: string) => void, userOptions?: any): Promise<IAzureTreeItem> {
-        const mapName = await vscode.window.showInputBox(
+        const mapTypes = Object.keys(MapType).map((k) => MapType[k as any]);
+        const mapType = await vscode.window.showQuickPick(mapTypes);
+
+        if (mapType) {
+            const mapName = await vscode.window.showInputBox(
             {
                 prompt: "Enter the name of your new Map",
                 validateInput: async (value: string): Promise<string | null> => {
@@ -69,16 +73,14 @@ export class IntegrationAccountMapsTreeItem implements IAzureParentTreeItem {
                     return null;
                 }
             });
-        if (mapName) {
-            const mapTypes = Object.keys(MapType).map((k) => MapType[k as any]);
-            const mapType = await vscode.window.showQuickPick(mapTypes);
 
-            if (mapType) {
+            if (mapName) {
                 showCreatingNode(mapName);
                 const newMap: IntegrationAccountMap = await this.client.maps.createOrUpdate(this.resourceGroupName,
                                                                     this.integrationAccountName,
                                                                     mapName,
                                                                     await createNewMap(mapName, (MapType as any)[mapType]));
+
                 return new IntegrationAccountMapTreeItem(this.client, newMap);
             }
         }
