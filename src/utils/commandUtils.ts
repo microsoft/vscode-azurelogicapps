@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as vscode from "vscode";
-import { AzureTreeDataProvider, IAzureParentNode, IAzureNode, IAzureTreeItem } from "vscode-azureextensionui";
+import { AzureTreeDataProvider, IAzureNode, IAzureParentNode, IAzureTreeItem } from "vscode-azureextensionui";
 
 export async function openAndShowTextDocument(content: string, language = "json") {
     const document = await vscode.workspace.openTextDocument({
