@@ -3,6 +3,7 @@
     "azIntegrationAccounts.deleteIntegrationAccountPrompt": "Are you sure that you want to delete the whole integration account? This can not be undone.",
     "azIntegrationAccounts.deleting": "Deleting",
     "azIntegrationAccounts.loadMore": "Load More...",
+    "azIntegrationAccounts.nameAlreadyInUse": "Name already in use",
     "azIntegrationAccounts.new": "New",
     "azIntegrationAccounts.openMapInEditor": "Open in Editor",
     "azIntegrationAccounts.openSchemaInEditor": "Open in Editor",

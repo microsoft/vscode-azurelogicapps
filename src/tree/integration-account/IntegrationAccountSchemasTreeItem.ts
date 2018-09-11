@@ -63,7 +63,7 @@ export class IntegrationAccountSchemasTreeItem implements IAzureParentTreeItem {
             validateInput: async (value: string): Promise<string | null> => {
                 const existingSchemas = await this.getAllSchemas();
                 if (existingSchemas && existingSchemas.find((schema) => schema.name === value)) {
-                    return "Name already in use";
+                    return localize("azIntegrationAccounts.nameAlreadyInUse", "Name already in use");
                 }
 
                 return null;

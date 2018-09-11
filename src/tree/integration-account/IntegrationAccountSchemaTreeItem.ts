@@ -68,7 +68,7 @@ export class IntegrationAccountSchemaTreeItem implements IAzureTreeItem {
     public async update(schemaContent: string): Promise<string> {
         const schema: IntegrationAccountSchema = {
             content: schemaContent,
-            // contentType: getContentType(this.schemaType),
+            contentType: "application/xml",
             schemaType: this.schemaType
         };
 

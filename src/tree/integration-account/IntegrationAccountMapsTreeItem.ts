@@ -67,7 +67,7 @@ export class IntegrationAccountMapsTreeItem implements IAzureParentTreeItem {
                 validateInput: async (value: string): Promise<string | null> => {
                     const existingMaps = await this.getAllMaps();
                     if (existingMaps && existingMaps.find((map) => map.name === value)) {
-                        return "Name already in use";
+                        return localize("azIntegrationAccounts.nameAlreadyInUse", "Name already in use");
                     }
 
                     return null;
