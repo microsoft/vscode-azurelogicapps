@@ -11,6 +11,7 @@ import { disableLogicApp } from "./commands/disableLogicApp";
 import { enableLogicApp } from "./commands/enableLogicApp";
 import { deleteIntegrationAccount, viewIntegrationAccountProperties } from "./commands/integrationAccountCommands";
 import { deleteIntegrationAccountMap, openIntegrationAccountMapInEditor, viewIntegrationAccountMapProperties } from "./commands/integrationAccountMapCommands";
+import { deleteIntegrationAccountSchema, openIntegrationAccountSchemaInEditor, viewIntegrationAccountSchemaProperties } from "./commands/integrationAccountSchemaCommands";
 import { openInEditor } from "./commands/openInEditor";
 import { openInPortal } from "./commands/openInPortal";
 import { openRunActionInEditor } from "./commands/openRunActionInEditor";
@@ -21,9 +22,11 @@ import { promoteVersion } from "./commands/promoteVersion";
 import { resubmitRun } from "./commands/resubmitRun";
 import { runTrigger } from "./commands/runTrigger";
 import { IntegrationAccountMapEditor } from "./editors/integration-account/IntegrationAccountMapEditor";
+import { IntegrationAccountSchemaEditor } from "./editors/integration-account/IntegrationAccountSchemaEditor";
 import { LogicAppEditor } from "./editors/logic-app/LogicAppEditor";
 import { ext } from "./extensionVariables";
 import { IntegrationAccountMapTreeItem } from "./tree/integration-account/IntegrationAccountMapTreeItem";
+import { IntegrationAccountSchemaTreeItem } from "./tree/integration-account/IntegrationAccountSchemaTreeItem";
 import { IntegrationAccountProvider } from "./tree/integration-account/IntegrationAccountsProvider";
 import { LogicAppsProvider } from "./tree/logic-app/LogicAppsProvider";
 import { createChildNode } from "./utils/commandUtils";
@@ -139,6 +142,19 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         const integrationAccountMapEditor = new IntegrationAccountMapEditor();
         context.subscriptions.push(integrationAccountMapEditor);
 
+        const integrationAccountSchemaEditor = new IntegrationAccountSchemaEditor();
+        context.subscriptions.push(integrationAccountMapEditor);
+
+        registerCommand("azIntegrationAccounts.createMap", async (node?: IAzureParentNode) => {
+            const child = await createChildNode(integrationAccountTree, IntegrationAccountMapTreeItem.contextValue, node);
+            await openIntegrationAccountMapInEditor(integrationAccountTree, integrationAccountMapEditor, child);
+        });
+
+        registerCommand("azIntegrationAccounts.createSchema", async (node?: IAzureParentNode) => {
+            const child = await createChildNode(integrationAccountTree, IntegrationAccountSchemaTreeItem.contextValue, node);
+            await openIntegrationAccountSchemaInEditor(integrationAccountTree, integrationAccountSchemaEditor, child);
+        });
+
         registerCommand("azIntegrationAccounts.delete", async (node: IAzureNode) => {
             await deleteIntegrationAccount(integrationAccountTree, node);
         });
@@ -147,25 +163,32 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             await deleteIntegrationAccountMap(integrationAccountTree, node);
         });
 
+        registerCommand("azIntegrationAccounts.deleteSchema", async (node: IAzureNode) => {
+            await deleteIntegrationAccountSchema(integrationAccountTree, node);
+        });
+
         registerCommand("azIntegrationAccounts.loadMore", async (node: IAzureNode) => {
             await integrationAccountTree.loadMore(node);
         });
 
-        registerCommand("azIntegrationAccounts.viewIntegrationAccountProperties", async (node?: IAzureNode) => {
-            await viewIntegrationAccountProperties(integrationAccountTree, node);
+        registerEvent("azIntegrationAccounts.integrationAccountMapEditor.onDidSaveTextDocument",
+            vscode.workspace.onDidSaveTextDocument,
+            async function (this: IActionContext, document: vscode.TextDocument): Promise<void> {
+            await integrationAccountMapEditor.onDidSaveTextDocument(this, context.globalState, document);
+        });
+
+        registerEvent("azIntegrationAccounts.integrationAccountSchemaEditor.onDidSaveTextDocument",
+            vscode.workspace.onDidSaveTextDocument,
+            async function (this: IActionContext, document: vscode.TextDocument): Promise<void> {
+            await integrationAccountSchemaEditor.onDidSaveTextDocument(this, context.globalState, document);
         });
 
         registerCommand("azIntegrationAccounts.openMapInEditor", async (node?: IAzureNode) => {
             await openIntegrationAccountMapInEditor(integrationAccountTree, integrationAccountMapEditor, node);
         });
 
-        registerCommand("azIntegrationAccounts.viewIntegrationAccountMapProperties", async (node?: IAzureNode) => {
-            await viewIntegrationAccountMapProperties(integrationAccountTree, node);
-        });
-
-        registerCommand("azIntegrationAccounts.createMap", async (node?: IAzureParentNode) => {
-            const child = await createChildNode(integrationAccountTree, IntegrationAccountMapTreeItem.contextValue, node);
-            await openIntegrationAccountMapInEditor(integrationAccountTree, integrationAccountMapEditor, child);
+        registerCommand("azIntegrationAccounts.openSchemaInEditor", async (node?: IAzureNode) => {
+            await openIntegrationAccountSchemaInEditor(integrationAccountTree, integrationAccountSchemaEditor, node);
         });
 
         registerCommand("azIntegrationAccounts.refresh", async (node?: IAzureNode) => {
@@ -176,11 +199,17 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             vscode.commands.executeCommand("azure-account.selectSubscriptions");
         });
 
-        registerEvent("azIntegrationAccounts.azureIntegrationAccountEditor.onDidSaveTextDocument",
-            vscode.workspace.onDidSaveTextDocument,
-            async function (this: IActionContext, document: vscode.TextDocument): Promise<void> {
-                await integrationAccountMapEditor.onDidSaveTextDocument(this, context.globalState, document);
-            });
+        registerCommand("azIntegrationAccounts.viewIntegrationAccountMapProperties", async (node?: IAzureNode) => {
+            await viewIntegrationAccountMapProperties(integrationAccountTree, node);
+        });
+
+        registerCommand("azIntegrationAccounts.viewIntegrationAccountSchemaProperties", async (node?: IAzureNode) => {
+            await viewIntegrationAccountSchemaProperties(integrationAccountTree, node);
+        });
+
+        registerCommand("azIntegrationAccounts.viewIntegrationAccountProperties", async (node?: IAzureNode) => {
+            await viewIntegrationAccountProperties(integrationAccountTree, node);
+        });
     });
 }
 

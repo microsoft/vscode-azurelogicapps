@@ -8,14 +8,17 @@ import { IntegrationAccount } from "azure-arm-logic/lib/models";
 import { IAzureParentTreeItem, IAzureTreeItem } from "vscode-azureextensionui";
 import { getIconPath } from "../../utils/nodeUtils";
 import { IntegrationAccountMapsTreeItem } from "./IntegrationAccountMapsTreeItem";
+import { IntegrationAccountSchemasTreeItem } from "./IntegrationAccountSchemasTreeItem";
 
 export class IntegrationAccountTreeItem implements IAzureParentTreeItem {
     public static contextValue = "azIntegrationAccount";
     public contextValue = IntegrationAccountTreeItem.contextValue;
     public integrationAccountMapItem: IntegrationAccountMapsTreeItem;
+    public integrationAccountSchemaItem: IntegrationAccountSchemasTreeItem;
 
     public constructor(private readonly client: LogicAppsManagementClient, private integrationAccount: IntegrationAccount) {
         this.integrationAccountMapItem = new IntegrationAccountMapsTreeItem(client, integrationAccount);
+        this.integrationAccountSchemaItem = new IntegrationAccountSchemasTreeItem(client, integrationAccount);
     }
 
     public get iconPath(): string {
@@ -56,7 +59,8 @@ export class IntegrationAccountTreeItem implements IAzureParentTreeItem {
 
     public async loadMoreChildren(): Promise<IAzureTreeItem[]> {
         return [
-            this.integrationAccountMapItem
+            this.integrationAccountMapItem,
+            this.integrationAccountSchemaItem
         ];
     }
 
@@ -64,7 +68,8 @@ export class IntegrationAccountTreeItem implements IAzureParentTreeItem {
         switch (expectedContextValue) {
             case IntegrationAccountMapsTreeItem.contextValue:
                 return this.integrationAccountMapItem;
-
+            case IntegrationAccountSchemasTreeItem.contextValue:
+                return this.integrationAccountSchemaItem;
             default:
                 return undefined;
         }
