@@ -29,6 +29,7 @@
     ],
     "preview": true,
     "activationEvents": [
+        "onCommand:azureLogicApps.createLogicApps",
         "onCommand:azureLogicApps.deleteLogicApp",
         "onCommand:azureLogicApps.disableLogicApp",
         "onCommand:azureLogicApps.enableLogicApp",
@@ -63,6 +64,11 @@
     "main": "./out/extension",
     "contributes": {
         "commands": [
+            {
+                "category": "Azure Logic Apps",
+                "command": "azureLogicApps.createLogicApp",
+                "title": "%azLogicApps.createLogicApp%"
+            },
             {
                 "category": "Azure Logic Apps",
                 "command": "azureLogicApps.deleteLogicApp",
@@ -260,8 +266,13 @@
             ],
             "view/item/context": [
                 {
-                    "command": "azureLogicApps.openInPortal",
+                    "command": "azureLogicApps.createLogicApp",
                     "group": "1@1",
+                    "when": "view == azureLogicAppsExplorer && viewItem == azureextensionui.azureSubscription"
+                },
+                {
+                    "command": "azureLogicApps.openInPortal",
+                    "group": "1@2",
                     "when": "view == azureLogicAppsExplorer && viewItem == azureextensionui.azureSubscription"
                 },
                 {

@@ -14,6 +14,7 @@
     "azIntegrationAccounts.viewIntegrationAccountMapProperties": "View properties",
     "azIntegrationAccounts.viewIntegrationAccountProperties": "View properties",
     "azIntegrationAccounts.viewIntegrationAccountSchemaProperties": "View properties",
+    "azLogicApps.createLogicApp": "Create",
     "azLogicApps.deleteLogicApp": "Delete",
     "azLogicApps.disableLogicApp": "Disable",
     "azLogicApps.enableLogicApp": "Enable",
