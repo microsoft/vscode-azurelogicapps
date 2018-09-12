@@ -6,9 +6,9 @@
 import * as vscode from "vscode";
 import { AzureTreeDataProvider, AzureUserInput, callWithTelemetryAndErrorHandling, IActionContext, IAzureNode, IAzureParentNode, registerCommand, registerEvent, registerUIExtensionVariables } from "vscode-azureextensionui";
 import TelemetryReporter from "vscode-azureextensionui/node_modules/vscode-extension-telemetry";
-import { deleteIntegrationAccount, viewIntegrationAccountProperties } from "./commands/integrationAccountCommands";
-import { deleteIntegrationAccountMap, openIntegrationAccountMapInEditor, viewIntegrationAccountMapProperties } from "./commands/integrationAccountMapCommands";
-import { deleteIntegrationAccountSchema, openIntegrationAccountSchemaInEditor, viewIntegrationAccountSchemaProperties } from "./commands/integrationAccountSchemaCommands";
+import { deleteIntegrationAccount, viewIntegrationAccountProperties } from "./commands/integration-account/integrationAccountCommands";
+import { deleteIntegrationAccountMap, openIntegrationAccountMapInEditor, viewIntegrationAccountMapProperties } from "./commands/integration-account/integrationAccountMapCommands";
+import { deleteIntegrationAccountSchema, openIntegrationAccountSchemaInEditor, viewIntegrationAccountSchemaProperties } from "./commands/integration-account/integrationAccountSchemaCommands";
 import { createLogicApp } from "./commands/logic-app/createLogicApp";
 import { deleteLogicApp } from "./commands/logic-app/deleteLogicApp";
 import { disableLogicApp } from "./commands/logic-app/disableLogicApp";
