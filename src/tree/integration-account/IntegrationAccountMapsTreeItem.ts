@@ -56,30 +56,30 @@ export class IntegrationAccountMapsTreeItem implements IAzureParentTreeItem {
         return integrationAccountMaps.map((map: IntegrationAccountMap) => new IntegrationAccountMapTreeItem(this.client, map));
     }
 
-    public async createChild(node: IAzureNode, showCreatingNode: (label: string) => void, userOptions?: any): Promise<IAzureTreeItem> {
+    public async createChild(_: IAzureNode, showCreatingNode: (label: string) => void): Promise<IAzureTreeItem> {
         const mapTypes = Object.keys(MapType).map((k) => MapType[k as any]);
         const mapType = await vscode.window.showQuickPick(mapTypes);
 
         if (mapType) {
             const mapName = await vscode.window.showInputBox(
-            {
-                prompt: "Enter the name of your new Map",
-                validateInput: async (value: string): Promise<string | null> => {
-                    const existingMaps = await this.getAllMaps();
-                    if (existingMaps && existingMaps.find((map) => map.name === value)) {
-                        return localize("azIntegrationAccounts.nameAlreadyInUse", "Name already in use");
-                    }
+                {
+                    prompt: "Enter the name of your new Map",
+                    validateInput: async (value: string): Promise<string | null> => {
+                        const existingMaps = await this.getAllMaps();
+                        if (existingMaps && existingMaps.find((map) => map.name === value)) {
+                            return localize("azIntegrationAccounts.nameAlreadyInUse", "Name already in use");
+                        }
 
-                    return null;
-                }
-            });
+                        return null;
+                    }
+                });
 
             if (mapName) {
                 showCreatingNode(mapName);
                 const newMap: IntegrationAccountMap = await this.client.maps.createOrUpdate(this.resourceGroupName,
-                                                                    this.integrationAccountName,
-                                                                    mapName,
-                                                                    await createNewMap(mapName, (MapType as any)[mapType]));
+                    this.integrationAccountName,
+                    mapName,
+                    await createNewMap(mapName, (MapType as any)[mapType]));
 
                 return new IntegrationAccountMapTreeItem(this.client, newMap);
             }

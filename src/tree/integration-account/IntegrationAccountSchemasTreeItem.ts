@@ -56,26 +56,26 @@ export class IntegrationAccountSchemasTreeItem implements IAzureParentTreeItem {
         return integrationAccountSchemas.map((schema: IntegrationAccountSchema) => new IntegrationAccountSchemaTreeItem(this.client, schema));
     }
 
-    public async createChild(node: IAzureNode, showCreatingNode: (label: string) => void, userOptions?: any): Promise<IAzureTreeItem> {
+    public async createChild(_: IAzureNode, showCreatingNode: (label: string) => void): Promise<IAzureTreeItem> {
         const schemaName = await vscode.window.showInputBox(
-        {
-            prompt: "Enter the name of your new Schema",
-            validateInput: async (value: string): Promise<string | null> => {
-                const existingSchemas = await this.getAllSchemas();
-                if (existingSchemas && existingSchemas.find((schema) => schema.name === value)) {
-                    return localize("azIntegrationAccounts.nameAlreadyInUse", "Name already in use");
-                }
+            {
+                prompt: "Enter the name of your new Schema",
+                validateInput: async (value: string): Promise<string | null> => {
+                    const existingSchemas = await this.getAllSchemas();
+                    if (existingSchemas && existingSchemas.find((schema) => schema.name === value)) {
+                        return localize("azIntegrationAccounts.nameAlreadyInUse", "Name already in use");
+                    }
 
-                return null;
-            }
-        });
+                    return null;
+                }
+            });
 
         if (schemaName) {
             showCreatingNode(schemaName);
             const newSchema: IntegrationAccountSchema = await this.client.schemas.createOrUpdate(this.resourceGroupName,
-                                                                this.integrationAccountName,
-                                                                schemaName,
-                                                                await createNewSchema(schemaName));
+                this.integrationAccountName,
+                schemaName,
+                await createNewSchema(schemaName));
 
             return new IntegrationAccountSchemaTreeItem(this.client, newSchema);
         }
