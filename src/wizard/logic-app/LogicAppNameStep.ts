@@ -6,7 +6,7 @@
 import LogicAppsManagementClient from "azure-arm-logic";
 import { Workflow } from "azure-arm-logic/lib/models";
 import * as vscode from "vscode";
-import { addExtensionUserAgent, AzureWizardPromptStep, ResourceGroupListStep } from "vscode-azureextensionui";
+import { addExtensionUserAgent, AzureWizardPromptStep, ResourceGroupListStep, UserCancelledError } from "vscode-azureextensionui";
 import { localize } from "../../localize";
 import { IAzureLogicAppWizardContext } from "./createLogicApp";
 
@@ -32,8 +32,10 @@ export class LogicAppNameStep extends AzureWizardPromptStep<IAzureLogicAppWizard
         };
 
         const workflowName = await vscode.window.showInputBox(options);
-        if (workflowName) {
+        if (workflowName !== undefined) {
             wizardContext.workflowName = workflowName.trim();
+        } else {
+            throw new UserCancelledError();
         }
 
         return wizardContext;
