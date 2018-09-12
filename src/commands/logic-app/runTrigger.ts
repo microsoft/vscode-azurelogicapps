@@ -4,8 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { AzureTreeDataProvider, IAzureNode } from "vscode-azureextensionui";
-import { localize } from "../localize";
-import { LogicAppTriggerTreeItem } from "../tree/logic-app/LogicAppTriggerTreeItem";
+import { localize } from "../../localize";
+import { LogicAppTriggerTreeItem } from "../../tree/logic-app/LogicAppTriggerTreeItem";
 
 export async function runTrigger(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {
     if (!node) {

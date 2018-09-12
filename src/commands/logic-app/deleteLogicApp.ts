@@ -4,14 +4,18 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { AzureTreeDataProvider, IAzureNode } from "vscode-azureextensionui";
-import { LogicAppTreeItem } from "../tree/logic-app/LogicAppTreeItem";
+import { localize } from "../../localize";
+import { LogicAppTreeItem } from "../../tree/logic-app/LogicAppTreeItem";
 
-export async function openInPortal(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {
+export async function deleteLogicApp(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {
     if (!node) {
         node = await tree.showNodePicker(LogicAppTreeItem.contextValue);
-    } else if (node.treeItem.contextValue !== LogicAppTreeItem.contextValue) {
-        node = await tree.showNodePicker(LogicAppTreeItem.contextValue, node);
     }
 
-    node.openInPortal();
+    await node.runWithTemporaryDescription(
+        localize("azLogicApp.deleting", "Deleting..."),
+        async () => {
+            await node!.deleteNode();
+        }
+    );
 }

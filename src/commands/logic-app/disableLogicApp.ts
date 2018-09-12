@@ -4,8 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { AzureTreeDataProvider, IAzureNode } from "vscode-azureextensionui";
-import { localize } from "../localize";
-import { LogicAppTreeItem } from "../tree/logic-app/LogicAppTreeItem";
+import { localize } from "../../localize";
+import { LogicAppTreeItem } from "../../tree/logic-app/LogicAppTreeItem";
 
 export async function disableLogicApp(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {
     if (!node) {
