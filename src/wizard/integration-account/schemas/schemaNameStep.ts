@@ -50,7 +50,7 @@ export class SchemaNameStep extends AzureWizardPromptStep<ISchemaWizardContext> 
             return false;
         }
 
-        while (nextPageLink !== undefined) {
+        while (nextPageLink) {
             schemas = await client.schemas.listByIntegrationAccountsNext(nextPageLink);
             if (schemas.some((schema: IntegrationAccountSchema) => schema.name! === name)) {
                 return false;
