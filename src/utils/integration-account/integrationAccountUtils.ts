@@ -12,7 +12,6 @@ export enum IntegrationAccountSku {
 }
 
 export async function createNewIntegrationAccount(integrationAccountName: string, sku: IntegrationAccountSku, location: string): Promise<IntegrationAccount> {
-
     const integrationAccount: IntegrationAccount = {
         location,
         name: integrationAccountName,
