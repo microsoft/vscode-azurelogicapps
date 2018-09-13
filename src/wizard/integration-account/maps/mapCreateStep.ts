@@ -15,7 +15,7 @@ export class MapCreateStep extends AzureWizardExecuteStep<IMapWizardContext> {
         const client = new LogicAppsManagementClient(wizardContext.credentials, wizardContext.subscriptionId);
         addExtensionUserAgent(client);
 
-        const newMap: IntegrationAccountMap = await client.maps.createOrUpdate(wizardContext.resourceGroup!.name!,
+        const newMap: IntegrationAccountMap = await client.integrationAccountMaps.createOrUpdate(wizardContext.resourceGroup!.name!,
             wizardContext.integrationAccountName,
             wizardContext.mapName!,
             await createNewMap(wizardContext.mapName!, MapType[wizardContext.mapType! as MapType]));

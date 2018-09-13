@@ -15,7 +15,7 @@ export class SchemaCreateStep extends AzureWizardExecuteStep<ISchemaWizardContex
         const client = new LogicAppsManagementClient(wizardContext.credentials, wizardContext.subscriptionId);
         addExtensionUserAgent(client);
 
-        const newSchema: IntegrationAccountSchema = await client.schemas.createOrUpdate(wizardContext.resourceGroup!.name!,
+        const newSchema: IntegrationAccountSchema = await client.integrationAccountSchemas.createOrUpdate(wizardContext.resourceGroup!.name!,
             wizardContext.integrationAccountName,
             wizardContext.schemaName!,
             await createNewSchema(wizardContext.schemaName!));

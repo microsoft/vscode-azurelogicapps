@@ -44,14 +44,14 @@ export class SchemaNameStep extends AzureWizardPromptStep<ISchemaWizardContext> 
         const client = new LogicAppsManagementClient(wizardContext.credentials, wizardContext.subscriptionId);
         addExtensionUserAgent(client);
 
-        let schemas = await client.schemas.listByIntegrationAccounts(wizardContext.resourceGroup!.name!, wizardContext.integrationAccountName);
+        let schemas = await client.integrationAccountSchemas.list(wizardContext.resourceGroup!.name!, wizardContext.integrationAccountName);
         let nextPageLink = schemas.nextLink;
         if (schemas.some((schema: IntegrationAccountSchema) => schema.name! === name)) {
             return false;
         }
 
         while (nextPageLink) {
-            schemas = await client.schemas.listByIntegrationAccountsNext(nextPageLink);
+            schemas = await client.integrationAccountSchemas.listNext(nextPageLink);
             if (schemas.some((schema: IntegrationAccountSchema) => schema.name! === name)) {
                 return false;
             }

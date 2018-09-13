@@ -22,7 +22,7 @@ export class IntegrationAccountSchemaTreeItem implements IAzureTreeItem {
     }
 
     public async deleteTreeItem(): Promise<void> {
-        await this.client.schemas.deleteMethod(this.resourceGroupName, this.integrationAccountName, this.label);
+        await this.client.integrationAccountSchemas.deleteMethod(this.resourceGroupName, this.integrationAccountName, this.label);
     }
 
     public get iconPath(): string {
@@ -59,7 +59,7 @@ export class IntegrationAccountSchemaTreeItem implements IAzureTreeItem {
 
     public async getProperties(refresh = false): Promise<string> {
         if (refresh) {
-            this.integrationAccountSchema = await this.client.schemas.get(this.resourceGroupName, this.integrationAccountName, this.integrationAccountSchemaName);
+            this.integrationAccountSchema = await this.client.integrationAccountSchemas.get(this.resourceGroupName, this.integrationAccountName, this.integrationAccountSchemaName);
         }
 
         return JSON.stringify(this.integrationAccountSchema, null, 4);
@@ -72,7 +72,7 @@ export class IntegrationAccountSchemaTreeItem implements IAzureTreeItem {
             schemaType: this.schemaType
         };
 
-        const updatedSchema = await this.client.schemas.createOrUpdate(this.resourceGroupName, this.integrationAccountName, this.integrationAccountSchemaName, schema);
+        const updatedSchema = await this.client.integrationAccountSchemas.createOrUpdate(this.resourceGroupName, this.integrationAccountName, this.integrationAccountSchemaName, schema);
         return request(updatedSchema.contentLink!.uri!);
     }
 }
