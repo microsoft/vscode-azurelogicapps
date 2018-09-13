@@ -4,12 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 import LogicAppsManagementClient from "azure-arm-logic";
-import { IntegrationAccount, IntegrationAccountSchema, IntegrationAccountSchemaListResult } from "azure-arm-logic/lib/models";
-import * as vscode from "vscode";
-import { IAzureNode, IAzureParentTreeItem, IAzureTreeItem, UserCancelledError } from "vscode-azureextensionui";
+import { IntegrationAccount, IntegrationAccountSchema } from "azure-arm-logic/lib/models";
+import { IAzureNode, IAzureParentTreeItem, IAzureTreeItem } from "vscode-azureextensionui";
 import { localize } from "../../localize";
-import { createNewSchema } from "../../utils/integration-account/schemaUtils";
 import { getThemedIconPath, IThemedIconPath } from "../../utils/nodeUtils";
+import { runNewSchemaWizard } from "../../wizard/integration-account/schemas/createSchemaWizard";
 import { IntegrationAccountSchemaTreeItem } from "./IntegrationAccountSchemaTreeItem";
 
 export class IntegrationAccountSchemasTreeItem implements IAzureParentTreeItem {
@@ -56,43 +55,7 @@ export class IntegrationAccountSchemasTreeItem implements IAzureParentTreeItem {
         return integrationAccountSchemas.map((schema: IntegrationAccountSchema) => new IntegrationAccountSchemaTreeItem(this.client, schema));
     }
 
-    public async createChild(_: IAzureNode, showCreatingNode: (label: string) => void): Promise<IAzureTreeItem> {
-        const schemaName = await vscode.window.showInputBox(
-            {
-                prompt: "Enter the name of your new Schema",
-                validateInput: async (value: string): Promise<string | null> => {
-                    const existingSchemas = await this.getAllSchemas();
-                    if (existingSchemas && existingSchemas.find((schema) => schema.name === value)) {
-                        return localize("azIntegrationAccounts.nameAlreadyInUse", "Name already in use");
-                    }
-
-                    return null;
-                }
-            });
-
-        if (schemaName) {
-            showCreatingNode(schemaName);
-            const newSchema: IntegrationAccountSchema = await this.client.schemas.createOrUpdate(this.resourceGroupName,
-                this.integrationAccountName,
-                schemaName,
-                await createNewSchema(schemaName));
-
-            return new IntegrationAccountSchemaTreeItem(this.client, newSchema);
-        }
-        throw new UserCancelledError();
-    }
-
-    private async getAllSchemas(): Promise<IntegrationAccountSchemaListResult> {
-        let nextLink: string | undefined;
-        const results = await this.client.schemas.listByIntegrationAccounts(this.resourceGroupName, this.integrationAccountName);
-        nextLink = results.nextLink;
-
-        while (nextLink) {
-            const nextPage = await this.client.schemas.listByIntegrationAccountsNext(nextLink);
-            nextLink = nextPage.nextLink;
-            results.push(...nextPage);
-        }
-
-        return results;
+    public async createChild(node: IAzureNode, showCreatingNode: (label: string) => void): Promise<IAzureTreeItem> {
+        return runNewSchemaWizard(this.integrationAccount, node, showCreatingNode);
     }
 }
