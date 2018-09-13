@@ -18,7 +18,7 @@ export class MapCreateStep extends AzureWizardExecuteStep<IMapWizardContext> {
         const newMap: IntegrationAccountMap = await client.maps.createOrUpdate(wizardContext.resourceGroup!.name!,
             wizardContext.integrationAccountName,
             wizardContext.mapName!,
-            await createNewMap(wizardContext.mapName!, (MapType as any)[wizardContext.mapType!]));
+            await createNewMap(wizardContext.mapName!, MapType[wizardContext.mapType! as MapType]));
 
         wizardContext.map = new IntegrationAccountMapTreeItem(client, newMap);
 

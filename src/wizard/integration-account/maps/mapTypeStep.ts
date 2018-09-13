@@ -10,7 +10,7 @@ import { IMapWizardContext } from "./createMapWizard";
 
 export class MapTypeStep extends AzureWizardPromptStep<IMapWizardContext> {
     public async prompt(wizardContext: IMapWizardContext): Promise<IMapWizardContext> {
-        const mapTypes = Object.keys(MapType).map((k) => MapType[k as any]);
+        const mapTypes = Object.keys(MapType);
         wizardContext.mapType = await vscode.window.showQuickPick(mapTypes);
 
         if (wizardContext.mapType) {
