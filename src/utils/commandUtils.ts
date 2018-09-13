@@ -14,9 +14,9 @@ export async function openAndShowTextDocument(content: string, language = "json"
     await vscode.window.showTextDocument(document);
 }
 
-export async function createChildNode(tree: AzureTreeDataProvider, expectedContextValue: string, node?: IAzureParentNode): Promise<IAzureNode<IAzureTreeItem>> {
+export async function createChildNode(tree: AzureTreeDataProvider, parentContextValue: string, node?: IAzureParentNode): Promise<IAzureNode<IAzureTreeItem>> {
     if (!node) {
-        node = await tree.showNodePicker(expectedContextValue) as IAzureParentNode;
+        node = await tree.showNodePicker(parentContextValue) as IAzureParentNode;
     }
 
     return await node.createChild();

@@ -22,12 +22,13 @@ import { openVersionInEditor } from "./commands/logic-app/openVersionInEditor";
 import { promoteVersion } from "./commands/logic-app/promoteVersion";
 import { resubmitRun } from "./commands/logic-app/resubmitRun";
 import { runTrigger } from "./commands/logic-app/runTrigger";
+import { Constants } from "./constants";
 import { IntegrationAccountMapEditor } from "./editors/integration-account/IntegrationAccountMapEditor";
 import { IntegrationAccountSchemaEditor } from "./editors/integration-account/IntegrationAccountSchemaEditor";
 import { LogicAppEditor } from "./editors/logic-app/LogicAppEditor";
 import { ext } from "./extensionVariables";
-import { IntegrationAccountMapTreeItem } from "./tree/integration-account/IntegrationAccountMapTreeItem";
-import { IntegrationAccountSchemaTreeItem } from "./tree/integration-account/IntegrationAccountSchemaTreeItem";
+import { IntegrationAccountMapsTreeItem } from "./tree/integration-account/IntegrationAccountMapsTreeItem";
+import { IntegrationAccountSchemasTreeItem } from "./tree/integration-account/IntegrationAccountSchemasTreeItem";
 import { IntegrationAccountProvider } from "./tree/integration-account/IntegrationAccountsProvider";
 import { LogicAppsProvider } from "./tree/logic-app/LogicAppsProvider";
 import { createChildNode } from "./utils/commandUtils";
@@ -150,17 +151,21 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         const integrationAccountSchemaEditor = new IntegrationAccountSchemaEditor();
         context.subscriptions.push(integrationAccountMapEditor);
 
+        registerCommand("azIntegrationAccounts.createIntegrationAccount", async (node?: IAzureParentNode) => {
+            await createChildNode(integrationAccountTree, Constants.SubscriptionContextValue, node);
+        });
+
         registerCommand("azIntegrationAccounts.createMap", async (node?: IAzureParentNode) => {
-            const child = await createChildNode(integrationAccountTree, IntegrationAccountMapTreeItem.contextValue, node);
+            const child = await createChildNode(integrationAccountTree, IntegrationAccountMapsTreeItem.contextValue, node);
             await openIntegrationAccountMapInEditor(integrationAccountTree, integrationAccountMapEditor, child);
         });
 
         registerCommand("azIntegrationAccounts.createSchema", async (node?: IAzureParentNode) => {
-            const child = await createChildNode(integrationAccountTree, IntegrationAccountSchemaTreeItem.contextValue, node);
+            const child = await createChildNode(integrationAccountTree, IntegrationAccountSchemasTreeItem.contextValue, node);
             await openIntegrationAccountSchemaInEditor(integrationAccountTree, integrationAccountSchemaEditor, child);
         });
 
-        registerCommand("azIntegrationAccounts.delete", async (node: IAzureNode) => {
+        registerCommand("azIntegrationAccounts.deleteIntegrationAccount", async (node: IAzureNode) => {
             await deleteIntegrationAccount(integrationAccountTree, node);
         });
 

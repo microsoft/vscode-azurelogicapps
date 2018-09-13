@@ -50,7 +50,7 @@ export class MapNameStep extends AzureWizardPromptStep<IMapWizardContext> {
             return false;
         }
 
-        while (nextPageLink !== undefined) {
+        while (nextPageLink) {
             maps = await client.maps.listByIntegrationAccountsNext(nextPageLink);
             if (maps.some((map: IntegrationAccountMap) => map.name! === name)) {
                 return false;
