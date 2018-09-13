@@ -4,12 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 import LogicAppsManagementClient from "azure-arm-logic";
-import { IntegrationAccount, IntegrationAccountMap, IntegrationAccountMapListResult } from "azure-arm-logic/lib/models";
-import * as vscode from "vscode";
-import { IAzureNode, IAzureParentTreeItem, IAzureTreeItem, UserCancelledError } from "vscode-azureextensionui";
+import { IntegrationAccount, IntegrationAccountMap } from "azure-arm-logic/lib/models";
+import { IAzureNode, IAzureParentTreeItem, IAzureTreeItem } from "vscode-azureextensionui";
 import { localize } from "../../localize";
-import { createNewMap, MapType } from "../../utils/integration-account/mapUtils";
 import { getThemedIconPath, IThemedIconPath } from "../../utils/nodeUtils";
+import { runNewMapWizard } from "../../wizard/integration-account/maps/createMapWizard";
 import { IntegrationAccountMapTreeItem } from "./IntegrationAccountMapTreeItem";
 
 export class IntegrationAccountMapsTreeItem implements IAzureParentTreeItem {
@@ -56,48 +55,7 @@ export class IntegrationAccountMapsTreeItem implements IAzureParentTreeItem {
         return integrationAccountMaps.map((map: IntegrationAccountMap) => new IntegrationAccountMapTreeItem(this.client, map));
     }
 
-    public async createChild(_: IAzureNode, showCreatingNode: (label: string) => void): Promise<IAzureTreeItem> {
-        const mapTypes = Object.keys(MapType).map((k) => MapType[k as any]);
-        const mapType = await vscode.window.showQuickPick(mapTypes);
-
-        if (mapType) {
-            const mapName = await vscode.window.showInputBox(
-                {
-                    prompt: "Enter the name of your new Map",
-                    validateInput: async (value: string): Promise<string | null> => {
-                        const existingMaps = await this.getAllMaps();
-                        if (existingMaps && existingMaps.find((map) => map.name === value)) {
-                            return localize("azIntegrationAccounts.nameAlreadyInUse", "Name already in use");
-                        }
-
-                        return null;
-                    }
-                });
-
-            if (mapName) {
-                showCreatingNode(mapName);
-                const newMap: IntegrationAccountMap = await this.client.maps.createOrUpdate(this.resourceGroupName,
-                    this.integrationAccountName,
-                    mapName,
-                    await createNewMap(mapName, (MapType as any)[mapType]));
-
-                return new IntegrationAccountMapTreeItem(this.client, newMap);
-            }
-        }
-        throw new UserCancelledError();
-    }
-
-    private async getAllMaps(): Promise<IntegrationAccountMapListResult> {
-        let nextLink: string | undefined;
-        const results = await this.client.maps.listByIntegrationAccounts(this.resourceGroupName, this.integrationAccountName);
-        nextLink = results.nextLink;
-
-        while (nextLink) {
-            const nextPage = await this.client.maps.listByIntegrationAccountsNext(nextLink);
-            nextLink = nextPage.nextLink;
-            results.push(...nextPage);
-        }
-
-        return results;
+    public async createChild(node: IAzureNode, showCreatingNode: (label: string) => void): Promise<IAzureTreeItem> {
+        return runNewMapWizard(this.integrationAccount, node, showCreatingNode);
     }
 }

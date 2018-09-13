@@ -4,9 +4,9 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { AzureTreeDataProvider, BaseEditor, IAzureNode } from "vscode-azureextensionui";
-import { localize } from "../localize";
-import { IntegrationAccountMapTreeItem } from "../tree/integration-account/IntegrationAccountMapTreeItem";
-import { openAndShowTextDocument } from "../utils/commandUtils";
+import { localize } from "../../localize";
+import { IntegrationAccountMapTreeItem } from "../../tree/integration-account/IntegrationAccountMapTreeItem";
+import { openAndShowTextDocument } from "../../utils/commandUtils";
 
 export async function deleteIntegrationAccountMap(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {
     if (!node) {
