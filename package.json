@@ -5,7 +5,7 @@
     "version": "0.0.1",
     "publisher": "ms-azuretools",
     "icon": "resources/azLogicApps.png",
-    "aiKey": "a603acf5-644e-4b0e-bbf4-455c4ccff3b7",
+    "aiKey": "b6385546-3be0-489c-a298-baccd6c152fb ",
     "engines": {
         "vscode": "^1.25.1"
     },
