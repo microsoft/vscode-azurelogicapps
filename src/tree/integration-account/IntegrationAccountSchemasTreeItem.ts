@@ -47,8 +47,8 @@ export class IntegrationAccountSchemasTreeItem implements IAzureParentTreeItem {
         }
 
         const integrationAccountSchemas = this.nextLink === undefined
-            ? await this.client.schemas.listByIntegrationAccounts(this.resourceGroupName, this.integrationAccountName)
-            : await this.client.schemas.listByIntegrationAccountsNext(this.nextLink);
+            ? await this.client.integrationAccountSchemas.list(this.resourceGroupName, this.integrationAccountName)
+            : await this.client.integrationAccountSchemas.listNext(this.nextLink);
 
         this.nextLink = integrationAccountSchemas.nextLink;
 

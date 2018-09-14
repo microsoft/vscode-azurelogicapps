@@ -22,7 +22,7 @@ export class IntegrationAccountMapTreeItem implements IAzureTreeItem {
     }
 
     public async deleteTreeItem(): Promise<void> {
-        await this.client.maps.deleteMethod(this.resourceGroupName, this.integrationAccountName, this.label);
+        await this.client.integrationAccountMaps.deleteMethod(this.resourceGroupName, this.integrationAccountName, this.label);
     }
 
     public get iconPath(): string {
@@ -59,7 +59,7 @@ export class IntegrationAccountMapTreeItem implements IAzureTreeItem {
 
     public async getProperties(refresh = false): Promise<string> {
         if (refresh) {
-            this.integrationAccountMap = await this.client.maps.get(this.resourceGroupName, this.integrationAccountName, this.integrationAccountMapName);
+            this.integrationAccountMap = await this.client.integrationAccountMaps.get(this.resourceGroupName, this.integrationAccountName, this.integrationAccountMapName);
         }
 
         return JSON.stringify(this.integrationAccountMap, null, 4);
@@ -72,7 +72,7 @@ export class IntegrationAccountMapTreeItem implements IAzureTreeItem {
             mapType: this.mapType
         };
 
-        const updatedMap = await this.client.maps.createOrUpdate(this.resourceGroupName, this.integrationAccountName, this.integrationAccountMapName, map);
+        const updatedMap = await this.client.integrationAccountMaps.createOrUpdate(this.resourceGroupName, this.integrationAccountName, this.integrationAccountMapName, map);
         return request(updatedMap.contentLink!.uri!);
     }
 }

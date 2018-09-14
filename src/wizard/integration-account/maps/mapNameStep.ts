@@ -44,14 +44,14 @@ export class MapNameStep extends AzureWizardPromptStep<IMapWizardContext> {
         const client = new LogicAppsManagementClient(wizardContext.credentials, wizardContext.subscriptionId);
         addExtensionUserAgent(client);
 
-        let maps = await client.maps.listByIntegrationAccounts(wizardContext.resourceGroup!.name!, wizardContext.integrationAccountName);
+        let maps = await client.integrationAccountMaps.list(wizardContext.resourceGroup!.name!, wizardContext.integrationAccountName);
         let nextPageLink = maps.nextLink;
         if (maps.some((map: IntegrationAccountMap) => map.name! === name)) {
             return false;
         }
 
         while (nextPageLink) {
-            maps = await client.maps.listByIntegrationAccountsNext(nextPageLink);
+            maps = await client.integrationAccountMaps.listNext(nextPageLink);
             if (maps.some((map: IntegrationAccountMap) => map.name! === name)) {
                 return false;
             }
