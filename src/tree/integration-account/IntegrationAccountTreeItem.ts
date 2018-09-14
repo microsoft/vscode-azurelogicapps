@@ -6,12 +6,14 @@
 import LogicAppsManagementClient from "azure-arm-logic";
 import { IntegrationAccount } from "azure-arm-logic/lib/models";
 import { IAzureParentTreeItem, IAzureTreeItem } from "vscode-azureextensionui";
+import { localize } from "../../localize";
 import { getIconPath } from "../../utils/nodeUtils";
 import { IntegrationAccountMapsTreeItem } from "./IntegrationAccountMapsTreeItem";
 import { IntegrationAccountSchemasTreeItem } from "./IntegrationAccountSchemasTreeItem";
 
 export class IntegrationAccountTreeItem implements IAzureParentTreeItem {
     public static contextValue = "azIntegrationAccount";
+    public readonly childTypeLabel: string = localize("azIntegrationAccounts.child", "Child");
     public contextValue = IntegrationAccountTreeItem.contextValue;
     public integrationAccountMapItem: IntegrationAccountMapsTreeItem;
     public integrationAccountSchemaItem: IntegrationAccountSchemasTreeItem;

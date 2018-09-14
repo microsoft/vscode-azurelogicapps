@@ -6,6 +6,7 @@
 import LogicAppsManagementClient from "azure-arm-logic";
 import { Workflow } from "azure-arm-logic/lib/models";
 import { IAzureParentTreeItem, IAzureTreeItem } from "vscode-azureextensionui";
+import { localize } from "../../localize";
 import { getIconPath } from "../../utils/nodeUtils";
 import { LogicAppRunsTreeItem } from "./LogicAppRunsTreeItem";
 import { LogicAppTriggersTreeItem } from "./LogicAppTriggersTreeItem";
@@ -13,6 +14,7 @@ import { LogicAppVersionsTreeItem } from "./LogicAppVersionsTreeItem";
 
 export class LogicAppTreeItem implements IAzureParentTreeItem {
     public static contextValue = "azLogicAppsWorkflow";
+    public readonly childTypeLabel: string = localize("azLogicApps.child", "Child");
     public contextValue = LogicAppTreeItem.contextValue;
     public logicAppRunsItem: LogicAppRunsTreeItem;
     public logicAppTriggersItem: LogicAppTriggersTreeItem;
