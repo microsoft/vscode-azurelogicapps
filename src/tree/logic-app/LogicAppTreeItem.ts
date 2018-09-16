@@ -5,6 +5,8 @@
 
 import LogicAppsManagementClient from "azure-arm-logic";
 import { Workflow } from "azure-arm-logic/lib/models";
+import { WebResource } from "ms-rest";
+import * as request from "request-promise-native";
 import { IAzureParentTreeItem, IAzureTreeItem } from "vscode-azureextensionui";
 import { localize } from "../../localize";
 import { getIconPath } from "../../utils/nodeUtils";
@@ -96,10 +98,44 @@ export class LogicAppTreeItem implements IAzureParentTreeItem {
 
     public async update(definition: string): Promise<string> {
         const workflow = {
-            ...this.workflow,
-            definition: JSON.parse(definition)
+            id: this.id,
+            location: this.workflow.location!,
+            name: this.workflowName,
+            properties: {
+                ...this.workflow,
+                definition: JSON.parse(definition)
+            },
+            type: this.workflow.type!
         };
-        const updatedWorkflow = await this.client.workflows.createOrUpdate(this.resourceGroupName, this.workflowName, workflow);
-        return JSON.stringify(updatedWorkflow.definition, null, 4);
+        delete workflow.properties.id;
+        delete workflow.properties.location;
+        delete workflow.properties.name;
+        delete workflow.properties.tags;
+        delete workflow.properties.type;
+
+        const authorization = await new Promise<string>((resolve, reject) => {
+            const webResource = new WebResource();
+            this.client.credentials.signRequest(webResource, (err: Error): void => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(webResource.headers.authorization);
+                }
+            });
+        });
+
+        const uri = `https://management.azure.com/subscriptions/${this.client.subscriptionId}/resourceGroups/${this.resourceGroupName}/providers/Microsoft.Logic/workflows/${this.workflowName}?api-version=${this.client.apiVersion}`;
+        const options: request.RequestPromiseOptions = {
+            body: JSON.stringify(workflow),
+            headers: {
+                "Authorization": authorization,
+                "Content-Type": "application/json"
+            },
+            method: "PUT"
+        };
+        const response = await request(uri, options);
+        const updatedWorkflow = JSON.parse(response);
+
+        return JSON.stringify(updatedWorkflow.properties.definition, null, 4);
     }
 }
