@@ -115,7 +115,7 @@ export class LogicAppTreeItem implements IAzureParentTreeItem {
 
         const authorization = await new Promise<string>((resolve, reject) => {
             const webResource = new WebResource();
-            this.client.credentials.signRequest(webResource, (err: Error): void => {
+            this.client.credentials.signRequest(webResource, (err: Error | undefined): void => {
                 if (err) {
                     reject(err);
                 } else {
