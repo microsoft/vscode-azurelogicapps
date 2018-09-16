@@ -105,6 +105,7 @@ export class LogicAppTreeItem implements IAzureParentTreeItem {
                 ...this.workflow,
                 definition: JSON.parse(definition)
             },
+            tags: this.workflow.tags || {},
             type: this.workflow.type!
         };
         delete workflow.properties.id;
