@@ -234,15 +234,15 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             vscode.commands.executeCommand("azure-account.selectSubscriptions");
         });
 
-        registerCommand("azIntegrationAccounts.viewIntegrationAccountMapProperties", async (node?: IAzureNode) => {
+        registerCommand("azIntegrationAccounts.viewMapProperties", async (node?: IAzureNode) => {
             await viewIntegrationAccountMapProperties(integrationAccountTree, node);
         });
 
-        registerCommand("azIntegrationAccounts.viewIntegrationAccountPartnerProperties", async (node?: IAzureNode) => {
+        registerCommand("azIntegrationAccounts.viewPartnerProperties", async (node?: IAzureNode) => {
             await viewIntegrationAccountPartnerProperties(integrationAccountTree, node);
         });
 
-        registerCommand("azIntegrationAccounts.viewIntegrationAccountSchemaProperties", async (node?: IAzureNode) => {
+        registerCommand("azIntegrationAccounts.viewSchemaProperties", async (node?: IAzureNode) => {
             await viewIntegrationAccountSchemaProperties(integrationAccountTree, node);
         });
 
