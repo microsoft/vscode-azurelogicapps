@@ -35,6 +35,6 @@ export class IntegrationAccountSchemaEditor extends BaseEditor<IAzureNode<Integr
             throw new Error(localize("azIntegrationAccounts.errorUpdatingFile", "Cannot update Schema after it has been closed."));
         }
 
-        return await node.treeItem.update(vscode.window.activeTextEditor.document.getText());
+        return node.treeItem.update(vscode.window.activeTextEditor.document.getText());
     }
 }

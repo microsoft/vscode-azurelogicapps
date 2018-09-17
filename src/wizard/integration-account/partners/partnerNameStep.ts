@@ -4,16 +4,16 @@
  *--------------------------------------------------------------------------------------------*/
 
 import LogicAppsManagementClient from "azure-arm-logic";
-import { IntegrationAccountSchema } from "azure-arm-logic/lib/models";
+import { IntegrationAccountPartner } from "azure-arm-logic/lib/models";
 import * as vscode from "vscode";
 import { addExtensionUserAgent, AzureWizardPromptStep, UserCancelledError } from "vscode-azureextensionui";
 import { localize } from "../../../localize";
-import { ISchemaWizardContext } from "./createSchemaWizard";
+import { IPartnerWizardContext } from "./createPartnerWizard";
 
-export class SchemaNameStep extends AzureWizardPromptStep<ISchemaWizardContext> {
-    public async prompt(wizardContext: ISchemaWizardContext): Promise<ISchemaWizardContext> {
+export class PartnerNameStep extends AzureWizardPromptStep<IPartnerWizardContext> {
+    public async prompt(wizardContext: IPartnerWizardContext): Promise<IPartnerWizardContext> {
         const options: vscode.InputBoxOptions = {
-            prompt: localize("azIntegrationAccounts.promptForSchemaName", "Enter a name for the new Schema."),
+            prompt: localize("azIntegrationAccounts.promptForPartnerName", "Enter a name for the new Partner."),
             validateInput: async (name: string) => {
                 name = name ? name.trim() : "";
 
@@ -31,32 +31,32 @@ export class SchemaNameStep extends AzureWizardPromptStep<ISchemaWizardContext> 
             }
         };
 
-        const schemaName = await vscode.window.showInputBox(options);
-        if (schemaName) {
-            wizardContext.schemaName = schemaName.trim();
+        const partnerName = await vscode.window.showInputBox(options);
+        if (partnerName) {
+            wizardContext.partnerName = partnerName.trim();
             return wizardContext;
         }
 
         throw new UserCancelledError();
     }
 
-    private async isNameAvailable(name: string, wizardContext: ISchemaWizardContext): Promise<boolean> {
+    private async isNameAvailable(name: string, wizardContext: IPartnerWizardContext): Promise<boolean> {
         const client = new LogicAppsManagementClient(wizardContext.credentials, wizardContext.subscriptionId);
         addExtensionUserAgent(client);
 
-        let schemas = await client.integrationAccountSchemas.list(wizardContext.resourceGroup!.name!, wizardContext.integrationAccountName);
-        let nextPageLink = schemas.nextLink;
-        if (schemas.some((schema: IntegrationAccountSchema) => schema.name! === name)) {
+        let partners = await client.integrationAccountPartners.list(wizardContext.resourceGroup!.name!, wizardContext.integrationAccountName);
+        let nextPageLink = partners.nextLink;
+        if (partners.some((partner: IntegrationAccountPartner) => partner.name! === name)) {
             return false;
         }
 
         while (nextPageLink) {
-            schemas = await client.integrationAccountSchemas.listNext(nextPageLink);
-            if (schemas.some((schema: IntegrationAccountSchema) => schema.name! === name)) {
+            partners = await client.integrationAccountPartners.listNext(nextPageLink);
+            if (partners.some((partner: IntegrationAccountPartner) => partner.name! === name)) {
                 return false;
             }
 
-            nextPageLink = schemas.nextLink;
+            nextPageLink = partners.nextLink;
         }
 
         return true;

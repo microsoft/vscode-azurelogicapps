@@ -8,6 +8,7 @@ import { AzureTreeDataProvider, AzureUserInput, callWithTelemetryAndErrorHandlin
 import TelemetryReporter from "vscode-azureextensionui/node_modules/vscode-extension-telemetry";
 import { deleteIntegrationAccount, viewIntegrationAccountProperties } from "./commands/integration-account/integrationAccountCommands";
 import { deleteIntegrationAccountMap, openIntegrationAccountMapInEditor, viewIntegrationAccountMapProperties } from "./commands/integration-account/integrationAccountMapCommands";
+import { deleteIntegrationAccountPartner, openIntegrationAccountPartnerInEditor, viewIntegrationAccountPartnerProperties } from "./commands/integration-account/integrationAccountPartnerCommands";
 import { deleteIntegrationAccountSchema, openIntegrationAccountSchemaInEditor, viewIntegrationAccountSchemaProperties } from "./commands/integration-account/integrationAccountSchemaCommands";
 import { createLogicApp } from "./commands/logic-app/createLogicApp";
 import { deleteLogicApp } from "./commands/logic-app/deleteLogicApp";
@@ -24,10 +25,12 @@ import { resubmitRun } from "./commands/logic-app/resubmitRun";
 import { runTrigger } from "./commands/logic-app/runTrigger";
 import { Constants } from "./constants";
 import { IntegrationAccountMapEditor } from "./editors/integration-account/IntegrationAccountMapEditor";
+import { IntegrationAccountPartnerEditor } from "./editors/integration-account/integrationAccountPartnerEditor";
 import { IntegrationAccountSchemaEditor } from "./editors/integration-account/IntegrationAccountSchemaEditor";
 import { LogicAppEditor } from "./editors/logic-app/LogicAppEditor";
 import { ext } from "./extensionVariables";
 import { IntegrationAccountMapsTreeItem } from "./tree/integration-account/IntegrationAccountMapsTreeItem";
+import { IntegrationAccountPartnersTreeItem } from "./tree/integration-account/IntegrationAccountPartnersTreeItem";
 import { IntegrationAccountSchemasTreeItem } from "./tree/integration-account/IntegrationAccountSchemasTreeItem";
 import { IntegrationAccountProvider } from "./tree/integration-account/IntegrationAccountsProvider";
 import { LogicAppsProvider } from "./tree/logic-app/LogicAppsProvider";
@@ -148,6 +151,9 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         const integrationAccountMapEditor = new IntegrationAccountMapEditor();
         context.subscriptions.push(integrationAccountMapEditor);
 
+        const integrationAccountPartnerEditor = new IntegrationAccountPartnerEditor();
+        context.subscriptions.push(integrationAccountMapEditor);
+
         const integrationAccountSchemaEditor = new IntegrationAccountSchemaEditor();
         context.subscriptions.push(integrationAccountMapEditor);
 
@@ -158,6 +164,11 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         registerCommand("azIntegrationAccounts.createMap", async (node?: IAzureParentNode) => {
             const child = await createChildNode(integrationAccountTree, IntegrationAccountMapsTreeItem.contextValue, node);
             await openIntegrationAccountMapInEditor(integrationAccountTree, integrationAccountMapEditor, child);
+        });
+
+        registerCommand("azIntegrationAccounts.createPartner", async (node?: IAzureParentNode) => {
+            const child = await createChildNode(integrationAccountTree, IntegrationAccountPartnersTreeItem.contextValue, node);
+            await openIntegrationAccountPartnerInEditor(integrationAccountTree, integrationAccountPartnerEditor, child);
         });
 
         registerCommand("azIntegrationAccounts.createSchema", async (node?: IAzureParentNode) => {
@@ -171,6 +182,10 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
 
         registerCommand("azIntegrationAccounts.deleteMap", async (node: IAzureNode) => {
             await deleteIntegrationAccountMap(integrationAccountTree, node);
+        });
+
+        registerCommand("azIntegrationAccounts.deletePartner", async (node: IAzureNode) => {
+            await deleteIntegrationAccountPartner(integrationAccountTree, node);
         });
 
         registerCommand("azIntegrationAccounts.deleteSchema", async (node: IAzureNode) => {
@@ -187,6 +202,12 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             await integrationAccountMapEditor.onDidSaveTextDocument(this, context.globalState, document);
         });
 
+        registerEvent("azIntegrationAccounts.integrationAccountPartnerEditor.onDidSaveTextDocument",
+            vscode.workspace.onDidSaveTextDocument,
+            async function (this: IActionContext, document: vscode.TextDocument): Promise<void> {
+            await integrationAccountPartnerEditor.onDidSaveTextDocument(this, context.globalState, document);
+        });
+
         registerEvent("azIntegrationAccounts.integrationAccountSchemaEditor.onDidSaveTextDocument",
             vscode.workspace.onDidSaveTextDocument,
             async function (this: IActionContext, document: vscode.TextDocument): Promise<void> {
@@ -195,6 +216,10 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
 
         registerCommand("azIntegrationAccounts.openMapInEditor", async (node?: IAzureNode) => {
             await openIntegrationAccountMapInEditor(integrationAccountTree, integrationAccountMapEditor, node);
+        });
+
+        registerCommand("azIntegrationAccounts.openPartnerInEditor", async (node?: IAzureNode) => {
+            await openIntegrationAccountPartnerInEditor(integrationAccountTree, integrationAccountPartnerEditor, node);
         });
 
         registerCommand("azIntegrationAccounts.openSchemaInEditor", async (node?: IAzureNode) => {
@@ -211,6 +236,10 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
 
         registerCommand("azIntegrationAccounts.viewIntegrationAccountMapProperties", async (node?: IAzureNode) => {
             await viewIntegrationAccountMapProperties(integrationAccountTree, node);
+        });
+
+        registerCommand("azIntegrationAccounts.viewIntegrationAccountPartnerProperties", async (node?: IAzureNode) => {
+            await viewIntegrationAccountPartnerProperties(integrationAccountTree, node);
         });
 
         registerCommand("azIntegrationAccounts.viewIntegrationAccountSchemaProperties", async (node?: IAzureNode) => {
