@@ -6,6 +6,13 @@ All notable changes to the "vscode-logicapps" extension will be documented in th
 ## [0.1.0] - 2018-09-17
 ### Added
 - Integration Accounts
+  - Create, delete, and view properties
+  - Maps
+    - Create, delete, update, view map content, and view map properties
+  - Partners
+    - Create, delete, update, view partner content, and view partner properties
+  - Schemas
+    - Create, delete, update, view schema content, and view schema properties
 - Logic Apps
   - Create, delete, update, and view Logic Apps
     - Open the Logic App in the Azure Management portal
