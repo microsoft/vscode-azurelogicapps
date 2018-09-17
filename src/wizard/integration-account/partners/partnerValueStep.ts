@@ -22,7 +22,7 @@ export class PartnerValueStep extends AzureWizardPromptStep<IPartnerWizardContex
                 } else if (!/^\"?[a-zA-Z0-9\-_.() ]+\"?$/.test(value)) {
                     return localize("azIntegrationAccounts.valueContainsInvalidCharacters", "The value can only contain letters, numbers, and '-', '(', ')', '_', or '.'");
                 } else {
-                    return null;
+                    return undefined;
                 }
             }
         };

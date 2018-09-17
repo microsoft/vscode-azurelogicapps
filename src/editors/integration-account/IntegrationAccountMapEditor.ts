@@ -38,6 +38,6 @@ export class IntegrationAccountMapEditor extends BaseEditor<IAzureNode<Integrati
             throw new Error(localize("azIntegrationAccounts.errorUpdatingFile", "Cannot update Map after it has been closed."));
         }
 
-        return await node.treeItem.update(vscode.window.activeTextEditor.document.getText());
+        return node.treeItem.update(vscode.window.activeTextEditor.document.getText());
     }
 }

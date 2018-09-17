@@ -203,10 +203,10 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         });
 
         registerEvent("azIntegrationAccounts.integrationAccountPartnerEditor.onDidSaveTextDocument",
-        vscode.workspace.onDidSaveTextDocument,
-        async function (this: IActionContext, document: vscode.TextDocument): Promise<void> {
-        await integrationAccountPartnerEditor.onDidSaveTextDocument(this, context.globalState, document);
-    });
+            vscode.workspace.onDidSaveTextDocument,
+            async function (this: IActionContext, document: vscode.TextDocument): Promise<void> {
+            await integrationAccountPartnerEditor.onDidSaveTextDocument(this, context.globalState, document);
+        });
 
         registerEvent("azIntegrationAccounts.integrationAccountSchemaEditor.onDidSaveTextDocument",
             vscode.workspace.onDidSaveTextDocument,

@@ -39,6 +39,6 @@ export class IntegrationAccountPartnerEditor extends BaseEditor<IAzureNode<Integ
         const updatedText = vscode.window.activeTextEditor.document.getText();
         const updatedContent: PartnerContent = JSON.parse(updatedText);
 
-        return await node.treeItem.update(updatedContent);
+        return node.treeItem.update(updatedContent);
     }
 }

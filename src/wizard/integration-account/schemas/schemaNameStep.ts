@@ -26,7 +26,7 @@ export class SchemaNameStep extends AzureWizardPromptStep<ISchemaWizardContext> 
                 } else if (!await this.isNameAvailable(name, wizardContext)) {
                     return localize("azIntegrationAccounts.nameAlreadyInUse", "The name is already in use.");
                 } else {
-                    return null;
+                    return undefined;
                 }
             }
         };
