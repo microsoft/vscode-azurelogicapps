@@ -96,6 +96,7 @@ export class LogicAppTreeItem implements IAzureParentTreeItem {
         }
     }
 
+    // NOTE(joechung): Do the update request manually instead of using the SDK to work around #25.
     public async update(definition: string): Promise<string> {
         const workflow = {
             id: this.id,
