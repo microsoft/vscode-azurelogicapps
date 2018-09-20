@@ -22,9 +22,15 @@ export async function createNewMap(mapName: string, mapType: MapType): Promise<I
         case MapType.Liquid:
             content = "{% if user %}\nHello {{ user.name }}\n{% endif %}";
             break;
+        case MapType.Xslt30:
+            content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet version=\"3.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\n\t<xsl:template match=\"/\">\n\n\t</xsl:template>\n</xsl:stylesheet>";
+            break;
+        case MapType.Xslt20:
+            content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet version=\"2.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\n\t<xsl:template match=\"/\">\n\n\t</xsl:template>\n</xsl:stylesheet>";
+            break;
         case MapType.Xslt:
         default:
-            content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet version=\"1.0\"\nxmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\n<xsl:template match=\"/\">\n\n</xsl:template>\n</xsl:stylesheet>";
+            content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\n\t<xsl:template match=\"/\">\n\n\t</xsl:template>\n</xsl:stylesheet>";
     }
 
     const map: IntegrationAccountMap = {
