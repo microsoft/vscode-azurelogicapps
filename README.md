@@ -17,9 +17,13 @@ All you need is an Azure Subscription to get started. If you don't have one, [cl
 * Browse, create, edit, and delete integration accounts, schema, map, and partners
 * IntelliSense support helping you quickly and easily adding triggers, actions, and properties
 
+![Recurrence trigger IntelliSense](resources/recurrence-trigger.gif)
+
+![Run after IntelliSense](resources/run-after.gif)
+
 ## Recommended Extensions
 
-We recommend you to install the following VS Code extension for a better experience when working with different integration account artifacts.
+We recommend installing the following VS Code extensions for a better experience when working with different integration account artifacts.
 
 * For XSLT, install [XSLT Snippets](https://marketplace.visualstudio.com/items?itemName=marvinhagemeister.vscode-xslt-snippets)
 * For Liquid, install [Shopify Liquid Template Snippets](https://marketplace.visualstudio.com/items?itemName=killalau.vscode-liquid-snippets)
