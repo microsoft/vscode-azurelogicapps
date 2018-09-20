@@ -1,0 +1,937 @@
+{
+    "ApiConnection": {
+        "prefix": "api",
+        "body": [
+            "\"${1:ApiConnection}\": {",
+            "\t\"description\": \"$9\",",
+            "\t\"inputs\": {",
+            "\t\t\"authentication\": \"@parameters('\\$authentication')\",",
+            "\t\t\"body\": {$3},",
+            "\t\t\"headers\": {$4},",
+            "\t\t\"host\": {",
+            "\t\t\t\"connection\": {",
+            "\t\t\t\t\"name\": \"@parameters('\\$connections')['${2:connector}']['connectionId']\"",
+            "\t\t\t}",
+            "\t\t},",
+            "\t\t\"method\": \"${5|POST,GET,PUT,DELETE,HEAD,OPTIONS,PATCH,TRACE|}\",",
+            "\t\t\"path\": \"${6}\",",
+            "\t\t\"queries\": {$7}",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$8},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"ApiConnection\"",
+            "}"
+        ],
+        "description": "The API Connection operation."
+    },
+    "ApiConnectionWebhook": {
+        "prefix": "apiwebhook",
+        "body": [
+            "\"${1:ApiConnectionWebhook}\": {",
+            "\t\"description\": \"$8\",",
+            "\t\"inputs\": {",
+            "\t\t\"authentication\": \"@parameters('\\$authentication')\",",
+            "\t\t\"body\": {$3},",
+            "\t\t\"headers\": {$4},",
+            "\t\t\"host\": {",
+            "\t\t\t\"connection\": {",
+            "\t\t\t\t\"name\": \"@parameters('\\$connections')['${2:connector}']['connectionId']\"",
+            "\t\t\t}",
+            "\t\t},",
+            "\t\t\"method\": \"${5|POST,GET,PUT,DELETE,HEAD,OPTIONS,PATCH,TRACE|}\",",
+            "\t\t\"path\": \"${6}\",",
+            "\t\t\"queries\": {$7}",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$9},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"ApiConnectionWebhook\"",
+            "}"
+        ],
+        "description": "The API Connection webhook operation."
+    },
+    "ApiManagement": {
+        "prefix": "apimanagement",
+        "body": [
+            "\"${1:ApiManagement}\": {",
+            "\t\"description\": \"$9\",",
+            "\t\"inputs\": {",
+            "\t\t\"api\": {",
+            "\t\t\t\"id\": \"$2\"",
+            "\t\t},",
+            "\t\t\"body\": {$3},",
+            "\t\t\"headers\": {$4},",
+            "\t\t\"method\": \"${5|GET,POST,PUT,DELETE,HEAD,OPTIONS,PATCH,TRACE|}\",",
+            "\t\t\"pathTemplate\": {",
+            "\t\t\t\"parameters\": {$7},",
+            "\t\t\t\"template\": \"$6\"",
+            "\t\t},",
+            "\t\t\"queries\": {$8}",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$10},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"ApiManagement\"",
+            "}"
+        ],
+        "description": "The API Management operation."
+    },
+    "AppendToArrayVariable": {
+        "prefix": "appendtoarrayvariable",
+        "body": [
+            "\"${1:AppendToArrayVariable}\": {",
+            "\t\"description\": \"$4\",",
+            "\t\"inputs\": {",
+            "\t\t\"name\": {$2},",
+            "\t\t\"value\": \"$3\"",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$5},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"AppendToArrayVariable\"",
+            "}"
+        ],
+        "description": "The Append to Array Variable action."
+    },
+    "AppendToStringVariable": {
+        "prefix": "appendtostringvariable",
+        "body": [
+            "\"${1:AppendToStringVariable}\": {",
+            "\t\"description\": \"$4\",",
+            "\t\"inputs\": {",
+            "\t\t\"name\": {$2},",
+            "\t\t\"value\": \"$3\"",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$5},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"AppendToStringVariable\"",
+            "}"
+        ],
+        "description": "The Append to String Variable action."
+    },
+    "Batch": {
+        "prefix": "batch",
+        "body": [
+            "\"${1:Batch}\": {",
+            "\t\"inputs\": {",
+            "\t\t\"configurations\": {",
+            "\t\t\t\"${3:default}\": {",
+            "\t\t\t\t\"releaseCriteria\": {",
+            "\t\t\t\t\t\"recurrence\": {",
+            "\t\t\t\t\t\t\"frequency\": \"${4|Hour,Second,Minute,Day,Week,Month,Year|}\",",
+            "\t\t\t\t\t\t\"interval\": ${5:1}",
+            "\t\t\t\t\t}",
+            "\t\t\t\t}",
+            "\t\t\t},",
+            "\t\t},",
+            "\t\t\"mode\": \"${2|Inline,IntegrationAccount|}\"",
+            "\t},",
+            "\t\"description\": \"$6\",",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$7},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Batch\"",
+            "}"
+        ],
+        "description": "The Batch trigger."
+    },
+    "Compose": {
+        "prefix": "compose",
+        "body": [
+            "\"${1:Compose}\": {",
+            "\t\"description\": \"$3\",",
+            "\t\"inputs\": {$2},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$4},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Compose\"",
+            "}"
+        ],
+        "description": "The Compose action."
+    },
+    "DecrementVariable": {
+        "prefix": "decrementvariable",
+        "body": [
+            "\"${1:DecrementVariable}\": {",
+            "\t\"description\": \"$4\",",
+            "\t\"inputs\": {",
+            "\t\t\"name\": \"$2\",",
+            "\t\t\"value\": ${3:1}",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$5},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"DecrementVariable\"",
+            "}"
+        ],
+        "description": "The Decrement Variable action."
+    },
+    "ExpressionAddToTime": {
+        "prefix": "addtotime",
+        "body": [
+            "\"${1:AddToTime}\": {",
+            "\t\"description\": \"$5\",",
+            "\t\"inputs\": {",
+            "\t\t\"baseTime\": \"$2\",",
+            "\t\t\"interval\": ${3:1},",
+            "\t\t\"timeUnit\": \"${4|Hour,Second,Minute,Week,Day,Month,Year|}\"",
+            "\t},",
+            "\t\"kind\": \"AddToTime\",",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$6},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Expression\"",
+            "}"
+        ],
+        "description": "The Add to Time action."
+    },
+    "ExpressionConvertTimeZone": {
+        "prefix": "converttimezone",
+        "body": [
+            "\"${1:ConvertTimeZone}\": {",
+            "\t\"description\": \"$6\",",
+            "\t\"inputs\": {",
+            "\t\t\"baseTime\": \"$2\",",
+            "\t\t\"destinationTimeZone\": \"${5|Dateline Standard Time,UTC-11,Aleutian Standard Time,Hawaiian Standard Time,Marquesas Standard Time,Alaskan Standard Time,UTC-09,Pacific Standard Time (Mexico),UTC-08,Pacific Standard Time,US Mountain Standard Time,Mountain Standard Time (Mexico),Mountain Standard Time,Central America Standard Time,Central Standard Time,Easter Island Standard Time,Central Standard Time (Mexico),Canada Central Standard Time,SA Pacific Standard Time,Eastern Standard Time (Mexico),Eastern Standard Time,Haiti Standard Time,Cuba Standard Time,US Eastern Standard Time,Paraguay Standard Time,Atlantic Standard Time,Venezuela Standard Time,Central Brazilian Standard Time,SA Western Standard Time,Pacific SA Standard Time,Turks And Caicos Standard Time,Newfoundland Standard Time,Tocantins Standard Time,E. South America Standard Time,SA Eastern Standard Time,Argentina Standard Time,Greenland Standard Time,Montevideo Standard Time,Saint Pierre Standard Time,Bahia Standard Time,UTC-02,Mid-Atlantic Standard Time,Azores Standard Time,Cape Verde Standard Time,UTC,Morocco Standard Time,GMT Standard Time,Greenwich Standard Time,W. Europe Standard Time,Central Europe Standard Time,Romance Standard Time,Central European Standard Time,W. Central Africa Standard Time,Namibia Standard Time,Jordan Standard Time,GTB Standard Time,Middle East Standard Time,Egypt Standard Time,E. Europe Standard Time,Syria Standard Time,West Bank Standard Time,South Africa Standard Time,FLE Standard Time,Turkey Standard Time,Israel Standard Time,Kaliningrad Standard Time,Libya Standard Time,Arabic Standard Time,Arab Standard Time,Belarus Standard Time,Russian Standard Time,E. Africa Standard Time,Iran Standard Time,Arabian Standard Time,Astrakhan Standard Time,Azerbaijan Standard Time,Russia Time Zone 3,Mauritius Standard Time,Georgian Standard Time,Caucasus Standard Time,Afghanistan Standard Time,West Asia Standard Time,Ekaterinburg Standard Time,Pakistan Standard Time,India Standard Time,Sri Lanka Standard Time,Nepal Standard Time,Central Asia Standard Time,Bangladesh Standard Time,N. Central Asia Standard Time,Myanmar Standard Time,SE Asia Standard Time,Altai Standard Time,W. Mongolia Standard Time,North Asia Standard Time,Tomsk Standard Time,China Standard Time,North Asia East Standard Time,Singapore Standard Time,W. Australia Standard Time,Taipei Standard Time,Ulaanbaatar Standard Time,North Korea Standard Time,Aus Central W. Standard Time,Transbaikal Standard Time,Tokyo Standard Time,Korea Standard Time,Yakutsk Standard Time,Cen. Australia Standard Time,AUS Central Standard Time,E. Australia Standard Time,AUS Eastern Standard Time,West Pacific Standard Time,Tasmania Standard Time,Vladivostok Standard Time,Lord Howe Standard Time,Bougainville Standard Time,Russia Time Zone 10,Magadan Standard Time,Norfolk Standard Time,Sakhalin Standard Time,Central Pacific Standard Time,Russia Time Zone 11,New Zealand Standard Time,UTC+12,Fiji Standard Time,Kamchatka Standard Time,Chatham Islands Standard Time,Tonga Standard Time,Samoa Standard Time,Line Islands Standard Time|}\",",
+            "\t\t\"formatString\": \"${3|d,D,f,F,g,G,m,o,r,s,t,T,u,U,y|}\",",
+            "\t\t\"sourceTimeZone\": \"${4|Dateline Standard Time,UTC-11,Aleutian Standard Time,Hawaiian Standard Time,Marquesas Standard Time,Alaskan Standard Time,UTC-09,Pacific Standard Time (Mexico),UTC-08,Pacific Standard Time,US Mountain Standard Time,Mountain Standard Time (Mexico),Mountain Standard Time,Central America Standard Time,Central Standard Time,Easter Island Standard Time,Central Standard Time (Mexico),Canada Central Standard Time,SA Pacific Standard Time,Eastern Standard Time (Mexico),Eastern Standard Time,Haiti Standard Time,Cuba Standard Time,US Eastern Standard Time,Paraguay Standard Time,Atlantic Standard Time,Venezuela Standard Time,Central Brazilian Standard Time,SA Western Standard Time,Pacific SA Standard Time,Turks And Caicos Standard Time,Newfoundland Standard Time,Tocantins Standard Time,E. South America Standard Time,SA Eastern Standard Time,Argentina Standard Time,Greenland Standard Time,Montevideo Standard Time,Saint Pierre Standard Time,Bahia Standard Time,UTC-02,Mid-Atlantic Standard Time,Azores Standard Time,Cape Verde Standard Time,UTC,Morocco Standard Time,GMT Standard Time,Greenwich Standard Time,W. Europe Standard Time,Central Europe Standard Time,Romance Standard Time,Central European Standard Time,W. Central Africa Standard Time,Namibia Standard Time,Jordan Standard Time,GTB Standard Time,Middle East Standard Time,Egypt Standard Time,E. Europe Standard Time,Syria Standard Time,West Bank Standard Time,South Africa Standard Time,FLE Standard Time,Turkey Standard Time,Israel Standard Time,Kaliningrad Standard Time,Libya Standard Time,Arabic Standard Time,Arab Standard Time,Belarus Standard Time,Russian Standard Time,E. Africa Standard Time,Iran Standard Time,Arabian Standard Time,Astrakhan Standard Time,Azerbaijan Standard Time,Russia Time Zone 3,Mauritius Standard Time,Georgian Standard Time,Caucasus Standard Time,Afghanistan Standard Time,West Asia Standard Time,Ekaterinburg Standard Time,Pakistan Standard Time,India Standard Time,Sri Lanka Standard Time,Nepal Standard Time,Central Asia Standard Time,Bangladesh Standard Time,N. Central Asia Standard Time,Myanmar Standard Time,SE Asia Standard Time,Altai Standard Time,W. Mongolia Standard Time,North Asia Standard Time,Tomsk Standard Time,China Standard Time,North Asia East Standard Time,Singapore Standard Time,W. Australia Standard Time,Taipei Standard Time,Ulaanbaatar Standard Time,North Korea Standard Time,Aus Central W. Standard Time,Transbaikal Standard Time,Tokyo Standard Time,Korea Standard Time,Yakutsk Standard Time,Cen. Australia Standard Time,AUS Central Standard Time,E. Australia Standard Time,AUS Eastern Standard Time,West Pacific Standard Time,Tasmania Standard Time,Vladivostok Standard Time,Lord Howe Standard Time,Bougainville Standard Time,Russia Time Zone 10,Magadan Standard Time,Norfolk Standard Time,Sakhalin Standard Time,Central Pacific Standard Time,Russia Time Zone 11,New Zealand Standard Time,UTC+12,Fiji Standard Time,Kamchatka Standard Time,Chatham Islands Standard Time,Tonga Standard Time,Samoa Standard Time,Line Islands Standard Time|}\"",
+            "\t},",
+            "\t\"kind\": \"ConvertTimeZone\",",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$7},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Expression\"",
+            "}"
+        ],
+        "description": "The Convert Time Zone action."
+    },
+    "ExpressionCurrentTime": {
+        "prefix": "currenttime",
+        "body": [
+            "\"${1:CurrentTime}\": {",
+            "\t\"description\": \"$2\",",
+            "\t\"inputs\": {},",
+            "\t\"kind\": \"CurrentTime\",",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$3},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Expression\"",
+            "}"
+        ],
+        "description": "The Current Time action."
+    },
+    "ExpressionGetFutureTime": {
+        "prefix": "getfuturetime",
+        "body": [
+            "\"${1:GetFutureTime}\": {",
+            "\t\"description\": \"$4\",",
+            "\t\"inputs\": {",
+            "\t\t\"interval\": ${2:1},",
+            "\t\t\"timeUnit\": \"${3|Hour,Second,Minute,Week,Day,Month,Year|}\"",
+            "\t},",
+            "\t\"kind\": \"GetFutureTime\",",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$5},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Expression\"",
+            "}"
+        ],
+        "description": "The Get Future Time action."
+    },
+    "ExpressionGetPastTime": {
+        "prefix": "getpasttime",
+        "body": [
+            "\"${1:GetPastTime}\": {",
+            "\t\"description\": \"$4\",",
+            "\t\"inputs\": {",
+            "\t\t\"interval\": ${2:1},",
+            "\t\t\"timeUnit\": \"${3|Hour,Second,Minute,Week,Day,Month,Year|}\"",
+            "\t},",
+            "\t\"kind\": \"GetPastTime\",",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$5},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Expression\"",
+            "}"
+        ],
+        "description": "The Get Past Time action."
+    },
+    "ExpressionSubtractFromTime": {
+        "prefix": "subtractfromtime",
+        "body": [
+            "\"${1:SubtractFromTime}\": {",
+            "\t\"description\": \"$5\",",
+            "\t\"inputs\": {",
+            "\t\t\"baseTime\": \"$2\",",
+            "\t\t\"interval\": ${3:1},",
+            "\t\t\"timeUnit\": \"${4|Hour,Second,Minute,Week,Day,Month,Year|}\"",
+            "\t},",
+            "\t\"kind\": \"SubtractFromTime\",",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$6},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Expression\"",
+            "}"
+        ],
+        "description": "The Subtract from Time action."
+    },
+    "FlatFileDecoding": {
+        "prefix": "flatfiledecoding",
+        "body": [
+            "\"${1:FlatFileDecoding}\": {",
+            "\t\"description\": \"$4\",",
+            "\t\"inputs\": {",
+            "\t\t\"content\": \"$2\",",
+            "\t\t\"integrationAccount\": {",
+            "\t\t\t\"schema\": {",
+            "\t\t\t\t\"name\": \"$3\"",
+            "\t\t\t}",
+            "\t\t}",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$5},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"FlatFileDecoding\"",
+            "}"
+        ],
+        "description": "The Flat File Decoding action."
+    },
+    "FlatFileEncoding": {
+        "prefix": "flatfileencoding",
+        "body": [
+            "\"${1:FlatFileEncoding}\": {",
+            "\t\"description\": \"$5\",",
+            "\t\"inputs\": {",
+            "\t\t\"content\": \"$2\",",
+            "\t\t\"emptyNodeGenerationMode\": \"${3|ForcedDisabled,HonorSchemaNodeProperty,ForcedEnabled|}\",",
+            "\t\t\"integrationAccount\": {",
+            "\t\t\t\"schema\": {",
+            "\t\t\t\t\"name\": \"$4\"",
+            "\t\t\t}",
+            "\t\t}",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$6},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"FlatFileEncoding\"",
+            "}"
+        ],
+        "description": "The Flat File Encoding action."
+    },
+    "Foreach": {
+        "prefix": "foreach",
+        "body": [
+            "\"${1:Foreach}\": {",
+            "\t\"actions\": {$3},",
+            "\t\"description\": \"$4\",",
+            "\t\"foreach\": \"$2\",",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$5},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Foreach\"",
+            "}"
+        ],
+        "description": "The For Each scope action."
+    },
+    "Function": {
+        "prefix": "function",
+        "body": [
+            "\"${1:Function}\": {",
+            "\t\"description\": \"$7\",",
+            "\t\"inputs\": {",
+            "\t\t\"body\": {$2},",
+            "\t\t\"function\": {",
+            "\t\t\t\"id\": \"$3\"",
+            "\t\t},",
+            "\t\t\"headers\": {$4},",
+            "\t\t\"method\": \"${5|GET,HEAD,POST,PUT,DELETE,HEADER,OPTIONS,PATCH,TRACE|}\",",
+            "\t\t\"queries\": {$6}",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$8},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Function\"",
+            "}"
+        ],
+        "description": "The Azure Function action."
+    },
+    "FunctionSwagger": {
+        "prefix": "swaggerfunction",
+        "body": [
+            "\"${1:SwaggerFunction}\": {",
+            "\t\"description\": \"$8\",",
+            "\t\"inputs\": {",
+            "\t\t\"body\": {$2},",
+            "\t\t\"functionApp\": {",
+            "\t\t\t\"id\": \"$3\"",
+            "\t\t},",
+            "\t\t\"headers\": {$4},",
+            "\t\t\"method\": \"${5|GET,HEAD,POST,PUT,DELETE,HEADER,OPTIONS,PATCH,TRACE|}\",",
+            "\t\t\"queries\": {$6},",
+            "\t\t\"uri\": \"$7\"",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$9},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Function\"",
+            "}"
+        ],
+        "description": "The Azure Function Swagger action."
+    },
+    "Http": {
+        "prefix": "http",
+        "body": [
+            "\"${1:Http}\": {",
+            "\t\"description\": \"$9\",",
+            "\t\"inputs\": {",
+            "\t\t\"authentication\": {$8},",
+            "\t\t\"body\": {$6},",
+            "\t\t\"cookie\": \"$7\",",
+            "\t\t\"headers\": {$4},",
+            "\t\t\"method\": \"${2|GET,HEAD,POST,PUT,DELETE,HEADER,OPTIONS,PATCH,TRACE|}\",",
+            "\t\t\"queries\": {$5},",
+            "\t\t\"uri\": \"$3\"",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$10},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Http\"",
+            "}"
+            ],
+        "description": "The HTTP operation."
+    },
+    "HttpWebhook": {
+        "prefix": "httpwebhook",
+        "body": [
+            "\"${1:HttpWebhook}\": {",
+            "\t\"description\": \"$16\",",
+            "\t\"inputs\": {",
+            "\t\t\"subscribe\": {",
+            "\t\t\t\"authentication\": {$8},",
+            "\t\t\t\"body\": {$6},",
+            "\t\t\t\"cookie\": \"$7\",",
+            "\t\t\t\"headers\": {$4},",
+            "\t\t\t\"method\": \"${2|GET,HEAD,POST,PUT,DELETE,HEADER,OPTIONS,PATCH,TRACE|}\",",
+            "\t\t\t\"queries\": {$5},",
+            "\t\t\t\"uri\": \"$3\"",
+            "\t\t},",
+            "\t\t\"unsubscribe\": {",
+            "\t\t\t\"authentication\": {$15},",
+            "\t\t\t\"body\": {$13},",
+            "\t\t\t\"cookie\": \"$14\",",
+            "\t\t\t\"headers\": {$11},",
+            "\t\t\t\"method\": \"${9|GET,HEAD,POST,PUT,DELETE,HEADER,OPTIONS,PATCH,TRACE|}\",",
+            "\t\t\t\"queries\": {$12},",
+            "\t\t\t\"uri\": \"$10\"",
+            "\t\t}",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$17},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"HttpWebhook\"",
+            "}"
+        ],
+        "description": "The HTTP webhook operation."
+    },
+    "IfNew": {
+        "prefix": "ifnew",
+        "body": [
+            "\"${1:If}\": {",
+            "\t\"actions\": {$3},",
+            "\t\"else\": {",
+            "\t\t\"actions\": {$4}",
+            "\t},",
+            "\t\"description\": \"$5\",",
+            "\t\"expression\": {",
+            "\t\t\"and\": [",
+            "\t\t\t{",
+            "\t\t\t\t\"equals\": [",
+            "\t\t\t\t\t\"$2\",",
+            "\t\t\t\t\t\"\"",
+            "\t\t\t\t]",
+            "\t\t\t}",
+            "\t\t]",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$5},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"If\"",
+            "}"
+        ],
+        "description": "The If scope operation."
+    },
+    "If": {
+        "prefix": "if",
+        "body": [
+            "\"${1:If}\": {",
+            "\t\"actions\": {$3},",
+            "\t\"else\": {",
+            "\t\t\"actions\": {$4}",
+            "\t},",
+            "\t\"description\": \"$5\",",
+            "\t\"expression\": \"$2\",",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$6},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"If\"",
+            "}"
+        ],
+        "description": "The If scope operation."
+    },
+    "IncrementVariable": {
+        "prefix": "incrementvariable",
+        "body": [
+            "\"${1:IncrementVariable}\": {",
+            "\t\"description\": \"$4\",",
+            "\t\"inputs\": {",
+            "\t\t\"name\": \"$2\",",
+            "\t\t\"value\": ${3:1}",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$5},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"IncrementVariable\"",
+            "}"
+        ],
+        "description": "The Increment Variable action."
+    },
+    "InitializeVariable": {
+        "prefix": "initializevariable",
+        "body": [
+            "\"${1:InitializeVariable}\": {",
+            "\t\"description\": \"$5\",",
+            "\t\"inputs\": {",
+            "\t\t\"variables\": [",
+            "\t\t\t{",
+            "\t\t\t\t\"name\": \"$2\",",
+            "\t\t\t\t\"type\": \"${3|Boolean,Integer,Float,String,Object,Array|}\",",
+            "\t\t\t\t\"value\": \"$4\"",
+            "\t\t\t}",
+            "\t\t]",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$6},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"InitializeVariable\"",
+            "}"
+        ],
+        "description": "The Initialize Variable action."
+    },
+    "IntegrationAccountArtifactLookup": {
+        "prefix": "integrationaccountartifactlookup",
+        "body": [
+            "\"${1:IntegrationAccountArtifactLookup}\": {",
+            "\t\"description\": \"$4\",",
+            "\t\"inputs\": {",
+            "\t\t\"artifactName\": \"$3\",",
+            "\t\t\"artifactType\": \"${2|Schema,Map,Partner,Agreement|}\"",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$5},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"IntegrationAccountArtifactLookup\"",
+            "}"
+        ],
+        "description": "The Integration Account Artifact Lookup action."
+    },
+    "Join": {
+        "prefix": "join",
+        "body": [
+            "\"${1:Join}\": {",
+            "\t\"description\": \"$4\",",
+            "\t\"inputs\": {",
+            "\t\t\"from\": \"$2\",",
+            "\t\t\"joinWith\": \"$3\"",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$5},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Join\"",
+            "}"
+        ],
+        "description": "The Join action."
+    },
+    "Liquid": {
+        "prefix": "liquid",
+        "body": [
+            "\"${1:Liquid}\": {",
+            "\t\"description\": \"$4\",",
+            "\t\"inputs\": {",
+            "\t\t\"content\": \"$2\",",
+            "\t\t\"integrationAccount\": {",
+            "\t\t\t\"map\": {",
+            "\t\t\t\t\"name\": \"$3\"",
+            "\t\t\t}",
+            "\t\t}",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$5},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Liquid\"",
+            "}"
+        ],
+        "description": "The Liquid action."
+    },
+    "ParseJson": {
+        "prefix": "parsejson",
+        "body": [
+            "\"${1:ParseJson}\": {",
+            "\t\"description\": \"$4\",",
+            "\t\"inputs\": {",
+            "\t\t\"content\": \"$2\",",
+            "\t\t\"schema\": {$3}",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$5},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"ParseJson\"",
+            "}"
+        ],
+        "description": "The Parse JSON action."
+    },
+    "Query": {
+        "prefix": "filterarray",
+        "body": [
+            "\"${1:Query}\": {",
+            "\t\"description\": \"$4\",",
+            "\t\"inputs\": {",
+            "\t\t\"from\": \"$2\",",
+            "\t\t\"where\": \"$3\"",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$5},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Query\"",
+            "}"
+        ],
+        "description": "The Filter Array action."
+    },
+    "Recurrence": {
+        "prefix": "recurrence",
+        "body": [
+            "\"${1:Recurrence}\": {",
+            "\t\"description\": \"$10\",",
+            "\t\"metadata\": {},",
+            "\t\"recurrence\": {",
+            "\t\t\"frequency\": \"${2|Minute,Second,Hour,Day,Week,Month,Year|}\",",
+            "\t\t\"interval\": ${3:3},",
+            "\t\t\"startTime\": \"$4\",",
+            "\t\t\"endTime\": \"$5\",",
+            "\t\t\"timeZone\": \"${6|Dateline Standard Time,UTC-11,Aleutian Standard Time,Hawaiian Standard Time,Marquesas Standard Time,Alaskan Standard Time,UTC-09,Pacific Standard Time (Mexico),UTC-08,Pacific Standard Time,US Mountain Standard Time,Mountain Standard Time (Mexico),Mountain Standard Time,Central America Standard Time,Central Standard Time,Easter Island Standard Time,Central Standard Time (Mexico),Canada Central Standard Time,SA Pacific Standard Time,Eastern Standard Time (Mexico),Eastern Standard Time,Haiti Standard Time,Cuba Standard Time,US Eastern Standard Time,Paraguay Standard Time,Atlantic Standard Time,Venezuela Standard Time,Central Brazilian Standard Time,SA Western Standard Time,Pacific SA Standard Time,Turks And Caicos Standard Time,Newfoundland Standard Time,Tocantins Standard Time,E. South America Standard Time,SA Eastern Standard Time,Argentina Standard Time,Greenland Standard Time,Montevideo Standard Time,Saint Pierre Standard Time,Bahia Standard Time,UTC-02,Mid-Atlantic Standard Time,Azores Standard Time,Cape Verde Standard Time,UTC,Morocco Standard Time,GMT Standard Time,Greenwich Standard Time,W. Europe Standard Time,Central Europe Standard Time,Romance Standard Time,Central European Standard Time,W. Central Africa Standard Time,Namibia Standard Time,Jordan Standard Time,GTB Standard Time,Middle East Standard Time,Egypt Standard Time,E. Europe Standard Time,Syria Standard Time,West Bank Standard Time,South Africa Standard Time,FLE Standard Time,Turkey Standard Time,Israel Standard Time,Kaliningrad Standard Time,Libya Standard Time,Arabic Standard Time,Arab Standard Time,Belarus Standard Time,Russian Standard Time,E. Africa Standard Time,Iran Standard Time,Arabian Standard Time,Astrakhan Standard Time,Azerbaijan Standard Time,Russia Time Zone 3,Mauritius Standard Time,Georgian Standard Time,Caucasus Standard Time,Afghanistan Standard Time,West Asia Standard Time,Ekaterinburg Standard Time,Pakistan Standard Time,India Standard Time,Sri Lanka Standard Time,Nepal Standard Time,Central Asia Standard Time,Bangladesh Standard Time,N. Central Asia Standard Time,Myanmar Standard Time,SE Asia Standard Time,Altai Standard Time,W. Mongolia Standard Time,North Asia Standard Time,Tomsk Standard Time,China Standard Time,North Asia East Standard Time,Singapore Standard Time,W. Australia Standard Time,Taipei Standard Time,Ulaanbaatar Standard Time,North Korea Standard Time,Aus Central W. Standard Time,Transbaikal Standard Time,Tokyo Standard Time,Korea Standard Time,Yakutsk Standard Time,Cen. Australia Standard Time,AUS Central Standard Time,E. Australia Standard Time,AUS Eastern Standard Time,West Pacific Standard Time,Tasmania Standard Time,Vladivostok Standard Time,Lord Howe Standard Time,Bougainville Standard Time,Russia Time Zone 10,Magadan Standard Time,Norfolk Standard Time,Sakhalin Standard Time,Central Pacific Standard Time,Russia Time Zone 11,New Zealand Standard Time,UTC+12,Fiji Standard Time,Kamchatka Standard Time,Chatham Islands Standard Time,Tonga Standard Time,Samoa Standard Time,Line Islands Standard Time|}\",",
+            "\t\t\"schedule\": {",
+            "\t\t\t\"hours\": [$7],",
+            "\t\t\t\"minutes\": [$8],",
+            "\t\t\t\"weekDays\": [$9]",
+            "\t\t}",
+            "\t},",
+            "\t\"type\": \"Recurrence\"",
+            "}"
+        ],
+        "description": "The Recurrence trigger."
+    },
+    "Request": {
+        "prefix": "request",
+        "body": [
+            "\"${1:Request}\": {",
+            "\t\"description\": \"$6\",",
+            "\t\"kind\": \"Http\",",
+            "\t\"metadata\": {},",
+            "\t\"inputs\": {",
+            "\t\t\"method\": \"${2|POST,GET,PUT,DELETE,HEAD,OPTIONS,PATCH,TRACE|}\",",
+            "\t\t\"relativePath\": \"$3\",",
+            "\t\t\"schema\": {$4}",
+            "\t},",
+            "\t\"operationOptions\": \"$5\",",
+            "\t\"type\": \"Request\"",
+            "}"
+        ],
+        "description": "The Request trigger."
+    },
+    "Response": {
+        "prefix": "response",
+        "body": [
+            "\"${1:Response}\": {",
+            "\t\"description\": \"$5\",",
+            "\t\"inputs\": {",
+            "\t\t\"body\": {$2},",
+            "\t\t\"headers\": {$3},",
+            "\t\t\"statusCode\": ${4:200}",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$6},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Response\"",
+            "}"
+        ],
+        "description": "The Response action."
+    },
+    "Scope": {
+        "prefix": "scope",
+        "body": [
+            "\"${1:Scope}\": {",
+            "\t\"actions\": {$2},",
+            "\t\"description\": \"$3\",",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$4},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Scope\"",
+            "}"
+        ],
+        "description": "The Scope action."
+    },
+    "Select": {
+        "prefix": "select",
+        "body": [
+            "\"${1:Select}\": {",
+            "\t\"description\": \"$4\",",
+            "\t\"inputs\": {",
+            "\t\t\"from\": \"$2\",",
+            "\t\t\"select\": \"$3\"",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$5},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Select\"",
+            "}"
+        ],
+        "description": "The Select action."
+    },
+    "SlidingWindow": {
+        "prefix": "slidingwindow",
+        "body": [
+            "\"${1:SlidingWindow}\": {",
+            "\t\"description\": \"$11\",",
+            "\t\"inputs\": {",
+            "\t\t\"delay\": \"$2\"",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"recurrence\": {",
+            "\t\t\"frequency\": \"${3|Minute,Second,Hour,Day,Week,Month,Year|}\",",
+            "\t\t\"interval\": ${4:3},",
+            "\t\t\"startTime\": \"$5\",",
+            "\t\t\"endTime\": \"$6\",",
+            "\t\t\"timeZone\": \"${7|Dateline Standard Time,UTC-11,Aleutian Standard Time,Hawaiian Standard Time,Marquesas Standard Time,Alaskan Standard Time,UTC-09,Pacific Standard Time (Mexico),UTC-08,Pacific Standard Time,US Mountain Standard Time,Mountain Standard Time (Mexico),Mountain Standard Time,Central America Standard Time,Central Standard Time,Easter Island Standard Time,Central Standard Time (Mexico),Canada Central Standard Time,SA Pacific Standard Time,Eastern Standard Time (Mexico),Eastern Standard Time,Haiti Standard Time,Cuba Standard Time,US Eastern Standard Time,Paraguay Standard Time,Atlantic Standard Time,Venezuela Standard Time,Central Brazilian Standard Time,SA Western Standard Time,Pacific SA Standard Time,Turks And Caicos Standard Time,Newfoundland Standard Time,Tocantins Standard Time,E. South America Standard Time,SA Eastern Standard Time,Argentina Standard Time,Greenland Standard Time,Montevideo Standard Time,Saint Pierre Standard Time,Bahia Standard Time,UTC-02,Mid-Atlantic Standard Time,Azores Standard Time,Cape Verde Standard Time,UTC,Morocco Standard Time,GMT Standard Time,Greenwich Standard Time,W. Europe Standard Time,Central Europe Standard Time,Romance Standard Time,Central European Standard Time,W. Central Africa Standard Time,Namibia Standard Time,Jordan Standard Time,GTB Standard Time,Middle East Standard Time,Egypt Standard Time,E. Europe Standard Time,Syria Standard Time,West Bank Standard Time,South Africa Standard Time,FLE Standard Time,Turkey Standard Time,Israel Standard Time,Kaliningrad Standard Time,Libya Standard Time,Arabic Standard Time,Arab Standard Time,Belarus Standard Time,Russian Standard Time,E. Africa Standard Time,Iran Standard Time,Arabian Standard Time,Astrakhan Standard Time,Azerbaijan Standard Time,Russia Time Zone 3,Mauritius Standard Time,Georgian Standard Time,Caucasus Standard Time,Afghanistan Standard Time,West Asia Standard Time,Ekaterinburg Standard Time,Pakistan Standard Time,India Standard Time,Sri Lanka Standard Time,Nepal Standard Time,Central Asia Standard Time,Bangladesh Standard Time,N. Central Asia Standard Time,Myanmar Standard Time,SE Asia Standard Time,Altai Standard Time,W. Mongolia Standard Time,North Asia Standard Time,Tomsk Standard Time,China Standard Time,North Asia East Standard Time,Singapore Standard Time,W. Australia Standard Time,Taipei Standard Time,Ulaanbaatar Standard Time,North Korea Standard Time,Aus Central W. Standard Time,Transbaikal Standard Time,Tokyo Standard Time,Korea Standard Time,Yakutsk Standard Time,Cen. Australia Standard Time,AUS Central Standard Time,E. Australia Standard Time,AUS Eastern Standard Time,West Pacific Standard Time,Tasmania Standard Time,Vladivostok Standard Time,Lord Howe Standard Time,Bougainville Standard Time,Russia Time Zone 10,Magadan Standard Time,Norfolk Standard Time,Sakhalin Standard Time,Central Pacific Standard Time,Russia Time Zone 11,New Zealand Standard Time,UTC+12,Fiji Standard Time,Kamchatka Standard Time,Chatham Islands Standard Time,Tonga Standard Time,Samoa Standard Time,Line Islands Standard Time|}\",",
+            "\t\t\"schedule\": {",
+            "\t\t\t\"hours\": [$8],",
+            "\t\t\t\"minutes\": [$9],",
+            "\t\t\t\"weekDays\": [$10]",
+            "\t\t}",
+            "\t},",
+            "\t\"type\": \"SlidingWindow\"",
+            "}"
+        ],
+        "description": "The Sliding Window trigger."
+    },
+    "Switch": {
+        "prefix": "switch",
+        "body": [
+            "\"${1:Switch}\": {",
+            "\t\"cases\": {",
+            "\t\t\"$3\": {",
+            "\t\t\t\"actions\": {$5},",
+            "\t\t\t\"case\": \"${4}\"",
+            "\t\t}",
+            "\t},",
+            "\t\"default\": {",
+            "\t\t\"actions\": {$6}",
+            "\t},",
+            "\t\"description\": \"$7\",",
+            "\t\"expression\": \"$2\",",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$8},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Switch\"",
+            "}"
+        ],
+        "description": "The Switch scope action."
+    },
+    "TableCSV": {
+        "prefix": "csvtable",
+        "body": [
+            "\"${1:CsvTable}\": {",
+            "\t\"description\": \"$4\",",
+            "\t\"inputs\": {",
+            "\t\t\"columns\": [",
+            "\t\t\t{",
+            "\t\t\t\t\"header\": \"$3\",",
+            "\t\t\t\t\"value\": \"@item()\"",
+            "\t\t\t}",
+            "\t\t],",
+            "\t\t\"format\": \"CSV\",",
+            "\t\t\"from\": \"$2\"",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$5},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Table\"",
+            "}"
+        ],
+        "description": "The CSV Table action."
+    },
+    "TableHTML": {
+        "prefix": "htmltable",
+        "body": [
+            "\"${1:HtmlTable}\": {",
+            "\t\"description\": \"$4\",",
+            "\t\"inputs\": {",
+            "\t\t\"columns\": [",
+            "\t\t\t{",
+            "\t\t\t\t\"header\": \"$3\",",
+            "\t\t\t\t\"value\": \"@item()\"",
+            "\t\t\t}",
+            "\t\t],",
+            "\t\t\"format\": \"HTML\",",
+            "\t\t\"from\": \"$2\"",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$5},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Table\"",
+            "}"
+        ],
+        "description": "The HTML Table action."
+    },
+    "Terminate": {
+        "prefix": "terminate",
+        "body": [
+            "\"${1:Terminate}\": {",
+            "\t\"description\": \"$5\",",
+            "\t\"inputs\": {",
+            "\t\t\"runError\": {",
+            "\t\t\t\"code\": \"$3\",",
+            "\t\t\t\"message\": \"$4\"",
+            "\t\t},",
+            "\t\t\"runStatus\": \"${2|Failed,Succeeded,Cancelled|}\"",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$6},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Terminate\"",
+            "}"
+        ],
+        "description": "The Terminate action."
+    },
+    "Until": {
+        "prefix": "until",
+        "body": [
+            "\"${1:Until}\": {",
+            "\t\"actions\": {$3},",
+            "\t\"description\": \"$6\",",
+            "\t\"expression\": \"$2\",",
+            "\t\"limit\": {",
+            "\t\t\"count\": ${4:60},",
+            "\t\t\"timeout\": \"${5:PT1H}\"",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$7},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Until\"",
+            "}"
+        ],
+        "description": "The Until scope action."
+    },
+    "WaitInterval": {
+        "prefix": "delay",
+        "body": [
+            "\"${1:Delay}\": {",
+            "\t\"description\": \"$4\",",
+            "\t\"inputs\": {",
+            "\t\t\"interval\": {",
+            "\t\t\t\"count\": ${2:1},",
+            "\t\t\t\"unit\": \"${3|Minute,Second,Hour,Day,Week,Month,Year|}\"",
+            "\t\t}",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$5},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Wait\"",
+            "}"
+        ],
+        "description": "The Delay action."
+    },
+    "WaitUntil": {
+        "prefix": "delayuntil",
+        "body": [
+            "\"${1:DelayUntil}\": {",
+            "\t\"description\": \"$3\",",
+            "\t\"inputs\": {",
+            "\t\t\"until\": {",
+            "\t\t\t\"timestamp\": \"${2}\"",
+            "\t\t}",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$4},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Wait\"",
+            "}"
+        ],
+        "description": "The Delay Until action."
+    },
+    "Workflow": {
+        "prefix": "workflow",
+        "body": [
+            "\"${1:Workflow}\": {",
+            "\t\"description\": \"$6\",",
+            "\t\"inputs\": {",
+            "\t\t\"body\": {$4},",
+            "\t\t\"headers\": {$5},",
+            "\t\t\"host\": {",
+            "\t\t\t\"triggerName\": \"$3\",",
+            "\t\t\t\"workflow\": {",
+            "\t\t\t\t\"id\": \"$2\"",
+            "\t\t\t}",
+            "\t\t}",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$7},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Workflow\"",
+            "}"
+        ],
+        "description": "The Nested Workflow action."
+    },
+    "XmlValidation": {
+        "prefix": "xmlvalidation",
+        "body": [
+            "\"${1:XmlValidation}\": {",
+            "\t\"description\": \"$4\",",
+            "\t\"inputs\": {",
+            "\t\t\"content\": \"$2\",",
+            "\t\t\"integrationAccount\": {",
+            "\t\t\t\"schema\": {",
+            "\t\t\t\t\"name\": \"$3\"",
+            "\t\t\t}",
+            "\t\t}",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$5},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"XmlValidation\"",
+            "}"
+        ],
+        "description": "The XML Validation action."
+    },
+    "Xslt": {
+        "prefix": "xslt",
+        "body": [
+            "\"${1:Xslt}\": {",
+            "\t\"description\": \"$4\",",
+            "\t\"inputs\": {",
+            "\t\t\"content\": \"$2\",",
+            "\t\t\"integrationAccount\": {",
+            "\t\t\t\"map\": {",
+            "\t\t\t\t\"name\": \"$3\"",
+            "\t\t\t}",
+            "\t\t}",
+            "\t},",
+            "\t\"metadata\": {},",
+            "\t\"runAfter\": {$5},",
+            "\t\"trackedProperties\": {},",
+            "\t\"type\": \"Xslt\"",
+            "}"
+        ],
+        "description": "The Transform XML action."
+    }
+}

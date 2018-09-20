@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     width="50px" height="50px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
+  <polygon fill="#804998" points="30,6.8 25.2,2 23.2,0 23,0 0,0 0,50 32,50 32,9 32,8.8 " />
+  <polygon opacity="0.8" fill="#FFFFFF" enable-background="new    " points="23,2 2,2 2,48 30,48 30,9 23,9 " />
+  <polygon fill="#59B4D9" points="48,6.8 43.2,2 41.2,0 41,0 18,0 18,50 50,50 50,9 50,8.8 " />
+  <polygon opacity="0.8" fill="#FFFFFF" enable-background="new    " points="41,2 20,2 20,48 48,48 48,9 41,9 " />
+  <polygon fill="#804998" points="28.6,24 23.7,18.8 27.6,18.8 34.2,25.5 27.7,32.2 23.7,32.2 28.6,27.1 6.7,27.1 6.7,24 " />
+</svg>
