@@ -35,6 +35,7 @@ import { IntegrationAccountSchemasTreeItem } from "./tree/integration-account/In
 import { IntegrationAccountProvider } from "./tree/integration-account/IntegrationAccountsProvider";
 import { LogicAppsProvider } from "./tree/logic-app/LogicAppsProvider";
 import { createChildNode } from "./utils/commandUtils";
+import { getTriggerUrl } from "./commands/logic-app/getTriggerUrl";
 
 export async function activate(context: vscode.ExtensionContext): Promise<void> {
     registerUIExtensionVariables(ext);
@@ -126,6 +127,10 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
 
         registerCommand("azureLogicApps.runTrigger", async (node?: IAzureNode) => {
             await runTrigger(tree, node);
+        });
+
+        registerCommand("azureLogicApps.getTriggerUrl", async (node?: IAzureNode) => {
+            await getTriggerUrl(tree, node);
         });
 
         registerCommand("azureLogicApps.selectSubscriptions", () => {
