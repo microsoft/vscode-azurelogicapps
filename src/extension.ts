@@ -69,7 +69,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         context.subscriptions.push(logicAppEditor);
 
         registerCommand("azureLogicApps.createLogicApp", async (node: IAzureParentNode) => {
-            await createLogicApp(tree, node);
+            await createLogicApp(tree, logicAppEditor, node);
         });
 
         registerCommand("azureLogicApps.deleteLogicApp", async (node: IAzureNode) => {
