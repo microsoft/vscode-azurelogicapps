@@ -29,7 +29,7 @@
     ],
     "preview": true,
     "activationEvents": [
-        "onCommand:azureLogicApps.createLogicApps",
+        "onCommand:azureLogicApps.createLogicApp",
         "onCommand:azureLogicApps.deleteLogicApp",
         "onCommand:azureLogicApps.disableLogicApp",
         "onCommand:azureLogicApps.enableLogicApp",
