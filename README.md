@@ -2,12 +2,13 @@
 
 [![Version](https://vsmarketplacebadge.apphb.com/version/ms-azuretools.vscode-logicapps.svg)](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-logicapps) [![Installs](https://vsmarketplacebadge.apphb.com/installs/ms-azuretools.vscode-logicapps.svg)](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-logicapps) [![Rating](https://vsmarketplacebadge.apphb.com/rating-star/ms-azuretools.vscode-logicapps.svg)](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-logicapps#review-details)
 
-
 Azure Logic Apps simplifies how you build automated scalable workflows that integrate apps and data across cloud services and on-premises systems.
 
 Use the Azure Logic Apps extension for VS Code to quickly create, debug, and manage Azure Logic Apps and Integration Accounts.
 
 ## Requirements
+
+You must have Visual Studio Code 1.25.1 (July 2018) or later to install the extension.
 
 All you need is an Azure Subscription to get started. If you don't have one, [click here](https://azure.microsoft.com/en-us/free/) for a free subscription with $200 in Azure credits!
 
