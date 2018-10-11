@@ -574,6 +574,19 @@
         ],
         "description": "The Liquid action."
     },
+    "Parameter": {
+        "prefix": "parameter",
+        "body": [
+            "\"${1:parameter}\": {",
+            "\t\"allowedValues\": [$4],",
+            "\t\"defaultValue\": \"$3\",",
+            "\t\"description\": \"$5\",",
+            "\t\"metadata\": {},",
+            "\t\"type\": \"${2|string,array,bool,float,int,object,secureobject,securestring|}\"",
+            "}"
+        ],
+        "description": "A Logic App parameter."
+    },
     "ParseJson": {
         "prefix": "parsejson",
         "body": [
