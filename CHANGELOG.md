@@ -3,6 +3,15 @@ All notable changes to the "vscode-logicapps" extension will be documented in th
 
 ## [Unreleased]
 
+## [0.1.1] - 2018-10-31
+### Added
+- #47 - Add parameter snippet
+
+### Fixed
+- #34 - Open editor after creating a Logic App
+- #35 - Update README with minimum version requirement
+- #43 - Fix "command 'azureLogicApps.createLogicApp' not found" error
+
 ## [0.1.0] - 2018-09-17
 ### Added
 - Integration Accounts
