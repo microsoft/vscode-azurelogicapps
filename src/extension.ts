@@ -14,11 +14,13 @@ import { createLogicApp } from "./commands/logic-app/createLogicApp";
 import { deleteLogicApp } from "./commands/logic-app/deleteLogicApp";
 import { disableLogicApp } from "./commands/logic-app/disableLogicApp";
 import { enableLogicApp } from "./commands/logic-app/enableLogicApp";
+import { openInDesigner } from "./commands/logic-app/openInDesigner";
 import { openInEditor } from "./commands/logic-app/openInEditor";
 import { openInPortal } from "./commands/logic-app/openInPortal";
 import { openRunActionInEditor } from "./commands/logic-app/openRunActionInEditor";
 import { openRunInEditor } from "./commands/logic-app/openRunInEditor";
 import { openTriggerInEditor } from "./commands/logic-app/openTriggerInEditor";
+import { openVersionInDesigner} from "./commands/logic-app/openVersionInDesigner";
 import { openVersionInEditor } from "./commands/logic-app/openVersionInEditor";
 import { promoteVersion } from "./commands/logic-app/promoteVersion";
 import { resubmitRun } from "./commands/logic-app/resubmitRun";
@@ -88,6 +90,10 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             await tree.loadMore(node);
         });
 
+        registerCommand("azureLogicApps.openInDesigner", async (node?: IAzureNode) => {
+            await openInDesigner(tree, node);
+        });
+
         registerCommand("azureLogicApps.openInEditor", async (node?: IAzureNode) => {
             await openInEditor(tree, logicAppEditor, node);
         });
@@ -106,6 +112,10 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
 
         registerCommand("azureLogicApps.openTriggerInEditor", async (node?: IAzureNode) => {
             await openTriggerInEditor(tree, node);
+        });
+
+        registerCommand("azureLogicApps.openVersionInDesigner", async (node?: IAzureNode) => {
+            await openVersionInDesigner(tree, node);
         });
 
         registerCommand("azureLogicApps.openVersionInEditor", async (node?: IAzureNode) => {

@@ -4,8 +4,9 @@
  *--------------------------------------------------------------------------------------------*/
 
 import LogicAppsManagementClient from "azure-arm-logic";
-import { Workflow, WorkflowVersion } from "azure-arm-logic/lib/models";
+import { Sku, Workflow, WorkflowVersion } from "azure-arm-logic/lib/models";
 import { IAzureTreeItem } from "vscode-azureextensionui";
+import { ConnectionReferences, getConnectionReferencesForLogicAppVersion } from "../../utils/logic-app/connectionReferenceUtils";
 import * as nodeUtils from "../../utils/nodeUtils";
 
 export class LogicAppVersionTreeItem implements IAzureTreeItem {
@@ -27,12 +28,25 @@ export class LogicAppVersionTreeItem implements IAzureTreeItem {
         return this.workflowVersion.id!;
     }
 
+    public get integrationAccountId(): string | undefined {
+        const { integrationAccount } = this.workflowVersion;
+        return integrationAccount !== undefined ? integrationAccount.id : undefined;
+    }
+
     public get label(): string {
         return this.workflowVersion.name!;
     }
 
+    public get location(): string {
+        return this.workflowVersion.location!;
+    }
+
     public get resourceGroupName(): string {
         return this.workflow.id!.split("/").slice(-5, -4)[0];
+    }
+
+    public get sku(): Sku | undefined {
+        return this.workflow.sku;
     }
 
     public get workflowName(): string {
@@ -41,6 +55,10 @@ export class LogicAppVersionTreeItem implements IAzureTreeItem {
 
     public async getData(): Promise<string> {
         return JSON.stringify(this.workflowVersion.definition, null, 4);
+    }
+
+    public async getReferences(): Promise<ConnectionReferences> {
+        return getConnectionReferencesForLogicAppVersion(this.client.credentials, this.client.subscriptionId, this.resourceGroupName, this.workflowName, this.workflowVersion.name!, this.client.apiVersion);
     }
 
     public async promote(): Promise<void> {

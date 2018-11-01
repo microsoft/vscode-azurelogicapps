@@ -4,11 +4,13 @@
  *--------------------------------------------------------------------------------------------*/
 
 import LogicAppsManagementClient from "azure-arm-logic";
-import { Workflow } from "azure-arm-logic/lib/models";
+import { Sku, Workflow } from "azure-arm-logic/lib/models";
 import { WebResource } from "ms-rest";
 import * as request from "request-promise-native";
 import { IAzureParentTreeItem, IAzureTreeItem } from "vscode-azureextensionui";
 import { localize } from "../../localize";
+import { Callbacks, getCallbacks } from "../../utils/logic-app/callbackUtils";
+import { ConnectionReferences, getConnectionReferencesForLogicApp } from "../../utils/logic-app/connectionReferenceUtils";
 import { getIconPath } from "../../utils/nodeUtils";
 import { LogicAppRunsTreeItem } from "./LogicAppRunsTreeItem";
 import { LogicAppTriggersTreeItem } from "./LogicAppTriggersTreeItem";
@@ -36,12 +38,25 @@ export class LogicAppTreeItem implements IAzureParentTreeItem {
         return this.workflow.id!;
     }
 
+    public get integrationAccountId(): string | undefined {
+        const { integrationAccount } = this.workflow;
+        return integrationAccount !== undefined ? integrationAccount.id : undefined;
+    }
+
     public get label(): string {
         return this.workflow.name!;
     }
 
+    public get location(): string {
+        return this.workflow.location!;
+    }
+
     public get resourceGroupName(): string {
         return this.workflow.id!.split("/").slice(-5, -4)[0];
+    }
+
+    public get sku(): Sku | undefined {
+        return this.workflow.sku;
     }
 
     public get workflowName(): string {
@@ -64,12 +79,20 @@ export class LogicAppTreeItem implements IAzureParentTreeItem {
         await this.client.workflows.enable(this.resourceGroupName, this.workflowName);
     }
 
+    public async getCallbacks(): Promise<Callbacks> {
+        return getCallbacks(this.client, this.workflow.definition, this.resourceGroupName, this.workflowName);
+    }
+
     public async getData(refresh = false): Promise<string> {
         if (refresh) {
             this.workflow = await this.client.workflows.get(this.resourceGroupName, this.workflowName);
         }
 
         return JSON.stringify(this.workflow.definition, null, 4);
+    }
+
+    public async getReferences(): Promise<ConnectionReferences> {
+        return getConnectionReferencesForLogicApp(this.client.credentials, this.client.subscriptionId, this.resourceGroupName, this.workflowName, this.client.apiVersion);
     }
 
     public async loadMoreChildren(): Promise<IAzureTreeItem[]> {
