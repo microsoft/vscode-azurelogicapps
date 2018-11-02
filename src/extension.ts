@@ -19,6 +19,7 @@ import { openInEditor } from "./commands/logic-app/openInEditor";
 import { openInPortal } from "./commands/logic-app/openInPortal";
 import { openRunActionInEditor } from "./commands/logic-app/openRunActionInEditor";
 import { openRunInEditor } from "./commands/logic-app/openRunInEditor";
+import { openRunInMonitoringView } from "./commands/logic-app/openRunInMonitoringView";
 import { openTriggerInEditor } from "./commands/logic-app/openTriggerInEditor";
 import { openVersionInDesigner } from "./commands/logic-app/openVersionInDesigner";
 import { openVersionInEditor } from "./commands/logic-app/openVersionInEditor";
@@ -108,6 +109,10 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
 
         registerCommand("azureLogicApps.openRunInEditor", async (node?: IAzureNode) => {
             await openRunInEditor(tree, node);
+        });
+
+        registerCommand("azureLogicApps.openRunInMonitoringView", async (node?: IAzureNode) => {
+            await openRunInMonitoringView(tree, node);
         });
 
         registerCommand("azureLogicApps.openTriggerInEditor", async (node?: IAzureNode) => {

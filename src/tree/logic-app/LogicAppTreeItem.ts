@@ -5,10 +5,10 @@
 
 import LogicAppsManagementClient from "azure-arm-logic";
 import { Sku, Workflow } from "azure-arm-logic/lib/models";
-import { WebResource } from "ms-rest";
 import * as request from "request-promise-native";
 import { IAzureParentTreeItem, IAzureTreeItem } from "vscode-azureextensionui";
 import { localize } from "../../localize";
+import { getAuthorization } from "../../utils/authorizationUtils";
 import { Callbacks, getCallbacks } from "../../utils/logic-app/callbackUtils";
 import { ConnectionReferences, getConnectionReferencesForLogicApp } from "../../utils/logic-app/connectionReferenceUtils";
 import { getIconPath } from "../../utils/nodeUtils";
@@ -138,17 +138,7 @@ export class LogicAppTreeItem implements IAzureParentTreeItem {
         delete workflow.properties.tags;
         delete workflow.properties.type;
 
-        const authorization = await new Promise<string>((resolve, reject) => {
-            const webResource = new WebResource();
-            this.client.credentials.signRequest(webResource, (err: Error | undefined): void => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(webResource.headers.authorization);
-                }
-            });
-        });
-
+        const authorization = await getAuthorization(this.client.credentials);
         const uri = `https://management.azure.com/subscriptions/${this.client.subscriptionId}/resourceGroups/${this.resourceGroupName}/providers/Microsoft.Logic/workflows/${this.workflowName}?api-version=${this.client.apiVersion}`;
         const options: request.RequestPromiseOptions = {
             body: JSON.stringify(workflow),
