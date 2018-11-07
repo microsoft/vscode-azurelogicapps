@@ -71,6 +71,10 @@
             {
                 "category": "Azure Logic Apps",
                 "command": "azureLogicApps.createLogicApp",
+                "icon": {
+                    "dark": "resources/dark/CreateLogicApp.svg",
+                    "light": "resources/light/CreateLogicApp.svg"
+                },                    
                 "title": "%azLogicApps.createLogicApp%"
             },
             {
@@ -489,6 +493,11 @@
                 {
                     "command": "azureLogicApps.selectSubscriptions",
                     "group": "navigation@1",
+                    "when": "view == azureLogicAppsExplorer"
+                },
+                {
+                    "command": "azureLogicApps.createLogicApp",
+                    "group": "navigation@2",                
                     "when": "view == azureLogicAppsExplorer"
                 },
                 {
