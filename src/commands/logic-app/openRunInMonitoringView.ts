@@ -265,12 +265,6 @@ function getWebviewContent({ authorization, location, resourceGroupName, runId, 
                             };
 
                             const hostServiceFactory = () => ({
-                                fetchAndDisplayContent: (identifier, title, url, type) => {
-                                    // TODO?
-                                },
-                                openMonitorView: (resourceId, runName, identifier) => {
-                                    // TODO?
-                                }
                             });
 
                             const runInstanceServiceFactory = analytics => {
@@ -398,7 +392,7 @@ function getWebviewContent({ authorization, location, resourceGroupName, runId, 
                                 hostEnvironment: designercore.Host.LogicApps,
                                 hostServiceFactory,
                                 hostVersion: options.extensionVersion,
-                                identifier: '',
+                                identifier: "",
                                 oauthService,
                                 runInstanceServiceFactory,
                                 runServiceFactory,
@@ -459,7 +453,7 @@ function getWebviewContent({ authorization, location, resourceGroupName, runId, 
                             const analyticsContextData = {
                                 resourceData: {
                                     resourceId: "${workflowId}",
-                                    source: 'vscodeMonitoringView'
+                                    source: "vscodeMonitoringView"
                                 }
                             };
 
