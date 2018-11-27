@@ -20,7 +20,7 @@ import { openInPortal } from "./commands/logic-app/openInPortal";
 import { openRunActionInEditor } from "./commands/logic-app/openRunActionInEditor";
 import { openRunInEditor } from "./commands/logic-app/openRunInEditor";
 import { openTriggerInEditor } from "./commands/logic-app/openTriggerInEditor";
-import { openVersionInDesigner} from "./commands/logic-app/openVersionInDesigner";
+import { openVersionInDesigner } from "./commands/logic-app/openVersionInDesigner";
 import { openVersionInEditor } from "./commands/logic-app/openVersionInEditor";
 import { promoteVersion } from "./commands/logic-app/promoteVersion";
 import { resubmitRun } from "./commands/logic-app/resubmitRun";
