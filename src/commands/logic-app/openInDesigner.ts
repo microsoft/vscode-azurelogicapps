@@ -15,7 +15,7 @@ export async function openInDesigner(tree: AzureTreeDataProvider, node?: IAzureN
         node = await tree.showNodePicker(LogicAppTreeItem.contextValue);
     }
 
-    const title = localize("azLogicApps.designerTitle", "Designer");
+    const title = localize("azLogicApps.designerTitle", "Designer (read-only)");
     const options: vscode.WebviewOptions & vscode.WebviewPanelOptions = {
         enableScripts: true
     };
