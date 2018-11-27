@@ -223,11 +223,9 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                         };
 
                         const getCurrentTenantId = async () => {
-                            // TODO?
                         };
 
                         const getCurrentUserObjectId = async () => {
-                            // TODO?
                         };
 
                         let designer;
@@ -261,12 +259,6 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                             };
 
                             const hostServiceFactory = () => ({
-                                canOpenAzureFunction: async resourceId => {
-                                    // TODO?
-                                },
-                                openAzureFunction: async resourceId => {
-                                    // TODO?
-                                }
                             });
 
                             const analyticsServiceFactory = version => {
