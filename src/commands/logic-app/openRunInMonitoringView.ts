@@ -335,6 +335,17 @@ function getWebviewContent({ authorization, location, resourceGroupName, runId, 
                                 return new designercore.LogicAppsBuiltInTypeService(schemaVersion, options);
                             };
 
+                            const functionServiceFactory = analytics => {
+                                return new designercore.LogicAppsFunctionService({
+                                    analytics,
+                                    apiVersion: options.azureFunctionApiVersion,
+                                    baseUrl: options.baseUrl,
+                                    getAccessToken: getArmAccessToken,
+                                    locale: $locale,
+                                    urlService
+                                });
+                            };
+
                             const runServiceFactory = analytics => {
                                 return new designercore.LogicAppsRunService({
                                     analytics,
@@ -380,6 +391,7 @@ function getWebviewContent({ authorization, location, resourceGroupName, runId, 
                                     SUPPORT_PAN_AND_ZOOM: true,
                                     USE_NEW_EXPRESSION_PARSER: true
                                 },
+                                functionServiceFactory,
                                 getArmAccessToken: getArmAccessToken,
                                 getRuntimeAccessToken: getArmAccessToken,
                                 host: window.location.host,
