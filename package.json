@@ -49,19 +49,23 @@
         "onCommand:azureLogicApps.runTrigger",
         "onCommand:azureLogicApps.selectSubscriptions",
         "onView:azureLogicAppsExplorer",
+        "onCommand:azIntegrationAccounts.createAgreement",
         "onCommand:azIntegrationAccounts.createIntegrationAccount",
         "onCommand:azIntegrationAccounts.createMap",
         "onCommand:azIntegrationAccounts.createPartner",
         "onCommand:azIntegrationAccounts.createSchema",
+        "onCommand:azIntegrationAccounts.deleteAgreement",
         "onCommand:azIntegrationAccounts.deleteIntegrationAccount",
         "onCommand:azIntegrationAccounts.deleteMap",
         "onCommand:azIntegrationAccounts.deletePartner",
         "onCommand:azIntegrationAccounts.deleteSchema",
         "onCommand:azIntegrationAccounts.loadMore",
+        "onCommand:azIntegrationAccounts.openAgreementInEditor",
         "onCommand:azIntegrationAccounts.openMapInEditor",
         "onCommand:azIntegrationAccounts.openSchemaInEditor",
         "onCommand:azIntegrationAccounts.refresh",
         "onCommand:azIntegrationAccounts.selectSubscriptions",
+        "onCommand:azIntegrationAccounts.viewAgreementProperties",
         "onCommand:azIntegrationAccounts.viewIntegrationAccountProperties",
         "onCommand:azIntegrationAccounts.viewMapProperties",
         "onCommand:azIntegrationAccounts.viewPartnerProperties",
@@ -180,6 +184,11 @@
             },
             {
                 "category": "Azure Integration Accounts",
+                "command": "azIntegrationAccounts.createAgreement",
+                "title": "%azIntegrationAccounts.new%"
+            },
+            {
+                "category": "Azure Integration Accounts",
                 "command": "azIntegrationAccounts.createIntegrationAccount",
                 "title": "%azIntegrationAccounts.new%"
             },
@@ -197,6 +206,11 @@
                 "category": "Azure Integration Accounts",
                 "command": "azIntegrationAccounts.createSchema",
                 "title": "%azIntegrationAccounts.new%"
+            },
+            {
+                "category": "Azure Integration Accounts",
+                "command": "azIntegrationAccounts.deleteAgreement",
+                "title": "%azIntegrationAccounts.delete%"
             },
             {
                 "category": "Azure Integration Accounts",
@@ -222,6 +236,11 @@
                 "category": "Azure Integration Accounts",
                 "command": "azIntegrationAccounts.loadMore",
                 "title": "%azIntegrationAccounts.loadMore%"
+            },
+            {
+                "category": "Azure Integration Accounts",
+                "command": "azIntegrationAccounts.openAgreementInEditor",
+                "title": "%azIntegrationAccounts.openInEditor%"
             },
             {
                 "category": "Azure Integration Accounts",
@@ -251,6 +270,11 @@
                     "light": "resources/light/Filter.svg"
                 },
                 "title": "%azIntegrationAccounts.selectSubscriptions%"
+            },
+            {
+                "category": "Azure Integration Accounts",
+                "command": "azIntegrationAccounts.viewAgreementProperties",
+                "title": "%azIntegrationAccounts.viewProperties%"
             },
             {
                 "category": "Azure Integration Accounts",
@@ -465,6 +489,26 @@
                     "command": "azIntegrationAccounts.deleteIntegrationAccount",
                     "group": "2@1",
                     "when": "view == azureIntegrationAccountsExplorer && viewItem == azIntegrationAccount"
+                },
+                {
+                    "command": "azIntegrationAccounts.createAgreement",
+                    "group": "1@1",
+                    "when": "view == azureIntegrationAccountsExplorer && viewItem == azIntegrationAccountAgreements"
+                },
+                {
+                    "command": "azIntegrationAccounts.openAgreementInEditor",
+                    "group": "1@1",
+                    "when": "view == azureIntegrationAccountsExplorer && viewItem == azIntegrationAccountAgreement"
+                },
+                {
+                    "command": "azIntegrationAccounts.viewAgreementProperties",
+                    "group": "1@2",
+                    "when": "view == azureIntegrationAccountsExplorer && viewItem == azIntegrationAccountAgreement"
+                },
+                {
+                    "command": "azIntegrationAccounts.deleteAgreement",
+                    "group": "2@1",
+                    "when": "view == azureIntegrationAccountsExplorer && viewItem == azIntegrationAccountAgreement"
                 },
                 {
                     "command": "azIntegrationAccounts.createMap",

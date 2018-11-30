@@ -8,6 +8,8 @@ export class Constants {
 
     public static SubscriptionContextValue = "azureextensionui.azureSubscription";
 
+    //#region Partners and Agreements
+
     public static Qualifier = new Map<string, string>([
         ["1 - D-U-N-S (Dun & Bradstreet)", "1"],
         ["2 - SCAC (Standard Carrier Alpha Code) (X12)", "2"],
@@ -85,4 +87,110 @@ export class Constants {
         ["Z01 - Vehicle registration number", "Z01"],
         ["ZZZ - Mutually Defined", "ZZZ"]
     ]);
+
+    public static AS2AllowedIdentityQualifiers = [
+        "AS2Identity"
+    ];
+
+    public static X12AllowedIdentityQualifiers = [
+        "1",
+        "2",
+        "3",
+        "4",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "34",
+        "35",
+        "36",
+        "37",
+        "38",
+        "AM",
+        "NR",
+        "SA",
+        "SN",
+        "ZZ",
+        "BT"
+    ];
+
+    public static EdifactAllowedIdentityQualifiers = [
+        "1",
+        "4",
+        "5",
+        "8",
+        "9",
+        "12",
+        "14",
+        "18",
+        "22",
+        "30",
+        "31",
+        "33",
+        "34",
+        "51",
+        "52",
+        "53",
+        "54",
+        "55",
+        "57",
+        "58",
+        "59",
+        "61",
+        "63",
+        "65",
+        "80",
+        "82",
+        "84",
+        "85",
+        "86",
+        "87",
+        "89",
+        "90",
+        "91",
+        "92",
+        "103",
+        "128",
+        "129",
+        "144",
+        "145",
+        "146",
+        "147",
+        "148",
+        "Z01",
+        "ZZZ",
+        "ZZ",
+        "BT"
+    ];
+
+    //#endregion
+
+    // Content Types
+    public static JsonContentType = "application/json";
+    public static LiquidContentType = "text/plain";
+    public static TextContentType = "text/plain";
+    public static XmlContentType = "application/xml";
 }
