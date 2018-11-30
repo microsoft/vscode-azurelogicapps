@@ -603,7 +603,7 @@
         "vscode": "^1.1.18"
     },
     "dependencies": {
-        "azure-arm-logic": "^4.0.0",
+        "azure-arm-logic": "^4.1.0",
         "request": "^2.88.0",
         "request-promise-native": "^1.0.5",
         "vscode-azureextensionui": "^0.16.4",
