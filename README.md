@@ -25,6 +25,10 @@ All you need is an Azure Subscription to get started. If you don't have one, [cl
 
 ![Run after IntelliSense](resources/run-after.gif)
 
+![Open in read-only designer](resources/open-in-designer.gif)
+
+![Open run in monitoring view](resources/open-in-monitoring-view.gif)
+
 ## Recommended Extensions
 
 We recommend installing the following VS Code extensions for a better experience when working with different integration account artifacts.

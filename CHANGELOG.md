@@ -3,6 +3,14 @@ All notable changes to the "vscode-logicapps" extension will be documented in th
 
 ## [Unreleased]
 
+## [0.1.2] - 2018-12-03
+Thanks, Aaron Kunz (@DAXaholic), for contributing the new "Create Logic App" button!
+
+### Added
+- #33 - Add "Create Logic App" button to tree view
+- View Logic App in read-only designer
+- View Logic App run in monitoring view
+
 ## [0.1.1] - 2018-10-31
 ### Added
 - #47 - Add parameter snippet
