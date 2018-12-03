@@ -3,7 +3,10 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import LogicAppsManagementClient from "azure-arm-logic";
 import { AgreementContent, BusinessIdentity, IntegrationAccountAgreement } from "azure-arm-logic/lib/models";
+import { WebResource } from "ms-rest";
+import * as request from "request-promise-native";
 import { AgreementsDefaultContent } from "./default-content/agreementsDefaultContent";
 
 export enum AgreementType {
@@ -81,4 +84,28 @@ export async function createNewAgreement(agreementName: string,
     };
 
     return agreement;
+}
+
+export async function getAgreement(client: LogicAppsManagementClient, resourceGroupName: string, integrationAccountName: string, agreementName: string) {
+    const authorization = await new Promise<string>((resolve, reject) => {
+        const webResource = new WebResource();
+        client.credentials.signRequest(webResource, (err: Error | undefined): void => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(webResource.headers.authorization);
+            }
+        });
+    });
+
+    const uri = `https://management.azure.com/subscriptions/${client.subscriptionId}/resourceGroups/${resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/${integrationAccountName}/agreements/${agreementName}?api-version=${this.client.apiVersion}`;
+    const options: request.RequestPromiseOptions = {
+        headers: {
+            "Authorization": authorization,
+            "Content-Type": "application/json"
+        },
+        method: "GET"
+    };
+    const response = await request(uri, options);
+    return JSON.parse<IntegrationAccountAgreement>(response);
 }
