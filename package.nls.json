@@ -15,6 +15,7 @@
     "azLogicApps.disableLogicApp": "Disable",
     "azLogicApps.enableLogicApp": "Enable",
     "azLogicApps.loadMore": "Load More...",
+    "azLogicApps.openInDesigner": "Open in Designer",
     "azLogicApps.openInEditor": "Open in Editor",
     "azLogicApps.openInPortal": "Open in Portal",
     "azLogicApps.promoteVersion": "Promote",

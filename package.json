@@ -34,11 +34,13 @@
         "onCommand:azureLogicApps.disableLogicApp",
         "onCommand:azureLogicApps.enableLogicApp",
         "onCommand:azureLogicApps.loadMore",
+        "onCommand:azureLogicApps.openInDesigner",
         "onCommand:azureLogicApps.openInEditor",
         "onCommand:azureLogicApps.openInPortal",
         "onCommand:azureLogicApps.openRunActionInEditor",
         "onCommand:azureLogicApps.openRunInEditor",
         "onCommand:azureLogicApps.openTriggerInEditor",
+        "onCommand:azureLogicApps.openVersionInDesigner",
         "onCommand:azureLogicApps.openVersionInEditor",
         "onCommand:azureLogicApps.promoteVersion",
         "onCommand:azureLogicApps.refresh",
@@ -74,7 +76,7 @@
                 "icon": {
                     "dark": "resources/dark/CreateLogicApp.svg",
                     "light": "resources/light/CreateLogicApp.svg"
-                },                    
+                },
                 "title": "%azLogicApps.createLogicApp%"
             },
             {
@@ -96,6 +98,11 @@
                 "category": "Azure Logic Apps",
                 "command": "azureLogicApps.loadMore",
                 "title": "%azLogicApps.loadMore%"
+            },
+            {
+                "category": "Azure Logic Apps",
+                "command": "azureLogicApps.openInDesigner",
+                "title": "%azLogicApps.openInDesigner%"
             },
             {
                 "category": "Azure Logic Apps",
@@ -125,6 +132,11 @@
                 "category": "Azure Logic Apps",
                 "command": "azureLogicApps.openTriggerInEditor",
                 "title": "%azLogicApps.openInEditor%"
+            },
+            {
+                "category": "Azure Logic Apps",
+                "command": "azureLogicApps.openVersionInDesigner",
+                "title": "%azLogicApps.openInDesigner%"
             },
             {
                 "category": "Azure Logic Apps",
@@ -324,8 +336,13 @@
                     "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflow"
                 },
                 {
-                    "command": "azureLogicApps.openInPortal",
+                    "command": "azureLogicApps.openInDesigner",
                     "group": "1@2",
+                    "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflow"
+                },
+                {
+                    "command": "azureLogicApps.openInPortal",
+                    "group": "1@3",
                     "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflow"
                 },
                 {
@@ -399,13 +416,23 @@
                     "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflowCurrentVersion"
                 },
                 {
+                    "command": "azureLogicApps.openVersionInDesigner",
+                    "group": "1@2",
+                    "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflowCurrentVersion"
+                },
+                {
                     "command": "azureLogicApps.openVersionInEditor",
                     "group": "1@1",
                     "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflowVersion"
                 },
                 {
-                    "command": "azureLogicApps.promoteVersion",
+                    "command": "azureLogicApps.openVersionInDesigner",
                     "group": "1@2",
+                    "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflowVersion"
+                },
+                {
+                    "command": "azureLogicApps.promoteVersion",
+                    "group": "1@3",
                     "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflowVersion"
                 },
                 {
@@ -497,7 +524,7 @@
                 },
                 {
                     "command": "azureLogicApps.createLogicApp",
-                    "group": "navigation@2",                
+                    "group": "navigation@2",
                     "when": "view == azureLogicAppsExplorer"
                 },
                 {
