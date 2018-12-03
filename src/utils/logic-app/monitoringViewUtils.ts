@@ -13,7 +13,7 @@ interface IGetWebviewContentOptions {
     workflowId: string;
 }
 
-const version = "1.31119.1.53868315.181126-1351";
+const version = "1.31126.1.513093.181130-1946";
 
 export function getWebviewContent({ authorization, location, resourceGroupName, runId, subscriptionId, title, workflowId }: IGetWebviewContentOptions): string {
     return `<!DOCTYPE html>
@@ -279,8 +279,10 @@ export function getWebviewContent({ authorization, location, resourceGroupName, 
                             };
 
                             const analyticsServiceFactory = version => {
+                                const telemetryBaseUrl = options.telemetryBaseUrl || options.baseUrl;
+                                const telemetryVersion = options.telemetryVersion || options.emaApiVersion;
                                 const settings = {
-                                    analyticsServiceUri: \`\${options.telemetryBaseUrl}/providers/Internal.Telemetry/collect?api-version=\${options.telemetryVersion}\`,
+                                    analyticsServiceUri: \`\${telemetryBaseUrl}/providers/Internal.Telemetry/collect?api-version=\${telemetryVersion}\`,
                                     getAccessToken: getArmAccessToken
                                 };
 
