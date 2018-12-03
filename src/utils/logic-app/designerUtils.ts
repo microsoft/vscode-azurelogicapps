@@ -265,7 +265,7 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                                 const telemetryBaseUrl = options.telemetryBaseUrl || options.baseUrl;
                                 const telemetryVersion = options.telemetryVersion || options.emaApiVersion;
                                 const settings = {
-                                    analyticsServiceUri: \`\${telemetryBaseUrl}/providers/Internal.Telemetry/collect?api-version=\${options.telemetryVersion}\`,
+                                    analyticsServiceUri: \`\${telemetryBaseUrl}/providers/Internal.Telemetry/collect?api-version=\${telemetryVersion}\`,
                                     getAccessToken: getArmAccessToken
                                 };
 
