@@ -21,7 +21,7 @@ interface IGetWebviewContentOptions {
     workflowId: string;
 }
 
-const version = "1.31119.1.53868315.181126-1351";
+const version = "1.31126.1.513093.181130-1946";
 
 export function getWebviewContentForDesigner({ authorization, callbacks, definition, integrationAccountId, location, references, resourceGroupName, sku, subscriptionId, title, workflowId }: IGetWebviewContentOptions): string {
     sku = sku || { name: "Consumption" };
@@ -469,11 +469,11 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                                 return new designercore.LogicAppsSmartRecommendationService({
                                     analytics,
                                     apiVersion: options.integrationServiceEnvironmentApiVersion,
-                                    apiVersionForManagedConnector: options.integrationServiceEnvironmentApiVersion,
-                                    apiVersionForCustomConnector: options.integrationServiceEnvironmentApiVersion,
-                                    apiVersionForApiOperations: options.integrationServiceEnvironmentApiVersion,
                                     apiVersionForApiManagement: options.apiManagementApiVersion,
-                                    apiVersionForLogicApps: iseSupported ? options.integrationServiceEnvironmentApiVersion : options.emaApiVersion,
+                                    apiVersionForApiOperations: options.integrationServiceEnvironmentApiVersion,
+                                    apiVersionForCustomConnector: options.integrationServiceEnvironmentApiVersion,
+                                    apiVersionForLogicApps: options.integrationServiceEnvironmentApiVersion,
+                                    apiVersionForManagedConnector: options.integrationServiceEnvironmentApiVersion,
                                     apiVersionForWeb: options.azureFunctionApiVersion,
                                     baseUrl: options.baseUrl,
                                     getAccessToken: getArmAccessToken,
