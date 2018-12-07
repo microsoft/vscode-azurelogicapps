@@ -23,7 +23,7 @@ export async function openInDesigner(tree: AzureTreeDataProvider, node?: IAzureN
     const authorization = await getAuthorization(node.credentials);
     const { subscriptionId, treeItem } = node as IAzureNode<LogicAppTreeItem>;
     const callbacks = await treeItem.getCallbacks();
-    const definition = await treeItem.getData();
+    const definition = await treeItem.getData(/* refresh */ true);
     const references = await treeItem.getReferences();
     const { id: workflowId, integrationAccountId, location, resourceGroupName, sku } = treeItem;
     panel.webview.html = getWebviewContentForDesigner({ authorization, callbacks, definition, integrationAccountId, location, references, resourceGroupName, sku, subscriptionId, title, workflowId });
