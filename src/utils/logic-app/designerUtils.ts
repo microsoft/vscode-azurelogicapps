@@ -21,7 +21,7 @@ interface IGetWebviewContentOptions {
     workflowId: string;
 }
 
-const version = "1.31126.1.513093.181130-1946";
+const version = "1.31203.1.28076.181205-1625";
 
 export function getWebviewContentForDesigner({ authorization, callbacks, definition, integrationAccountId, location, references, resourceGroupName, sku, subscriptionId, title, workflowId }: IGetWebviewContentOptions): string {
     sku = sku || { name: "Consumption" };

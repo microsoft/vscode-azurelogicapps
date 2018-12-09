@@ -13,7 +13,7 @@ interface IGetWebviewContentOptions {
     workflowId: string;
 }
 
-const version = "1.31126.1.513093.181130-1946";
+const version = "1.31203.1.28076.181205-1625";
 
 export function getWebviewContent({ authorization, location, resourceGroupName, runId, subscriptionId, title, workflowId }: IGetWebviewContentOptions): string {
     return `<!DOCTYPE html>
