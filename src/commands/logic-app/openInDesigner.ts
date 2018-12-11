@@ -15,16 +15,18 @@ export async function openInDesigner(tree: AzureTreeDataProvider, node?: IAzureN
         node = await tree.showNodePicker(LogicAppTreeItem.contextValue);
     }
 
-    const title = localize("azLogicApps.designerTitle", "Designer (read-only)");
-    const options: vscode.WebviewOptions & vscode.WebviewPanelOptions = {
-        enableScripts: true
-    };
-    const panel = vscode.window.createWebviewPanel("readonlyDesigner", title, vscode.ViewColumn.Beside, options);
+    const readOnlySuffix = localize("azLogicApps.readOnlySuffix", "(read-only)");
     const authorization = await getAuthorization(node.credentials);
     const { subscriptionId, treeItem } = node as IAzureNode<LogicAppTreeItem>;
     const callbacks = await treeItem.getCallbacks();
     const definition = await treeItem.getData(/* refresh */ true);
     const references = await treeItem.getReferences();
-    const { id: workflowId, integrationAccountId, location, resourceGroupName, sku } = treeItem;
+    const { id: workflowId, integrationAccountId, label: workflowName, location, resourceGroupName, sku } = treeItem;
+    const title = `${workflowName} ${readOnlySuffix}`;
+
+    const options: vscode.WebviewOptions & vscode.WebviewPanelOptions = {
+        enableScripts: true
+    };
+    const panel = vscode.window.createWebviewPanel("readonlyDesigner", title, vscode.ViewColumn.Beside, options);
     panel.webview.html = getWebviewContentForDesigner({ authorization, callbacks, definition, integrationAccountId, location, references, resourceGroupName, sku, subscriptionId, title, workflowId });
 }
