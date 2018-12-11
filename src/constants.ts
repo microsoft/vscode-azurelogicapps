@@ -4,6 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 export class Constants {
+    public static DesignerVersion = "1.31203.1.28076.181205-1625";
+
     public static SubscriptionContextValue = "azureextensionui.azureSubscription";
 
     public static Qualifier = new Map<string, string>([
