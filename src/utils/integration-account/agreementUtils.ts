@@ -86,7 +86,8 @@ export async function createNewAgreement(agreementName: string,
     return agreement;
 }
 
-export async function getAgreement(client: LogicAppsManagementClient, resourceGroupName: string, integrationAccountName: string, agreementName: string) {
+// This is required until the casing bug (validateEdiTypes from SDK vs validateEDITypes from API) in the validation settings can be resolved
+export async function getAgreement(client: LogicAppsManagementClient, resourceGroupName: string, integrationAccountName: string, agreementName: string, ): Promise<IntegrationAccountAgreement> {
     const authorization = await new Promise<string>((resolve, reject) => {
         const webResource = new WebResource();
         client.credentials.signRequest(webResource, (err: Error | undefined): void => {
@@ -98,7 +99,7 @@ export async function getAgreement(client: LogicAppsManagementClient, resourceGr
         });
     });
 
-    const uri = `https://management.azure.com/subscriptions/${client.subscriptionId}/resourceGroups/${resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/${integrationAccountName}/agreements/${agreementName}?api-version=${this.client.apiVersion}`;
+    const uri = `https://management.azure.com/subscriptions/${client.subscriptionId}/resourceGroups/${resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/${integrationAccountName}/agreements/${agreementName}?api-version=${client.apiVersion}`;
     const options: request.RequestPromiseOptions = {
         headers: {
             "Authorization": authorization,
@@ -107,5 +108,26 @@ export async function getAgreement(client: LogicAppsManagementClient, resourceGr
         method: "GET"
     };
     const response = await request(uri, options);
-    return JSON.parse<IntegrationAccountAgreement>(response);
+    const fixedAgreement = fixAcronymCasing(response);
+    const parsedAgreement = JSON.parse(fixedAgreement);
+    const agreement: IntegrationAccountAgreement = {
+        agreementType: parsedAgreement.properties.agreementType,
+        content: parsedAgreement.properties.content,
+        guestIdentity: parsedAgreement.properties.guestIdentity,
+        guestPartner: parsedAgreement.properties.guestPartner,
+        hostIdentity: parsedAgreement.properties.hostIdentity,
+        hostPartner: parsedAgreement.properties.hostPartner,
+        id:  parsedAgreement.id,
+        name: parsedAgreement.name
+    };
+
+    return agreement;
+}
+
+// This is required until the casing bug (validateEdiTypes from SDK vs validateEDITypes from API) in the validation settings can be resolved
+export function fixAcronymCasing(agreement: string): string {
+    agreement = agreement.replace(/validateEDITypes/g, "validateEdiTypes");
+    agreement = agreement.replace(/validateXSDTypes/g, "validateXsdTypes");
+
+    return agreement;
 }

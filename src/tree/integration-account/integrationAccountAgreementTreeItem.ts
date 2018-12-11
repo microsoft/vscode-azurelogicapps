@@ -6,7 +6,7 @@
 import LogicAppsManagementClient from "azure-arm-logic";
 import { IntegrationAccountAgreement } from "azure-arm-logic/lib/models";
 import { IAzureTreeItem } from "vscode-azureextensionui";
-import { AgreementType } from "../../utils/integration-account/agreementUtils";
+import { AgreementType, fixAcronymCasing, getAgreement } from "../../utils/integration-account/agreementUtils";
 import { getIconPath } from "../../utils/nodeUtils";
 
 export class IntegrationAccountAgreementTreeItem implements IAzureTreeItem {
@@ -53,21 +53,27 @@ export class IntegrationAccountAgreementTreeItem implements IAzureTreeItem {
     }
 
     public async getContent(): Promise<string> {
-        this.integrationAccountAgreement = await this.client.integrationAccountAgreements.get(this.resourceGroupName, this.integrationAccountName, this.integrationAccountAgreementName);
+        // this.integrationAccountAgreement = await this.client.integrationAccountAgreements.get(this.resourceGroupName, this.integrationAccountName, this.integrationAccountAgreementName);
+        this.integrationAccountAgreement = await getAgreement(this.client, this.resourceGroupName, this.integrationAccountName, this.integrationAccountAgreementName);
 
         return JSON.stringify(this.integrationAccountAgreement, null, 4);
     }
 
     public async getProperties(refresh = false): Promise<string> { // XXX Remove content?
         if (refresh) {
-            this.integrationAccountAgreement = await this.client.integrationAccountAgreements.get(this.resourceGroupName, this.integrationAccountName, this.integrationAccountAgreementName);
+            // this.integrationAccountAgreement = await this.client.integrationAccountAgreements.get(this.resourceGroupName, this.integrationAccountName, this.integrationAccountAgreementName);
+            this.integrationAccountAgreement = await getAgreement(this.client, this.resourceGroupName, this.integrationAccountName, this.integrationAccountAgreementName);
         }
+
+        // Only want the high level properties, not the whole content
+        delete this.integrationAccountAgreement.content;
 
         return JSON.stringify(this.integrationAccountAgreement, null, 4);
     }
 
     public async update(agreementContent: string): Promise<string> {
-        const agreement: IntegrationAccountAgreement = JSON.parse(agreementContent);
+        const fixedAgreement = fixAcronymCasing(agreementContent);
+        const agreement: IntegrationAccountAgreement = JSON.parse(fixedAgreement);
 
         const updatedAgreement = await this.client.integrationAccountAgreements.createOrUpdate(this.resourceGroupName, this.integrationAccountName, this.integrationAccountAgreementName, agreement);
         return JSON.stringify(updatedAgreement, null, 4);
