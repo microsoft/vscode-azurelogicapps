@@ -3,6 +3,8 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { Constants } from "../../constants";
+
 interface IGetWebviewContentOptions {
     authorization: string;
     location: string;
@@ -13,7 +15,7 @@ interface IGetWebviewContentOptions {
     workflowId: string;
 }
 
-const version = "1.31126.1.513093.181130-1946";
+const version = Constants.DesignerVersion;
 
 export function getWebviewContent({ authorization, location, resourceGroupName, runId, subscriptionId, title, workflowId }: IGetWebviewContentOptions): string {
     return `<!DOCTYPE html>
