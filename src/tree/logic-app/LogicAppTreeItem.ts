@@ -119,38 +119,16 @@ export class LogicAppTreeItem implements IAzureParentTreeItem {
         }
     }
 
-    // NOTE(joechung): Do the update request manually instead of using the SDK to work around #25.
     public async update(definition: string): Promise<string> {
-        const workflow = {
-            id: this.id,
-            location: this.workflow.location!,
-            name: this.workflowName,
-            properties: {
-                ...this.workflow,
-                definition: JSON.parse(definition)
-            },
-            tags: this.workflow.tags || {},
-            type: this.workflow.type!
+        const workflow: Workflow = {
+            definition: JSON.parse(definition),
+            integrationAccount: this.workflow.integrationAccount || undefined,
+            location: this.workflow.location,
+            tags: this.workflow.tags || undefined
         };
-        delete workflow.properties.id;
-        delete workflow.properties.location;
-        delete workflow.properties.name;
-        delete workflow.properties.tags;
-        delete workflow.properties.type;
 
-        const authorization = await getAuthorization(this.client.credentials);
-        const uri = `https://management.azure.com/subscriptions/${this.client.subscriptionId}/resourceGroups/${this.resourceGroupName}/providers/Microsoft.Logic/workflows/${this.workflowName}?api-version=${this.client.apiVersion}`;
-        const options: request.RequestPromiseOptions = {
-            body: JSON.stringify(workflow),
-            headers: {
-                "Authorization": authorization,
-                "Content-Type": "application/json"
-            },
-            method: "PUT"
-        };
-        const response = await request(uri, options);
-        const updatedWorkflow = JSON.parse(response);
+        const updatedWorkflow = await this.client.workflows.createOrUpdate(this.resourceGroupName, this.workflowName, workflow);
 
-        return JSON.stringify(updatedWorkflow.properties.definition, null, 4);
+        return JSON.stringify(updatedWorkflow.definition, null, 4);
     }
 }
