@@ -5,10 +5,8 @@
 
 import LogicAppsManagementClient from "azure-arm-logic";
 import { Sku, Workflow } from "azure-arm-logic/lib/models";
-import * as request from "request-promise-native";
 import { IAzureParentTreeItem, IAzureTreeItem } from "vscode-azureextensionui";
 import { localize } from "../../localize";
-import { getAuthorization } from "../../utils/authorizationUtils";
 import { Callbacks, getCallbacks } from "../../utils/logic-app/callbackUtils";
 import { ConnectionReferences, getConnectionReferencesForLogicApp } from "../../utils/logic-app/connectionReferenceUtils";
 import { getIconPath } from "../../utils/nodeUtils";
