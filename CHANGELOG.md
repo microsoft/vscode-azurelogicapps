@@ -3,6 +3,14 @@ All notable changes to the "vscode-logicapps" extension will be documented in th
 
 ## [Unreleased]
 
+## [0.1.3] - 2018-12-14
+### Changed
+- Change read-only designer and monitoring view titles
+- Update designer version to 1.31210.1.6
+
+### Fixed
+- #61 - Refresh Logic Apps before rendering in designer
+
 ## [0.1.2] - 2018-12-03
 Thanks, Aaron Kunz (@DAXaholic), for contributing the new "Create Logic App" button!
 
