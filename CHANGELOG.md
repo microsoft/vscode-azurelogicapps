@@ -3,6 +3,10 @@ All notable changes to the "vscode-logicapps" extension will be documented in th
 
 ## [Unreleased]
 
+## [0.1.4] - 2019-01-10
+### Changed
+- Update designer version to 1.40107.1.6
+
 ## [0.1.3] - 2018-12-14
 ### Changed
 - Change read-only designer and monitoring view titles
