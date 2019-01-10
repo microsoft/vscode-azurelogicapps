@@ -455,7 +455,6 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                                 SHOW_TOKENS_FOR_FOREACH: !!options.featureFlags && !!options.featureFlags.showforeachtokens,
                                 SHOW_TRIGGER_RECURRENCE: true,
                                 SHOW_VARIABLE_ACTIONS: true,
-                                SUPPORT_INTEGRATION_SERVICE_ENVIRONMENT: iseSupported,
                                 SUPPORT_NESTED_FOREACH_UI: true,
                                 SUPPORT_PAN_AND_ZOOM: true,
                                 SUPPORT_PEEK: true,
