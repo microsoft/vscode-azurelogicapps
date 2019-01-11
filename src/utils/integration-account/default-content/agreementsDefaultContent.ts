@@ -22,17 +22,17 @@ export class AgreementsDefaultContent {
             transmitFileNameInMimeHeader: false
         },
         errorSettings: {
-            resendIfMdnNotReceived: false,
+            resendIfMDNNotReceived: false,
             suspendDuplicateMessage: false
         },
         mdnSettings: {
             dispositionNotificationTo: "http://localhost",
             micHashingAlgorithm: "SHA1",
-            needMdn: false,
-            sendInboundMdnToMessageBox: true,
-            sendMdnAsynchronously: false,
-            signMdn: false,
-            signOutboundMdnIfOptional: false
+            needMDN: false,
+            sendInboundMDNToMessageBox: true,
+            sendMDNAsynchronously: false,
+            signMDN: false,
+            signOutboundMDNIfOptional: false
         },
         messageConnectionSettings: {
             ignoreCertificateNameMismatch: false,
@@ -41,12 +41,12 @@ export class AgreementsDefaultContent {
             unfoldHttpHeaders: true
         },
         securitySettings: {
-            enableNrrForInboundDecodedMessages: false,
-            enableNrrForInboundEncodedMessages: false,
-            enableNrrForInboundMdn: false,
-            enableNrrForOutboundDecodedMessages: false,
-            enableNrrForOutboundEncodedMessages: false,
-            enableNrrForOutboundMdn: false,
+            enableNRRForInboundDecodedMessages: false,
+            enableNRRForInboundEncodedMessages: false,
+            enableNRRForInboundMDN: false,
+            enableNRRForOutboundDecodedMessages: false,
+            enableNRRForOutboundEncodedMessages: false,
+            enableNRRForOutboundMDN: false,
             overrideGroupSigningCertificate: false,
         },
         validationSettings: {
@@ -138,8 +138,8 @@ export class AgreementsDefaultContent {
             trailingSeparatorPolicy: "NotAllowed",
             trimLeadingAndTrailingSpacesAndZeroes: false,
             validateCharacterSet: true,
-            validateEdiTypes: true,
-            validateXsdTypes: false
+            validateEDITypes: true,
+            validateXSDTypes: false
         },
         x12DelimiterOverrides: []
     };
@@ -207,8 +207,8 @@ export class AgreementsDefaultContent {
             trailingSeparatorPolicy: "NotAllowed",
             trimLeadingAndTrailingSpacesAndZeroes: false,
             validateCharacterSet: true,
-            validateEdiTypes: true,
-            validateXsdTypes: false
+            validateEDITypes: true,
+            validateXSDTypes: false
         }
     };
 }
