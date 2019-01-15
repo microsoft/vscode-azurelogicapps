@@ -25,3 +25,12 @@ export function getThemedIconPath(iconName: string): IThemedIconPath {
         light: ext.context.asAbsolutePath(path.join("resources", "light", `${iconName}.svg`))
     };
 }
+
+export function arrayToMap<T, K extends keyof T>(array: T[], key: K): Map<string, T> {
+    const mappedObjects: Map<string, T> = new Map();
+    for (const item of array) {
+        mappedObjects.set(item[key].toString(), item);
+    }
+
+    return mappedObjects;
+}

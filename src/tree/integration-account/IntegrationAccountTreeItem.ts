@@ -8,6 +8,7 @@ import { IntegrationAccount } from "azure-arm-logic/lib/models";
 import { IAzureParentTreeItem, IAzureTreeItem } from "vscode-azureextensionui";
 import { localize } from "../../localize";
 import { getIconPath } from "../../utils/nodeUtils";
+import { IntegrationAccountAgreementsTreeItem } from "./integrationAccountAgreementsTreeItem";
 import { IntegrationAccountMapsTreeItem } from "./IntegrationAccountMapsTreeItem";
 import { IntegrationAccountPartnersTreeItem } from "./IntegrationAccountPartnersTreeItem";
 import { IntegrationAccountSchemasTreeItem } from "./IntegrationAccountSchemasTreeItem";
@@ -16,11 +17,13 @@ export class IntegrationAccountTreeItem implements IAzureParentTreeItem {
     public static contextValue = "azIntegrationAccount";
     public readonly childTypeLabel: string = localize("azIntegrationAccounts.child", "Child");
     public contextValue = IntegrationAccountTreeItem.contextValue;
+    public integrationAccountAgreementsItem: IntegrationAccountAgreementsTreeItem;
     public integrationAccountMapsItem: IntegrationAccountMapsTreeItem;
     public integrationAccountPartnersItem: IntegrationAccountPartnersTreeItem;
     public integrationAccountSchemasItem: IntegrationAccountSchemasTreeItem;
 
     public constructor(private readonly client: LogicAppsManagementClient, private integrationAccount: IntegrationAccount) {
+        this.integrationAccountAgreementsItem = new IntegrationAccountAgreementsTreeItem(client, integrationAccount);
         this.integrationAccountMapsItem = new IntegrationAccountMapsTreeItem(client, integrationAccount);
         this.integrationAccountPartnersItem = new IntegrationAccountPartnersTreeItem(client, integrationAccount);
         this.integrationAccountSchemasItem = new IntegrationAccountSchemasTreeItem(client, integrationAccount);
@@ -64,6 +67,7 @@ export class IntegrationAccountTreeItem implements IAzureParentTreeItem {
 
     public async loadMoreChildren(): Promise<IAzureTreeItem[]> {
         return [
+            this.integrationAccountAgreementsItem,
             this.integrationAccountMapsItem,
             this.integrationAccountPartnersItem,
             this.integrationAccountSchemasItem
@@ -72,6 +76,8 @@ export class IntegrationAccountTreeItem implements IAzureParentTreeItem {
 
     public pickTreeItem(expectedContextValue: string): IAzureTreeItem | undefined {
         switch (expectedContextValue) {
+            case IntegrationAccountAgreementsTreeItem.contextValue:
+                return this.integrationAccountAgreementsItem;
             case IntegrationAccountMapsTreeItem.contextValue:
                 return this.integrationAccountMapsItem;
             case IntegrationAccountPartnersTreeItem.contextValue:

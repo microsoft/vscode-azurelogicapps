@@ -11,6 +11,7 @@ export async function openAndShowTextDocument(content: string, language = "json"
         content,
         language
     });
+
     await vscode.window.showTextDocument(document);
 }
 
