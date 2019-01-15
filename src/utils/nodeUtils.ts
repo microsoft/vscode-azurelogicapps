@@ -28,9 +28,9 @@ export function getThemedIconPath(iconName: string): IThemedIconPath {
 
 export function arrayToMap<T, K extends keyof T>(array: T[], key: K): Map<string, T> {
     const mappedObjects: Map<string, T> = new Map();
-    array.forEach((item) => {
+    for (const item of array) {
         mappedObjects.set(item[key].toString(), item);
-    });
+    }
 
     return mappedObjects;
 }

@@ -39,7 +39,7 @@ export async function getAllPartners(credentials: ServiceClientCredentials, subs
     let nextPageLink = partners.nextLink;
 
     while (nextPageLink) {
-        partners.concat(await client.integrationAccountPartners.listNext(nextPageLink));
+        partners.push(...await client.integrationAccountPartners.listNext(nextPageLink));
         nextPageLink = partners.nextLink;
     }
 

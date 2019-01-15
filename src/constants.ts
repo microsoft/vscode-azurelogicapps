@@ -8,7 +8,7 @@ export class Constants {
 
     public static SubscriptionContextValue = "azureextensionui.azureSubscription";
 
-    //#region Partners and Agreements
+    // #region Partners and Agreements
 
     public static Qualifier = new Map<string, string>([
         ["1 - D-U-N-S (Dun & Bradstreet)", "1"],
@@ -186,7 +186,7 @@ export class Constants {
         "BT"
     ];
 
-    //#endregion
+    // #endregion
 
     // Content Types
     public static JsonContentType = "application/json";

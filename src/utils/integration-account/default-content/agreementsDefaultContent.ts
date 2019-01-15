@@ -1,10 +1,10 @@
-import { AS2ProtocolSettings, EdifactProtocolSettings, X12ProtocolSettings } from "azure-arm-logic/lib/models";
-import { Constants } from "../../../constants";
-
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+
+import { AS2ProtocolSettings, EdifactProtocolSettings, X12ProtocolSettings } from "azure-arm-logic/lib/models";
+import { Constants } from "../../../constants";
 
 export class AgreementsDefaultContent {
     public static defaultAs2ProtocolSettings: AS2ProtocolSettings = {
