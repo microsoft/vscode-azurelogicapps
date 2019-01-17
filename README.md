@@ -18,7 +18,7 @@ All you need is an Azure Subscription to get started. If you don't have one, [cl
 * Browse and run logic apps triggers
 * Browse and resubmit logic apps runs
 * Browse and promote logic apps versions
-* Browse, create, edit, and delete integration accounts, schema, map, and partners
+* Browse, create, edit, and delete integration accounts, schema, map, partners, and agreements
 * IntelliSense support helping you quickly and easily adding triggers, actions, and properties
 
 ![Recurrence trigger IntelliSense](resources/recurrence-trigger.gif)
