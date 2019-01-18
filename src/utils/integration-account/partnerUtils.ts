@@ -5,8 +5,8 @@
 
 import LogicAppsManagementClient from "azure-arm-logic";
 import { IntegrationAccountPartner } from "azure-arm-logic/lib/models";
-import { addExtensionUserAgent } from "vscode-azureextensionui";
 import { ServiceClientCredentials } from "ms-rest";
+import { addExtensionUserAgent } from "vscode-azureextensionui";
 
 export enum PartnerType {
     B2B = "B2B"
