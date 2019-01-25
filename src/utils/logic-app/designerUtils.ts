@@ -310,6 +310,11 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                                     baseUrl: options.baseUrl,
                                     getAccessToken: getArmAccessToken,
                                     locale: $locale,
+                                    serviceConfigs: {
+                                        "sql": {
+                                            serverTemplate: "{0}.database.windows.net"
+                                        }
+                                    },
                                     subscriptionId: options.subscriptionId
                                 });
                             };
@@ -435,6 +440,7 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                                 AUTO_CASTING_IN_PARAMETER_FIELD_TIP: true,
                                 CONCURRENCY: true,
                                 DEBOUNCE_EMIT_CHANGE: true,
+                                DISABLE_AUTO_FOCUS_PARAMETERS: true,
                                 DISABLE_TOKEN_PICKER_COMPACT_MODE: true,
                                 FILTER_TOKEN_PICKER_WITH_TYPE_AND_FORMAT: true,
                                 FX_TOKEN: true,
@@ -461,7 +467,8 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                                 USE_CONNECTION_CONFIGURATION_SERVICE: true,
                                 USE_DICTIONARY_EDITOR: true,
                                 USE_EDITOR_INPUT: true,
-                                USE_NEW_EXPRESSION_PARSER: true
+                                USE_NEW_EXPRESSION_PARSER: true,
+                                USE_TEXT_EDITOR: false
                             };
 
                             const recommendationServiceFactory = (analytics, schemaVersion) => {
