@@ -440,6 +440,7 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                                 AUTO_CASTING_IN_PARAMETER_FIELD_TIP: true,
                                 CONCURRENCY: true,
                                 DEBOUNCE_EMIT_CHANGE: true,
+                                DISABLE_AUTO_FOCUS_PARAMETERS: true,
                                 DISABLE_TOKEN_PICKER_COMPACT_MODE: true,
                                 FILTER_TOKEN_PICKER_WITH_TYPE_AND_FORMAT: true,
                                 FX_TOKEN: true,
