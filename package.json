@@ -648,6 +648,7 @@
     },
     "dependencies": {
         "azure-arm-logic": "^6.0.0",
+        "lodash": ">=4.17.11",
         "request": "^2.88.0",
         "request-promise-native": "^1.0.5",
         "vscode-azureextensionui": "^0.16.4",
