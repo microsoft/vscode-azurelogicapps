@@ -166,8 +166,6 @@ export function getWebviewContent({ authorization, location, resourceGroupName, 
                     "office-ui-fabric-react": "office-ui-fabric-react.min",
                     "prop-types": "prop-types.min",
                     "react": "react.production.min",
-                    "react-dnd": "react-dnd-bundle/react-dnd/dist/ReactDnD.min",
-                    "react-dnd-html5-backend": "react-dnd-bundle/react-dnd-html5-backend/dist/ReactDnDHTML5Backend.min",
                     "react-dom": "react-dom.production.min",
                     "react-draft-wysiwyg": "react-draft-wysiwyg.min",
                     "reselect": "reselect",
@@ -388,14 +386,10 @@ export function getWebviewContent({ authorization, location, resourceGroupName, 
                         }
 
                         async function renderMonitor(runId) {
-                            try {
-                                disposeMonitor();
-                                monitor = new designercore.Monitor(flowConfigurationOptions, element);
-                                await monitor.loadRun(runId);
-                                monitor.render();
-                            } catch (reason) {
-                                monitor.render();
-                            }
+                            disposeMonitor();
+                            monitor = new designercore.Monitor(flowConfigurationOptions, element);
+                            await monitor.loadRun(runId);
+                            monitor.render();
                         }
 
                         function disposeMonitor() {

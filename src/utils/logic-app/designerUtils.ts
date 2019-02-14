@@ -176,8 +176,6 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                     "office-ui-fabric-react": "office-ui-fabric-react.min",
                     "prop-types": "prop-types.min",
                     "react": "react.production.min",
-                    "react-dnd": "react-dnd-bundle/react-dnd/dist/ReactDnD.min",
-                    "react-dnd-html5-backend": "react-dnd-bundle/react-dnd-html5-backend/dist/ReactDnDHTML5Backend.min",
                     "react-dom": "react-dom.production.min",
                     "react-draft-wysiwyg": "react-draft-wysiwyg.min",
                     "reselect": "reselect",
