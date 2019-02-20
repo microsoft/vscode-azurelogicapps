@@ -189,7 +189,8 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                         "deps": ["prop-types", "react", "react-dom", "tslib"],
                         "exports": "Fabric"
                     }
-                }
+                },
+                waitSeconds: 0
             });
 
             r(["immutable", "react", "react-dom"], (Immutable, React, ReactDOM) => {
@@ -440,7 +441,6 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                                 DEBOUNCE_EMIT_CHANGE: true,
                                 DISABLE_AUTO_FOCUS_PARAMETERS: true,
                                 DISABLE_TOKEN_PICKER_COMPACT_MODE: true,
-                                FILTER_TOKEN_PICKER_WITH_TYPE_AND_FORMAT: true,
                                 FX_TOKEN: true,
                                 FX_TOKEN_FOR_CONDITION: true,
                                 GATEWAY_FOR_CONNECTION: true,
@@ -458,6 +458,7 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                                 SHOW_TOKENS_FOR_FOREACH: !!options.featureFlags && !!options.featureFlags.showforeachtokens,
                                 SHOW_TRIGGER_RECURRENCE: true,
                                 SHOW_VARIABLE_ACTIONS: true,
+                                STATIC_RESULT: false,
                                 SUPPORT_NESTED_FOREACH_UI: true,
                                 SUPPORT_PAN_AND_ZOOM: true,
                                 SUPPORT_PEEK: true,
