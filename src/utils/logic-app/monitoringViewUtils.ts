@@ -179,7 +179,8 @@ export function getWebviewContent({ authorization, location, resourceGroupName, 
                         "deps": ["prop-types", "react", "react-dom", "tslib"],
                         "exports": "Fabric"
                     }
-                }
+                },
+                waitSeconds: 0
             });
 
             r(["immutable", "react", "react-dom"], (Immutable, React, ReactDOM) => {
