@@ -437,6 +437,7 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                             const featuresToEnable = {
                                 ALLOW_EMPTY_DEFINITION: true,
                                 AUTO_CASTING_IN_PARAMETER_FIELD_TIP: true,
+                                COLLAPSE_ALL_CARDS: true,
                                 CONCURRENCY: true,
                                 DEBOUNCE_EMIT_CHANGE: true,
                                 DISABLE_AUTO_FOCUS_PARAMETERS: true,
