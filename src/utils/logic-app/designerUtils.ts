@@ -350,6 +350,10 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                                 });
                             };
 
+                            const operationManifestServiceFactory = () => {
+                                return new designercore.LogicAppsOperationManifestService();
+                            };
+
                             const workflowServiceFactory = analytics => {
                                 return new designercore.LogicAppsWorkflowService({
                                     analytics,
@@ -444,23 +448,17 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                                 DISABLE_TOKEN_PICKER_COMPACT_MODE: true,
                                 FX_TOKEN: true,
                                 FX_TOKEN_FOR_CONDITION: true,
-                                GATEWAY_FOR_CONNECTION: true,
                                 HTML_EDITOR: true,
-                                INITIALIZE_DYNAMIC_CONTENT_ASYNC: true,
                                 NEW_CONDITION_RULES_BUILDER: true,
                                 NEW_RECOMMENDATION_CARD_WITH_FOR_YOU: true,
                                 NEW_RECOMMENDATION_CARD_WITH_MODULES: true,
                                 NEW_SCHEMA_EDITOR: true,
                                 RAW_MODE: true,
                                 SHOW_CONNECTION_NAME: true,
-                                SHOW_INSERT_ACTION_BUTTON: true,
                                 SHOW_PARENT_OBJECT_FOR_OUTPUTS: true,
-                                SHOW_SOFT_LANDING_TIPS: true,
                                 SHOW_TOKENS_FOR_FOREACH: !!options.featureFlags && !!options.featureFlags.showforeachtokens,
                                 SHOW_TRIGGER_RECURRENCE: true,
-                                SHOW_VARIABLE_ACTIONS: true,
                                 STATIC_RESULT: false,
-                                SUPPORT_NESTED_FOREACH_UI: true,
                                 SUPPORT_PAN_AND_ZOOM: true,
                                 SUPPORT_PEEK: true,
                                 TOKEN_COPY_PASTE: true,
@@ -531,6 +529,7 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                                 identityServiceFactory,
                                 locale: $locale,
                                 oauthService,
+                                operationManifestServiceFactory,
                                 prefetchedData: {
                                     connectionProviders: !!options.connectionProviders ? JSON.parse(options.connectionProviders) : undefined
                                 },
