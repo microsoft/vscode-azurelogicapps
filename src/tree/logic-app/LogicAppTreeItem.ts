@@ -119,10 +119,8 @@ export class LogicAppTreeItem implements IAzureParentTreeItem {
 
     public async update(definition: string): Promise<string> {
         const workflow: Workflow = {
-            definition: JSON.parse(definition),
-            integrationAccount: this.workflow.integrationAccount || undefined,
-            location: this.workflow.location,
-            tags: this.workflow.tags || undefined
+            ...this.workflow,
+            definition: JSON.parse(definition)
         };
 
         const updatedWorkflow = await this.client.workflows.createOrUpdate(this.resourceGroupName, this.workflowName, workflow);
