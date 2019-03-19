@@ -5,7 +5,7 @@ All notable changes to the "vscode-logicapps" extension will be documented in th
 
 ## [0.1.13] - 2019-03-21
 ### Changed
-- Update designer version to 1.40318.1.1
+- Update designer version to 1.40318.1.2
 
 ### Fixed
 - #79 - Include $connections parameter when updating Logic Apps
