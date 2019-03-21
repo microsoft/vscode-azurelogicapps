@@ -320,6 +320,10 @@ export function getWebviewContent({ authorization, location, resourceGroupName, 
                                 });
                             };
 
+                            const operationManifestServiceFactory = () => {
+                                return new designercore.LogicAppsOperationManifestService();
+                            };
+
                             const runServiceFactory = analytics => {
                                 return new designercore.LogicAppsRunService({
                                     analytics,
@@ -359,9 +363,7 @@ export function getWebviewContent({ authorization, location, resourceGroupName, 
                                     EXPRESSION_TRACE: true,
                                     FX_TOKEN: true,
                                     FX_TOKEN_FOR_CONDITION: true,
-                                    INITIALIZE_DYNAMIC_CONTENT_ASYNC: true,
                                     LOAD_RUN_ACTION_INPUTS_OUTPUTS_ASYNC: true,
-                                    SHOW_VARIABLE_ACTIONS: true,
                                     SHOW_WEBHOOK_REQUEST_HISTORY: true,
                                     SUPPORT_PAN_AND_ZOOM: true,
                                     USE_NEW_EXPRESSION_PARSER: true
@@ -375,6 +377,7 @@ export function getWebviewContent({ authorization, location, resourceGroupName, 
                                 hostVersion: options.extensionVersion,
                                 identifier: "",
                                 oauthService,
+                                operationManifestServiceFactory,
                                 runInstanceServiceFactory,
                                 runServiceFactory,
                                 startTelemetryPublish: true,
