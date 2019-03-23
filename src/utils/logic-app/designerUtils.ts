@@ -51,11 +51,10 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
         (global => {
             "use strict";
 
-            global.publicPath = "https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/EMAExtension/Client/logicappdesigner/";
-
             const $locale = "en";
 
             const baseUrl = "https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/EMAExtension/Client/logicappdesigner/";
+            global.publicPath = baseUrl;
 
             function getMonacoLocale(locale) {
                 // Mapping of the languages Monaco editor supports. Default to english for non-supported languages.
