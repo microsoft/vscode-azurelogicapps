@@ -51,6 +51,8 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
         (global => {
             "use strict";
 
+            global.publicPath = "https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/EMAExtension/Client/logicappdesigner/";
+
             const $locale = "en";
 
             const baseUrl = "https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/EMAExtension/Client/logicappdesigner/";
@@ -165,7 +167,7 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                     "@uifabric/styling/lib": "@uifabric/styling",
                     "@uifabric/utilities/lib": "@uifabric/utilities",
                     "cds-control-expression": "cds-control-expression",
-                    "core/main": "core.all.min",
+                    "core/main": "core.designer.min",
                     "draft-js": "draft.min",
                     "draft-js-export-html": "draft-js-export-html.min",
                     "draft-js-import-html": "draft-js-import-html.min",
