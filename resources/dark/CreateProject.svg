@@ -1,0 +1,8 @@
+<svg version="1.1" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+ <style>.icon-canvas-transparent{opacity:0;fill:#2d2d30}.icon-vs-out{fill:#2d2d30}.icon-folder{fill:#c09553}.icon-vs-fg{fill:#2b282e}.icon-vs-bg{fill:#c5c5c5}</style>
+ <path class="icon-canvas-transparent" d="M0 0h16v16H0V0z"/>
+ <path class="icon-vs-out" d="M14.996 9.418V10H16v1.352l-1.004.96v.188c0 .827-.673 1.5-1.5 1.5h-.266l-2.092 2H9.441l.961-2H1.5C.673 14 0 13.327 0 12.5v-10C0 1.673.673 1 1.5 1h8.11l1 2h2.886c.827 0 1.5.673 1.5 1.5V7H16v1.414l-1.004 1.004z" display="none"/>
+ <path class="icon-vs-fg" d="M2 3h6.374l.5 1H2V3z" display="none"/>
+ <path class="icon-folder" d="M13.996 7V4.5a.5.5 0 0 0-.5-.5H9.992l-1-2H1.5a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h6.882l3-6h2.614zM2 4V3h6.374l.5 1H2z"/>
+ <path class="st1" d="m14.868 12.281h0.86694v2.1669h-2.1669v-2.1669h0.86694v-0.86694h-3.9v0.86694h0.86694v2.1669h-2.1669v-2.1669h0.86694v-1.3h2.1669v-0.86694h-0.86694v-2.1669h2.1669v2.1669h-0.86694v0.86694h2.1669zm-3.9 1.7331v-1.3h-1.3v1.3zm0.86694-5.6331v1.3h1.3v-1.3zm3.4669 5.6331v-1.3h-1.3v1.3z" fill="#c5c5c5" stroke-width=".8125"/>
+</svg>
