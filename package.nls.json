@@ -1,7 +1,5 @@
 {
     "azIntegrationAccounts.delete": "Delete",
-    "azIntegrationAccounts.deleteIntegrationAccountPrompt": "Are you sure that you want to delete the whole integration account? This can not be undone.",
-    "azIntegrationAccounts.deleting": "Deleting",
     "azIntegrationAccounts.loadMore": "Load More...",
     "azIntegrationAccounts.new": "New",
     "azIntegrationAccounts.openInEditor": "Open in Editor",

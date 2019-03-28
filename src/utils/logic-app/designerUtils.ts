@@ -54,6 +54,7 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
             const $locale = "en";
 
             const baseUrl = "https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/EMAExtension/Client/logicappdesigner/";
+            global.publicPath = baseUrl;
 
             function getMonacoLocale(locale) {
                 // Mapping of the languages Monaco editor supports. Default to english for non-supported languages.
@@ -165,7 +166,7 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                     "@uifabric/styling/lib": "@uifabric/styling",
                     "@uifabric/utilities/lib": "@uifabric/utilities",
                     "cds-control-expression": "cds-control-expression",
-                    "core/main": "core.all.min",
+                    "core/main": "core.designer.min",
                     "draft-js": "draft.min",
                     "draft-js-export-html": "draft-js-export-html.min",
                     "draft-js-import-html": "draft-js-import-html.min",
