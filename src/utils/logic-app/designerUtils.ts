@@ -376,7 +376,9 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                                     \`/subscriptions/\${options.subscriptionId}/providers/Microsoft.Web/locations/\${options.location}/managedApis/azureblob\`,
                                     \`\${options.integrationServiceEnvironmentId}/managedApis/azureblob\`,
                                     \`/subscriptions/\${options.subscriptionId}/providers/Microsoft.Web/locations/\${options.location}/managedApis/cognitiveservicestextanalytics\`,
-                                    \`\${options.integrationServiceEnvironmentId}/managedApis/cognitiveservicestextanalytics\`
+                                    \`\${options.integrationServiceEnvironmentId}/managedApis/cognitiveservicestextanalytics\`,
+                                    \`/subscriptions/\${options.subscriptionId}/providers/Microsoft.Web/locations/\${options.location}/managedApis/keyvault\`,
+                                    \`\${options.integrationServiceEnvironmentId}/managedApis/keyvault\`
                                 ]
                                 : [
                                     "connectionProviders/control",
@@ -387,6 +389,7 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                                     \`/subscriptions/\${options.subscriptionId}/providers/Microsoft.Web/locations/\${options.location}/managedApis/office365\`,
                                     \`/subscriptions/\${options.subscriptionId}/providers/Microsoft.Web/locations/\${options.location}/managedApis/azureblob\`,
                                     \`/subscriptions/\${options.subscriptionId}/providers/Microsoft.Web/locations/\${options.location}/managedApis/cognitiveservicestextanalytics\`,
+                                    \`/subscriptions/\${options.subscriptionId}/providers/Microsoft.Web/locations/\${options.location}/managedApis/keyvault\`
                                 ];
 
                             const promotedConnectorsForTriggers = iseSupported && options.integrationServiceEnvironmentId
