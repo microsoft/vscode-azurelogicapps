@@ -2,7 +2,7 @@
     "name": "vscode-logicapps",
     "displayName": "Azure Logic Apps",
     "description": "%extension.description%",
-    "version": "0.1.16",
+    "version": "0.1.17",
     "publisher": "ms-azuretools",
     "icon": "resources/azLogicApps.png",
     "aiKey": "b6385546-3be0-489c-a298-baccd6c152fb",
@@ -644,7 +644,7 @@
         "tslint": "^5.15.0",
         "typescript": "^3.4.3",
         "vsce": "^1.59.0",
-        "vscode": "^1.1.29"
+        "vscode": "^1.1.33"
     },
     "dependencies": {
         "azure-arm-logic": "^6.0.0",
