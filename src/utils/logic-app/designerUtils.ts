@@ -378,7 +378,9 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                                     \`/subscriptions/\${options.subscriptionId}/providers/Microsoft.Web/locations/\${options.location}/managedApis/cognitiveservicestextanalytics\`,
                                     \`\${options.integrationServiceEnvironmentId}/managedApis/cognitiveservicestextanalytics\`,
                                     \`/subscriptions/\${options.subscriptionId}/providers/Microsoft.Web/locations/\${options.location}/managedApis/keyvault\`,
-                                    \`\${options.integrationServiceEnvironmentId}/managedApis/keyvault\`
+                                    \`\${options.integrationServiceEnvironmentId}/managedApis/keyvault\`,
+                                    'builtin/as2',
+                                    'builtin/rosettanet'
                                 ]
                                 : [
                                     "connectionProviders/control",
@@ -389,7 +391,9 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                                     \`/subscriptions/\${options.subscriptionId}/providers/Microsoft.Web/locations/\${options.location}/managedApis/office365\`,
                                     \`/subscriptions/\${options.subscriptionId}/providers/Microsoft.Web/locations/\${options.location}/managedApis/azureblob\`,
                                     \`/subscriptions/\${options.subscriptionId}/providers/Microsoft.Web/locations/\${options.location}/managedApis/cognitiveservicestextanalytics\`,
-                                    \`/subscriptions/\${options.subscriptionId}/providers/Microsoft.Web/locations/\${options.location}/managedApis/keyvault\`
+                                    \`/subscriptions/\${options.subscriptionId}/providers/Microsoft.Web/locations/\${options.location}/managedApis/keyvault\`,
+                                    'builtin/as2',
+                                    'builtin/rosettanet'
                                 ];
 
                             const promotedConnectorsForTriggers = iseSupported && options.integrationServiceEnvironmentId
