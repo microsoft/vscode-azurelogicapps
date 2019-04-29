@@ -385,6 +385,7 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                                 : [
                                     "connectionProviders/control",
                                     "connectionProviders/http",
+                                    "builtin/code",
                                     \`/subscriptions/\${options.subscriptionId}/providers/Microsoft.Web/locations/\${options.location}/managedApis/servicebus\`,
                                     \`/subscriptions/\${options.subscriptionId}/providers/Microsoft.Web/locations/\${options.location}/managedApis/sql\`,
                                     "connectionProviders/function",
