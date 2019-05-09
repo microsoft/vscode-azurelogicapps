@@ -161,6 +161,10 @@
             {
                 "category": "Azure Logic Apps",
                 "command": "azureLogicApps.refresh",
+                "icon": {
+                    "dark": "resources/dark/Refresh.svg",
+                    "light": "resources/light/Refresh.svg"
+                },
                 "title": "%azLogicApps.refresh%"
             },
             {
@@ -260,6 +264,10 @@
             {
                 "category": "Azure Integration Accounts",
                 "command": "azIntegrationAccounts.refresh",
+                "icon": {
+                    "dark": "resources/dark/Refresh.svg",
+                    "light": "resources/light/Refresh.svg"
+                },
                 "title": "%azIntegrationAccounts.refresh%"
             },
             {
@@ -583,8 +591,18 @@
                     "when": "view == azureLogicAppsExplorer"
                 },
                 {
+                    "command": "azureLogicApps.refresh",
+                    "group": "navigation@3",
+                    "when": "view == azureLogicAppsExplorer"
+                },
+                {
                     "command": "azIntegrationAccounts.selectSubscriptions",
                     "group": "navigation@1",
+                    "when": "view == azureIntegrationAccountsExplorer"
+                },
+                {
+                    "command": "azIntegrationAccounts.refresh",
+                    "group": "navigation@2",
                     "when": "view == azureIntegrationAccountsExplorer"
                 }
             ]
