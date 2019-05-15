@@ -8,7 +8,7 @@ Thanks, Aaron Kunz (@DAXaholic), for contributing the new "Refresh" button!
 
 ### Changed
 - #88 - Add "Refresh" button to tree view
-- Update designer version to 1.40513.1.1
+- Update designer version to 1.40513.1.2
 
 ## [0.1.20] - 2019-05-09
 ### Changed
