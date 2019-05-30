@@ -3,6 +3,10 @@ All notable changes to the "vscode-logicapps" extension will be documented in th
 
 ## [Unreleased]
 
+## [0.1.22] - 2019-05-30
+### Changed
+- Update designer version to 1.40527.1.3
+
 ## [0.1.21] - 2019-05-16
 Thanks, Aaron Kunz (@DAXaholic), for contributing the new "Refresh" button!
 
