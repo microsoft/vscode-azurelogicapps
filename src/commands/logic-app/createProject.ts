@@ -6,6 +6,7 @@
 import * as fse from "fs-extra";
 import * as vscode from "vscode";
 import { ext } from "../../extensionVariables";
+import { localize } from "../../localize";
 import { openFolder, selectWorkspaceFolder } from "../../utils/workspaceUtils";
 
 export async function createProject(): Promise<void> {
@@ -14,8 +15,15 @@ export async function createProject(): Promise<void> {
         return;
     }
 
-    await fse.ensureDir(fsPath);
+    const options: vscode.ProgressOptions = {
+        location: vscode.ProgressLocation.Notification,
+        title: localize("azLogicApp.creatingProject", "Creating project...")
+    };
 
-    const uri = vscode.Uri.file(fsPath);
-    await openFolder(uri);
+    await vscode.window.withProgress(options, async () => {
+        await fse.ensureDir(fsPath);
+
+        const uri = vscode.Uri.file(fsPath);
+        await openFolder(uri);
+    });
 }
