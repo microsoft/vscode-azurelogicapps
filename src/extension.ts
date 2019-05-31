@@ -11,7 +11,10 @@ import { deleteIntegrationAccount, viewIntegrationAccountProperties } from "./co
 import { deleteIntegrationAccountMap, openIntegrationAccountMapInEditor, viewIntegrationAccountMapProperties } from "./commands/integration-account/integrationAccountMapCommands";
 import { deleteIntegrationAccountPartner, openIntegrationAccountPartnerInEditor, viewIntegrationAccountPartnerProperties } from "./commands/integration-account/integrationAccountPartnerCommands";
 import { deleteIntegrationAccountSchema, openIntegrationAccountSchemaInEditor, viewIntegrationAccountSchemaProperties } from "./commands/integration-account/integrationAccountSchemaCommands";
+import { addBuildDefinitionToProject } from "./commands/logic-app/addBuildDefinitionToProject";
+import { addLogicAppToProject } from "./commands/logic-app/addLogicAppToProject";
 import { createLogicApp } from "./commands/logic-app/createLogicApp";
+import { createProject } from "./commands/logic-app/createProject";
 import { deleteLogicApp } from "./commands/logic-app/deleteLogicApp";
 import { disableLogicApp } from "./commands/logic-app/disableLogicApp";
 import { enableLogicApp } from "./commands/logic-app/enableLogicApp";
@@ -74,8 +77,29 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         const logicAppEditor = new LogicAppEditor();
         context.subscriptions.push(logicAppEditor);
 
+        registerCommand("azureLogicApps.addBuildDefinitionToProject", async (uri?: vscode.Uri) => {
+            if (uri) {
+                const workspaceFolder = vscode.workspace.getWorkspaceFolder(uri);
+                if (workspaceFolder) {
+                    await addBuildDefinitionToProject(workspaceFolder.uri.fsPath);
+                } else {
+                    await addBuildDefinitionToProject(uri.fsPath);
+                }
+            } else {
+                await addBuildDefinitionToProject();
+            }
+        });
+
+        registerCommand("azureLogicApps.addLogicAppToProject", async (node: IAzureNode) => {
+            await addLogicAppToProject(tree, node);
+        });
+
         registerCommand("azureLogicApps.createLogicApp", async (node: IAzureParentNode) => {
             await createLogicApp(tree, logicAppEditor, node);
+        });
+
+        registerCommand("azureLogicApps.createProject", async () => {
+            await createProject();
         });
 
         registerCommand("azureLogicApps.deleteLogicApp", async (node: IAzureNode) => {
@@ -229,26 +253,26 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         registerEvent("azIntegrationAccounts.integrationAccountAgreementEditor.onDidSaveTextDocument",
             vscode.workspace.onDidSaveTextDocument,
             async function (this: IActionContext, document: vscode.TextDocument): Promise<void> {
-            await integrationAccountAgreementEditor.onDidSaveTextDocument(this, context.globalState, document);
-        });
+                await integrationAccountAgreementEditor.onDidSaveTextDocument(this, context.globalState, document);
+            });
 
         registerEvent("azIntegrationAccounts.integrationAccountMapEditor.onDidSaveTextDocument",
             vscode.workspace.onDidSaveTextDocument,
             async function (this: IActionContext, document: vscode.TextDocument): Promise<void> {
-            await integrationAccountMapEditor.onDidSaveTextDocument(this, context.globalState, document);
-        });
+                await integrationAccountMapEditor.onDidSaveTextDocument(this, context.globalState, document);
+            });
 
         registerEvent("azIntegrationAccounts.integrationAccountPartnerEditor.onDidSaveTextDocument",
             vscode.workspace.onDidSaveTextDocument,
             async function (this: IActionContext, document: vscode.TextDocument): Promise<void> {
-            await integrationAccountPartnerEditor.onDidSaveTextDocument(this, context.globalState, document);
-        });
+                await integrationAccountPartnerEditor.onDidSaveTextDocument(this, context.globalState, document);
+            });
 
         registerEvent("azIntegrationAccounts.integrationAccountSchemaEditor.onDidSaveTextDocument",
             vscode.workspace.onDidSaveTextDocument,
             async function (this: IActionContext, document: vscode.TextDocument): Promise<void> {
-            await integrationAccountSchemaEditor.onDidSaveTextDocument(this, context.globalState, document);
-        });
+                await integrationAccountSchemaEditor.onDidSaveTextDocument(this, context.globalState, document);
+            });
 
         registerCommand("azIntegrationAccounts.openAgreementInEditor", async (node?: IAzureNode) => {
             await openIntegrationAccountAgreementInEditor(integrationAccountTree, integrationAccountAgreementEditor, node);

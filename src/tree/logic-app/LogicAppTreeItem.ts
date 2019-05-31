@@ -5,10 +5,13 @@
 
 import LogicAppsManagementClient from "azure-arm-logic";
 import { Sku, Workflow } from "azure-arm-logic/lib/models";
+import * as fse from "fs-extra";
+import * as path from "path";
 import { IAzureParentTreeItem, IAzureTreeItem } from "vscode-azureextensionui";
 import { localize } from "../../localize";
 import { Callbacks, getCallbacks } from "../../utils/logic-app/callbackUtils";
 import { ConnectionReferences, getConnectionReferencesForLogicApp } from "../../utils/logic-app/connectionReferenceUtils";
+import { generateParameters, generateTemplate } from "../../utils/logic-app/templateUtils";
 import { getIconPath } from "../../utils/nodeUtils";
 import { LogicAppRunsTreeItem } from "./LogicAppRunsTreeItem";
 import { LogicAppTriggersTreeItem } from "./LogicAppTriggersTreeItem";
@@ -63,6 +66,14 @@ export class LogicAppTreeItem implements IAzureParentTreeItem {
 
     public hasMoreChildren(): boolean {
         return false;
+    }
+
+    public async addToProject(workspaceFolderPath: string): Promise<void> {
+        const template = generateTemplate(this.workflow!);
+        await fse.writeJSON(path.join(workspaceFolderPath, `${this.workflowName!}.definition.json`), template, { spaces: 4 });
+
+        const parameters = generateParameters(this.workflow!);
+        await fse.writeJSON(path.join(workspaceFolderPath, `${this.workflowName!}.parameters.json`), parameters, { spaces: 4 });
     }
 
     public async deleteTreeItem(): Promise<void> {
