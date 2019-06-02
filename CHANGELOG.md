@@ -3,6 +3,14 @@ All notable changes to the "vscode-logicapps" extension will be documented in th
 
 ## [Unreleased]
 
+## [0.2.0] - 2019-06-03
+### Added
+- Local Projects
+  - Logic Apps
+    - Download as ARM template and template parameter files
+    - Manage Logic App files in multi-root workspaces for version control
+    - Create Azure DevOps pipeline YAML definitions
+
 ## [0.1.22] - 2019-05-30
 ### Changed
 - Update designer version to 1.40527.1.3
