@@ -10,5 +10,6 @@
     "typescript.tsc.autoDetect": "off",
     "cSpell.words": [
         "azureextensionui"
-    ]
+    ],
+    "typescript.tsdk": "node_modules\\typescript\\lib"
 }
