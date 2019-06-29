@@ -8,5 +8,4 @@
 // import * as vscode from 'vscode';
 
 suite("Extension Tests", (): void => {
-    // tslint:disable-line: no-empty
 });

@@ -24,13 +24,13 @@ export function generateBuildDefinition(options: IGenerateBuildDefinitionOptions
                 repo: "self"
             }
         ],
-        pool: { // tslint:disable-line: object-literal-sort-keys
+        pool: {
             name: "Hosted"
         },
         steps: [
             {
                 task: "AzureResourceGroupDeployment@2",
-                displayName: `Azure Deployment: Create Or Update Resource Group action on ${resourceGroupName}`, // tslint:disable-line: object-literal-sort-keys
+                displayName: `Azure Deployment: Create Or Update Resource Group action on ${resourceGroupName}`,
                 inputs: {
                     azureSubscription,
                     csmFile,
