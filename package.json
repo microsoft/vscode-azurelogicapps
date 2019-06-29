@@ -695,12 +695,14 @@
         ]
     },
     "scripts": {
-        "compile": "tsc -p ./",
+        "compile": "webpack --mode production",
         "lint": "tslint src/**/*.ts --project tsconfig.json -e src/**/*.d.ts -t verbose",
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "npm run compile && node ./node_modules/vscode/bin/test",
         "vscode:prepublish": "npm run compile",
-        "watch": "tsc -watch -p ./"
+        "watch": "webpack --mode development --watch",
+        "webpack": "webpack --mode production",
+        "webpack-dev": "webpack --mode development --watch"
     },
     "devDependencies": {
         "@types/fs-extra": "^5.0.5",
@@ -710,10 +712,13 @@
         "@types/node": "^7.0.67",
         "@types/request-promise-native": "^1.0.15",
         "querystringify": ">=2.0.0",
+        "ts-loader": "^6.0.4",
         "tslint": "^5.18.0",
         "typescript": "^3.5.2",
         "vsce": "^1.64.0",
-        "vscode": "^1.1.33"
+        "vscode": "^1.1.33",
+        "webpack": "^4.35.0",
+        "webpack-cli": "^3.3.5"
     },
     "dependencies": {
         "azure-arm-logic": "^6.0.0",
@@ -724,8 +729,8 @@
         "lodash": ">=4.17.11",
         "request": "^2.88.0",
         "request-promise-native": "^1.0.5",
-        "vscode-azureextensionui": "^0.16.4",
-        "vscode-extension-telemetry": "0.0.15",
+        "vscode-azureextensionui": "^0.16.5",
+        "vscode-extension-telemetry": "0.0.18",
         "vscode-nls": "^3.2.4"
     },
     "extensionDependencies": [
