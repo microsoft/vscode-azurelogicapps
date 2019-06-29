@@ -388,21 +388,44 @@ export function getWebviewContent({ authorization, location, resourceGroupName, 
                             monitor = window.monitor = new designercore.Monitor(flowConfigurationOptions, element);
                         }
 
-                        async function renderMonitor(runId) {
-                            disposeMonitor();
-                            monitor = new designercore.Monitor(flowConfigurationOptions, element);
-                            await monitor.loadRun(runId);
-                            monitor.render();
-                        }
-
-                        function disposeMonitor() {
-                            if (monitor) {
-                                ReactDOM.unmountComponentAtNode(element);
-                                monitor = null;
-                            }
-                        }
-
                         (async () => {
+                            function changeTheme() {
+                                const { classList } = document.body;
+                                const isInverted = classList.contains("vscode-dark");
+                                const theme = isInverted ? "dark" : "light";
+                                if (!classList.contains(theme)) {
+                                    classList.remove("dark", "light");
+                                    classList.add(theme);
+                                    monitor.changeTheme(theme);
+                                }
+                            }
+
+                            async function renderMonitor(runId) {
+                                disposeMonitor();
+                                monitor = new designercore.Monitor(flowConfigurationOptions, element);
+                                await monitor.loadRun(runId);
+                                monitor.render();
+                                changeTheme();
+
+                                const callback = mutations => {
+                                    if (mutations.length > 0) {
+                                        const mutation = mutations[0];
+                                        if (mutation.target instanceof Element) {
+                                            changeTheme();
+                                        }
+                                    }
+                                };
+                                const observer = new MutationObserver(callback);
+                                observer.observe(document.body, { attributeFilter: ["class"], attributes: true });
+                            }
+
+                            function disposeMonitor() {
+                                if (monitor) {
+                                    ReactDOM.unmountComponentAtNode(element);
+                                    monitor = null;
+                                }
+                            }
+
                             const options = {
                                 apiManagementApiVersion: "2015-09-15",
                                 armApiVersion: "2017-08-01",
