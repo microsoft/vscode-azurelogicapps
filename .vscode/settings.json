@@ -11,5 +11,9 @@
     "cSpell.words": [
         "azureextensionui"
     ],
-    "typescript.tsdk": "node_modules\\typescript\\lib"
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "eslint.validate": [
+        { "language": "typescript", "autoFix": true },
+        { "language": "typescriptreact", "autoFix": true }
+    ]
 }

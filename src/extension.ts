@@ -66,7 +66,6 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         ext.reporter = reporter;
         context.subscriptions.push(reporter);
     } catch (error) {
-        // tslint:disable-line: no-empty
     }
 
     const ui = new AzureUserInput(context.globalState);
@@ -327,5 +326,4 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
 }
 
 export async function deactivate(): Promise<void> {
-    // tslint:disable-line: no-empty
 }
