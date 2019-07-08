@@ -3,6 +3,11 @@ All notable changes to the "vscode-logicapps" extension will be documented in th
 
 ## [Unreleased]
 
+## [0.2.5] - 2019-07-11
+### Changed
+- Update designer version to 1.40708.1.1
+- Use Webpack to bundle extension scripts for faster extension loads
+
 ## [0.2.4] - 2019-06-27
 ### Changed
 - Update designer version to 1.40624.1.5
