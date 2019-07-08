@@ -3,9 +3,10 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import * as fs from "fs";
 import * as vscode from "vscode";
 import { AzureTreeDataProvider, AzureUserInput, callWithTelemetryAndErrorHandling, IActionContext, IAzureNode, IAzureParentNode, registerCommand, registerEvent, registerUIExtensionVariables } from "vscode-azureextensionui";
-import TelemetryReporter from "vscode-azureextensionui/node_modules/vscode-extension-telemetry";
+import TelemetryReporter from "vscode-extension-telemetry";
 import { deleteIntegrationAccountAgreement, openIntegrationAccountAgreementInEditor, viewIntegrationAccountAgreementProperties } from "./commands/integration-account/IntegrationAccountAgreementCommands";
 import { deleteIntegrationAccount, viewIntegrationAccountProperties } from "./commands/integration-account/integrationAccountCommands";
 import { deleteIntegrationAccountMap, openIntegrationAccountMapInEditor, viewIntegrationAccountMapProperties } from "./commands/integration-account/integrationAccountMapCommands";
@@ -45,6 +46,11 @@ import { IntegrationAccountProvider } from "./tree/integration-account/Integrati
 import { LogicAppsProvider } from "./tree/logic-app/LogicAppsProvider";
 import { createChildNode } from "./utils/commandUtils";
 
+function readJson(path: string) {
+    const json = fs.readFileSync(path, "utf8");
+    return JSON.parse(json);
+}
+
 export async function activate(context: vscode.ExtensionContext): Promise<void> {
     registerUIExtensionVariables(ext);
     ext.context = context;
@@ -55,7 +61,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
 
     let reporter: TelemetryReporter | undefined;
     try {
-        const { aiKey, name, version } = require(context.asAbsolutePath("./package.json"));
+        const { aiKey, name, version } = readJson(context.asAbsolutePath("./package.json"));
         reporter = new TelemetryReporter(name, version, aiKey);
         ext.reporter = reporter;
         context.subscriptions.push(reporter);
