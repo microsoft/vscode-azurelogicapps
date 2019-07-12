@@ -467,6 +467,7 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                                 SUPPORT_PAN_AND_ZOOM: true,
                                 SUPPORT_PEEK: true,
                                 TOKEN_COPY_PASTE: true,
+                                TOPOLOGY_RENDER: true,
                                 USE_CONNECTION_CONFIGURATION_SERVICE: true,
                                 USE_DICTIONARY_EDITOR: true,
                                 USE_EDITOR_INPUT: true,
