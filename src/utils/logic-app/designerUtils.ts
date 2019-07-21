@@ -464,6 +464,7 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                                 SHOW_TOKENS_FOR_FOREACH: !!options.featureFlags && !!options.featureFlags.showforeachtokens,
                                 SHOW_TRIGGER_RECURRENCE: true,
                                 STATIC_RESULT: false,
+                                SUPPORT_OBFUSCATION: true,
                                 SUPPORT_PAN_AND_ZOOM: true,
                                 SUPPORT_PEEK: true,
                                 TOKEN_COPY_PASTE: true,
