@@ -721,7 +721,7 @@
         "ts-loader": "^6.0.4",
         "tslint": "^5.18.0",
         "typescript": "^3.5.3",
-        "vsce": "^1.65.0",
+        "vsce": "^1.66.0",
         "vscode": "^1.1.35",
         "webpack": "^4.36.1",
         "webpack-cli": "^3.3.6"
