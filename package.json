@@ -712,7 +712,7 @@
         "@types/mocha": "^2.2.48",
         "@types/node": "^7.10.7",
         "@types/request-promise-native": "^1.0.16",
-        "@types/vscode": "^1.36.0",
+        "@types/vscode": "^1.25.0",
         "@typescript-eslint/eslint-plugin": "^1.13.0",
         "@typescript-eslint/parser": "^1.13.0",
         "ajv": "^6.10.2",
