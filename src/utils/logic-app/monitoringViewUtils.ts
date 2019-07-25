@@ -362,6 +362,7 @@ export function getWebviewContent({ authorization, location, resourceGroupName, 
                                     FX_TOKEN_FOR_CONDITION: true,
                                     LOAD_RUN_ACTION_INPUTS_OUTPUTS_ASYNC: true,
                                     SHOW_WEBHOOK_REQUEST_HISTORY: true,
+                                    SUPPORT_OBFUSCATION: true,
                                     SUPPORT_PAN_AND_ZOOM: true,
                                     USE_NEW_EXPRESSION_PARSER: true
                                 },
