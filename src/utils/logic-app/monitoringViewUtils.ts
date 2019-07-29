@@ -37,14 +37,14 @@ export function getWebviewContent({ authorization, location, resourceGroupName, 
 </head>
 <body>
     <div id="monitoring-view"></div>
-    <script src="https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/EMAExtension/Client/logicappdesigner/require.min.js"></script>
+    <script src="https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/logicappdesigner/require.min.js"></script>
     <script>
         (global => {
             "use strict";
 
             const $locale = "en";
 
-            const baseUrl = "https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/EMAExtension/Client/logicappdesigner/";
+            const baseUrl = "https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/logicappdesigner/";
             global.publicPath = baseUrl;
 
             function getMonacoLocale(locale) {

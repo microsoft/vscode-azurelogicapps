@@ -46,14 +46,14 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
 </head>
 <body>
     <div id="designer"></div>
-    <script src="https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/EMAExtension/Client/logicappdesigner/require.min.js"></script>
+    <script src="https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/logicappdesigner/require.min.js"></script>
     <script>
         (global => {
             "use strict";
 
             const $locale = "en";
 
-            const baseUrl = "https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/EMAExtension/Client/logicappdesigner/";
+            const baseUrl = "https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/logicappdesigner/";
             global.publicPath = baseUrl;
 
             function getMonacoLocale(locale) {
@@ -199,7 +199,7 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                     global.Draft = Draft;
 
                     r(["SwaggerParser", "resources", "core/main", "oauth"], (SwaggerParser, resources, designercore, OAuth) => {
-                        designercore.requireScriptForEditor("https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/EMAExtension/Client/logicappdesigner/monaco/min/vs");
+                        designercore.requireScriptForEditor(\`\${baseUrl}/monaco/min/vs\`);
 
                         const monacoLocale = getMonacoLocale($locale);
 
