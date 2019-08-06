@@ -11,6 +11,10 @@ export namespace DialogResponses {
         title: localize("no", "No")
     };
 
+    export const ok: MessageItem = {
+        title: localize("ok", "OK")
+    };
+
     export const yes: MessageItem = {
         title: localize("yes", "Yes")
     };
