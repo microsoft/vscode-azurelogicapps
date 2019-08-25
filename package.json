@@ -719,12 +719,12 @@
         "eslint": "^5.16.0",
         "querystringify": ">=2.0.0",
         "ts-loader": "^6.0.4",
-        "tslint": "^5.18.0",
+        "tslint": "^5.19.0",
         "typescript": "^3.5.3",
         "vsce": "^1.66.0",
         "vscode": "^1.1.36",
         "webpack": "^4.39.2",
-        "webpack-cli": "^3.3.6"
+        "webpack-cli": "^3.3.7"
     },
     "dependencies": {
         "azure-arm-logic": "^6.0.0",
