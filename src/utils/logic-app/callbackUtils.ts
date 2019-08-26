@@ -13,7 +13,7 @@ export interface ICallback {
     urlTemplate: string;
 }
 
-interface ICallbackUrlAndTriggerName {
+export interface ICallbackUrlAndTriggerName {
     callbackUrl: WorkflowTriggerCallbackUrl;
     triggerName: string;
 }

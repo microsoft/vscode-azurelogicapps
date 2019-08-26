@@ -9,13 +9,13 @@
         "noImplicitReturns": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "outDir": "out",
         "rootDir": "src",
         "sourceMap": true,
         "strict": true,
         "target": "es6"
     },
     "exclude": [
+        "hostsrc",
         "node_modules",
         ".vscode-test"
     ]

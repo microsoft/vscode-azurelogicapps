@@ -2,12 +2,12 @@
     "name": "vscode-logicapps",
     "displayName": "Azure Logic Apps",
     "description": "%extension.description%",
-    "version": "0.2.29",
+    "version": "0.3.0",
     "publisher": "ms-azuretools",
     "icon": "resources/azLogicApps.png",
     "aiKey": "b6385546-3be0-489c-a298-baccd6c152fb",
     "engines": {
-        "vscode": "^1.31.0"
+        "vscode": "^1.38.0"
     },
     "repository": {
         "type": "git",
@@ -73,7 +73,29 @@
         "onCommand:azIntegrationAccounts.viewMapProperties",
         "onCommand:azIntegrationAccounts.viewPartnerProperties",
         "onCommand:azIntegrationAccounts.viewSchemaProperties",
-        "onView:azureIntegrationAccountsExplorer"
+        "onView:azureIntegrationAccountsExplorer",
+        "onCommand:azLogicAppContainers.connectToContainer",
+        "onCommand:azLogicAppContainers.createLogicApp",
+        "onCommand:azLogicAppContainers.deleteConnection",
+        "onCommand:azLogicAppContainers.deleteLogicApp",
+        "onCommand:azLogicAppContainers.disableLogicApp",
+        "onCommand:azLogicAppContainers.disconnect",
+        "onCommand:azLogicAppContainers.enableLogicApp",
+        "onCommand:azLogicAppContainers.loadMore",
+        "onCommand:azLogicAppContainers.openConnectionInEditor",
+        "onCommand:azLogicAppContainers.openInDesigner",
+        "onCommand:azLogicAppContainers.openInEditor",
+        "onCommand:azLogicAppContainers.openRunActionInEditor",
+        "onCommand:azLogicAppContainers.openRunInEditor",
+        "onCommand:azLogicAppContainers.openRunInMonitoringView",
+        "onCommand:azLogicAppContainers.openTriggerInEditor",
+        "onCommand:azLogicAppContainers.openVersionInDesigner",
+        "onCommand:azLogicAppContainers.openVersionInEditor",
+        "onCommand:azLogicAppContainers.promoteVersion",
+        "onCommand:azLogicAppContainers.refresh",
+        "onCommand:azLogicAppContainers.resubmitRun",
+        "onCommand:azLogicAppContainers.runTrigger",
+        "onView:containerLogicAppsExplorer"
     ],
     "main": "./out/extension",
     "contributes": {
@@ -113,17 +135,17 @@
             {
                 "category": "Azure Logic Apps",
                 "command": "azureLogicApps.deleteLogicApp",
-                "title": "%azLogicApps.deleteLogicApp%"
+                "title": "%azLogicApps.delete%"
             },
             {
                 "category": "Azure Logic Apps",
                 "command": "azureLogicApps.disableLogicApp",
-                "title": "%azLogicApps.disableLogicApp%"
+                "title": "%azLogicApps.disable%"
             },
             {
                 "category": "Azure Logic Apps",
                 "command": "azureLogicApps.enableLogicApp",
-                "title": "%azLogicApps.enableLogicApp%"
+                "title": "%azLogicApps.enable%"
             },
             {
                 "category": "Azure Logic Apps",
@@ -341,6 +363,143 @@
                 "category": "Azure Integration Accounts",
                 "command": "azIntegrationAccounts.viewSchemaProperties",
                 "title": "%azIntegrationAccounts.viewProperties%"
+            },
+            {
+                "category": "Azure Logic App Containers",
+                "command": "azLogicAppContainers.connectToContainer",
+                "icon": {
+                    "dark": "resources/dark/Connect.svg",
+                    "light": "resources/light/Connect.svg"
+                },
+                "title": "%azLogicAppContainers.connectToContainer%"
+            },
+            {
+                "category": "Azure Logic App Containers",
+                "command": "azLogicAppContainers.createLogicApp",
+                "icon": {
+                    "dark": "resources/dark/CreateLogicApp.svg",
+                    "light": "resources/light/CreateLogicApp.svg"
+                },
+                "title": "%azLogicApps.createLogicApp%"
+            },
+            {
+                "category": "Azure Logic App Containers",
+                "command": "azLogicAppContainers.deleteConnection",
+                "title": "%azLogicApps.delete%"
+            },
+            {
+                "category": "Azure Logic App Containers",
+                "command": "azLogicAppContainers.deleteLogicApp",
+                "title": "%azLogicApps.delete%"
+            },
+            {
+                "category": "Azure Logic App Containers",
+                "command": "azLogicAppContainers.disableLogicApp",
+                "title": "%azLogicApps.disable%"
+            },
+            {
+                "category": "Azure Logic App Containers",
+                "command": "azLogicAppContainers.disconnect",
+                "title": "%azLogicAppContainers.disconnect%"
+            },
+            {
+                "category": "Azure Logic App Containers",
+                "command": "azLogicAppContainers.enableLogicApp",
+                "title": "%azLogicApps.enable%"
+            },
+            {
+                "category": "Azure Logic Apps Containers",
+                "command": "azLogicAppContainers.loadMore",
+                "title": "%azLogicApps.loadMore%"
+            },
+            {
+                "category": "Azure Logic App Containers",
+                "command": "azLogicAppContainers.openConnectionInEditor",
+                "icon": {
+                    "dark": "resources/dark/Edit.svg",
+                    "light": "resources/light/Edit.svg"
+                },
+                "title": "%azLogicApps.openInEditor%"
+            },
+            {
+                "category": "Azure Logic App Containers",
+                "command": "azLogicAppContainers.openInDesigner",
+                "icon": {
+                    "dark": "resources/dark/Edit.svg",
+                    "light": "resources/light/Edit.svg"
+                },
+                "title": "%azLogicApps.openInDesigner%"
+            },
+            {
+                "category": "Azure Logic App Containers",
+                "command": "azLogicAppContainers.openInEditor",
+                "title": "%azLogicApps.openInEditor%"
+            },
+            {
+                "category": "Azure Logic App Containers",
+                "command": "azLogicAppContainers.openRunActionInEditor",
+                "title": "%azLogicApps.openInEditor%"
+            },
+            {
+                "category": "Azure Logic App Containers",
+                "command": "azLogicAppContainers.openRunInEditor",
+                "title": "%azLogicApps.openInEditor%"
+            },
+            {
+                "category": "Azure Logic App Containers",
+                "command": "azLogicAppContainers.openRunInMonitoringView",
+                "icon": {
+                    "dark": "resources/dark/eye.svg",
+                    "light": "resources/light/eye.svg"
+                },
+                "title": "%azLogicApps.openRunInMonitoringView%"
+            },
+            {
+                "category": "Azure Logic App Containers",
+                "command": "azLogicAppContainers.openTriggerInEditor",
+                "title": "%azLogicApps.openInEditor%"
+            },
+            {
+                "category": "Azure Logic App Containers",
+                "command": "azLogicAppContainers.openVersionInDesigner",
+                "icon": {
+                    "dark": "resources/dark/eye.svg",
+                    "light": "resources/light/eye.svg"
+                },
+                "title": "%azLogicApps.openInDesigner%"
+            },
+            {
+                "category": "Azure Logic App Containers",
+                "command": "azLogicAppContainers.openVersionInEditor",
+                "title": "%azLogicApps.openInEditor%"
+            },
+            {
+                "category": "Azure Logic App Containers",
+                "command": "azLogicAppContainers.promoteVersion",
+                "title": "%azLogicApps.promoteVersion%"
+            },
+            {
+                "category": "Azure Logic App Containers",
+                "command": "azLogicAppContainers.refresh",
+                "icon": {
+                    "dark": "resources/dark/Refresh.svg",
+                    "light": "resources/light/Refresh.svg"
+                },
+                "title": "%azLogicApps.refresh%"
+            },
+            {
+                "category": "Azure Logic App Containers",
+                "command": "azLogicAppContainers.resubmitRun",
+                "title": "%azLogicApps.resubmitRun%"
+            },
+            {
+                "category": "Azure Logic App Containers",
+                "command": "azLogicAppContainers.runTrigger",
+                "icon": {
+                    "dark": "resources/dark/run.svg",
+                    "light": "resources/light/run.svg"
+                },
+                "title": "%azLogicApps.runTrigger%"
             }
         ],
         "viewsContainers": {
@@ -349,6 +508,11 @@
                     "icon": "resources/azure.svg",
                     "id": "azure",
                     "title": "Azure"
+                },
+                {
+                    "icon": "resources/azLogicApps.svg",
+                    "id": "logic-apps",
+                    "title": "Logic Apps"
                 }
             ]
         },
@@ -363,6 +527,13 @@
                     "id": "azureIntegrationAccountsExplorer",
                     "name": "Integration Accounts",
                     "when": "config.azureLogicApps.showExplorer == true"
+                }
+            ],
+            "logic-apps": [
+                {
+                    "id": "containerLogicAppsExplorer",
+                    "name": "Containers",
+                    "when": "config.logicAppContainers.showExplorer == true"
                 }
             ]
         },
@@ -382,6 +553,14 @@
                 },
                 {
                     "command": "azIntegrationAccounts.refresh",
+                    "when": "never"
+                },
+                {
+                    "command": "azLogicAppContainers.loadMore",
+                    "when": "never"
+                },
+                {
+                    "command": "azLogicAppContainers.refresh",
                     "when": "never"
                 }
             ],
@@ -646,6 +825,201 @@
                     "command": "azIntegrationAccounts.deleteSchema",
                     "group": "2@1",
                     "when": "view == azureIntegrationAccountsExplorer && viewItem == azIntegrationAccountSchema"
+                },
+                {
+                    "command": "azLogicAppContainers.createLogicApp",
+                    "group": "inline@1",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsContainer"
+                },
+                {
+                    "command": "azLogicAppContainers.refresh",
+                    "group": "inline@2",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsContainer"
+                },
+                {
+                    "command": "azLogicAppContainers.createLogicApp",
+                    "group": "1@1",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsContainer"
+                },
+                {
+                    "command": "azLogicAppContainers.disconnect",
+                    "group": "2@1",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsContainer"
+                },
+                {
+                    "command": "azLogicAppContainers.refresh",
+                    "group": "3@1",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsContainer"
+                },
+                {
+                    "command": "azLogicAppContainers.openConnectionInEditor",
+                    "group": "inline",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsConnection"
+                },
+                {
+                    "command": "azLogicAppContainers.openConnectionInEditor",
+                    "group": "1@1",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsConnection"
+                },
+                {
+                    "command": "azLogicAppContainers.deleteConnection",
+                    "group": "2@1",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsConnection"
+                },
+                {
+                    "command": "azLogicAppContainers.openInDesigner",
+                    "group": "inline@1",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflow"
+                },
+                {
+                    "command": "azLogicAppContainers.refresh",
+                    "group": "inline@2",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflow"
+                },
+                {
+                    "command": "azLogicAppContainers.openInEditor",
+                    "group": "1@1",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflow"
+                },
+                {
+                    "command": "azLogicAppContainers.openInDesigner",
+                    "group": "1@2",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflow"
+                },
+                {
+                    "command": "azLogicAppContainers.disableLogicApp",
+                    "group": "2@1",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflow"
+                },
+                {
+                    "command": "azLogicAppContainers.enableLogicApp",
+                    "group": "2@2",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflow"
+                },
+                {
+                    "command": "azLogicAppContainers.deleteLogicApp",
+                    "group": "3@1",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflow"
+                },
+                {
+                    "command": "azLogicAppContainers.refresh",
+                    "group": "4@1",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflow"
+                },
+                {
+                    "command": "azLogicAppContainers.openRunInMonitoringView",
+                    "group": "inline",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflowRun"
+                },
+                {
+                    "command": "azLogicAppContainers.openRunInEditor",
+                    "group": "1@1",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflowRun"
+                },
+                {
+                    "command": "azLogicAppContainers.openRunInMonitoringView",
+                    "group": "1@2",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflowRun"
+                },
+                {
+                    "command": "azLogicAppContainers.resubmitRun",
+                    "group": "1@3",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflowRun"
+                },
+                {
+                    "command": "azLogicAppContainers.refresh",
+                    "group": "inline",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflowRuns"
+                },
+                {
+                    "command": "azLogicAppContainers.refresh",
+                    "group": "1@1",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflowRuns"
+                },
+                {
+                    "command": "azLogicAppContainers.openRunActionInEditor",
+                    "group": "1@1",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflowRunAction"
+                },
+                {
+                    "command": "azLogicAppContainers.refresh",
+                    "group": "inline",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflowRunActions"
+                },
+                {
+                    "command": "azLogicAppContainers.refresh",
+                    "group": "2@1",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflowRunActions"
+                },
+                {
+                    "command": "azLogicAppContainers.runTrigger",
+                    "group": "inline",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflowTrigger"
+                },
+                {
+                    "command": "azLogicAppContainers.refresh",
+                    "group": "inline",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflowTriggers"
+                },
+                {
+                    "command": "azLogicAppContainers.openTriggerInEditor",
+                    "group": "1@1",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflowTrigger"
+                },
+                {
+                    "command": "azLogicAppContainers.runTrigger",
+                    "group": "1@2",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflowTrigger"
+                },
+                {
+                    "command": "azLogicAppContainers.refresh",
+                    "group": "2@1",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflowTriggers"
+                },
+                {
+                    "command": "azLogicAppContainers.openVersionInDesigner",
+                    "group": "inline",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflowCurrentVersion"
+                },
+                {
+                    "command": "azLogicAppContainers.openVersionInEditor",
+                    "group": "1@1",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflowCurrentVersion"
+                },
+                {
+                    "command": "azLogicAppContainers.openVersionInDesigner",
+                    "group": "1@2",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflowCurrentVersion"
+                },
+                {
+                    "command": "azLogicAppContainers.openVersionInDesigner",
+                    "group": "inline",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflowVersion"
+                },
+                {
+                    "command": "azLogicAppContainers.openVersionInEditor",
+                    "group": "1@1",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflowVersion"
+                },
+                {
+                    "command": "azLogicAppContainers.openVersionInDesigner",
+                    "group": "1@2",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflowVersion"
+                },
+                {
+                    "command": "azLogicAppContainers.promoteVersion",
+                    "group": "1@3",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflowVersion"
+                },
+                {
+                    "command": "azLogicAppContainers.refresh",
+                    "group": "inline",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflowVersions"
+                },
+                {
+                    "command": "azLogicAppContainers.refresh",
+                    "group": "1@1",
+                    "when": "view == containerLogicAppsExplorer && viewItem == azLogicAppsWorkflowVersions"
                 }
             ],
             "view/title": [
@@ -683,6 +1057,11 @@
                     "command": "azIntegrationAccounts.refresh",
                     "group": "navigation@2",
                     "when": "view == azureIntegrationAccountsExplorer"
+                },
+                {
+                    "command": "azLogicAppContainers.connectToContainer",
+                    "group": "navigation@1",
+                    "when": "view == containerLogicAppsExplorer"
                 }
             ]
         },
@@ -717,6 +1096,16 @@
                         "type": "boolean"
                     }
                 }
+            },
+            {
+                "title": "Logic App Containers",
+                "properties": {
+                    "logicAppContainers.showExplorer": {
+                        "default": false,
+                        "description": "%azLogicAppContainers.showExplorerDescription%",
+                        "type": "boolean"
+                    }
+                }
             }
         ],
         "snippets": [
@@ -727,15 +1116,27 @@
         ]
     },
     "scripts": {
-        "compile": "webpack --mode production",
-        "lint": "eslint --ext .ts src",
-        "lint-fix": "eslint --ext .ts --fix src",
+        "compile": "npm-run-all -p compile:extension compile:host",
+        "compile:extension": "webpack --mode production",
+        "compile:host": "webpack --config hostsrc/webpack.config.js --mode production",
+        "lint": "npm-run-all -p lint:extension lint:host",
+        "lint:extension": "eslint --ext .ts src",
+        "lint:host": "eslint --ext .ts hostsrc",
+        "lint-fix": "npm-run-all -p lint-fix:extension lint-fix:host",
+        "lint-fix:extension": "eslint --ext .ts --fix src",
+        "lint-fix:host": "eslint --ext .ts --fix hostsrc",
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "npm run compile && node ./node_modules/vscode/bin/test",
         "vscode:prepublish": "npm run compile",
-        "watch": "webpack --mode development --watch",
-        "webpack": "webpack --mode production",
-        "webpack-dev": "webpack --mode development --watch"
+        "watch": "npm-run-all -p watch:extension watch:host",
+        "watch:extension": "webpack --mode development --watch",
+        "watch:host": "webpack --config hostsrc/webpack.config.js --mode development --watch",
+        "webpack": "npm-run-all -p webpack:extension webpack:host",
+        "webpack:extension": "webpack-cli --mode production",
+        "webpack:host": "webpack-cli --config hostsrc/webpack.config.js --mode production",
+        "webpack-dev": "npm-run-all -p webpack-dev:extension webpack-dev:host",
+        "webpack-dev:extension": "webpack --mode development --watch",
+        "webpack-dev:host": "webpack --config hostsrc/webpack.config.js --mode development --watch"
     },
     "devDependencies": {
         "@types/fs-extra": "^5.1.0",
@@ -744,12 +1145,13 @@
         "@types/mocha": "^2.2.48",
         "@types/node": "^7.10.9",
         "@types/request-promise-native": "^1.0.17",
-        "@types/vscode": "^1.31.0",
+        "@types/vscode": "^1.38.0",
         "@typescript-eslint/eslint-plugin": "^1.13.0",
         "@typescript-eslint/parser": "^1.13.0",
         "ajv": "^6.11.0",
         "eslint": "^5.16.0",
         "eslint-utils": "^1.4.3",
+        "npm-run-all": "^4.1.5",
         "querystringify": ">=2.0.0",
         "serialize-javascript": "^=2.1.1",
         "ts-loader": "^6.2.1",

@@ -6,6 +6,8 @@
 export class Constants {
     public static DesignerVersion = "1.50210.1.3.200210-2111";
 
+    public static ContainerApiVersion = "2019-10-01-edge-preview";
+
     public static SubscriptionContextValue = "azureextensionui.azureSubscription";
 
     // #region Partners and Agreements

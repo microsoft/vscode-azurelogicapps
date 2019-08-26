@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>host.js</title>
+    <script src="https://unpkg.com/@babel/polyfill/dist/polyfill.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/requirejs/require.js"></script>
+    <script>
+        const r = require.config({
+            map: {
+                "*": {
+                    "office-ui-fabric-react/lib/common/DirectionalHint": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/Button": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/Callout": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/Checkbox": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/ComboBox": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/ContextualMenu": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/DatePicker": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/DetailsList": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/Dialog": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/DocumentCard": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/Dropdown": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/Fabric": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/FocusTrapZone": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/FocusZone": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/GroupedList": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/Icon": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/Image": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/Label": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/Link": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/List": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/MessageBar": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/Nav": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/Pivot": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/Rating": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/SearchBox": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/Slider": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/Spinner": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/Styling": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/TextField": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/Toggle": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/Tooltip": "office-ui-fabric-react",
+                    "office-ui-fabric-react/lib/Utilities": "office-ui-fabric-react",
+                    "reselect": "Reselect"
+                }
+            },
+            paths: {
+                "@uifabric/icons/lib": "https://ema.hosting.portal.azure.net/ema/Content/1.40916.1.2.190918-1700/Scripts/logicappdesigner/@uifabric/icons",
+                "@uifabric/merge-styles/lib": "https://ema.hosting.portal.azure.net/ema/Content/1.40916.1.2.190918-1700/Scripts/logicappdesigner/@uifabric/merge-styles",
+                "@uifabric/set-version/lib": "https://ema.hosting.portal.azure.net/ema/Content/1.40916.1.2.190918-1700/Scripts/logicappdesigner/@uifabric/set-version",
+                "@uifabric/styling/lib": "https://ema.hosting.portal.azure.net/ema/Content/1.40916.1.2.190918-1700/Scripts/logicappdesigner/@uifabric/styling",
+                "@uifabric/utilities/lib": "https://ema.hosting.portal.azure.net/ema/Content/1.40916.1.2.190918-1700/Scripts/logicappdesigner/@uifabric/utilities",
+                "designer": "https://ema.hosting.portal.azure.net/ema/Content/1.40916.1.2.190918-1700/Scripts/logicappdesigner/core.designer.min",
+                "draft-js": "https://ema.hosting.portal.azure.net/ema/Content/1.40916.1.2.190918-1700/Scripts/logicappdesigner/Draft.min",
+                "fuse": "https://ema.hosting.portal.azure.net/ema/Content/1.40916.1.2.190918-1700/Scripts/logicappdesigner/fuse.min",
+                "host": "../out/host",
+                "immutable": "https://unpkg.com/immutable@3.8.1/dist/immutable.min",
+                "localforage": "https://ema.hosting.portal.azure.net/ema/Content/1.40916.1.2.190918-1700/Scripts/logicappdesigner/localforage.min",
+                "office-ui-fabric-react": "https://ema.hosting.portal.azure.net/ema/Content/1.40916.1.2.190918-1700/Scripts/logicappdesigner/office-ui-fabric-react.min",
+                "prop-types": "https://ema.hosting.portal.azure.net/ema/Content/1.40916.1.2.190918-1700/Scripts/logicappdesigner/prop-types.min",
+                "react": "https://ema.hosting.portal.azure.net/ema/Content/1.40916.1.2.190918-1700/Scripts/logicappdesigner/react.production.min",
+                "react-dom": "https://ema.hosting.portal.azure.net/ema/Content/1.40916.1.2.190918-1700/Scripts/logicappdesigner/react-dom.production.min",
+                "re-reselect": "https://ema.hosting.portal.azure.net/ema/Content/1.40916.1.2.190918-1700/Scripts/logicappdesigner/re-reselect",
+                "Reselect": "https://ema.hosting.portal.azure.net/ema/Content/1.40916.1.2.190918-1700/Scripts/logicappdesigner/reselect",
+                "resources": "https://ema.hosting.portal.azure.net/ema/Content/1.40916.1.2.190918-1700/Scripts/logicappdesigner/resources.logicapps.min",
+                "SwaggerParser": "https://ema.hosting.portal.azure.net/ema/Content/1.40916.1.2.190918-1700/Scripts/logicappdesigner/swagger-parser.min",
+                "tslib": "https://ema.hosting.portal.azure.net/ema/Content/1.40916.1.2.190918-1700/Scripts/logicappdesigner/tslib"
+            },
+            shim: {
+                "office-ui-fabric-react": {
+                    deps: ["prop-types", "react", "react-dom", "tslib"],
+                    exports: "Fabric"
+                }
+            }
+        });
+
+        r(["react", "react-dom"], (React, ReactDOM) => {
+            window.React = React;
+            window.ReactDOM = ReactDOM;
+
+            r(["designer", "host"], ({ LogicAppsBuiltInTypeService }, { BuiltInTypeService, RecommendationService }) => {
+                (async () => {
+                    const builtInTypeService = new BuiltInTypeService({
+                        builtInTypeService: new LogicAppsBuiltInTypeService("2016-06-01", {
+                            httpManagedServiceIdentitySupported: false,
+                            openApiConnection: false,
+                            showFullyQualifiedOperationIds: [],
+                            showHiddenOperations: false,
+                            showScopeActions: true,
+                            showVariableActions: true
+                        })
+                    });
+                    const recommendationService = new RecommendationService({
+                        apiVersion: "2019-09-01",
+                        baseUrl: "https://localhost",
+                        builtInTypeService
+                    });
+                    console.log(await recommendationService.getConnectorsByCategory("BUILTIN", "", "Triggers"));
+                    console.log(await recommendationService.getOperationsByCategory("BUILTIN", "", "Triggers"));
+                    console.log(await recommendationService.getOperationsByCategory("BUILTIN", "", "Actions"));
+                })();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -20,7 +20,7 @@ export class LogicAppTriggerTreeItem implements IAzureTreeItem {
     }
 
     public get iconPath(): IThemedIconPath {
-        return getThemedIconPath("Run");
+        return getThemedIconPath("Trigger");
     }
 
     public get id(): string {

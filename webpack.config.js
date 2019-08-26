@@ -12,7 +12,7 @@ const path = require("path");
 /** @type {import("webpack").Configuration} */
 const config = {
     devtool: "source-map",
-    entry: "./src/extension.ts",
+    entry: path.resolve(__dirname, "./src/extension.ts"),
     externals: {
         "azure-arm-logic": "commonjs azure-arm-logic",
         "fs-extra": "commonjs fs-extra",
@@ -30,7 +30,7 @@ const config = {
         rules: [
             {
                 test: /\.ts$/,
-                exclude: /node_modules/,
+                exclude: /(hostsrc|node_modules)/,
                 loader: "ts-loader"
             }
         ]
