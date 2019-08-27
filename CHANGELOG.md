@@ -8,7 +8,7 @@ All notable changes to the "vscode-logicapps" extension will be documented in th
 - Dark mode enabled for designer and monitoring view
 
 ### Changed
-- Update designer version to 1.40826.1.1
+- Update designer version to 1.40826.1.2
 
 ## [0.2.11] - 2019-08-22
 ### Changed
