@@ -717,6 +717,7 @@
         "@typescript-eslint/parser": "^1.13.0",
         "ajv": "^6.10.2",
         "eslint": "^5.16.0",
+        "eslint-utils": "^=1.4.1",
         "querystringify": ">=2.0.0",
         "ts-loader": "^6.0.4",
         "tslint": "^5.19.0",
