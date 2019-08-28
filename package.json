@@ -717,14 +717,14 @@
         "@typescript-eslint/parser": "^1.13.0",
         "ajv": "^6.10.2",
         "eslint": "^5.16.0",
-        "eslint-utils": "^=1.4.1",
+        "eslint-utils": "^1.4.2",
         "querystringify": ">=2.0.0",
         "ts-loader": "^6.0.4",
         "tslint": "^5.19.0",
-        "typescript": "^3.5.3",
+        "typescript": "^3.6.2",
         "vsce": "^1.66.0",
         "vscode": "^1.1.36",
-        "webpack": "^4.39.2",
+        "webpack": "^4.39.3",
         "webpack-cli": "^3.3.7"
     },
     "dependencies": {
