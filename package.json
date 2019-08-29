@@ -2,7 +2,7 @@
     "name": "vscode-logicapps",
     "displayName": "Azure Logic Apps",
     "description": "%extension.description%",
-    "version": "0.2.11",
+    "version": "0.2.12",
     "publisher": "ms-azuretools",
     "icon": "resources/azLogicApps.png",
     "aiKey": "b6385546-3be0-489c-a298-baccd6c152fb",
@@ -717,14 +717,15 @@
         "@typescript-eslint/parser": "^1.13.0",
         "ajv": "^6.10.2",
         "eslint": "^5.16.0",
+        "eslint-utils": "^1.4.2",
         "querystringify": ">=2.0.0",
         "ts-loader": "^6.0.4",
-        "tslint": "^5.18.0",
-        "typescript": "^3.5.3",
+        "tslint": "^5.19.0",
+        "typescript": "^3.6.2",
         "vsce": "^1.66.0",
         "vscode": "^1.1.36",
-        "webpack": "^4.39.2",
-        "webpack-cli": "^3.3.6"
+        "webpack": "^4.39.3",
+        "webpack-cli": "^3.3.7"
     },
     "dependencies": {
         "azure-arm-logic": "^6.0.0",

@@ -379,8 +379,8 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                                     \`\${options.integrationServiceEnvironmentId}/managedApis/cognitiveservicestextanalytics\`,
                                     \`/subscriptions/\${options.subscriptionId}/providers/Microsoft.Web/locations/\${options.location}/managedApis/keyvault\`,
                                     \`\${options.integrationServiceEnvironmentId}/managedApis/keyvault\`,
-                                    'builtin/as2',
-                                    'builtin/rosettanet'
+                                    "builtin/as2",
+                                    "builtin/rosettanet"
                                 ]
                                 : [
                                     "connectionProviders/control",
@@ -393,8 +393,8 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                                     \`/subscriptions/\${options.subscriptionId}/providers/Microsoft.Web/locations/\${options.location}/managedApis/azureblob\`,
                                     \`/subscriptions/\${options.subscriptionId}/providers/Microsoft.Web/locations/\${options.location}/managedApis/cognitiveservicestextanalytics\`,
                                     \`/subscriptions/\${options.subscriptionId}/providers/Microsoft.Web/locations/\${options.location}/managedApis/keyvault\`,
-                                    'builtin/as2',
-                                    'builtin/rosettanet'
+                                    "builtin/as2",
+                                    "builtin/rosettanet"
                                 ];
 
                             const promotedConnectorsForTriggers = iseSupported && options.integrationServiceEnvironmentId
@@ -576,6 +576,17 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                         }
 
                         (async () => {
+                            function changeTheme() {
+                                const { classList } = document.body;
+                                const isInverted = classList.contains("vscode-dark");
+                                const theme = isInverted ? "dark" : "light";
+                                if (!classList.contains(theme)) {
+                                    classList.remove("dark", "light");
+                                    classList.add(theme);
+                                    designer.changeTheme(theme);
+                                }
+                            }
+
                             const options = {
                                 apiManagementApiVersion: "2015-09-15",
                                 armApiVersion: "2017-08-01",
@@ -625,6 +636,18 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                             await loadDefinition(logicApp, callbacks, workflowOptions);
 
                             designer.render();
+                            changeTheme();
+
+                            const callback = mutations => {
+                                if (mutations.length > 0) {
+                                    const mutation = mutations[0];
+                                    if (mutation.target instanceof Element) {
+                                        changeTheme();
+                                    }
+                                }
+                            };
+                            const observer = new MutationObserver(callback);
+                            observer.observe(document.body, { attributeFilter: ["class"], attributes: true });
                         })();
                     });
                 });
