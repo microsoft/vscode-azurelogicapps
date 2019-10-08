@@ -21,6 +21,11 @@ All you need is an Azure Subscription to get started. If you don't have one, [cl
 * Browse, create, edit, and delete integration accounts, schema, map, partners, and agreements
 * IntelliSense support helping you quickly and easily adding triggers, actions, and properties
 
+* Create local logic apps project
+* Add logic apps from explorer to local project
+* Generate Azure resource manager deployment template for local project
+* Generate Azure DevOps pipeline definition for local project
+
 ![Recurrence trigger IntelliSense](resources/recurrence-trigger.gif)
 
 ![Run after IntelliSense](resources/run-after.gif)
