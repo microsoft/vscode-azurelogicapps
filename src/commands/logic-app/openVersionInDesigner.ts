@@ -21,6 +21,7 @@ export async function openVersionInDesigner(tree: AzureTreeDataProvider, node?: 
     const { subscriptionId, treeItem } = node as IAzureNode<LogicAppVersionTreeItem>;
     const callbacks = {};
     const definition = await treeItem.getData();
+    const parameters = treeItem.getParameters();
     const references = await treeItem.getReferences();
     const { id: workflowId, integrationAccountId, label: workflowVersionName, location, resourceGroupName, sku } = treeItem;
     const title = `${workflowVersionName} ${readOnlySuffix}`;
@@ -29,5 +30,18 @@ export async function openVersionInDesigner(tree: AzureTreeDataProvider, node?: 
         enableScripts: true
     };
     const panel = vscode.window.createWebviewPanel("readonlyDesigner", title, vscode.ViewColumn.Beside, options);
-    panel.webview.html = getWebviewContentForDesigner({ authorization, callbacks, definition, integrationAccountId, location, references, resourceGroupName, sku, subscriptionId, title, workflowId });
+    panel.webview.html = getWebviewContentForDesigner({
+        authorization,
+        callbacks,
+        definition,
+        integrationAccountId,
+        location,
+        parameters,
+        references,
+        resourceGroupName,
+        sku,
+        subscriptionId,
+        title,
+        workflowId
+    });
 }

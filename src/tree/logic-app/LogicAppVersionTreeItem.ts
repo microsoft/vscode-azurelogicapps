@@ -57,6 +57,10 @@ export class LogicAppVersionTreeItem implements IAzureTreeItem {
         return JSON.stringify(this.workflowVersion.definition, null, 4);
     }
 
+    public getParameters(): Record<string, any> | undefined {
+        return this.workflow.parameters;
+    }
+
     public async getReferences(): Promise<ConnectionReferences> {
         return getConnectionReferencesForLogicAppVersion(this.client.credentials, this.client.subscriptionId, this.resourceGroupName, this.workflowName, this.workflowVersion.name!, this.client.apiVersion);
     }

@@ -14,6 +14,7 @@ interface IGetWebviewContentOptions {
     definition: string;
     integrationAccountId?: string;
     location: string;
+    parameters: Record<string, any> | undefined;
     references: ConnectionReferences;
     resourceGroupName: string;
     sku?: Sku;
@@ -24,7 +25,7 @@ interface IGetWebviewContentOptions {
 
 const version = Constants.DesignerVersion;
 
-export function getWebviewContentForDesigner({ authorization, callbacks, definition, integrationAccountId, location, references, resourceGroupName, sku, subscriptionId, title, workflowId }: IGetWebviewContentOptions): string {
+export function getWebviewContentForDesigner({ authorization, callbacks, definition, integrationAccountId, location, parameters, references, resourceGroupName, sku, subscriptionId, title, workflowId }: IGetWebviewContentOptions): string {
     sku = sku || { name: "Consumption" };
 
     return `<!DOCTYPE html>
@@ -554,11 +555,12 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                         }
 
                         function loadDefinition(logicApp, callbacks, options) {
-                            const { definition, references, sku } = logicApp;
+                            const { connectionReferences, definition, parameters, sku } = logicApp;
                             const loadOptions = { ...options };
                             const workflow = {
+                                connectionReferences,
                                 definition,
-                                references,
+                                parameters,
                                 properties: {
                                     callbacks,
                                     sku
@@ -621,8 +623,9 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                             };
 
                             const logicApp = {
+                                connectionReferences: ${JSON.stringify(references)},
                                 definition: ${definition},
-                                references: ${JSON.stringify(references)},
+                                parameters: ${JSON.stringify(parameters)},
                                 sku: ${JSON.stringify(sku)}
                             };
 
