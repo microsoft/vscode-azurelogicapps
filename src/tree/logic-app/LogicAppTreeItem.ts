@@ -100,6 +100,10 @@ export class LogicAppTreeItem implements IAzureParentTreeItem {
         return JSON.stringify(this.workflow.definition, null, 4);
     }
 
+    public getParameters(): Record<string, any> | undefined {
+        return this.workflow.parameters;
+    }
+
     public async getReferences(): Promise<ConnectionReferences> {
         return getConnectionReferencesForLogicApp(this.client.credentials, this.client.subscriptionId, this.resourceGroupName, this.workflowName, this.client.apiVersion);
     }

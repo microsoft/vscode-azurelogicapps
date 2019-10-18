@@ -20,6 +20,7 @@ export async function openInDesigner(tree: AzureTreeDataProvider, node?: IAzureN
     const { subscriptionId, treeItem } = node as IAzureNode<LogicAppTreeItem>;
     const callbacks = await treeItem.getCallbacks();
     const definition = await treeItem.getData(/* refresh */ true);
+    const parameters = treeItem.getParameters();
     const references = await treeItem.getReferences();
     const { id: workflowId, integrationAccountId, label: workflowName, location, resourceGroupName, sku } = treeItem;
     const title = `${workflowName} ${readOnlySuffix}`;
@@ -28,5 +29,18 @@ export async function openInDesigner(tree: AzureTreeDataProvider, node?: IAzureN
         enableScripts: true
     };
     const panel = vscode.window.createWebviewPanel("readonlyDesigner", title, vscode.ViewColumn.Beside, options);
-    panel.webview.html = getWebviewContentForDesigner({ authorization, callbacks, definition, integrationAccountId, location, references, resourceGroupName, sku, subscriptionId, title, workflowId });
+    panel.webview.html = getWebviewContentForDesigner({
+        authorization,
+        callbacks,
+        definition,
+        integrationAccountId,
+        location,
+        parameters,
+        references,
+        resourceGroupName,
+        sku,
+        subscriptionId,
+        title,
+        workflowId
+    });
 }
