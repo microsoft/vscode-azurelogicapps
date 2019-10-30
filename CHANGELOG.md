@@ -7,7 +7,7 @@ All notable changes to the "vscode-logicapps" extension will be documented in th
 Thanks, Aaron Kunz (@DAXaholic), for the bug fix!
 
 ### Changed
-- Update designer version to 1.41028.1.2
+- Update designer version to 1.41028.1.3
 
 ### Fixed
 - #107 - Avoid save prompt when closing the editor for preview content

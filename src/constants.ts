@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 export class Constants {
-    public static DesignerVersion = "1.41028.1.2.191028-1631";
+    public static DesignerVersion = "1.41028.1.3.191029-1703";
 
     public static SubscriptionContextValue = "azureextensionui.azureSubscription";
 
