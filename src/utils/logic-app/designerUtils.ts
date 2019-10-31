@@ -452,6 +452,7 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                                 DEBOUNCE_EMIT_CHANGE: true,
                                 DISABLE_AUTO_FOCUS_PARAMETERS: true,
                                 DISABLE_TOKEN_PICKER_COMPACT_MODE: true,
+                                EXCLUDE_AUTHENTICATION: true,
                                 FX_TOKEN: true,
                                 FX_TOKEN_FOR_CONDITION: true,
                                 HTML_EDITOR: true,
