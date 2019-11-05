@@ -720,7 +720,7 @@
         "eslint-utils": "^1.4.3",
         "querystringify": ">=2.0.0",
         "ts-loader": "^6.2.1",
-        "typescript": "^3.6.4",
+        "typescript": "^3.7.2",
         "vsce": "^1.69.0",
         "vscode": "^1.1.36",
         "webpack": "^4.41.2",
@@ -734,7 +734,7 @@
         "js-yaml": "^3.13.1",
         "lodash": "^4.17.15",
         "request": "^2.88.0",
-        "request-promise-native": "^1.0.7",
+        "request-promise-native": "^1.0.8",
         "vscode-azureextensionui": "^0.16.5",
         "vscode-extension-telemetry": "0.0.18",
         "vscode-nls": "^3.2.5"
