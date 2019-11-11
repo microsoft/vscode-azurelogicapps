@@ -60,12 +60,20 @@ export class LogicAppRunTreeItem implements IAzureParentTreeItem {
         return this.workflowRun.name!;
     }
 
+    public get location(): string {
+        return this.workflow.location!;
+    }
+
     public get resourceGroupName(): string {
         return this.workflow.id!.split("/").slice(-5, -4)[0];
     }
 
     public get triggerName(): string {
         return this.workflowRun.trigger!.name!;
+    }
+
+    public get workflowId(): string {
+        return this.workflow.id!;
     }
 
     public get workflowName(): string {

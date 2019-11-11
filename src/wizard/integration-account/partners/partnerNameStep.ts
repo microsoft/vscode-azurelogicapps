@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import LogicAppsManagementClient from "azure-arm-logic";
 import { IntegrationAccountPartner } from "azure-arm-logic/lib/models";
 import * as vscode from "vscode";
-import { addExtensionUserAgent, AzureWizardPromptStep, UserCancelledError } from "vscode-azureextensionui";
+import { AzureWizardPromptStep, UserCancelledError } from "vscode-azureextensionui";
 import { localize } from "../../../localize";
+import { getAllPartners } from "../../../utils/integration-account/partnerUtils";
 import { IPartnerWizardContext } from "./createPartnerWizard";
 
 export class PartnerNameStep extends AzureWizardPromptStep<IPartnerWizardContext> {
@@ -41,22 +41,10 @@ export class PartnerNameStep extends AzureWizardPromptStep<IPartnerWizardContext
     }
 
     private async isNameAvailable(name: string, wizardContext: IPartnerWizardContext): Promise<boolean> {
-        const client = new LogicAppsManagementClient(wizardContext.credentials, wizardContext.subscriptionId);
-        addExtensionUserAgent(client);
+        const partners = await getAllPartners(wizardContext.credentials, wizardContext.subscriptionId, wizardContext.resourceGroup!.name!, wizardContext.integrationAccountName);
 
-        let partners = await client.integrationAccountPartners.list(wizardContext.resourceGroup!.name!, wizardContext.integrationAccountName);
-        let nextPageLink = partners.nextLink;
         if (partners.some((partner: IntegrationAccountPartner) => partner.name! === name)) {
             return false;
-        }
-
-        while (nextPageLink) {
-            partners = await client.integrationAccountPartners.listNext(nextPageLink);
-            if (partners.some((partner: IntegrationAccountPartner) => partner.name! === name)) {
-                return false;
-            }
-
-            nextPageLink = partners.nextLink;
         }
 
         return true;

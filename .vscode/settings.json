@@ -10,5 +10,10 @@
     "typescript.tsc.autoDetect": "off",
     "cSpell.words": [
         "azureextensionui"
+    ],
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "eslint.validate": [
+        { "language": "typescript", "autoFix": true },
+        { "language": "typescriptreact", "autoFix": true }
     ]
 }

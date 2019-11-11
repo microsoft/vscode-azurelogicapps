@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { IntegrationAccountMap } from "azure-arm-logic/lib/models";
+import { Constants } from "../../constants";
 
 export enum MapType {
     Liquid = "Liquid",
@@ -13,7 +14,7 @@ export enum MapType {
 }
 
 export function getContentType(mapType: MapType): string {
-    return mapType === MapType.Liquid ? "text/plain" : "application/xml";
+    return mapType === MapType.Liquid ? Constants.LiquidContentType : Constants.XmlContentType;
 }
 
 export async function createNewMap(mapName: string, mapType: MapType): Promise<IntegrationAccountMap> {

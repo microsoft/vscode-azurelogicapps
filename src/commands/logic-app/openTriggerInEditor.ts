@@ -5,7 +5,7 @@
 
 import { AzureTreeDataProvider, IAzureNode } from "vscode-azureextensionui";
 import { LogicAppTriggerTreeItem } from "../../tree/logic-app/LogicAppTriggerTreeItem";
-import { openAndShowTextDocument } from "../../utils/commandUtils";
+import { openReadOnlyJson } from "../../utils/readOnlyUtils";
 
 export async function openTriggerInEditor(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {
     if (!node) {
@@ -13,5 +13,5 @@ export async function openTriggerInEditor(tree: AzureTreeDataProvider, node?: IA
     }
 
     const content = await (node.treeItem as LogicAppTriggerTreeItem).getData();
-    await openAndShowTextDocument(content);
+    await openReadOnlyJson(node.id, content);
 }

@@ -5,7 +5,7 @@
 
 import { AzureTreeDataProvider, IAzureNode } from "vscode-azureextensionui";
 import { LogicAppRunActionTreeItem } from "../../tree/logic-app/LogicAppRunActionTreeItem";
-import { openAndShowTextDocument } from "../../utils/commandUtils";
+import { openReadOnlyJson } from "../../utils/readOnlyUtils";
 
 export async function openRunActionInEditor(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {
     if (!node) {
@@ -13,5 +13,5 @@ export async function openRunActionInEditor(tree: AzureTreeDataProvider, node?: 
     }
 
     const content = await (node.treeItem as LogicAppRunActionTreeItem).getData();
-    await openAndShowTextDocument(content);
+    await openReadOnlyJson(node.id, content);
 }

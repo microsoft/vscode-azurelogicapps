@@ -4,11 +4,14 @@
  *--------------------------------------------------------------------------------------------*/
 
 import LogicAppsManagementClient from "azure-arm-logic";
-import { Workflow } from "azure-arm-logic/lib/models";
-import { WebResource } from "ms-rest";
-import * as request from "request-promise-native";
+import { Sku, Workflow } from "azure-arm-logic/lib/models";
+import * as fse from "fs-extra";
+import * as path from "path";
 import { IAzureParentTreeItem, IAzureTreeItem } from "vscode-azureextensionui";
 import { localize } from "../../localize";
+import { Callbacks, getCallbacks } from "../../utils/logic-app/callbackUtils";
+import { ConnectionReferences, getConnectionReferencesForLogicApp } from "../../utils/logic-app/connectionReferenceUtils";
+import { generateParameters, generateTemplate } from "../../utils/logic-app/templateUtils";
 import { getIconPath } from "../../utils/nodeUtils";
 import { LogicAppRunsTreeItem } from "./LogicAppRunsTreeItem";
 import { LogicAppTriggersTreeItem } from "./LogicAppTriggersTreeItem";
@@ -36,12 +39,25 @@ export class LogicAppTreeItem implements IAzureParentTreeItem {
         return this.workflow.id!;
     }
 
+    public get integrationAccountId(): string | undefined {
+        const { integrationAccount } = this.workflow;
+        return integrationAccount !== undefined ? integrationAccount.id : undefined;
+    }
+
     public get label(): string {
         return this.workflow.name!;
     }
 
+    public get location(): string {
+        return this.workflow.location!;
+    }
+
     public get resourceGroupName(): string {
         return this.workflow.id!.split("/").slice(-5, -4)[0];
+    }
+
+    public get sku(): Sku | undefined {
+        return this.workflow.sku;
     }
 
     public get workflowName(): string {
@@ -50,6 +66,14 @@ export class LogicAppTreeItem implements IAzureParentTreeItem {
 
     public hasMoreChildren(): boolean {
         return false;
+    }
+
+    public async addToProject(workspaceFolderPath: string): Promise<void> {
+        const template = generateTemplate(this.workflow!);
+        await fse.writeJSON(path.join(workspaceFolderPath, `${this.workflowName!}.definition.json`), template, { spaces: 4 });
+
+        const parameters = generateParameters(this.workflow!);
+        await fse.writeJSON(path.join(workspaceFolderPath, `${this.workflowName!}.parameters.json`), parameters, { spaces: 4 });
     }
 
     public async deleteTreeItem(): Promise<void> {
@@ -64,12 +88,24 @@ export class LogicAppTreeItem implements IAzureParentTreeItem {
         await this.client.workflows.enable(this.resourceGroupName, this.workflowName);
     }
 
+    public async getCallbacks(): Promise<Callbacks> {
+        return getCallbacks(this.client, this.workflow.definition, this.resourceGroupName, this.workflowName);
+    }
+
     public async getData(refresh = false): Promise<string> {
         if (refresh) {
             this.workflow = await this.client.workflows.get(this.resourceGroupName, this.workflowName);
         }
 
         return JSON.stringify(this.workflow.definition, null, 4);
+    }
+
+    public getParameters(): Record<string, any> | undefined {
+        return this.workflow.parameters;
+    }
+
+    public async getReferences(): Promise<ConnectionReferences> {
+        return getConnectionReferencesForLogicApp(this.client.credentials, this.client.subscriptionId, this.resourceGroupName, this.workflowName, this.client.apiVersion);
     }
 
     public async loadMoreChildren(): Promise<IAzureTreeItem[]> {
@@ -96,48 +132,14 @@ export class LogicAppTreeItem implements IAzureParentTreeItem {
         }
     }
 
-    // NOTE(joechung): Do the update request manually instead of using the SDK to work around #25.
     public async update(definition: string): Promise<string> {
-        const workflow = {
-            id: this.id,
-            location: this.workflow.location!,
-            name: this.workflowName,
-            properties: {
-                ...this.workflow,
-                definition: JSON.parse(definition)
-            },
-            tags: this.workflow.tags || {},
-            type: this.workflow.type!
+        const workflow: Workflow = {
+            ...this.workflow,
+            definition: JSON.parse(definition)
         };
-        delete workflow.properties.id;
-        delete workflow.properties.location;
-        delete workflow.properties.name;
-        delete workflow.properties.tags;
-        delete workflow.properties.type;
 
-        const authorization = await new Promise<string>((resolve, reject) => {
-            const webResource = new WebResource();
-            this.client.credentials.signRequest(webResource, (err: Error | undefined): void => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(webResource.headers.authorization);
-                }
-            });
-        });
+        const updatedWorkflow = await this.client.workflows.createOrUpdate(this.resourceGroupName, this.workflowName, workflow);
 
-        const uri = `https://management.azure.com/subscriptions/${this.client.subscriptionId}/resourceGroups/${this.resourceGroupName}/providers/Microsoft.Logic/workflows/${this.workflowName}?api-version=${this.client.apiVersion}`;
-        const options: request.RequestPromiseOptions = {
-            body: JSON.stringify(workflow),
-            headers: {
-                "Authorization": authorization,
-                "Content-Type": "application/json"
-            },
-            method: "PUT"
-        };
-        const response = await request(uri, options);
-        const updatedWorkflow = JSON.parse(response);
-
-        return JSON.stringify(updatedWorkflow.properties.definition, null, 4);
+        return JSON.stringify(updatedWorkflow.definition, null, 4);
     }
 }

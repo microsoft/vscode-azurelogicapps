@@ -6,7 +6,7 @@
 import { AzureTreeDataProvider, IAzureNode } from "vscode-azureextensionui";
 import { LogicAppCurrentVersionTreeItem } from "../../tree/logic-app/LogicAppCurrentVersionTreeItem";
 import { LogicAppVersionTreeItem } from "../../tree/logic-app/LogicAppVersionTreeItem";
-import { openAndShowTextDocument } from "../../utils/commandUtils";
+import { openReadOnlyJson } from "../../utils/readOnlyUtils";
 
 export async function openVersionInEditor(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {
     if (!node) {
@@ -14,5 +14,5 @@ export async function openVersionInEditor(tree: AzureTreeDataProvider, node?: IA
     }
 
     const content = await (node.treeItem as LogicAppCurrentVersionTreeItem | LogicAppVersionTreeItem).getData();
-    await openAndShowTextDocument(content);
+    await openReadOnlyJson(node.id, content);
 }
