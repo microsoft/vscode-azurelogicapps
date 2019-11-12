@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import LogicAppsManagementClient from "azure-arm-logic";
-import { WorkflowTrigger, WorkflowTriggerCallbackUrl } from "azure-arm-logic/lib/models";
+import { WorkflowTrigger } from "azure-arm-logic/lib/models";
 import { IAzureTreeItem } from "vscode-azureextensionui";
 import { getThemedIconPath, IThemedIconPath } from "../../utils/nodeUtils";
 
@@ -17,10 +17,6 @@ export class LogicAppTriggerTreeItem implements IAzureTreeItem {
 
     public get commandId(): string {
         return "azureLogicApps.openTriggerInEditor";
-    }
-
-    public get callbackUrl(): Promise<WorkflowTriggerCallbackUrl> {
-        return this.client.workflowTriggers.listCallbackUrl(this.resourceGroupName, this.workflowName, this.triggerName);
     }
 
     public get iconPath(): IThemedIconPath {
