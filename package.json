@@ -50,7 +50,6 @@
         "onCommand:azureLogicApps.refresh",
         "onCommand:azureLogicApps.resubmitRun",
         "onCommand:azureLogicApps.runTrigger",
-        "onCommand:azureLogicApps.getTriggerUrl",
         "onCommand:azureLogicApps.selectSubscriptions",
         "onView:azureLogicAppsExplorer",
         "onCommand:azIntegrationAccounts.createAgreement",
@@ -203,11 +202,6 @@
                 "category": "Azure Logic Apps",
                 "command": "azureLogicApps.runTrigger",
                 "title": "%azLogicApps.runTrigger%"
-            },
-            {
-                "category": "Azure Logic Apps",
-                "command": "azureLogicApps.getTriggerUrl",
-                "title": "%azLogicApps.getTriggerUrl%"
             },
             {
                 "category": "Azure Logic Apps",
@@ -489,11 +483,6 @@
                 {
                     "command": "azureLogicApps.runTrigger",
                     "group": "1@2",
-                    "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflowTrigger"
-                },
-                {
-                    "command": "azureLogicApps.getTriggerUrl",
-                    "group": "1@3",
                     "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflowTrigger"
                 },
                 {
