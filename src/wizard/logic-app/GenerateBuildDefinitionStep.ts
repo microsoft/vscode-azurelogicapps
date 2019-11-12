@@ -8,7 +8,7 @@ import * as fse from "fs-extra";
 import * as glob from "glob";
 import * as path from "path";
 import { AzureWizardExecuteStep } from "vscode-azureextensionui";
-import { generateTemplateParameter, generateTemplateParameterDefinition, generateTemplateResource } from "../../utils/logic-app/templateUtils";
+import { generateParameters, generateTemplate, generateTemplateResource } from "../../utils/logic-app/templateUtils";
 import { IBuildDefinitionWizardContext } from "./createBuildDefinition";
 
 export class GenerateBuildDefinitionStep extends AzureWizardExecuteStep<IBuildDefinitionWizardContext> {
@@ -46,10 +46,10 @@ export class GenerateBuildDefinitionStep extends AzureWizardExecuteStep<IBuildDe
             const templateResource = generateTemplateResource(workflow);
             templateResources.push(templateResource);
 
-            const templateParameterDefinition = generateTemplateParameterDefinition(name);
+            const templateParameterDefinition = generateTemplate(workflow).parameters;
             Object.assign(templateParameterDefinitions, templateParameterDefinition);
 
-            const templateParameter = generateTemplateParameter(name);
+            const templateParameter = generateParameters(workflow);
             Object.assign(templateParameters, templateParameter);
         }
 

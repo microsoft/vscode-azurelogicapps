@@ -6,6 +6,7 @@
 import { AzureTreeDataProvider, IAzureNode } from "vscode-azureextensionui";
 import { localize } from "../../localize";
 import { LogicAppTriggerTreeItem } from "../../tree/logic-app/LogicAppTriggerTreeItem";
+import * as vscode from "vscode";
 
 export async function getTriggerUrl(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {
     if (!node) {
@@ -17,6 +18,7 @@ export async function getTriggerUrl(tree: AzureTreeDataProvider, node?: IAzureNo
         async () => {
             const logicAppTriggerTreeItem = node!.treeItem as LogicAppTriggerTreeItem;
             let callbackUrl = await logicAppTriggerTreeItem.callbackUrl;
-            console.log(callbackUrl.value);
+            await vscode.env.clipboard.writeText(<string>callbackUrl.value);
+        }
     );
 }
