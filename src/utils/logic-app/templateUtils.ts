@@ -68,7 +68,7 @@ export function generateParameters(workflow: Workflow) {
         $schema: "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
         contentVersion: "1.0.0.0",
         parameters: {
-            ...generateTemplateParameter(workflow.name!)
+            ...generateTemplateParameter(workflow)
         }
     };
 }
@@ -78,7 +78,7 @@ export function generateTemplate(workflow: Workflow) {
         $schema: "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
         contentVersion: "1.0.0.0",
         parameters: {
-            ...generateTemplateParameterDefinition(workflow.name!)
+            ...generateTemplateParameterDefinition(workflow)
         },
         resources: [
             generateTemplateResource(workflow)
@@ -87,32 +87,61 @@ export function generateTemplate(workflow: Workflow) {
     };
 }
 
-export function generateTemplateParameter(name: string) {
-    const value = normalizeResourceName(name);
-    const nameParameter = normalizeParameterName(`workflows_${name}_name`);
+export function generateTemplateParameter(workflow: Workflow) {
+    const value = normalizeResourceName(workflow.name!);
+    const nameParameter = normalizeParameterName(`workflows_${workflow.name}_name`);
+    const parameters =  { ...workflow.definition.parameters };
 
-    return {
+    const workflowNameParameters = {
         [nameParameter]: {
             value
         }
     };
-}
 
-export function generateTemplateParameterDefinition(name: string) {
-    const defaultValue = normalizeResourceName(name);
-    const nameParameter = normalizeParameterName(`workflows_${name}_name`);
+    for (const key of Object.keys(parameters)) {
+        // Rename parameters by prepending `workflows_{workflow}` to avoid conflict of the same parameter name between multiple Logic Apps
+        parameters[`workflows_${workflow.name}_parameters_${key}`] = {value: parameters[key].defaultValue};
+        delete parameters[key];
+    }
 
     return {
+        ...workflowNameParameters, ...parameters
+    };
+}
+
+export function generateTemplateParameterDefinition(workflow: Workflow) {
+    const parameters =  { ...workflow.definition.parameters };
+    const defaultValue = normalizeResourceName(workflow.name!);
+    const nameParameter = normalizeParameterName(`workflows_${workflow.name}_name`);
+
+    const workflowNameParameters = {
         [nameParameter]: {
             defaultValue,
             type: "string"
         }
     };
+
+    for (const key of Object.keys(parameters)) {
+        // Rename parameters by prepending `workflows_{workflow}` to avoid conflict of the same parameter name between multiple Logic Apps
+        parameters[`workflows_${workflow.name}_parameters_${key}`] = parameters[key];
+        delete parameters[key];
+    }
+
+    return {
+        ...workflowNameParameters, ...parameters
+    };
 }
 
 export function generateTemplateResource(workflow: Workflow) {
-    const { definition, location, name, parameters } = workflow;
+    const { definition, location, name } = workflow;
     const nameParameter = normalizeParameterName(`workflows_${name!}_name`);
+    const parameters =  { ...workflow.definition.parameters };
+
+    for (const key of Object.keys(parameters)) {
+        parameters[key] = {
+            value: `[parameters('workflows_${workflow.name}_parameters_${key}')]`
+        };
+    }
 
     return {
         apiVersion: "2017-07-01",

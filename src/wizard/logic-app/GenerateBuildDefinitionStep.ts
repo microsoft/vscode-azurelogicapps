@@ -46,10 +46,10 @@ export class GenerateBuildDefinitionStep extends AzureWizardExecuteStep<IBuildDe
             const templateResource = generateTemplateResource(workflow);
             templateResources.push(templateResource);
 
-            const templateParameterDefinition = generateTemplateParameterDefinition(name);
+            const templateParameterDefinition = generateTemplateParameterDefinition(workflow);
             Object.assign(templateParameterDefinitions, templateParameterDefinition);
 
-            const templateParameter = generateTemplateParameter(name);
+            const templateParameter = generateTemplateParameter(workflow);
             Object.assign(templateParameters, templateParameter);
         }
 
