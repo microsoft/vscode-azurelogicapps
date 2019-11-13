@@ -99,7 +99,7 @@ export function generateTemplateParameter(workflow: Workflow) {
     };
 
     for (const key of Object.keys(parameters)) {
-        // Rename parameters by appending `workflows_{workflow}` in front to avoid conflict of the same parameter name between multiple Logic Apps
+        // Rename parameters by prepending `workflows_{workflow}` to avoid conflict of the same parameter name between multiple Logic Apps
         parameters[`workflows_${workflow.name}_parameters_${key}`] = {value: parameters[key].defaultValue};
         delete parameters[key];
     }
@@ -122,7 +122,7 @@ export function generateTemplateParameterDefinition(workflow: Workflow) {
     };
 
     for (const key of Object.keys(parameters)) {
-        // Rename parameters by appending `workflows_{workflow}` in front to avoid conflict of the same parameter name between multiple Logic Apps
+        // Rename parameters by prepending `workflows_{workflow}` to avoid conflict of the same parameter name between multiple Logic Apps
         parameters[`workflows_${workflow.name}_parameters_${key}`] = parameters[key];
         delete parameters[key];
     }
