@@ -3,6 +3,13 @@ All notable changes to the "vscode-logicapps" extension will be documented in th
 
 ## [Unreleased]
 
+## [0.2.23] - 2019-11-14
+### Changed
+- Update designer version to 1.41111.1.3
+
+### Fixed
+- #129, #130 - Generate ARM parameters given defined Logic Apps parameters
+
 ## [0.2.22] - 2019-11-07
 ### Changed
 - Update designer version to 1.41104.1.3
