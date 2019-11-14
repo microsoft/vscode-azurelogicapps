@@ -91,6 +91,7 @@ export function generateTemplateParameter(workflow: Workflow) {
     const value = normalizeResourceName(workflow.name!);
     const nameParameter = normalizeParameterName(`workflows_${workflow.name}_name`);
     const parameters =  { ...workflow.definition.parameters };
+    const parametersValue = { ...workflow.parameters };
 
     const workflowNameParameters = {
         [nameParameter]: {
@@ -100,7 +101,10 @@ export function generateTemplateParameter(workflow: Workflow) {
 
     for (const key of Object.keys(parameters)) {
         // Rename parameters by prepending `workflows_{workflow}` to avoid conflict of the same parameter name between multiple Logic Apps
-        parameters[`workflows_${workflow.name}_parameters_${key}`] = {value: parameters[key].defaultValue};
+        // Checks whether said parameter already has a value (most likely set from prior deployment), and use its value as defaultValue if exist
+        parameters[`workflows_${workflow.name}_parameters_${key}`] = {
+            value:  (parametersValue as any)[key] && (parametersValue as any)[key].value || parameters[key].defaultValue
+        };
         delete parameters[key];
     }
 
@@ -110,9 +114,10 @@ export function generateTemplateParameter(workflow: Workflow) {
 }
 
 export function generateTemplateParameterDefinition(workflow: Workflow) {
-    const parameters =  { ...workflow.definition.parameters };
     const defaultValue = normalizeResourceName(workflow.name!);
     const nameParameter = normalizeParameterName(`workflows_${workflow.name}_name`);
+    const parameters =  { ...workflow.definition.parameters };
+    const parametersValue = { ...workflow.parameters };
 
     const workflowNameParameters = {
         [nameParameter]: {
@@ -124,6 +129,12 @@ export function generateTemplateParameterDefinition(workflow: Workflow) {
     for (const key of Object.keys(parameters)) {
         // Rename parameters by prepending `workflows_{workflow}` to avoid conflict of the same parameter name between multiple Logic Apps
         parameters[`workflows_${workflow.name}_parameters_${key}`] = parameters[key];
+
+        // Checks whether said parameter already has a value (most likely set from prior deployment), and use its value as defaultValue if exist
+        if ((parametersValue as any)[key] && (parametersValue as any)[key].value) {
+            parameters[`workflows_${workflow.name}_parameters_${key}`].defaultValue = (parametersValue as any)[key].value;
+        }
+
         delete parameters[key];
     }
 
