@@ -177,6 +177,7 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                         "office-ui-fabric-react/lib/Styling": "office-ui-fabric-react",
                         "office-ui-fabric-react/lib/SwatchColorPicker": "office-ui-fabric-react",
                         "office-ui-fabric-react/lib/TeachingBubble": "office-ui-fabric-react",
+                        "office-ui-fabric-react/lib/Text": "office-ui-fabric-react",
                         "office-ui-fabric-react/lib/TextField": "office-ui-fabric-react",
                         "office-ui-fabric-react/lib/ThemeGenerator": "office-ui-fabric-react",
                         "office-ui-fabric-react/lib/Toggle": "office-ui-fabric-react",
