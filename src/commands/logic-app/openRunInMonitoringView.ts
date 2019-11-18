@@ -20,7 +20,8 @@ export async function openRunInMonitoringView(tree: AzureTreeDataProvider, node?
     const { subscriptionId } = runNode;
 
     const options: vscode.WebviewOptions & vscode.WebviewPanelOptions = {
-        enableScripts: true
+        enableScripts: true,
+        retainContextWhenHidden: true
     };
     const panel = vscode.window.createWebviewPanel("monitoringView", title, vscode.ViewColumn.Beside, options);
     panel.webview.html = getWebviewContent({ authorization, location, resourceGroupName, runId, subscriptionId, title, workflowId });

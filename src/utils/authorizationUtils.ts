@@ -5,6 +5,11 @@
 
 import { ServiceClientCredentials, WebResource } from "ms-rest";
 
+export interface CredentialsMetadata {
+    domain: string;
+    userName: string;
+}
+
 export function getAuthorization(credentials: ServiceClientCredentials): Promise<string> {
     return new Promise((resolve, reject) => {
         const webResource = new WebResource();
@@ -16,4 +21,8 @@ export function getAuthorization(credentials: ServiceClientCredentials): Promise
             }
         });
     });
+}
+
+export function getCredentialsMetadata(credentials: ServiceClientCredentials): CredentialsMetadata {
+    return credentials as unknown as CredentialsMetadata;
 }

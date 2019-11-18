@@ -17,6 +17,12 @@ import { LogicAppRunsTreeItem } from "./LogicAppRunsTreeItem";
 import { LogicAppTriggersTreeItem } from "./LogicAppTriggersTreeItem";
 import { LogicAppVersionsTreeItem } from "./LogicAppVersionsTreeItem";
 
+export interface ConnectionReference {
+    connectionId: string;
+    connectionName: string;
+    id: string;
+}
+
 export class LogicAppTreeItem implements IAzureParentTreeItem {
     public static contextValue = "azLogicAppsWorkflow";
     public readonly childTypeLabel: string = localize("azLogicApps.child", "Child");
@@ -132,14 +138,30 @@ export class LogicAppTreeItem implements IAzureParentTreeItem {
         }
     }
 
-    public async update(definition: string): Promise<string> {
+    public async update(stringifiedDefinition: string, parameters?: Record<string, any> | undefined): Promise<string> {
+        const definition = JSON.parse(stringifiedDefinition);
+        delete definition.parameters.$authentication;
+
+        parameters = removeAuthenticationParameter(parameters);
+
         const workflow: Workflow = {
             ...this.workflow,
-            definition: JSON.parse(definition)
+            definition,
+            ...parameters !== undefined ? { parameters } : undefined
         };
 
         const updatedWorkflow = await this.client.workflows.createOrUpdate(this.resourceGroupName, this.workflowName, workflow);
 
         return JSON.stringify(updatedWorkflow.definition, null, 4);
     }
+}
+
+function removeAuthenticationParameter(parameters: Record<string, any> | undefined): Record<string, any> | undefined {
+    if (parameters === undefined) {
+        return parameters;
+    }
+
+    parameters = { ...parameters };
+    delete parameters.$authentication;
+    return parameters;
 }

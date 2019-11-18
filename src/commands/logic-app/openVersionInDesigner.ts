@@ -8,7 +8,7 @@ import { AzureTreeDataProvider, IAzureNode } from "vscode-azureextensionui";
 import { localize } from "../../localize";
 import { LogicAppCurrentVersionTreeItem } from "../../tree/logic-app/LogicAppCurrentVersionTreeItem";
 import { LogicAppVersionTreeItem } from "../../tree/logic-app/LogicAppVersionTreeItem";
-import { getAuthorization } from "../../utils/authorizationUtils";
+import { getAuthorization, getCredentialsMetadata } from "../../utils/authorizationUtils";
 import { getWebviewContentForDesigner } from "../../utils/logic-app/designerUtils";
 
 export async function openVersionInDesigner(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {
@@ -19,11 +19,11 @@ export async function openVersionInDesigner(tree: AzureTreeDataProvider, node?: 
     const readOnlySuffix = localize("azLogicApps.readOnlySuffix", "(read-only)");
     const authorization = await getAuthorization(node.credentials);
     const { subscriptionId, treeItem } = node as IAzureNode<LogicAppVersionTreeItem>;
-    const callbacks = {};
     const definition = await treeItem.getData();
     const parameters = treeItem.getParameters();
     const references = await treeItem.getReferences();
     const { id: workflowId, integrationAccountId, label: workflowVersionName, location, resourceGroupName, sku } = treeItem;
+    const { domain: tenantId, userName: userId } = getCredentialsMetadata(node.credentials);
     const title = `${workflowVersionName} ${readOnlySuffix}`;
 
     const options: vscode.WebviewOptions & vscode.WebviewPanelOptions = {
@@ -32,16 +32,19 @@ export async function openVersionInDesigner(tree: AzureTreeDataProvider, node?: 
     const panel = vscode.window.createWebviewPanel("readonlyDesigner", title, vscode.ViewColumn.Beside, options);
     panel.webview.html = getWebviewContentForDesigner({
         authorization,
-        callbacks,
+        callbacks: {},
         definition,
         integrationAccountId,
         location,
         parameters,
+        readOnly: true,
         references,
         resourceGroupName,
         sku,
         subscriptionId,
+        tenantId,
         title,
+        userId,
         workflowId
     });
 }

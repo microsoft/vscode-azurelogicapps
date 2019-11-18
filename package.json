@@ -7,7 +7,7 @@
     "icon": "resources/azLogicApps.png",
     "aiKey": "b6385546-3be0-489c-a298-baccd6c152fb",
     "engines": {
-        "vscode": "^1.25.1"
+        "vscode": "^1.31.0"
     },
     "repository": {
         "type": "git",
@@ -133,6 +133,10 @@
             {
                 "category": "Azure Logic Apps",
                 "command": "azureLogicApps.openInDesigner",
+                "icon": {
+                    "dark": "resources/dark/eye.svg",
+                    "light": "resources/light/eye.svg"
+                },
                 "title": "%azLogicApps.openInDesigner%"
             },
             {
@@ -162,6 +166,10 @@
             {
                 "category": "Azure Logic Apps",
                 "command": "azureLogicApps.openRunInMonitoringView",
+                "icon": {
+                    "dark": "resources/dark/eye.svg",
+                    "light": "resources/light/eye.svg"
+                },
                 "title": "%azLogicApps.openRunInMonitoringView%"
             },
             {
@@ -172,6 +180,10 @@
             {
                 "category": "Azure Logic Apps",
                 "command": "azureLogicApps.openVersionInDesigner",
+                "icon": {
+                    "dark": "resources/dark/eye.svg",
+                    "light": "resources/light/eye.svg"
+                },
                 "title": "%azLogicApps.openInDesigner%"
             },
             {
@@ -396,8 +408,13 @@
                     "when": "view == azureLogicAppsExplorer && viewItem == azureextensionui.azureSubscription"
                 },
                 {
+                    "command": "azureLogicApps.openInDesigner",
+                    "group": "inline@1",
+                    "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflow"
+                },
+                {
                     "command": "azureLogicApps.openInEditor",
-                    "group": "inline",
+                    "group": "inline@2",
                     "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflow"
                 },
                 {
@@ -446,6 +463,11 @@
                     "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflowRuns"
                 },
                 {
+                    "command": "azureLogicApps.openRunInMonitoringView",
+                    "group": "inline",
+                    "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflowRun"
+                },
+                {
                     "command": "azureLogicApps.openRunInEditor",
                     "group": "1@1",
                     "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflowRun"
@@ -489,6 +511,16 @@
                     "command": "azureLogicApps.refresh",
                     "group": "1@1",
                     "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflowVersions"
+                },
+                {
+                    "command": "azureLogicApps.openVersionInDesigner",
+                    "group": "inline",
+                    "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflowCurrentVersion"
+                },
+                {
+                    "command": "azureLogicApps.openVersionInDesigner",
+                    "group": "inline",
+                    "when": "view == azureLogicAppsExplorer && viewItem == azLogicAppsWorkflowVersion"
                 },
                 {
                     "command": "azureLogicApps.openVersionInEditor",

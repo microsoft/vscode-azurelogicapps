@@ -24,19 +24,33 @@ export function getWebviewContent({ authorization, location, resourceGroupName, 
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy" content="img-src data: https:; script-src https: 'unsafe-inline'; style-src https: 'unsafe-inline';">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://ema.hosting.portal.azure.net/ema/Content/${version}/Html/styles/Draft.css">
     <link rel="stylesheet" href="https://ema.hosting.portal.azure.net/ema/Content/${version}/Html/styles/fabric.min.css">
     <link rel="stylesheet" href="https://ema.hosting.portal.azure.net/ema/Content/${version}/Html/styles/designer.min.css">
     <style>
         body {
+            background-color: --vscode-editor-background;
+            margin: 0;
+            padding: 0;
+        }
+        body.light {
             background-color: #f2f2f2;
-            margin-top: 3em;
+            margin-top: 4em;
+        }
+        .msla-container {
+            margin-top: 52px;
+        }
+        #app {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 9;
         }
     </style>
     <title>${title}</title>
 </head>
 <body>
-    <div id="monitoring-view"></div>
+    <div id="app"></div>
+    <div id="monitoring-view" class="msla-container"></div>
     <script src="https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/logicappdesigner/require.min.js"></script>
     <script>
         (global => {
@@ -180,288 +194,308 @@ export function getWebviewContent({ authorization, location, resourceGroupName, 
                 waitSeconds: 0
             });
 
-            r(["immutable", "react", "react-dom"], (Immutable, React, ReactDOM) => {
-                global.Immutable = Immutable;
+            r(["react", "react-dom"], ( React, ReactDOM) => {
                 global.React = React;
                 global.ReactDOM = ReactDOM;
 
-                r(["draft-js"], Draft => {
-                    global.Draft = Draft;
+                r(["core/main", "oauth", "office-ui-fabric-react"], (designercore, OAuth, { CommandBar, Fabric }) => {
+                    designercore.requireScriptForEditor(\`\${baseUrl}/monaco/min/vs\`);
 
-                    r(["SwaggerParser", "resources", "core/main", "oauth"], (SwaggerParser, resources, designercore, OAuth) => {
-                        designercore.requireScriptForEditor(\`\${baseUrl}/monaco/min/vs\`);
+                    const monacoLocale = getMonacoLocale($locale);
 
-                        const monacoLocale = getMonacoLocale($locale);
-
-                        if (monacoLocale !== "en") {
-                            global.require.config({
-                                "vs/nls": {
-                                    availableLanguages: {
-                                        "*": monacoLocale
-                                    }
+                    if (monacoLocale !== "en") {
+                        global.require.config({
+                            "vs/nls": {
+                                availableLanguages: {
+                                    "*": monacoLocale
                                 }
-                            });
-                        }
+                            }
+                        });
+                    }
 
-                        const oauthService = new OAuth.OAuthPopupService();
+                    const oauthService = new OAuth.OAuthPopupService();
 
-                        let monitor;
-                        let flowConfigurationOptions;
-                        const element = document.getElementById("monitoring-view");
+                    let monitor;
+                    let flowConfigurationOptions;
+                    const element = document.getElementById("monitoring-view");
 
-                        function initialize(options, analyticsContextData) {
-                            const iseSupported = !!options.featureFlags && !!options.featureFlags.enableintegrationserviceenvironment;
+                    function initialize(options, analyticsContextData) {
+                        const iseSupported = !!options.featureFlags && !!options.featureFlags.enableintegrationserviceenvironment;
 
-                            const config = {
-                                apiOperationsPath: \`/providers/Microsoft.Web/locations/\${options.location}/apiOperations\`,
-                                connectionsPath: "/providers/Microsoft.Web/connections",
-                                connectionProvidersPath: \`/providers/Microsoft.Web/locations/\${options.location}/managedApis\`,
-                                flowsPath: "/providers/Microsoft.Logic/workflows"
-                            };
+                        const config = {
+                            apiOperationsPath: \`/providers/Microsoft.Web/locations/\${options.location}/apiOperations\`,
+                            connectionsPath: "/providers/Microsoft.Web/connections",
+                            connectionProvidersPath: \`/providers/Microsoft.Web/locations/\${options.location}/managedApis\`,
+                            flowsPath: "/providers/Microsoft.Logic/workflows"
+                        };
 
-                            const urlService = new designercore.LogicAppsUrlService({
+                        const urlService = new designercore.LogicAppsUrlService({
+                            baseUrl: options.baseUrl,
+                            config,
+                            subscriptionId: options.subscriptionId,
+                            resourceGroup: options.resourceGroup,
+                            location: options.location,
+                            integrationAccountId: options.integrationAccountId
+                        });
+
+                        const apiManagementServiceFactory = analytics => {
+                            return new designercore.LogicAppsApiManagementService({
+                                analytics,
+                                apiVersion: options.apiManagementApiVersion,
                                 baseUrl: options.baseUrl,
-                                config,
-                                subscriptionId: options.subscriptionId,
-                                resourceGroup: options.resourceGroup,
-                                location: options.location,
-                                integrationAccountId: options.integrationAccountId
+                                getAccessToken: getArmAccessToken,
+                                locale: $locale,
+                                subscriptionId: options.subscriptionId
                             });
+                        };
 
-                            const apiManagementServiceFactory = analytics => {
-                                return new designercore.LogicAppsApiManagementService({
-                                    analytics,
-                                    apiVersion: options.apiManagementApiVersion,
-                                    baseUrl: options.baseUrl,
-                                    getAccessToken: getArmAccessToken,
-                                    locale: $locale,
-                                    subscriptionId: options.subscriptionId
-                                });
-                            };
+                        const hostServiceFactory = () => ({
+                        });
 
-                            const hostServiceFactory = () => ({
-                            });
-
-                            const runInstanceServiceFactory = analytics => {
-                                return new designercore.LogicAppsRunInstanceService({
-                                    analytics,
-                                    apiVersion: options.emaApiVersion,
-                                    baseUrl: options.baseUrl,
-                                    getAccessToken: getArmAccessToken,
-                                    locale: $locale
-                                });
-                            };
-
-                            const connectionServiceFactory = analytics => {
-                                return new designercore.LogicAppsConnectionService({
-                                    analytics,
-                                    apiVersion: options.connectionApiVersion,
-                                    apiVersionForConnection: iseSupported ? options.integrationServiceEnvironmentApiVersion : options.connectionApiVersion,
-                                    apiVersionForCustomConnector: iseSupported ? options.integrationServiceEnvironmentApiVersion : options.connectionApiVersion,
-                                    apiVersionForGateways: options.connectionApiVersion,
-                                    apiVersionForIseManagedConnector: iseSupported ? options.integrationServiceEnvironmentApiVersion : options.connectionApiVersion,
-                                    apiVersionForSharedManagedConnector: iseSupported ? options.integrationServiceEnvironmentApiVersion : options.connectionApiVersion,
-                                    baseUrl: options.baseUrl,
-                                    batchApiVersion: options.batchApiVersion,
-                                    getAccessToken: getArmAccessToken,
-                                    integrationServiceEnvironmentId: options.integrationServiceEnvironmentId,
-                                    isIntegrationServiceEnvironmentSupported: iseSupported,
-                                    locale: $locale,
-                                    oauthService,
-                                    urlService
-                                });
-                            };
-
-                            const getArmAccessToken = async () => {
-                                return "${authorization}".substring("Bearer ".length);
-                            };
-
-                            const analyticsServiceFactory = version => {
-                                const telemetryBaseUrl = options.telemetryBaseUrl || options.baseUrl;
-                                const telemetryVersion = options.telemetryVersion || options.emaApiVersion;
-                                const settings = {
-                                    analyticsServiceUri: \`\${telemetryBaseUrl}/providers/Internal.Telemetry/collect?api-version=\${telemetryVersion}\`,
-                                    getAccessToken: getArmAccessToken
-                                };
-
-                                const contextData = analyticsContextData || {};
-                                contextData.host = window.location.host;
-                                contextData.hostVersion = options.extensionVersion;
-                                contextData.designerVersion = version;
-
-                                const analyticsService = new designercore.AnalyticsService(settings, contextData);
-                                analyticsService.startPublish();
-
-                                return analyticsService;
-                            };
-
-                            const builtInTypeServiceFactory = (analytics, schemaVersion) => {
-                                const options = {
-                                    openApiConnection: false,
-                                    showScopeActions: true,
-                                    showVariableActions: true,
-                                    httpManagedServiceIdentitySupported: true
-                                };
-
-                                return new designercore.LogicAppsBuiltInTypeService(schemaVersion, options);
-                            };
-
-                            const functionServiceFactory = analytics => {
-                                return new designercore.LogicAppsFunctionService({
-                                    analytics,
-                                    apiVersion: options.azureFunctionApiVersion,
-                                    baseUrl: options.baseUrl,
-                                    getAccessToken: getArmAccessToken,
-                                    locale: $locale,
-                                    urlService
-                                });
-                            };
-
-                            const operationManifestServiceFactory = () => {
-                                return new designercore.LogicAppsOperationManifestService();
-                            };
-
-                            const runServiceFactory = analytics => {
-                                return new designercore.LogicAppsRunService({
-                                    analytics,
-                                    apiVersion: options.emaApiVersion,
-                                    baseUrl: options.baseUrl,
-                                    getAccessToken: getArmAccessToken,
-                                    getRuntimeToken: getArmAccessToken,
-                                    locale: $locale
-                                });
-                            };
-
-                            const workflowServiceFactory = analytics => {
-                                return new designercore.LogicAppsWorkflowService({
-                                    analytics,
-                                    apiVersion: options.emaApiVersion,
-                                    baseUrl: options.baseUrl,
-                                    getAccessToken: getArmAccessToken,
-                                    locale: $locale,
-                                    urlService
-                                });
-                            };
-
-                            flowConfigurationOptions = {
-                                analyticsServiceFactory,
-                                apiManagementServiceFactory,
+                        const runInstanceServiceFactory = analytics => {
+                            return new designercore.LogicAppsRunInstanceService({
+                                analytics,
                                 apiVersion: options.emaApiVersion,
-                                azureFunctionsApiVersion: options.azureFunctionApiVersion,
+                                baseUrl: options.baseUrl,
+                                getAccessToken: getArmAccessToken,
+                                locale: $locale
+                            });
+                        };
+
+                        const connectionServiceFactory = analytics => {
+                            return new designercore.LogicAppsConnectionService({
+                                analytics,
+                                apiVersion: options.connectionApiVersion,
+                                apiVersionForConnection: iseSupported ? options.integrationServiceEnvironmentApiVersion : options.connectionApiVersion,
+                                apiVersionForCustomConnector: iseSupported ? options.integrationServiceEnvironmentApiVersion : options.connectionApiVersion,
+                                apiVersionForGateways: options.connectionApiVersion,
+                                apiVersionForIseManagedConnector: iseSupported ? options.integrationServiceEnvironmentApiVersion : options.connectionApiVersion,
+                                apiVersionForSharedManagedConnector: iseSupported ? options.integrationServiceEnvironmentApiVersion : options.connectionApiVersion,
                                 baseUrl: options.baseUrl,
                                 batchApiVersion: options.batchApiVersion,
-                                builtInTypeServiceFactory,
-                                connectionGatewayApiVersion: options.connectionGatewayApiVersion,
-                                connectionServiceFactory,
-                                dynamicCallApiVersion: options.connectionApiVersion,
-                                features: {
-                                    COLORIZE_MONITORING_INPUTS_OUTPUTS: true,
-                                    DEBOUNCE_EMIT_CHANGE: true,
-                                    EXPRESSION_TRACE: true,
-                                    FX_TOKEN: true,
-                                    FX_TOKEN_FOR_CONDITION: true,
-                                    LOAD_RUN_ACTION_INPUTS_OUTPUTS_ASYNC: true,
-                                    SHOW_WEBHOOK_REQUEST_HISTORY: true,
-                                    SUPPORT_OBFUSCATION: true,
-                                    SUPPORT_PAN_AND_ZOOM: true,
-                                    USE_NEW_EXPRESSION_PARSER: true
-                                },
-                                functionServiceFactory,
-                                getArmAccessToken: getArmAccessToken,
-                                getRuntimeAccessToken: getArmAccessToken,
-                                host: window.location.host,
-                                hostEnvironment: designercore.Host.LogicApps,
-                                hostServiceFactory,
-                                hostVersion: options.extensionVersion,
-                                identifier: "",
+                                getAccessToken: getArmAccessToken,
+                                integrationServiceEnvironmentId: options.integrationServiceEnvironmentId,
+                                isIntegrationServiceEnvironmentSupported: iseSupported,
+                                locale: $locale,
                                 oauthService,
-                                operationManifestServiceFactory,
-                                runInstanceServiceFactory,
-                                runServiceFactory,
-                                startTelemetryPublish: true,
-                                telemetryBaseUrl: options.telemetryBaseUrl,
-                                telemetryVersion: options.telemetryVersion,
-                                urlService,
-                                workflowServiceFactory
+                                urlService
+                            });
+                        };
+
+                        const getArmAccessToken = async () => {
+                            return "${authorization}".substring("Bearer ".length);
+                        };
+
+                        const analyticsServiceFactory = version => {
+                            const telemetryBaseUrl = options.telemetryBaseUrl || options.baseUrl;
+                            const telemetryVersion = options.telemetryVersion || options.emaApiVersion;
+                            const settings = {
+                                analyticsServiceUri: \`\${telemetryBaseUrl}/providers/Internal.Telemetry/collect?api-version=\${telemetryVersion}\`,
+                                getAccessToken: getArmAccessToken
                             };
 
-                            monitor = window.monitor = new designercore.Monitor(flowConfigurationOptions, element);
+                            const contextData = analyticsContextData || {};
+                            contextData.host = window.location.host;
+                            contextData.hostVersion = options.extensionVersion;
+                            contextData.designerVersion = version;
+
+                            const analyticsService = new designercore.AnalyticsService(settings, contextData);
+                            analyticsService.startPublish();
+
+                            return analyticsService;
+                        };
+
+                        const builtInTypeServiceFactory = (analytics, schemaVersion) => {
+                            const options = {
+                                openApiConnection: false,
+                                showScopeActions: true,
+                                showVariableActions: true,
+                                httpManagedServiceIdentitySupported: true
+                            };
+
+                            return new designercore.LogicAppsBuiltInTypeService(schemaVersion, options);
+                        };
+
+                        const functionServiceFactory = analytics => {
+                            return new designercore.LogicAppsFunctionService({
+                                analytics,
+                                apiVersion: options.azureFunctionApiVersion,
+                                baseUrl: options.baseUrl,
+                                getAccessToken: getArmAccessToken,
+                                locale: $locale,
+                                urlService
+                            });
+                        };
+
+                        const operationManifestServiceFactory = () => {
+                            return new designercore.LogicAppsOperationManifestService();
+                        };
+
+                        const runServiceFactory = analytics => {
+                            return new designercore.LogicAppsRunService({
+                                analytics,
+                                apiVersion: options.emaApiVersion,
+                                baseUrl: options.baseUrl,
+                                getAccessToken: getArmAccessToken,
+                                getRuntimeToken: getArmAccessToken,
+                                locale: $locale
+                            });
+                        };
+
+                        const workflowServiceFactory = analytics => {
+                            return new designercore.LogicAppsWorkflowService({
+                                analytics,
+                                apiVersion: options.emaApiVersion,
+                                baseUrl: options.baseUrl,
+                                getAccessToken: getArmAccessToken,
+                                locale: $locale,
+                                urlService
+                            });
+                        };
+
+                        flowConfigurationOptions = {
+                            analyticsServiceFactory,
+                            apiManagementServiceFactory,
+                            apiVersion: options.emaApiVersion,
+                            azureFunctionsApiVersion: options.azureFunctionApiVersion,
+                            baseUrl: options.baseUrl,
+                            batchApiVersion: options.batchApiVersion,
+                            builtInTypeServiceFactory,
+                            connectionGatewayApiVersion: options.connectionGatewayApiVersion,
+                            connectionServiceFactory,
+                            dynamicCallApiVersion: options.connectionApiVersion,
+                            features: {
+                                COLORIZE_MONITORING_INPUTS_OUTPUTS: true,
+                                DEBOUNCE_EMIT_CHANGE: true,
+                                ENABLE_ENVIRONMENT_BADGE: false, // TODO(joechung): Enable when ISE is supported in Visual Studio Code.
+                                EXPRESSION_TRACE: true,
+                                FX_TOKEN: true,
+                                FX_TOKEN_FOR_CONDITION: true,
+                                LOAD_RUN_ACTION_INPUTS_OUTPUTS_ASYNC: true,
+                                SHOW_WEBHOOK_REQUEST_HISTORY: true,
+                                SUPPORT_OBFUSCATION: true,
+                                SUPPORT_PAN_AND_ZOOM: true,
+                                USE_NEW_EXPRESSION_PARSER: true
+                            },
+                            functionServiceFactory,
+                            getArmAccessToken: getArmAccessToken,
+                            getRuntimeAccessToken: getArmAccessToken,
+                            host: window.location.host,
+                            hostEnvironment: designercore.Host.LogicApps,
+                            hostServiceFactory,
+                            hostVersion: options.extensionVersion,
+                            identifier: "",
+                            oauthService,
+                            operationManifestServiceFactory,
+                            runInstanceServiceFactory,
+                            runServiceFactory,
+                            startTelemetryPublish: true,
+                            telemetryBaseUrl: options.telemetryBaseUrl,
+                            telemetryVersion: options.telemetryVersion,
+                            urlService,
+                            workflowServiceFactory
+                        };
+
+                        monitor = window.monitor = new designercore.Monitor(flowConfigurationOptions, element);
+                    }
+
+                    (async () => {
+                        function changeTheme() {
+                            const { classList } = document.body;
+                            const isInverted = classList.contains("vscode-dark");
+                            const theme = isInverted ? "dark" : "light";
+                            if (!classList.contains(theme)) {
+                                classList.remove("dark", "light");
+                                classList.add(theme);
+                                monitor.changeTheme(theme);
+                            }
                         }
 
-                        (async () => {
-                            function changeTheme() {
-                                const { classList } = document.body;
-                                const isInverted = classList.contains("vscode-dark");
-                                const theme = isInverted ? "dark" : "light";
-                                if (!classList.contains(theme)) {
-                                    classList.remove("dark", "light");
-                                    classList.add(theme);
-                                    monitor.changeTheme(theme);
-                                }
-                            }
+                        async function renderMonitor(runId) {
+                            disposeMonitor();
+                            monitor = new designercore.Monitor(flowConfigurationOptions, element);
+                            await monitor.loadRun(runId);
+                            monitor.render();
+                            changeTheme();
 
-                            async function renderMonitor(runId) {
-                                disposeMonitor();
-                                monitor = new designercore.Monitor(flowConfigurationOptions, element);
-                                await monitor.loadRun(runId);
-                                monitor.render();
-                                changeTheme();
-
-                                const callback = mutations => {
-                                    if (mutations.length > 0) {
-                                        const mutation = mutations[0];
-                                        if (mutation.target instanceof Element) {
-                                            changeTheme();
-                                        }
+                            const callback = mutations => {
+                                if (mutations.length > 0) {
+                                    const mutation = mutations[0];
+                                    if (mutation.target instanceof Element) {
+                                        changeTheme();
                                     }
-                                };
-                                const observer = new MutationObserver(callback);
-                                observer.observe(document.body, { attributeFilter: ["class"], attributes: true });
-                            }
-
-                            function disposeMonitor() {
-                                if (monitor) {
-                                    ReactDOM.unmountComponentAtNode(element);
-                                    monitor = null;
-                                }
-                            }
-
-                            const options = {
-                                apiManagementApiVersion: "2015-09-15",
-                                armApiVersion: "2017-08-01",
-                                azureFunctionApiVersion: "2015-08-01",
-                                baseUrl: "https://management.azure.com",
-                                batchApiVersion: "2015-11-01",
-                                connectionApiVersion: "2016-06-01",
-                                connectionGatewayApiVersion: "2016-06-01",
-                                emaApiVersion: "2016-10-01",
-                                enableMock: false,
-                                extensionVersion: "${version}",
-                                featureFlags: {
-                                    enableintegrationserviceenvironment: false,
-                                    htmleditor: false,
-                                    showforeachtokens: false
-                                },
-                                hideCustomConnectors: false,
-                                integrationServiceEnvironmentApiVersion: "2018-07-01-preview",
-                                location: "${location}",
-                                resourceGroup: "${resourceGroupName}",
-                                subscriptionId: "${subscriptionId}",
-                                telemetryBaseUrl: "https://management.azure.com",
-                                telemetryVersion: "2015-09-30-preview"
-                            };
-
-                            const analyticsContextData = {
-                                resourceData: {
-                                    resourceId: "${workflowId}",
-                                    source: "vscodeMonitoringView"
                                 }
                             };
+                            const observer = new MutationObserver(callback);
+                            observer.observe(document.body, { attributeFilter: ["class"], attributes: true });
+                        }
 
-                            await initialize(options, analyticsContextData);
-                            await renderMonitor("${runId}");
-                        })();
-                    });
+                        function disposeMonitor() {
+                            if (monitor) {
+                                ReactDOM.unmountComponentAtNode(element);
+                                monitor = null;
+                            }
+                        }
+
+                        function App() {
+                            async function handleRefresh() {
+                                await monitor.refreshRun();
+                            }
+
+                            const items = [
+                                {
+                                    key: "Refresh",
+                                    ariaLabel: "Refresh",
+                                    iconProps: {
+                                        iconName: "Refresh"
+                                    },
+                                    name: "Refresh",
+                                    onClick: handleRefresh
+                                }
+                            ];
+
+                            return React.createElement(Fabric, null,
+                                React.createElement(CommandBar, { items })
+                            );
+                        }
+
+                        const options = {
+                            apiManagementApiVersion: "2015-09-15",
+                            armApiVersion: "2017-08-01",
+                            azureFunctionApiVersion: "2015-08-01",
+                            baseUrl: "https://management.azure.com",
+                            batchApiVersion: "2015-11-01",
+                            connectionApiVersion: "2016-06-01",
+                            connectionGatewayApiVersion: "2016-06-01",
+                            emaApiVersion: "2016-10-01",
+                            enableMock: false,
+                            extensionVersion: "${version}",
+                            featureFlags: {
+                                enableintegrationserviceenvironment: false,
+                                htmleditor: false,
+                                showforeachtokens: false
+                            },
+                            hideCustomConnectors: false,
+                            integrationServiceEnvironmentApiVersion: "2018-07-01-preview",
+                            location: "${location}",
+                            resourceGroup: "${resourceGroupName}",
+                            subscriptionId: "${subscriptionId}",
+                            telemetryBaseUrl: "https://management.azure.com",
+                            telemetryVersion: "2015-09-30-preview"
+                        };
+
+                        const analyticsContextData = {
+                            resourceData: {
+                                resourceId: "${workflowId}",
+                                source: "vscodeMonitoringView"
+                            }
+                        };
+
+                        await initialize(options, analyticsContextData);
+                        await renderMonitor("${runId}");
+
+                        ReactDOM.render(React.createElement(App), document.getElementById("app"));
+                    })();
                 });
             });
         })(window);
