@@ -9,7 +9,7 @@ All notable changes to the "vscode-logicapps" extension will be documented in th
 - Add "Refresh" button to monitoring view
 
 ### Changed
-- Update designer version to 1.41118.1.1
+- Update designer version to 1.41118.1.2
 
 ## [0.2.23] - 2019-11-14
 ### Changed
