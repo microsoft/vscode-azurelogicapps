@@ -3,6 +3,14 @@ All notable changes to the "vscode-logicapps" extension will be documented in th
 
 ## [Unreleased]
 
+## [0.2.24] - 2019-11-21
+### Added
+- Add "Open in designer" and "Open run in monitoring view" buttons
+- Add "Refresh" button to monitoring view
+
+### Changed
+- Update designer version to 1.41118.1.3
+
 ## [0.2.23] - 2019-11-14
 ### Changed
 - Update designer version to 1.41111.1.3
