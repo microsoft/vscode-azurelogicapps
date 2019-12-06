@@ -4,13 +4,17 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { Sku } from "azure-arm-logic/lib/models";
+import * as path from "path";
+import * as vscode from "vscode";
 import { Constants } from "../../constants";
+import { ext } from "../../extensionVariables";
 import { Callbacks } from "./callbackUtils";
 import { ConnectionReferences } from "./connectionReferenceUtils";
 
 interface IGetWebviewContentOptions {
     authorization: string;
     callbacks: Callbacks;
+    cloudScriptPath: string;
     definition: string;
     integrationAccountId?: string;
     location: string;
@@ -28,7 +32,11 @@ interface IGetWebviewContentOptions {
 
 const version = Constants.DesignerVersion;
 
-export function getWebviewContentForDesigner({ authorization, callbacks, definition, integrationAccountId, location, parameters, references, readOnly, resourceGroupName, sku, subscriptionId, tenantId, title, userId, workflowId }: IGetWebviewContentOptions): string {
+export function getCloudScriptPath(webview: vscode.Webview): string {
+    return webview.asWebviewUri(vscode.Uri.file(path.join(ext.context.extensionPath, "out", "cloud"))).toString();
+}
+
+export function getWebviewContentForDesigner({ authorization, callbacks, cloudScriptPath, definition, integrationAccountId, location, parameters, references, readOnly, resourceGroupName, sku, subscriptionId, tenantId, title, userId, workflowId }: IGetWebviewContentOptions): string {
     readOnly = readOnly || false;
     sku = sku || { name: "Consumption" };
 
@@ -40,7 +48,7 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="img-src data: https: 'unsafe-inline'; script-src https: 'unsafe-inline'; style-src https: 'unsafe-inline';">
+    <meta http-equiv="Content-Security-Policy" content="img-src data: https: 'unsafe-inline'; script-src vscode-resource: https: 'unsafe-eval' 'unsafe-inline'; style-src https: 'unsafe-inline';">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://ema.hosting.portal.azure.net/ema/Content/${version}/Html/styles/fabric.min.css">
     <link rel="stylesheet" href="https://ema.hosting.portal.azure.net/ema/Content/${version}/Html/styles/Draft.css">
@@ -192,6 +200,7 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                     "@uifabric/merge-styles/lib": "@uifabric/merge-styles",
                     "@uifabric/styling/lib": "@uifabric/styling",
                     "@uifabric/utilities/lib": "@uifabric/utilities",
+                    "cloud": "${cloudScriptPath}",
                     "core/main": "core.designer.min",
                     "draft-js": "draft.min",
                     "fuse": "fuse.min",
@@ -221,7 +230,7 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                 global.React = React;
                 global.ReactDOM = ReactDOM;
 
-                r(["core/main", "oauth", "office-ui-fabric-react"], (designercore, OAuth, { CommandBar, Fabric }) => {
+                r(["core/main", "cloud", "office-ui-fabric-react"], (designercore, { OAuthService }, { CommandBar, Fabric }) => {
                     designercore.requireScriptForEditor(\`\${baseUrl}/monaco/min/vs\`);
 
                     const monacoLocale = getMonacoLocale($locale);
@@ -236,7 +245,10 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                         });
                     }
 
-                    const oauthService = new OAuth.OAuthPopupService("https://portal.azure.com");
+                    const oauthService = new OAuthService({
+                        eventTarget: global,
+                        postMessage: vscode.postMessage
+                    });
 
                     const getArmAccessToken = async () => {
                         return "${authorization}".substring("Bearer ".length);
