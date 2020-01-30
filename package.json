@@ -2,7 +2,7 @@
     "name": "vscode-logicapps",
     "displayName": "Azure Logic Apps",
     "description": "%extension.description%",
-    "version": "0.2.26",
+    "version": "0.2.27",
     "publisher": "ms-azuretools",
     "icon": "resources/azLogicApps.png",
     "aiKey": "b6385546-3be0-489c-a298-baccd6c152fb",
@@ -740,7 +740,7 @@
     "devDependencies": {
         "@types/fs-extra": "^5.1.0",
         "@types/glob": "^7.1.1",
-        "@types/js-yaml": "^3.12.1",
+        "@types/js-yaml": "^3.12.2",
         "@types/mocha": "^2.2.48",
         "@types/node": "^7.10.9",
         "@types/request-promise-native": "^1.0.17",
