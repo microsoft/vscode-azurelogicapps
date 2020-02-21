@@ -10,7 +10,7 @@ import { localize } from "../../localize";
 import { LogicAppTreeItem } from "../../tree/logic-app/LogicAppTreeItem";
 import { getAuthorization, getCredentialsMetadata } from "../../utils/authorizationUtils";
 import { DialogResponses } from "../../utils/dialogResponses";
-import { getWebviewContentForDesigner } from "../../utils/logic-app/designerUtils";
+import { getCloudScriptPath, getWebviewContentForDesigner } from "../../utils/logic-app/designerUtils";
 
 export async function openInDesigner(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {
     if (!node) {
@@ -32,14 +32,15 @@ export async function openInDesigner(tree: AzureTreeDataProvider, node?: IAzureN
         retainContextWhenHidden: true
     };
     const panel = vscode.window.createWebviewPanel("readonlyDesigner", title, vscode.ViewColumn.Beside, options);
+    const cloudScriptPath = getCloudScriptPath(panel.webview);
     panel.webview.html = getWebviewContentForDesigner({
         authorization,
         callbacks,
+        cloudScriptPath,
         definition,
         integrationAccountId,
         location,
         parameters,
-        readOnly: true,
         references,
         resourceGroupName,
         sku,
@@ -52,6 +53,11 @@ export async function openInDesigner(tree: AzureTreeDataProvider, node?: IAzureN
     panel.webview.onDidReceiveMessage(
         async message => {
             switch (message.command) {
+                // @todo Start an HTTP server to listen for requests from the external window.
+                case "OpenLoginPopup":
+                    await vscode.env.openExternal(message.url);
+                    break;
+
                 case "OpenWindow":
                     await vscode.env.openExternal(message.url);
                     break;
@@ -67,6 +73,13 @@ export async function openInDesigner(tree: AzureTreeDataProvider, node?: IAzureN
                 default:
                     break;
             }
+        },
+        /* thisArgs */ undefined,
+        ext.context.subscriptions
+    );
+    panel.onDidDispose(
+        () => {
+            // @todo Shut down any HTTP servers listening for OAuth authorization popup requests.
         },
         /* thisArgs */ undefined,
         ext.context.subscriptions

@@ -9,7 +9,7 @@ import { localize } from "../../localize";
 import { LogicAppCurrentVersionTreeItem } from "../../tree/logic-app/LogicAppCurrentVersionTreeItem";
 import { LogicAppVersionTreeItem } from "../../tree/logic-app/LogicAppVersionTreeItem";
 import { getAuthorization, getCredentialsMetadata } from "../../utils/authorizationUtils";
-import { getWebviewContentForDesigner } from "../../utils/logic-app/designerUtils";
+import { getCloudScriptPath, getWebviewContentForDesigner } from "../../utils/logic-app/designerUtils";
 
 export async function openVersionInDesigner(tree: AzureTreeDataProvider, node?: IAzureNode): Promise<void> {
     if (!node) {
@@ -30,9 +30,11 @@ export async function openVersionInDesigner(tree: AzureTreeDataProvider, node?: 
         enableScripts: true
     };
     const panel = vscode.window.createWebviewPanel("readonlyDesigner", title, vscode.ViewColumn.Beside, options);
+    const cloudScriptPath = getCloudScriptPath(panel.webview);
     panel.webview.html = getWebviewContentForDesigner({
         authorization,
         callbacks: {},
+        cloudScriptPath,
         definition,
         integrationAccountId,
         location,

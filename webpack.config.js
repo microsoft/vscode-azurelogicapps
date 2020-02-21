@@ -30,7 +30,7 @@ const config = {
         rules: [
             {
                 test: /\.ts$/,
-                exclude: /node_modules/,
+                exclude: /cloudsrc|node_modules/,
                 loader: "ts-loader"
             }
         ]

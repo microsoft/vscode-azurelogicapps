@@ -16,6 +16,7 @@
         "target": "es6"
     },
     "exclude": [
+        "cloudsrc",
         "node_modules",
         ".vscode-test"
     ]

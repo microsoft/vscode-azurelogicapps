@@ -7,7 +7,7 @@
     "icon": "resources/azLogicApps.png",
     "aiKey": "b6385546-3be0-489c-a298-baccd6c152fb",
     "engines": {
-        "vscode": "^1.31.0"
+        "vscode": "^1.38.0"
     },
     "repository": {
         "type": "git",
@@ -727,15 +727,27 @@
         ]
     },
     "scripts": {
-        "compile": "webpack --mode production",
-        "lint": "eslint --ext .ts src",
-        "lint-fix": "eslint --ext .ts --fix src",
+        "compile": "npm-run-all -p compile:cloud compile:extension",
+        "compile:cloud": "webpack --config cloudsrc/webpack.config.js --mode production",
+        "compile:extension": "webpack --mode production",
+        "lint": "npm-run-all -p lint:cloud lint:extension",
+        "lint:cloud": "eslint --ext .ts cloudsrc",
+        "lint:extension": "eslint --ext .ts src",
+        "lint-fix": "npm-run-all -p lint-fix:cloud lint-fix:extension",
+        "lint-fix:cloud": "eslint --ext .ts --fix cloudsrc",
+        "lint-fix:extension": "eslint --ext .ts --fix src",
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "npm run compile && node ./node_modules/vscode/bin/test",
         "vscode:prepublish": "npm run compile",
-        "watch": "webpack --mode development --watch",
-        "webpack": "webpack --mode production",
-        "webpack-dev": "webpack --mode development --watch"
+        "watch": "npm-run-all -p watch:cloud watch:extension",
+        "watch:cloud": "webpack --config cloudsrc/webpack.config.js --mode development --watch",
+        "watch:extension": "webpack --mode development --watch",
+        "webpack": "npm-run-all -p webpack:cloud webpack:extension",
+        "webpack:cloud": "webpack --config cloudsrc/webpack.config.js --mode production",
+        "webpack:extension": "webpack --mode production",
+        "webpack-dev": "npm-run-all -p webpack-dev:cloud webpack-dev:extension",
+        "webpack-dev:cloud": "webpack --config cloudsrc/webpack.config.js --mode development --watch",
+        "webpack-dev:extension": "webpack --mode development --watch"
     },
     "devDependencies": {
         "@types/fs-extra": "^5.1.0",
@@ -744,12 +756,13 @@
         "@types/mocha": "^2.2.48",
         "@types/node": "^7.10.9",
         "@types/request-promise-native": "^1.0.17",
-        "@types/vscode": "^1.31.0",
+        "@types/vscode": "^1.38.0",
         "@typescript-eslint/eslint-plugin": "^1.13.0",
         "@typescript-eslint/parser": "^1.13.0",
         "ajv": "^6.11.0",
         "eslint": "^5.16.0",
         "eslint-utils": "^1.4.3",
+        "npm-run-all": "^4.1.5",
         "querystringify": ">=2.0.0",
         "serialize-javascript": "^=2.1.1",
         "ts-loader": "^6.2.1",
