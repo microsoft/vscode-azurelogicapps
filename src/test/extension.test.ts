@@ -8,4 +8,5 @@
 // import * as vscode from 'vscode';
 
 suite("Extension Tests", (): void => {
+    // eslint disable-line @typescript-eslint/no-empty-function
 });

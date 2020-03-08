@@ -10,7 +10,7 @@
  * @param {string} [replaceWith="_"]
  * @returns {string}
  */
-export function normalizeParameterName(value: string, replaceWith: string = "_"): string {
+export function normalizeParameterName(value: string, replaceWith = "_"): string {
     return value.replace(/[^$\w]/g, replaceWith).replace(/^\d/, replaceWith);
 }
 
@@ -21,6 +21,6 @@ export function normalizeParameterName(value: string, replaceWith: string = "_")
  * @param {string} [replaceWith="_"]
  * @returns {string}
  */
-export function normalizeResourceName(value: string, replaceWith: string = "_"): string {
+export function normalizeResourceName(value: string, replaceWith = "_"): string {
     return value.replace(/[^-\w.()]/g, replaceWith).replace(/\.$/, replaceWith);
 }
