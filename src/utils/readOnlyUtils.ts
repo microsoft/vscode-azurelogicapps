@@ -12,7 +12,7 @@
 
 import { createHash } from "crypto";
 import { isNullOrUndefined } from "util";
-import { CancellationToken, Event, EventEmitter, TextDocumentContentProvider, Uri, window, workspace } from "vscode";
+import { Event, EventEmitter, TextDocumentContentProvider, Uri, window, workspace } from "vscode";
 import { ext } from "../extensionVariables";
 
 let contentProvider: ReadOnlyContentProvider | undefined;
@@ -47,8 +47,8 @@ class ReadOnlyContentProvider implements TextDocumentContentProvider {
         this._onDidChangeEmitter.fire(uri);
     }
 
-    public async provideTextDocumentContent(uri: Uri, _token: CancellationToken): Promise<string> {
-        let content = this._contentMap.get(uri.toString());
+    public async provideTextDocumentContent(uri: Uri): Promise<string> {
+        const content = this._contentMap.get(uri.toString());
         if (isNullOrUndefined(content)) {
             throw new Error(
                 "Internal error: Expected content from read-only provider to be neither null nor undefined");
