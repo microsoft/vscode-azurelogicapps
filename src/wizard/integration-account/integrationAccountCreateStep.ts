@@ -12,7 +12,7 @@ import { IIntegrationAccountWizardContext } from "./createIntegrationAccountWiza
 
 export class IntegrationAccountCreateStep extends AzureWizardExecuteStep<IIntegrationAccountWizardContext> {
     public async execute(wizardContext: IIntegrationAccountWizardContext): Promise<IIntegrationAccountWizardContext> {
-        const client = new LogicAppsManagementClient(wizardContext.credentials, wizardContext.subscriptionId);
+        const client = new LogicAppsManagementClient(wizardContext.credentials, wizardContext.subscriptionId, wizardContext.credentials.environment?.resourceManagerEndpointUrl);
         addExtensionUserAgent(client);
 
         const newIntegrationAccount: IntegrationAccount = await client.integrationAccounts.createOrUpdate(wizardContext.resourceGroup!.name!,

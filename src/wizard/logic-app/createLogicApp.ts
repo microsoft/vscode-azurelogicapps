@@ -3,12 +3,13 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AzureWizard, AzureWizardExecuteStep, AzureWizardPromptStep, IActionContext, IAzureNode, IAzureTreeItem, ILocationWizardContext, IResourceGroupWizardContext, LocationListStep, ResourceGroupCreateStep, ResourceGroupListStep } from "vscode-azureextensionui";
+import { AzureWizard, AzureWizardExecuteStep, AzureWizardPromptStep, IActionContext, IAzureNode, IAzureTreeItem, LocationListStep, ResourceGroupCreateStep, ResourceGroupListStep } from "vscode-azureextensionui";
 import { LogicAppTreeItem } from "../../tree/logic-app/LogicAppTreeItem";
 import { LogicAppCreateStep } from "./LogicAppCreateStep";
 import { LogicAppNameStep } from "./LogicAppNameStep";
+import { IWizardContext } from "../../models/wizard/wizard";
 
-export interface IAzureLogicAppWizardContext extends ILocationWizardContext, IResourceGroupWizardContext {
+export interface IAzureLogicAppWizardContext extends IWizardContext {
     logicApp?: LogicAppTreeItem;
     workflowName?: string;
 }

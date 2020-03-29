@@ -5,7 +5,7 @@
 
 import LogicAppsManagementClient from "azure-arm-logic";
 import { IntegrationAccountPartner } from "azure-arm-logic/lib/models";
-import { ServiceClientCredentials } from "ms-rest";
+import { IWizardCredentials } from "../../models/wizard/wizard";
 import { addExtensionUserAgent } from "vscode-azureextensionui";
 
 export enum PartnerType {
@@ -31,8 +31,8 @@ export async function createNewPartner(partnerName: string, qualifier: string, v
     return partner;
 }
 
-export async function getAllPartners(credentials: ServiceClientCredentials, subscriptionId: string, resourceGroup: string, integrationAccount: string): Promise<IntegrationAccountPartner[]> {
-    const client = new LogicAppsManagementClient(credentials, subscriptionId);
+export async function getAllPartners(credentials: IWizardCredentials, subscriptionId: string, resourceGroup: string, integrationAccount: string): Promise<IntegrationAccountPartner[]> {
+    const client = new LogicAppsManagementClient(credentials, subscriptionId, credentials.environment?.resourceManagerEndpointUrl);
     addExtensionUserAgent(client);
 
     const partners = await client.integrationAccountPartners.list(resourceGroup, integrationAccount);

@@ -4,14 +4,15 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { IntegrationAccount } from "azure-arm-logic/lib/models";
-import { AzureWizard, AzureWizardExecuteStep, AzureWizardPromptStep, IActionContext, IAzureNode, IAzureTreeItem, ILocationWizardContext, IResourceGroupWizardContext } from "vscode-azureextensionui";
+import { AzureWizard, AzureWizardExecuteStep, AzureWizardPromptStep, IActionContext, IAzureNode, IAzureTreeItem } from "vscode-azureextensionui";
 import { IntegrationAccountPartnerTreeItem } from "../../../tree/integration-account/IntegrationAccountPartnerTreeItem";
 import { PartnerCreateStep } from "./partnerCreateStep";
 import { PartnerNameStep } from "./partnerNameStep";
 import { PartnerQualifierStep } from "./partnerQualifierStep";
 import { PartnerValueStep } from "./partnerValueStep";
+import { IWizardContext } from "../../../models/wizard/wizard";
 
-export interface IPartnerWizardContext extends ILocationWizardContext, IResourceGroupWizardContext {
+export interface IPartnerWizardContext extends IWizardContext {
     integrationAccountName: string;
     partner?: IntegrationAccountPartnerTreeItem;
     partnerName?: string;

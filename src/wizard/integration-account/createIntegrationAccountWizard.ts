@@ -3,13 +3,14 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AzureWizard, AzureWizardExecuteStep, AzureWizardPromptStep, IActionContext, IAzureNode, IAzureTreeItem, ILocationWizardContext, IResourceGroupWizardContext, LocationListStep, ResourceGroupCreateStep, ResourceGroupListStep } from "vscode-azureextensionui";
+import { AzureWizard, AzureWizardExecuteStep, AzureWizardPromptStep, IActionContext, IAzureNode, IAzureTreeItem, LocationListStep, ResourceGroupCreateStep, ResourceGroupListStep } from "vscode-azureextensionui";
 import { IntegrationAccountTreeItem } from "../../tree/integration-account/IntegrationAccountTreeItem";
 import { IntegrationAccountCreateStep } from "./integrationAccountCreateStep";
 import { IntegrationAccountNameStep } from "./integrationAccountNameStep";
 import { IntegrationAccountSkuStep } from "./integrationAccountSkuStep";
+import { IWizardContext } from "../../models/wizard/wizard";
 
-export interface IIntegrationAccountWizardContext extends ILocationWizardContext, IResourceGroupWizardContext {
+export interface IIntegrationAccountWizardContext extends IWizardContext {
     integrationAccount?: IntegrationAccountTreeItem;
     integrationAccountName?: string;
     sku?: string;

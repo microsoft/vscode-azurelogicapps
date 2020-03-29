@@ -4,13 +4,14 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { IntegrationAccount } from "azure-arm-logic/lib/models";
-import { AzureWizard, AzureWizardExecuteStep, AzureWizardPromptStep, IActionContext, IAzureNode, IAzureTreeItem, ILocationWizardContext, IResourceGroupWizardContext } from "vscode-azureextensionui";
+import { AzureWizard, AzureWizardExecuteStep, AzureWizardPromptStep, IActionContext, IAzureNode, IAzureTreeItem } from "vscode-azureextensionui";
 import { IntegrationAccountMapTreeItem } from "../../../tree/integration-account/IntegrationAccountMapTreeItem";
 import { MapCreateStep } from "./mapCreateStep";
 import { MapNameStep } from "./mapNameStep";
 import { MapTypeStep } from "./mapTypeStep";
+import { IWizardContext } from "../../../models/wizard/wizard";
 
-export interface IMapWizardContext extends ILocationWizardContext, IResourceGroupWizardContext {
+export interface IMapWizardContext extends IWizardContext {
     integrationAccountName: string;
     map?: IntegrationAccountMapTreeItem;
     mapName?: string;

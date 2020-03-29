@@ -11,7 +11,7 @@ import { IAzureLogicAppWizardContext } from "./createLogicApp";
 
 export class LogicAppCreateStep extends AzureWizardExecuteStep<IAzureLogicAppWizardContext> {
     public async execute(wizardContext: IAzureLogicAppWizardContext): Promise<IAzureLogicAppWizardContext> {
-        const client = new LogicAppsManagementClient(wizardContext.credentials, wizardContext.subscriptionId);
+        const client = new LogicAppsManagementClient(wizardContext.credentials, wizardContext.subscriptionId, wizardContext.credentials.environment?.resourceManagerEndpointUrl);
         addExtensionUserAgent(client);
 
         const location = wizardContext.location!.name!;

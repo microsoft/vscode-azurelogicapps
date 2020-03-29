@@ -12,7 +12,7 @@ import { IPartnerWizardContext } from "./createPartnerWizard";
 
 export class PartnerCreateStep extends AzureWizardExecuteStep<IPartnerWizardContext> {
     public async execute(wizardContext: IPartnerWizardContext): Promise<IPartnerWizardContext> {
-        const client = new LogicAppsManagementClient(wizardContext.credentials, wizardContext.subscriptionId);
+        const client = new LogicAppsManagementClient(wizardContext.credentials, wizardContext.subscriptionId, wizardContext.credentials.environment?.resourceManagerEndpointUrl);
         addExtensionUserAgent(client);
 
         const newPartner: IntegrationAccountPartner = await client.integrationAccountPartners.createOrUpdate(wizardContext.resourceGroup!.name!,

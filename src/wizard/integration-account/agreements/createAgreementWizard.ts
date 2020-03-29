@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { BusinessIdentity, IntegrationAccount, IntegrationAccountPartner } from "azure-arm-logic/lib/models";
-import { AzureWizard, AzureWizardExecuteStep, AzureWizardPromptStep, IActionContext, IAzureNode, IAzureTreeItem, ILocationWizardContext, IResourceGroupWizardContext } from "vscode-azureextensionui";
+import { AzureWizard, AzureWizardExecuteStep, AzureWizardPromptStep, IActionContext, IAzureNode, IAzureTreeItem } from "vscode-azureextensionui";
 import { IntegrationAccountAgreementTreeItem } from "../../../tree/integration-account/IntegrationAccountAgreementTreeItem";
 import { AgreementCreateStep } from "./agreementCreateStep";
 import { AgreementNameStep } from "./agreementNameStep";
@@ -13,8 +13,9 @@ import { GuestIdentityStep } from "./guestIdentityStep";
 import { GuestPartnerStep } from "./guestPartnerStep";
 import { HostIdentityStep } from "./hostIdentityStep";
 import { HostPartnerStep } from "./hostPartnerStep";
+import { IWizardContext } from "../../../models/wizard/wizard";
 
-export interface IAgreementWizardContext extends ILocationWizardContext, IResourceGroupWizardContext {
+export interface IAgreementWizardContext extends IWizardContext {
     integrationAccountName: string;
     agreement?: IntegrationAccountAgreementTreeItem;
     agreementName?: string;
