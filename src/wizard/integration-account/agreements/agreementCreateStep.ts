@@ -12,7 +12,7 @@ import { IAgreementWizardContext } from "./createAgreementWizard";
 
 export class AgreementCreateStep extends AzureWizardExecuteStep<IAgreementWizardContext> {
     public async execute(wizardContext: IAgreementWizardContext): Promise<IAgreementWizardContext> {
-        const client = new LogicAppsManagementClient(wizardContext.credentials, wizardContext.subscriptionId);
+        const client = new LogicAppsManagementClient(wizardContext.credentials, wizardContext.subscriptionId, wizardContext.environment.resourceManagerEndpointUrl);
         addExtensionUserAgent(client);
 
         const newAgreement: IntegrationAccountAgreement = await client.integrationAccountAgreements.createOrUpdate(wizardContext.resourceGroup!.name!,

@@ -41,7 +41,7 @@ export class MapNameStep extends AzureWizardPromptStep<IMapWizardContext> {
     }
 
     private async isNameAvailable(name: string, wizardContext: IMapWizardContext): Promise<boolean> {
-        const client = new LogicAppsManagementClient(wizardContext.credentials, wizardContext.subscriptionId);
+        const client = new LogicAppsManagementClient(wizardContext.credentials, wizardContext.subscriptionId, wizardContext.environment.resourceManagerEndpointUrl);
         addExtensionUserAgent(client);
 
         let maps = await client.integrationAccountMaps.list(wizardContext.resourceGroup!.name!, wizardContext.integrationAccountName);

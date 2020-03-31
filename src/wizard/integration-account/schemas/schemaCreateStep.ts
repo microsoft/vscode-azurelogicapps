@@ -12,7 +12,7 @@ import { ISchemaWizardContext } from "./createSchemaWizard";
 
 export class SchemaCreateStep extends AzureWizardExecuteStep<ISchemaWizardContext> {
     public async execute(wizardContext: ISchemaWizardContext): Promise<ISchemaWizardContext> {
-        const client = new LogicAppsManagementClient(wizardContext.credentials, wizardContext.subscriptionId);
+        const client = new LogicAppsManagementClient(wizardContext.credentials, wizardContext.subscriptionId, wizardContext.environment.resourceManagerEndpointUrl);
         addExtensionUserAgent(client);
 
         const newSchema: IntegrationAccountSchema = await client.integrationAccountSchemas.createOrUpdate(wizardContext.resourceGroup!.name!,
