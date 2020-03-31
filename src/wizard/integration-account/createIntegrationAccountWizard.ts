@@ -2,7 +2,7 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-
+import { AzureEnvironment } from "ms-rest-azure";
 import { AzureWizard, AzureWizardExecuteStep, AzureWizardPromptStep, IActionContext, IAzureNode, IAzureTreeItem, ILocationWizardContext, IResourceGroupWizardContext, LocationListStep, ResourceGroupCreateStep, ResourceGroupListStep } from "vscode-azureextensionui";
 import { IntegrationAccountTreeItem } from "../../tree/integration-account/IntegrationAccountTreeItem";
 import { IntegrationAccountCreateStep } from "./integrationAccountCreateStep";
@@ -13,6 +13,7 @@ export interface IIntegrationAccountWizardContext extends ILocationWizardContext
     integrationAccount?: IntegrationAccountTreeItem;
     integrationAccountName?: string;
     sku?: string;
+    environment: AzureEnvironment;
 }
 
 export async function runNewIntegrationAccountWizard(node: IAzureNode, showCreatingNode: (label: string) => void): Promise<IAzureTreeItem> {
@@ -34,7 +35,8 @@ export async function runNewIntegrationAccountWizard(node: IAzureNode, showCreat
     let wizardContext: IIntegrationAccountWizardContext = {
         credentials: node.credentials,
         subscriptionDisplayName: node.subscriptionDisplayName,
-        subscriptionId: node.subscriptionId
+        subscriptionId: node.subscriptionId,
+        environment: node.environment
     };
 
     // Create a new instance of an Azure wizard for creating Integration Accounts.

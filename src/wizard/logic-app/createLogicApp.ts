@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { AzureEnvironment } from "ms-rest-azure";
 import { AzureWizard, AzureWizardExecuteStep, AzureWizardPromptStep, IActionContext, IAzureNode, IAzureTreeItem, ILocationWizardContext, IResourceGroupWizardContext, LocationListStep, ResourceGroupCreateStep, ResourceGroupListStep } from "vscode-azureextensionui";
 import { LogicAppTreeItem } from "../../tree/logic-app/LogicAppTreeItem";
 import { LogicAppCreateStep } from "./LogicAppCreateStep";
@@ -11,6 +12,7 @@ import { LogicAppNameStep } from "./LogicAppNameStep";
 export interface IAzureLogicAppWizardContext extends ILocationWizardContext, IResourceGroupWizardContext {
     logicApp?: LogicAppTreeItem;
     workflowName?: string;
+    environment: AzureEnvironment;
 }
 
 export async function createLogicApp(node: IAzureNode, showCreatingNode: (label: string) => void): Promise<IAzureTreeItem> {
@@ -31,7 +33,8 @@ export async function createLogicApp(node: IAzureNode, showCreatingNode: (label:
     let wizardContext: IAzureLogicAppWizardContext = {
         credentials: node.credentials,
         subscriptionDisplayName: node.subscriptionDisplayName,
-        subscriptionId: node.subscriptionId
+        subscriptionId: node.subscriptionId,
+        environment: node.environment
     };
 
     // Create a new instance of an Azure wizard for creating Logic Apps.
