@@ -689,8 +689,6 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                         await initialize(options, analyticsContextData);
                         await loadDefinition(logicApp, callbacks, ${workflowOptions});
 
-                        designer.render();
-
                         function App({ readOnly }) {
                             async function handleSave() {
                                 try {
