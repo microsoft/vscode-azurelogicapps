@@ -3,10 +3,9 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-// import * as assert from 'assert';
-// import * as extension from '../extension';
-// import * as vscode from 'vscode';
+// const assert = require("assert");
+// const extension = require("../extension");
 
-suite("Extension Tests", (): void => {
+suite("Extension Tests", () => {
     // eslint disable-line @typescript-eslint/no-empty-function
 });
