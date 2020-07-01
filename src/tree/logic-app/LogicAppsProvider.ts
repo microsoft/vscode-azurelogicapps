@@ -28,7 +28,7 @@ export class LogicAppsProvider implements IChildProvider {
             this.nextLink = undefined;
         }
 
-        const client = new LogicAppsManagementClient(node.credentials, node.subscriptionId);
+        const client = new LogicAppsManagementClient(node.credentials, node.subscriptionId, node.environment.resourceManagerEndpointUrl);
         addExtensionUserAgent(client);
 
         const logicApps = this.nextLink === undefined

@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { AzureEnvironment } from "ms-rest-azure";
 import { BusinessIdentity, IntegrationAccount, IntegrationAccountPartner } from "azure-arm-logic/lib/models";
 import { AzureWizard, AzureWizardExecuteStep, AzureWizardPromptStep, IActionContext, IAzureNode, IAzureTreeItem, ILocationWizardContext, IResourceGroupWizardContext } from "vscode-azureextensionui";
 import { IntegrationAccountAgreementTreeItem } from "../../../tree/integration-account/IntegrationAccountAgreementTreeItem";
@@ -23,6 +24,7 @@ export interface IAgreementWizardContext extends ILocationWizardContext, IResour
     hostIdentity?: BusinessIdentity;
     guestPartner?: string;
     guestIdentity?: BusinessIdentity;
+    environment: AzureEnvironment;
 
     // Passing Data Around
     partners?: Map<string, IntegrationAccountPartner>;
@@ -53,7 +55,8 @@ export async function runNewAgreementWizard(integrationAccount: IntegrationAccou
             name: integrationAccount.id!.split("/").slice(-5, -4)[0]
         },
         subscriptionDisplayName: node.subscriptionDisplayName,
-        subscriptionId: node.subscriptionId
+        subscriptionId: node.subscriptionId,
+        environment: node.environment
     };
 
     // Create a new instance of an Azure wizard for creating Agreements.

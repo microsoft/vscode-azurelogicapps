@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { AzureEnvironment } from "ms-rest-azure";
 import LogicAppsManagementClient from "azure-arm-logic";
 import { IntegrationAccountPartner } from "azure-arm-logic/lib/models";
 import { ServiceClientCredentials } from "ms-rest";
@@ -31,8 +32,8 @@ export async function createNewPartner(partnerName: string, qualifier: string, v
     return partner;
 }
 
-export async function getAllPartners(credentials: ServiceClientCredentials, subscriptionId: string, resourceGroup: string, integrationAccount: string): Promise<IntegrationAccountPartner[]> {
-    const client = new LogicAppsManagementClient(credentials, subscriptionId);
+export async function getAllPartners(credentials: IPartnerCredentials, subscriptionId: string, resourceGroup: string, integrationAccount: string): Promise<IntegrationAccountPartner[]> {
+    const client = new LogicAppsManagementClient(credentials, subscriptionId, credentials.environment?.resourceManagerEndpointUrl);
     addExtensionUserAgent(client);
 
     const partners = await client.integrationAccountPartners.list(resourceGroup, integrationAccount);
@@ -44,4 +45,8 @@ export async function getAllPartners(credentials: ServiceClientCredentials, subs
     }
 
     return partners;
+}
+
+export interface IPartnerCredentials extends ServiceClientCredentials {
+    environment?: AzureEnvironment;
 }

@@ -41,7 +41,7 @@ export class SchemaNameStep extends AzureWizardPromptStep<ISchemaWizardContext> 
     }
 
     private async isNameAvailable(name: string, wizardContext: ISchemaWizardContext): Promise<boolean> {
-        const client = new LogicAppsManagementClient(wizardContext.credentials, wizardContext.subscriptionId);
+        const client = new LogicAppsManagementClient(wizardContext.credentials, wizardContext.subscriptionId, wizardContext.environment.resourceManagerEndpointUrl);
         addExtensionUserAgent(client);
 
         let schemas = await client.integrationAccountSchemas.list(wizardContext.resourceGroup!.name!, wizardContext.integrationAccountName);
