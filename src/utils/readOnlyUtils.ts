@@ -18,11 +18,11 @@ import { ext } from "../extensionVariables";
 let contentProvider: ReadOnlyContentProvider | undefined;
 const providerScheme = "azurelogicappsReadonly";
 
-export async function openReadOnlyJson(name: string, content: string) {
+export async function openReadOnlyJson(name: string, content: string): Promise<void> {
     return openReadOnlyContent(name, content, ".json");
 }
 
-export async function openReadOnlyContent(name: string, content: string, fileExt: string) {
+export async function openReadOnlyContent(name: string, content: string, fileExt: string): Promise<void> {
     if (!contentProvider) {
         contentProvider = new ReadOnlyContentProvider();
         ext.context.subscriptions.push(
