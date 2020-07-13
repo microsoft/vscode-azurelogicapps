@@ -7,5 +7,5 @@
 // const extension = require("../extension");
 
 suite("Extension Tests", () => {
-    // eslint disable-line @typescript-eslint/no-empty-function
+    // eslint-disable-line @typescript-eslint/no-empty-function
 });

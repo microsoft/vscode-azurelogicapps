@@ -45,6 +45,7 @@ export function generateBuildDefinition(options: IGenerateBuildDefinitionOptions
     return jsyaml.safeDump(yaml);
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function generateDeploymentTemplate(parameters: Record<string, any>, resources: any[]) {
     return {
         $schema: "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
@@ -55,6 +56,7 @@ export function generateDeploymentTemplate(parameters: Record<string, any>, reso
     };
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function generateDeploymentTemplateParameters(parameters: Record<string, any>) {
     return {
         $schema: "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
@@ -63,6 +65,7 @@ export function generateDeploymentTemplateParameters(parameters: Record<string, 
     };
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function generateParameters(workflow: Workflow) {
     return {
         $schema: "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
@@ -73,6 +76,7 @@ export function generateParameters(workflow: Workflow) {
     };
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function generateTemplate(workflow: Workflow) {
     return {
         $schema: "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
@@ -87,6 +91,7 @@ export function generateTemplate(workflow: Workflow) {
     };
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function generateTemplateParameter(workflow: Workflow) {
     const value = normalizeResourceName(workflow.name!);
     const nameParameter = normalizeParameterName(`workflows_${workflow.name}_name`);
@@ -113,6 +118,7 @@ export function generateTemplateParameter(workflow: Workflow) {
     };
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function generateTemplateParameterDefinition(workflow: Workflow) {
     const defaultValue = normalizeResourceName(workflow.name!);
     const nameParameter = normalizeParameterName(`workflows_${workflow.name}_name`);
@@ -143,6 +149,7 @@ export function generateTemplateParameterDefinition(workflow: Workflow) {
     };
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function generateTemplateResource(workflow: Workflow) {
     const { definition, location, name } = workflow;
     const nameParameter = normalizeParameterName(`workflows_${name!}_name`);

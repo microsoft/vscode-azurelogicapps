@@ -28,6 +28,7 @@ interface IWorkflowDefinitionWithTriggers {
 
 type HasCallbackFunction = (triggerName: string) => boolean;
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export async function getCallbacks(client: LogicAppsManagementClient, definition: any, resourceGroupName: string, workflowName: string): Promise<Callbacks> {
     const triggers = await client.workflowTriggers.list(resourceGroupName, workflowName);
     const hasCallbackFn = hasCallback(definition);
