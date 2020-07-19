@@ -37,6 +37,10 @@ export class LogicAppTreeItem implements IAzureParentTreeItem {
         this.logicAppVersionsItem = new LogicAppVersionsTreeItem(client, workflow);
     }
 
+    public get description(): string | undefined{
+        return this.resourceGroupName;
+    }
+
     public get iconPath(): string {
         return getIconPath(LogicAppTreeItem.contextValue);
     }
