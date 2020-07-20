@@ -29,6 +29,10 @@ export class IntegrationAccountTreeItem implements IAzureParentTreeItem {
         this.integrationAccountSchemasItem = new IntegrationAccountSchemasTreeItem(client, integrationAccount);
     }
 
+    public get description(): string | undefined{
+        return this.resourceGroupName;
+    }
+
     public get iconPath(): string {
         return getIconPath(IntegrationAccountTreeItem.contextValue);
     }
