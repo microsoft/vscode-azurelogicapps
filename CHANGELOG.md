@@ -5,7 +5,7 @@ All notable changes to the "vscode-logicapps" extension will be documented in th
 
 ## [0.2.44] - 2020-08-03
 ### Changed
-- Update designer version to 1.50720.1.1
+- Update designer version to 1.50727.1.1
 
 ### Fixed
 - #106 - Show resource group for Logic Apps and Integration Accounts
