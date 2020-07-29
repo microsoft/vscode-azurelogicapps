@@ -50,8 +50,7 @@ export class LogicAppTreeItem implements IAzureParentTreeItem {
     }
 
     public get integrationAccountId(): string | undefined {
-        const { integrationAccount } = this.workflow;
-        return integrationAccount !== undefined ? integrationAccount.id : undefined;
+        return this.workflow.integrationAccount?.id;
     }
 
     public get label(): string {
