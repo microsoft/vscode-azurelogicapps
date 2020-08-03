@@ -29,8 +29,7 @@ export class LogicAppVersionTreeItem implements IAzureTreeItem {
     }
 
     public get integrationAccountId(): string | undefined {
-        const { integrationAccount } = this.workflowVersion;
-        return integrationAccount !== undefined ? integrationAccount.id : undefined;
+        return this.workflowVersion.integrationAccount?.id;
     }
 
     public get label(): string {
@@ -58,7 +57,7 @@ export class LogicAppVersionTreeItem implements IAzureTreeItem {
     }
 
     public getParameters(): Record<string, any> | undefined {
-        return this.workflow.parameters;
+        return this.workflowVersion.parameters;
     }
 
     public async getReferences(): Promise<ConnectionReferences> {

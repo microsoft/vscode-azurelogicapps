@@ -237,7 +237,7 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                         });
                     }
 
-                    const oauthService = new OAuth.OAuthPopupService("https://portal.azure.com");
+                    const oauthService = new OAuth.OAuthPopupService("https://portal.azure.com", "iframedesigner");
 
                     const getArmAccessToken = async () => {
                         return "${authorization}".substring("Bearer ".length);
