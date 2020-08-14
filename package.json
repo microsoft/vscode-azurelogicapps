@@ -765,7 +765,7 @@
         "fs-extra": "^9.0.1",
         "glob": "^7.1.6",
         "js-yaml": "^3.14.0",
-        "lodash": "^4.17.19",
+        "lodash": "^4.17.20",
         "request": "^2.88.2",
         "request-promise-native": "^1.0.9",
         "vscode-azureextensionui": "^0.16.5",
