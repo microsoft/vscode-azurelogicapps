@@ -10,7 +10,7 @@ Use the Azure Logic Apps extension for VS Code to quickly create, debug, and man
 
 You must have Visual Studio Code 1.31.0 (January 2019) or later to install the extension.
 
-All you need is an Azure Subscription to get started. If you don't have one, [click here](https://azure.microsoft.com/en-us/free/) for a free subscription with $200 in Azure credits!
+All you need is an Azure Subscription to get started. If you don't have one, [click here](https://azure.microsoft.com/en-us/free/) for a free subscription.
 
 ## Features
 
