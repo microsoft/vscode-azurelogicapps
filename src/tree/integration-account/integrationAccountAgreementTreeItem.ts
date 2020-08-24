@@ -64,9 +64,10 @@ export class IntegrationAccountAgreementTreeItem implements IAzureTreeItem {
         }
 
         // Only want the high level properties, not the whole content
-        delete this.integrationAccountAgreement.content;
+        const integrationAccountAgreement: Record<string, any> = { ...this.integrationAccountAgreement };
+        delete integrationAccountAgreement.content;
 
-        return JSON.stringify(this.integrationAccountAgreement, null, 4);
+        return JSON.stringify(integrationAccountAgreement, null, 4);
     }
 
     public async update(agreementContent: string): Promise<string> {
