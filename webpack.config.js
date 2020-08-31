@@ -15,6 +15,7 @@ const config = {
     entry: "./src/extension.ts",
     externals: {
         "azure-arm-logic": "commonjs azure-arm-logic",
+        "azure-arm-resource": "commonjs azure-arm-resource",
         "fs-extra": "commonjs fs-extra",
         "glob": "commonjs glob",
         "js-yaml": "commonjs js-yaml",
