@@ -752,11 +752,11 @@
         "mocha": "^8.1.3",
         "querystringify": "^2.2.0",
         "serialize-javascript": "^5.0.1",
-        "ts-loader": "^8.0.3",
-        "typescript": "^4.0.2",
+        "ts-loader": "^8.0.4",
+        "typescript": "^4.0.3",
         "vsce": "^1.79.5",
         "vscode-test": "^1.4.0",
-        "webpack": "^4.44.1",
+        "webpack": "^4.44.2",
         "webpack-cli": "^3.3.12"
     },
     "dependencies": {
