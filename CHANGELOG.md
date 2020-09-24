@@ -5,7 +5,7 @@ All notable changes to the "vscode-logicapps" extension will be documented in th
 
 ## [0.2.52] - 2020-09-28
 ### Changed
-- Update designer version to 1.50921.1.2
+- Update designer version to 1.50921.1.3
 
 ## [0.2.51] - 2020-09-21
 ### Changed
