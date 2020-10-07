@@ -26,3 +26,7 @@ You must not have any open instances of Visual Studio Code before running tests.
 ### Command to run tests
 
 `npm run test`
+
+## Packaging code
+
+`npm run package`
