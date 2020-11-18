@@ -1,4 +1,4 @@
-# Azure Logic Apps for Visual Studio Code (Preview)
+# Azure Logic Apps for Visual Studio Code
 
 [![Version](https://vsmarketplacebadge.apphb.com/version/ms-azuretools.vscode-logicapps.svg)](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-logicapps) [![Installs](https://vsmarketplacebadge.apphb.com/installs/ms-azuretools.vscode-logicapps.svg)](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-logicapps) [![Rating](https://vsmarketplacebadge.apphb.com/rating-star/ms-azuretools.vscode-logicapps.svg)](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-logicapps#review-details)
 
