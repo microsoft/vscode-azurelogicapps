@@ -2,7 +2,7 @@
     "name": "vscode-logicapps",
     "displayName": "Azure Logic Apps",
     "description": "%extension.description%",
-    "version": "0.2.60",
+    "version": "1.0.0",
     "publisher": "ms-azuretools",
     "icon": "resources/azLogicApps.png",
     "aiKey": "b6385546-3be0-489c-a298-baccd6c152fb",
@@ -27,7 +27,6 @@
         "Logic Apps",
         "Integration Accounts"
     ],
-    "preview": true,
     "activationEvents": [
         "onCommand:azureLogicApps.addBuildDefinitionToProject",
         "onCommand:azureLogicApps.addLogicAppToProject",
