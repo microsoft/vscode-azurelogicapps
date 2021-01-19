@@ -26,13 +26,13 @@ All you need is an Azure Subscription to get started. If you don't have one, [cl
 * Generate Azure resource manager deployment template for local project
 * Generate Azure DevOps pipeline definition for local project
 
-![Recurrence trigger IntelliSense](resources/recurrence-trigger.gif)
+![Recurrence trigger IntelliSense](https://raw.githubusercontent.com/microsoft/vscode-azurelogicapps/main/resources/recurrence-trigger.gif)
 
-![Run after IntelliSense](resources/run-after.gif)
+![Run after IntelliSense](https://raw.githubusercontent.com/microsoft/vscode-azurelogicapps/main/resources/run-after.gif)
 
-![Open in read-only designer](resources/open-in-designer.gif)
+![Open in read-only designer](https://raw.githubusercontent.com/microsoft/vscode-azurelogicapps/main/resources/open-in-designer.gif)
 
-![Open run in monitoring view](resources/open-in-monitoring-view.gif)
+![Open run in monitoring view](https://raw.githubusercontent.com/microsoft/vscode-azurelogicapps/main/resources/open-in-monitoring-view.gif)
 
 ## Recommended Extensions
 
