@@ -42,7 +42,7 @@ export function generateBuildDefinition(options: IGenerateBuildDefinitionOptions
         ]
     };
 
-    return jsyaml.safeDump(yaml);
+    return jsyaml.dump(yaml);
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
