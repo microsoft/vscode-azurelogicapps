@@ -194,7 +194,7 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                     "@uifabric/styling/lib": "@uifabric/styling",
                     "@uifabric/utilities/lib": "@uifabric/utilities",
                     "core/main": "core.designer.min",
-                    "draft-js": "draft.min",
+                    "draft-js": "Draft.min",
                     "fuse": "fuse.min",
                     "immutable": "immutable.min",
                     "localforage": "localforage.min",
