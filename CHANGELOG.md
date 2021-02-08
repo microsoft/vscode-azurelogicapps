@@ -7,7 +7,7 @@ All notable changes to the "vscode-logicapps" extension will be documented in th
 Thanks, Tyler Leonhardt (@TylerLeonhardt), for the bug fix!
 
 ### Changed
-- Update designer version to 1.60201.1.1
+- Update designer version to 1.60201.1.6
 
 ### Fixed
 - #193 - Fix Draft.js script reference to work on case-sensitive file systems
