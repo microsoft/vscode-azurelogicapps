@@ -764,7 +764,7 @@
         "azure-arm-resource": "^3.0.0-preview",
         "fs-extra": "^9.1.0",
         "glob": "^7.1.6",
-        "js-yaml": "^4.0.0",
+        "js-yaml": "^4.1.0",
         "lodash": "^4.17.21",
         "request": "^2.88.2",
         "request-promise-native": "^1.0.9",
