@@ -2,7 +2,7 @@
     "name": "vscode-logicapps",
     "displayName": "Azure Logic Apps (Consumption)",
     "description": "%extension.description%",
-    "version": "1.0.12",
+    "version": "1.0.13",
     "publisher": "ms-azuretools",
     "icon": "resources/azLogicApps.png",
     "aiKey": "b6385546-3be0-489c-a298-baccd6c152fb",
@@ -746,17 +746,17 @@
         "@types/vscode": "^1.31.0",
         "@typescript-eslint/eslint-plugin": "^4.24.0",
         "@typescript-eslint/parser": "^4.24.0",
-        "ajv": "^8.4.0",
-        "eslint": "^7.26.0",
+        "ajv": "^8.5.0",
+        "eslint": "^7.27.0",
         "eslint-utils": "^3.0.0",
         "mocha": "^8.4.0",
         "querystringify": "^2.2.0",
         "serialize-javascript": "^5.0.1",
-        "ts-loader": "^9.1.2",
+        "ts-loader": "^9.2.2",
         "typescript": "^4.2.4",
         "vsce": "^1.88.0",
         "vscode-test": "^1.5.2",
-        "webpack": "^5.37.0",
+        "webpack": "^5.37.1",
         "webpack-cli": "^4.7.0"
     },
     "dependencies": {
@@ -774,5 +774,11 @@
     },
     "extensionDependencies": [
         "ms-vscode.azure-account"
-    ]
+    ],
+    "capabilities": {
+        "untrustedWorkspaces": {
+            "supported": true
+        },
+        "virtualWorkspaces": false
+    }
 }
