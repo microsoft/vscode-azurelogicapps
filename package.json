@@ -78,7 +78,7 @@
     "contributes": {
         "commands": [
             {
-                "category": "Azure Logic Apps",
+                "category": "Azure Logic Apps (Consumption)",
                 "command": "azureLogicApps.addBuildDefinitionToProject",
                 "icon": {
                     "dark": "resources/dark/AddBuildDefinitionToProject.svg",
@@ -87,12 +87,12 @@
                 "title": "%azLogicApps.addBuildDefinitionToProject%"
             },
             {
-                "category": "Azure Logic Apps",
+                "category": "Azure Logic Apps (Consumption)",
                 "command": "azureLogicApps.addLogicAppToProject",
                 "title": "%azLogicApps.addLogicAppToProject%"
             },
             {
-                "category": "Azure Logic Apps",
+                "category": "Azure Logic Apps (Consumption)",
                 "command": "azureLogicApps.createLogicApp",
                 "icon": {
                     "dark": "resources/dark/CreateLogicApp.svg",
@@ -101,7 +101,7 @@
                 "title": "%azLogicApps.createLogicApp%"
             },
             {
-                "category": "Azure Logic Apps",
+                "category": "Azure Logic Apps (Consumption)",
                 "command": "azureLogicApps.createProject",
                 "icon": {
                     "dark": "resources/dark/CreateProject.svg",
@@ -110,27 +110,27 @@
                 "title": "%azLogicApps.createProject%"
             },
             {
-                "category": "Azure Logic Apps",
+                "category": "Azure Logic Apps (Consumption)",
                 "command": "azureLogicApps.deleteLogicApp",
                 "title": "%azLogicApps.deleteLogicApp%"
             },
             {
-                "category": "Azure Logic Apps",
+                "category": "Azure Logic Apps (Consumption)",
                 "command": "azureLogicApps.disableLogicApp",
                 "title": "%azLogicApps.disableLogicApp%"
             },
             {
-                "category": "Azure Logic Apps",
+                "category": "Azure Logic Apps (Consumption)",
                 "command": "azureLogicApps.enableLogicApp",
                 "title": "%azLogicApps.enableLogicApp%"
             },
             {
-                "category": "Azure Logic Apps",
+                "category": "Azure Logic Apps (Consumption)",
                 "command": "azureLogicApps.loadMore",
                 "title": "%azLogicApps.loadMore%"
             },
             {
-                "category": "Azure Logic Apps",
+                "category": "Azure Logic Apps (Consumption)",
                 "command": "azureLogicApps.openInDesigner",
                 "icon": {
                     "dark": "resources/dark/eye.svg",
@@ -139,7 +139,7 @@
                 "title": "%azLogicApps.openInDesigner%"
             },
             {
-                "category": "Azure Logic Apps",
+                "category": "Azure Logic Apps (Consumption)",
                 "command": "azureLogicApps.openInEditor",
                 "icon": {
                     "dark": "resources/dark/Edit.svg",
@@ -148,22 +148,22 @@
                 "title": "%azLogicApps.openInEditor%"
             },
             {
-                "category": "Azure Logic Apps",
+                "category": "Azure Logic Apps (Consumption)",
                 "command": "azureLogicApps.openInPortal",
                 "title": "%azLogicApps.openInPortal%"
             },
             {
-                "category": "Azure Logic Apps",
+                "category": "Azure Logic Apps (Consumption)",
                 "command": "azureLogicApps.openRunActionInEditor",
                 "title": "%azLogicApps.openInEditor%"
             },
             {
-                "category": "Azure Logic Apps",
+                "category": "Azure Logic Apps (Consumption)",
                 "command": "azureLogicApps.openRunInEditor",
                 "title": "%azLogicApps.openInEditor%"
             },
             {
-                "category": "Azure Logic Apps",
+                "category": "Azure Logic Apps (Consumption)",
                 "command": "azureLogicApps.openRunInMonitoringView",
                 "icon": {
                     "dark": "resources/dark/eye.svg",
@@ -172,12 +172,12 @@
                 "title": "%azLogicApps.openRunInMonitoringView%"
             },
             {
-                "category": "Azure Logic Apps",
+                "category": "Azure Logic Apps (Consumption)",
                 "command": "azureLogicApps.openTriggerInEditor",
                 "title": "%azLogicApps.openInEditor%"
             },
             {
-                "category": "Azure Logic Apps",
+                "category": "Azure Logic Apps (Consumption)",
                 "command": "azureLogicApps.openVersionInDesigner",
                 "icon": {
                     "dark": "resources/dark/eye.svg",
@@ -186,17 +186,17 @@
                 "title": "%azLogicApps.openInDesigner%"
             },
             {
-                "category": "Azure Logic Apps",
+                "category": "Azure Logic Apps (Consumption)",
                 "command": "azureLogicApps.openVersionInEditor",
                 "title": "%azLogicApps.openInEditor%"
             },
             {
-                "category": "Azure Logic Apps",
+                "category": "Azure Logic Apps (Consumption)",
                 "command": "azureLogicApps.promoteVersion",
                 "title": "%azLogicApps.promoteVersion%"
             },
             {
-                "category": "Azure Logic Apps",
+                "category": "Azure Logic Apps (Consumption)",
                 "command": "azureLogicApps.refresh",
                 "icon": {
                     "dark": "resources/dark/Refresh.svg",
@@ -205,17 +205,17 @@
                 "title": "%azLogicApps.refresh%"
             },
             {
-                "category": "Azure Logic Apps",
+                "category": "Azure Logic Apps (Consumption)",
                 "command": "azureLogicApps.resubmitRun",
                 "title": "%azLogicApps.resubmitRun%"
             },
             {
-                "category": "Azure Logic Apps",
+                "category": "Azure Logic Apps (Consumption)",
                 "command": "azureLogicApps.runTrigger",
                 "title": "%azLogicApps.runTrigger%"
             },
             {
-                "category": "Azure Logic Apps",
+                "category": "Azure Logic Apps (Consumption)",
                 "command": "azureLogicApps.selectSubscriptions",
                 "icon": {
                     "dark": "resources/dark/Filter.svg",
@@ -355,7 +355,7 @@
             "azure": [
                 {
                     "id": "azureLogicAppsExplorer",
-                    "name": "Logic Apps",
+                    "name": "Logic Apps (Consumption)",
                     "when": "config.azureLogicApps.showExplorer == true"
                 },
                 {
@@ -688,7 +688,7 @@
         "jsonValidation": [],
         "configuration": [
             {
-                "title": "Azure Logic Apps",
+                "title": "Azure Logic Apps (Consumption)",
                 "properties": {
                     "azureLogicApps.showExplorer": {
                         "default": true,

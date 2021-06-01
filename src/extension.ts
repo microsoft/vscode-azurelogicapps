@@ -55,7 +55,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     registerUIExtensionVariables(ext);
     ext.context = context;
 
-    const outputChannel = vscode.window.createOutputChannel("Azure Logic Apps");
+    const outputChannel = vscode.window.createOutputChannel("Azure Logic Apps (Consumption)");
     ext.outputChannel = outputChannel;
     context.subscriptions.push(outputChannel);
 
