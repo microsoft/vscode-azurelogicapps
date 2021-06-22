@@ -27,5 +27,5 @@
     "azLogicApps.selectSubscriptions": "Select Subscriptions",
     "azLogicApps.showExplorerDescription": "Show or hide the Azure Logic Apps Explorer",
     "azLogicApps.showSavePrompt": "Prompt the user before saving and updating a Logic App.",
-    "extension.description": "Visual Studio Code extension for Azure Logic App (Consumption)"
+    "extension.description": "Visual Studio Code extension for Azure Logic Apps (Consumption)"
 }
