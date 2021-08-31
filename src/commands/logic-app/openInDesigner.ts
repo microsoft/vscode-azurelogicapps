@@ -84,7 +84,7 @@ async function handleSave(node: IAzureNode<LogicAppTreeItem>, definition: string
             const updatedDefinition = await node.treeItem.update(definition, parameters);
             await node.refresh();
             return updatedDefinition;
-        } catch (error) {
+        } catch (error: any) {
             await vscode.window.showErrorMessage(error.message, DialogResponses.ok);
             throw error;
         }
