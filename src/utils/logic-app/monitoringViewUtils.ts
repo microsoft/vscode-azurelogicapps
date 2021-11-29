@@ -7,6 +7,7 @@ import { Constants } from "../../constants";
 
 interface IGetWebviewContentOptions {
     authorization: string;
+    canvasMode: boolean;
     location: string;
     resourceGroupName: string;
     runId: string;
@@ -17,7 +18,7 @@ interface IGetWebviewContentOptions {
 
 const version = Constants.DesignerVersion;
 
-export function getWebviewContent({ authorization, location, resourceGroupName, runId, subscriptionId, title, workflowId }: IGetWebviewContentOptions): string {
+export function getWebviewContent({ authorization, canvasMode, location, resourceGroupName, runId, subscriptionId, title, workflowId }: IGetWebviewContentOptions): string {
     return `<!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +26,7 @@ export function getWebviewContent({ authorization, location, resourceGroupName, 
     <meta http-equiv="Content-Security-Policy" content="img-src data: https:; script-src https: 'unsafe-inline'; style-src https: 'unsafe-inline';">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://ema.hosting.portal.azure.net/ema/Content/${version}/Html/styles/fabric.min.css">
+    <link rel="stylesheet" href="https://ema.hosting.portal.azure.net/ema/Content/${version}/Html/styles/v2/jsplumbtoolkit-defaults.css">
     <link rel="stylesheet" href="https://ema.hosting.portal.azure.net/ema/Content/${version}/Html/styles/designer.min.css">
     <style>
         body {
@@ -39,6 +41,18 @@ export function getWebviewContent({ authorization, location, resourceGroupName, 
         .msla-container {
             margin-top: 52px;
         }
+${canvasMode ? `
+        .msla-container {
+            max-height: calc(100vh - 52px);
+            overflow-x: hidden;
+        }
+        .msla-transformable-view-container {
+            height: calc(100vh - 52px);
+        }
+        .msla-panel-container .panel-container .msla-panel-root {
+            height: calc(100vh - 45px); /* 52px - 7px negative margin */
+        }
+` : ''}
         #app {
             position: fixed;
             top: 0;
@@ -51,6 +65,10 @@ export function getWebviewContent({ authorization, location, resourceGroupName, 
 <body>
     <div id="app"></div>
     <div id="monitoring-view" class="msla-container"></div>
+${canvasMode ? `
+    <script src="https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/serverless/dagre.min.js"></script>
+    <script src="https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/serverless/jsplumb.min.js"></script>
+` : ''}
     <script src="https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/logicappdesigner/require.min.js"></script>
     <script>
         (global => {
@@ -373,10 +391,12 @@ export function getWebviewContent({ authorization, location, resourceGroupName, 
                                 EXPRESSION_TRACE: true,
                                 FX_TOKEN: true,
                                 FX_TOKEN_FOR_CONDITION: true,
+                                HIDE_PANEL_MODE_UI: true,
                                 LOAD_RUN_ACTION_INPUTS_OUTPUTS_ASYNC: true,
                                 SHOW_WEBHOOK_REQUEST_HISTORY: true,
                                 SUPPORT_OBFUSCATION: true,
-                                SUPPORT_PAN_AND_ZOOM: true,
+                                SUPPORT_PAN_AND_ZOOM: ${!canvasMode},
+                                SUPPORT_PANEL_MODE: ${canvasMode},
                                 USE_NEW_EXPRESSION_PARSER: true
                             },
                             functionServiceFactory,

@@ -11,6 +11,7 @@ import { ConnectionReferences } from "./connectionReferenceUtils";
 interface IGetWebviewContentOptions {
     authorization: string;
     callbacks: Callbacks;
+    canvasMode: boolean;
     definition: string;
     integrationAccountId?: string;
     location: string;
@@ -28,7 +29,7 @@ interface IGetWebviewContentOptions {
 
 const version = Constants.DesignerVersion;
 
-export function getWebviewContentForDesigner({ authorization, callbacks, definition, integrationAccountId, location, parameters, references, readOnly, resourceGroupName, sku, subscriptionId, tenantId, title, userId, workflowId }: IGetWebviewContentOptions): string {
+export function getWebviewContentForDesigner({ authorization, callbacks, canvasMode, definition, integrationAccountId, location, parameters, references, readOnly, resourceGroupName, sku, subscriptionId, tenantId, title, userId, workflowId }: IGetWebviewContentOptions): string {
     readOnly = readOnly || false;
     sku = sku || { name: "Consumption" };
 
@@ -44,6 +45,7 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://ema.hosting.portal.azure.net/ema/Content/${version}/Html/styles/fabric.min.css">
     <link rel="stylesheet" href="https://ema.hosting.portal.azure.net/ema/Content/${version}/Html/styles/Draft.css">
+    <link rel="stylesheet" href="https://ema.hosting.portal.azure.net/ema/Content/${version}/Html/styles/v2/jsplumbtoolkit-defaults.css" type="text/css">
     <link rel="stylesheet" href="https://ema.hosting.portal.azure.net/ema/Content/${version}/Html/styles/react-draft-wysiwyg.css">
     <link rel="stylesheet" href="https://ema.hosting.portal.azure.net/ema/Content/${version}/Html/styles/designer.min.css">
     <style>
@@ -58,6 +60,19 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
         .msla-container {
             margin-top: 52px;
         }
+${canvasMode ? `
+        .msla-container {
+            margin-top: 0;
+            max-height: 100vh;
+            overflow-x: hidden;
+        }
+        .msla-transformable-view-container {
+            height: 100vh;
+        }
+        .msla-panel-container .panel-container .msla-panel-root {
+            height: calc(100vh + 7px); /* offset 7px negative margin */
+        }
+`: ''}
         #app {
             position: fixed;
             top: 0;
@@ -70,6 +85,10 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
 <body>
     <div id="app"></div>
     <div id="designer" class="msla-container"></div>
+${canvasMode ? `
+    <script src="https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/serverless/dagre.min.js"></script>
+    <script src="https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/serverless/jsplumb.min.js"></script>
+` : ''}
     <script src="https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/logicappdesigner/require.min.js"></script>
     <script>
         (global => {
@@ -512,6 +531,7 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                             FX_TOKEN: true,
                             FX_TOKEN_FOR_CONDITION: true,
                             HTML_EDITOR: true,
+                            HIDE_PANEL_MODE_UI: true,
                             NEW_CONDITION_RULES_BUILDER: true,
                             NEW_RECOMMENDATION_CARD_WITH_FOR_YOU: true,
                             NEW_RECOMMENDATION_CARD_WITH_MODULES: true,
@@ -523,7 +543,8 @@ export function getWebviewContentForDesigner({ authorization, callbacks, definit
                             SHOW_TRIGGER_RECURRENCE: true,
                             STATIC_RESULT: true,
                             SUPPORT_OBFUSCATION: true,
-                            SUPPORT_PAN_AND_ZOOM: true,
+                            SUPPORT_PAN_AND_ZOOM: ${!canvasMode},
+                            SUPPORT_PANEL_MODE: ${canvasMode},
                             SUPPORT_PEEK: true,
                             SUPPRESS_WORKFLOW_HEADERS_ON_RESPONSE: true,
                             TOKEN_COPY_PASTE: true,

@@ -18,6 +18,7 @@ export async function openVersionInDesigner(tree: AzureTreeDataProvider, node?: 
 
     const readOnlySuffix = localize("azLogicApps.readOnlySuffix", "(read-only)");
     const authorization = await getAuthorization(node.credentials);
+    const canvasMode = vscode.workspace.getConfiguration("azureLogicApps").get<boolean>("canvasMode")!;
     const { subscriptionId, treeItem } = node as IAzureNode<LogicAppVersionTreeItem>;
     const definition = await treeItem.getData();
     const parameters = treeItem.getParameters();
@@ -33,6 +34,7 @@ export async function openVersionInDesigner(tree: AzureTreeDataProvider, node?: 
     panel.webview.html = getWebviewContentForDesigner({
         authorization,
         callbacks: {},
+        canvasMode,
         definition,
         integrationAccountId,
         location,
