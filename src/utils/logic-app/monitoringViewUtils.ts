@@ -295,7 +295,7 @@ export function getWebviewContent({ authorization, location, resourceGroupName, 
                 global.React = React;
                 global.ReactDOM = ReactDOM;
 
-                r(["core/main", "oauth", "office-ui-fabric-react"], (designercore, OAuth, { CommandBar, Fabric }) => {
+                r(["core/main", "oauth", "@fluentui/react"], (designercore, OAuth, { CommandBar, Fabric }) => {
                     designercore.requireScriptForEditor(\`\${baseUrl}/monaco/min/vs\`);
 
                     const monacoLocale = getMonacoLocale($locale);
