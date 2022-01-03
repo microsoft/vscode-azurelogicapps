@@ -20,6 +20,7 @@ export async function openInDesigner(tree: AzureTreeDataProvider, node?: IAzureN
     const authorization = await getAuthorization(node.credentials);
     const { subscriptionId, treeItem } = node as IAzureNode<LogicAppTreeItem>;
     const callbacks = await treeItem.getCallbacks();
+    const canvasMode = vscode.workspace.getConfiguration("azureLogicApps").get<boolean>("canvasMode")!;
     const definition = await treeItem.getData(/* refresh */ true);
     const parameters = treeItem.getParameters();
     const references = await treeItem.getReferences();
@@ -35,6 +36,7 @@ export async function openInDesigner(tree: AzureTreeDataProvider, node?: IAzureN
     panel.webview.html = getWebviewContentForDesigner({
         authorization,
         callbacks,
+        canvasMode,
         definition,
         integrationAccountId,
         location,

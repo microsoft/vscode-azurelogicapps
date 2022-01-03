@@ -10,6 +10,7 @@
     "azIntegrationAccounts.viewProperties": "View properties",
     "azLogicApps.addBuildDefinitionToProject": "Add Build Definition to Project",
     "azLogicApps.addLogicAppToProject": "Add to Project",
+    "azLogicApps.canvasMode": "Use the same canvas mode used by the Logic Apps (Standard) designer",
     "azLogicApps.createLogicApp": "Create Logic App",
     "azLogicApps.createProject": "Create Project",
     "azLogicApps.deleteLogicApp": "Delete",

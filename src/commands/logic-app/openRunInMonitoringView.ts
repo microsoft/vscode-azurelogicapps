@@ -15,6 +15,7 @@ export async function openRunInMonitoringView(tree: AzureTreeDataProvider, node?
     }
 
     const authorization = await getAuthorization(node.credentials);
+    const canvasMode = vscode.workspace.getConfiguration("azureLogicApps").get<boolean>("canvasMode")!;
     const runNode = node as IAzureNode<LogicAppRunTreeItem>;
     const { id: runId, label: title, location, resourceGroupName, workflowId } = runNode.treeItem;
     const { subscriptionId } = runNode;
@@ -24,5 +25,5 @@ export async function openRunInMonitoringView(tree: AzureTreeDataProvider, node?
         retainContextWhenHidden: true
     };
     const panel = vscode.window.createWebviewPanel("monitoringView", title, vscode.ViewColumn.Beside, options);
-    panel.webview.html = getWebviewContent({ authorization, location, resourceGroupName, runId, subscriptionId, title, workflowId });
+    panel.webview.html = getWebviewContent({ authorization, canvasMode, location, resourceGroupName, runId, subscriptionId, title, workflowId });
 }

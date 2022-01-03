@@ -690,6 +690,11 @@
             {
                 "title": "Azure Logic Apps (Consumption)",
                 "properties": {
+                    "azureLogicApps.canvasMode": {
+                        "default": false,
+                        "description": "%azLogicApps.canvasMode%",
+                        "type": "boolean"
+                    },
                     "azureLogicApps.showExplorer": {
                         "default": true,
                         "description": "%azLogicApps.showExplorerDescription%",
