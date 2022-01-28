@@ -4,7 +4,7 @@
 
 ### Prerequisites for compiling code
 
-Install Node 7.x or later (preferably latest).
+Install Node 14.x or later.
 
 Install prerequisite Node.js package dependencies:  
 `npm install`
