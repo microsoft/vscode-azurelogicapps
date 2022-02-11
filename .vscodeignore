@@ -3,9 +3,11 @@
 out/test/**
 out/**/*.map
 src/**
+.eslintignore
 .eslintrc.js
+.gitattributes
 .gitignore
+.npmrc
 NOTES.md
 tsconfig.json
-vsc-extension-quickstart.md
 webpack.config.js
