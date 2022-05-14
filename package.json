@@ -765,7 +765,7 @@
         "azure-arm-logic": "^6.0.0",
         "azure-arm-resource": "^3.0.0-preview",
         "fs-extra": "^10.1.0",
-        "glob": "^8.0.2",
+        "glob": "^8.0.3",
         "js-yaml": "^4.1.0",
         "lodash": "^4.17.21",
         "request": "^2.88.2",
