@@ -734,7 +734,7 @@
         "compile": "webpack --mode development",
         "lint": "eslint --ext .ts src",
         "lint-fix": "eslint --ext .ts --fix src",
-        "package": "vsce package --no-yarn",
+        "package": "vsce package",
         "test": "npm run webpack-prod && node ./src/test/runTest.js",
         "vscode:prepublish": "npm run webpack-prod",
         "watch": "webpack --mode development --watch",
