@@ -4,10 +4,10 @@
 
 ### Prerequisites for compiling code
 
-Install Node 14.x or later.
+Install Node 16.x or later (includes npm 8.x or later).
 
 Install prerequisite Node.js package dependencies:  
-`npm install`
+`npm install --legacy-peer-deps`
 
 ### Commands to compile code
 
