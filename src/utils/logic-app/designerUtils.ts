@@ -43,11 +43,11 @@ export function getWebviewContentForDesigner({ authorization, callbacks, canvasM
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy" content="img-src data: https: 'unsafe-inline'; script-src https: 'unsafe-inline'; style-src https: 'unsafe-inline';">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://ema.hosting.portal.azure.net/ema/Content/${version}/Html/styles/fabric.min.css">
-    <link rel="stylesheet" href="https://ema.hosting.portal.azure.net/ema/Content/${version}/Html/styles/Draft.css">
-    <link rel="stylesheet" href="https://ema.hosting.portal.azure.net/ema/Content/${version}/Html/styles/v2/jsplumbtoolkit-defaults.css" type="text/css">
-    <link rel="stylesheet" href="https://ema.hosting.portal.azure.net/ema/Content/${version}/Html/styles/react-draft-wysiwyg.css">
-    <link rel="stylesheet" href="https://ema.hosting.portal.azure.net/ema/Content/${version}/Html/styles/designer.min.css">
+    <link rel="stylesheet" href="https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/serverless/styles/v2/fabric.min.css">
+    <link rel="stylesheet" href="https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/serverless/styles/v2/Draft.css">
+    <link rel="stylesheet" href="https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/serverless/styles/v2/v2/jsplumbtoolkit-defaults.css" type="text/css">
+    <link rel="stylesheet" href="https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/serverless/styles/v2/react-draft-wysiwyg.css">
+    <link rel="stylesheet" href="https://ema.hosting.portal.azure.net/ema/Content/${version}/Scripts/serverless/styles/v2/designer.min.css">
     <style>
         body {
             background-color: --vscode-editor-background;
