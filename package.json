@@ -2,7 +2,7 @@
     "name": "vscode-logicapps",
     "displayName": "Azure Logic Apps (Consumption)",
     "description": "%extension.description%",
-    "version": "1.1.13",
+    "version": "1.1.14",
     "publisher": "ms-azuretools",
     "icon": "resources/azLogicApps.png",
     "aiKey": "b6385546-3be0-489c-a298-baccd6c152fb",
