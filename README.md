@@ -1,10 +1,10 @@
-# Azure Logic Apps for Visual Studio Code
+# Azure Logic Apps (Consumption) for Visual Studio Code
 
-[![Version](https://vsmarketplacebadge.apphb.com/version/ms-azuretools.vscode-logicapps.svg)](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-logicapps) [![Installs](https://vsmarketplacebadge.apphb.com/installs/ms-azuretools.vscode-logicapps.svg)](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-logicapps) [![Rating](https://vsmarketplacebadge.apphb.com/rating-star/ms-azuretools.vscode-logicapps.svg)](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-logicapps#review-details)
+[![Version](https://img.shields.io/visual-studio-marketplace/v/ms-azuretools.vscode-logicapps.svg)](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-logicapps) [![Installs](https://img.shields.io/visual-studio-marketplace/i/ms-azuretools.vscode-logicapps.svg)](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-logicapps) [![Rating](https://img.shields.io/visual-studio-marketplace/r/ms-azuretools.vscode-logicapps.svg)](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-logicapps#review-details)
 
-Azure Logic Apps simplifies how you build automated scalable workflows that integrate apps and data across cloud services and on-premises systems.
+Azure Logic Apps (Consumption) simplifies how you build automated scalable workflows that integrate apps and data across cloud services and on-premises systems.
 
-Use the Azure Logic Apps extension for VS Code to quickly create, debug, and manage Azure Logic Apps and Integration Accounts.
+Use the Azure Logic Apps (Consumption) extension for VS Code to quickly create, debug, and manage Azure Logic Apps and Integration Accounts.
 
 ## Requirements
 
