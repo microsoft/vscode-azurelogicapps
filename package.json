@@ -743,7 +743,7 @@
     },
     "devDependencies": {
         "@types/fs-extra": "^9.0.13",
-        "@types/glob": "^8.0.0",
+        "@types/glob": "^8.0.1",
         "@types/js-yaml": "^4.0.5",
         "@types/mocha": "^10.0.1",
         "@types/node": "^16.18.11",
