@@ -38,7 +38,7 @@ import { IntegrationAccountPartnerEditor } from "./editors/integration-account/i
 import { IntegrationAccountSchemaEditor } from "./editors/integration-account/IntegrationAccountSchemaEditor";
 import { LogicAppEditor } from "./editors/logic-app/LogicAppEditor";
 import { ext } from "./extensionVariables";
-import { IntegrationAccountAgreementsTreeItem } from "./tree/integration-account/integrationAccountAgreementsTreeItem";
+import { IntegrationAccountAgreementsTreeItem } from "./tree/integration-account/IntegrationAccountAgreementsTreeItem";
 import { IntegrationAccountMapsTreeItem } from "./tree/integration-account/IntegrationAccountMapsTreeItem";
 import { IntegrationAccountPartnersTreeItem } from "./tree/integration-account/IntegrationAccountPartnersTreeItem";
 import { IntegrationAccountSchemasTreeItem } from "./tree/integration-account/IntegrationAccountSchemasTreeItem";
