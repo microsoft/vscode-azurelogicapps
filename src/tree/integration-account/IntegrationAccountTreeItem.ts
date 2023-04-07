@@ -8,7 +8,7 @@ import { IntegrationAccount } from "azure-arm-logic/lib/models";
 import { IAzureParentTreeItem, IAzureTreeItem } from "vscode-azureextensionui";
 import { localize } from "../../localize";
 import { getIconPath } from "../../utils/nodeUtils";
-import { IntegrationAccountAgreementsTreeItem } from "./integrationAccountAgreementsTreeItem";
+import { IntegrationAccountAgreementsTreeItem } from "./IntegrationAccountAgreementsTreeItem";
 import { IntegrationAccountMapsTreeItem } from "./IntegrationAccountMapsTreeItem";
 import { IntegrationAccountPartnersTreeItem } from "./IntegrationAccountPartnersTreeItem";
 import { IntegrationAccountSchemasTreeItem } from "./IntegrationAccountSchemasTreeItem";
