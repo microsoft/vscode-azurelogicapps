@@ -712,13 +712,13 @@
         "ts-loader": "^9.4.2",
         "typescript": "^5.0.4",
         "webpack": "^5.82.0",
-        "webpack-cli": "^5.1.0"
+        "webpack-cli": "^5.1.1"
     },
     "dependencies": {
         "azure-arm-logic": "^6.0.0",
         "azure-arm-resource": "^3.0.0-preview",
         "fs-extra": "^11.1.1",
-        "glob": "^10.2.2",
+        "glob": "^10.2.3",
         "js-yaml": "^4.1.0",
         "lodash": "^4.17.21",
         "request": "^2.88.2",
