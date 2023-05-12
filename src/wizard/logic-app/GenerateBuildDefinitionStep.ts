@@ -5,7 +5,7 @@
 
 import { Workflow } from "azure-arm-logic/lib/models";
 import * as fse from "fs-extra";
-import * as glob from "glob";
+import { glob } from "glob";
 import * as path from "path";
 import { AzureWizardExecuteStep } from "vscode-azureextensionui";
 import { generateTemplateParameter, generateTemplateParameterDefinition, generateTemplateResource } from "../../utils/logic-app/templateUtils";
@@ -15,15 +15,8 @@ export class GenerateBuildDefinitionStep extends AzureWizardExecuteStep<IBuildDe
     public async execute(wizardContext: IBuildDefinitionWizardContext): Promise<IBuildDefinitionWizardContext> {
         const { location, templateParameterDefinitions, templateParameters, templateResources, workspaceFolderPath } = wizardContext;
 
-        const definitions = await new Promise<string[]>((resolve, reject) => {
-            glob(path.join(workspaceFolderPath!, "**/*.definition.json"), (err, matches) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(matches);
-                }
-            });
-        });
+        const definitions = await glob(path.join(workspaceFolderPath!, "**/*.definition.json"));
+
         const names = definitions.map((definition) => path.basename(definition).replace(/\.definition\.json$/i, ""));
 
         for (const name of names) {
